@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/*
+  Bali Handmade redesign — light luxury / editorial direction.
+  Warm ivory paper, espresso ink, champagne-gold + cool-silver metallics.
+  Tokens live here (Tailwind v4 @theme); no tailwind.config.ts.
+*/
+
+@theme {
+  /* Surfaces */
+  --color-paper: oklch(97.5% 0.008 85);
+  --color-paper-deep: oklch(94% 0.012 80);
+  --color-ink: oklch(22% 0.012 60);
+  --color-ink-soft: oklch(42% 0.012 65);
+  --color-line: oklch(88% 0.012 80);
+
+  /* Metals */
+  --color-gold: oklch(72% 0.09 75);
+  --color-gold-deep: oklch(58% 0.085 70);
+  --color-silver: oklch(80% 0.012 250);
+
+  /* Dark band (espresso) */
+  --color-espresso: oklch(26% 0.02 55);
+  --color-espresso-deep: oklch(20% 0.018 55);
+
+  /* Typography */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  /* Rhythm */
+  --spacing-section: clamp(4.5rem, 3rem + 7vw, 9rem);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Champagne-gold hairline used for accents and dividers */
+.rule-gold {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold) 20%,
+    var(--color-gold) 80%,
+    transparent
+  );
+}
+
+/* Metallic placeholder tiles — stand in for real product photography.
+   Designed to read as intentional silver/gold surfaces, not broken images. */
+.metal-silver {
+  background:
+    radial-gradient(120% 80% at 30% 20%, oklch(96% 0.004 250) 0%, transparent 55%),
+    linear-gradient(135deg, oklch(86% 0.01 250) 0%, oklch(72% 0.012 250) 45%, oklch(90% 0.008 250) 100%);
+}
+.metal-gold {
+  background:
+    radial-gradient(120% 80% at 30% 20%, oklch(94% 0.05 85) 0%, transparent 55%),
+    linear-gradient(135deg, oklch(82% 0.08 80) 0%, oklch(64% 0.09 72) 48%, oklch(86% 0.07 85) 100%);
+}
+.metal-brass {
+  background:
+    radial-gradient(120% 80% at 30% 20%, oklch(90% 0.07 95) 0%, transparent 55%),
+    linear-gradient(135deg, oklch(78% 0.1 92) 0%, oklch(62% 0.1 88) 48%, oklch(82% 0.09 95) 100%);
+}
+.metal-bronze {
+  background:
+    radial-gradient(120% 80% at 30% 20%, oklch(80% 0.06 55) 0%, transparent 55%),
+    linear-gradient(135deg, oklch(64% 0.07 50) 0%, oklch(48% 0.07 45) 50%, oklch(70% 0.06 55) 100%);
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease-out-expo);
+}
+.group:hover .shimmer::after {
+  transform: translateX(120%);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.7s var(--ease-out-expo) both;
+}
+
+/* Cross-fade used when a featured-product slot swaps to a new design. */
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.swap-in {
+  animation: swap-in 0.6s var(--ease-out-expo) both;
+}
