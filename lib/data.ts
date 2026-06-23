@@ -32,8 +32,11 @@ export interface Product {
 }
 
 export interface Service {
+  slug: string;
   title: string;
-  description: string;
+  description: string; // short summary used on cards and the homepage strip
+  intro: string; // longer paragraph for the detail page
+  highlights: string[]; // what is included
 }
 
 export interface Finish {
@@ -82,13 +85,107 @@ export const CONTACT = {
 } as const;
 
 export const SERVICES: Service[] = [
-  { title: "3D Design & CAD", description: "Turn a sketch or reference into a production-ready model with computerized design." },
-  { title: "Casting", description: "Imported casting machines reproduce your master in silver, bronze or brass at volume." },
-  { title: "Plating & Vermeil", description: "Gold, rhodium and vermeil finishes applied to any component or finished piece." },
-  { title: "Engraving & Laser", description: "Computerized laser engraving for logos, hallmarks and personalization." },
-  { title: "Micro & Stone Setting", description: "Pavé, micro and bezel setting by bench artisans for gemstone work." },
-  { title: "Oxidation & Antiquing", description: "Oxidised, sandblasted and antique finishes to bring out detail and patina." },
+  {
+    slug: "jewelry-3d-design",
+    title: "Jewelry 3D Design",
+    description: "Turn a sketch or reference into a production-ready model with computerized design.",
+    intro:
+      "Send a sketch, a photo or a written brief and our designers build a precise 3D CAD model ready for casting. We refine proportions, weight and stone seats before a single gram of metal is cut.",
+    highlights: [
+      "CAD modelling from sketches, photos or samples",
+      "Render previews for sign-off before production",
+      "Files prepared for casting and resin printing",
+    ],
+  },
+  {
+    slug: "high-quality-casting",
+    title: "High Quality Casting",
+    description: "Imported casting machines reproduce your master in silver, bronze or brass at volume.",
+    intro:
+      "Imported vacuum casting machines reproduce your master cleanly and consistently, in solid 925 silver, bronze or brass, from a handful of pieces to bulk production runs.",
+    highlights: [
+      "Lost-wax casting in silver, bronze and brass",
+      "Consistent results from small batch to volume",
+      "Low porosity for clean finishing and setting",
+    ],
+  },
+  {
+    slug: "molds-for-casting",
+    title: "Molds for Casting",
+    description: "Master molds cut and vulcanized so your design can be reproduced on demand.",
+    intro:
+      "We cut and vulcanize master molds from your model so the design can be reproduced reliably for every future order, with the mold kept on file for re-runs.",
+    highlights: [
+      "Rubber and silicone molds from your master",
+      "Stored for fast, repeatable re-orders",
+      "Optimised gating for clean casts",
+    ],
+  },
+  {
+    slug: "gold-rhodium-plating",
+    title: "Gold & Rhodium Plating",
+    description: "Gold, rhodium and vermeil finishes applied to any component or finished piece.",
+    intro:
+      "Electroplating in gold, rose gold, rhodium and black rhodium, plus FTC-standard gold vermeil, applied to any component or finished piece to the thickness you need.",
+    highlights: [
+      "Yellow gold, rose gold and white rhodium",
+      "FTC-standard gold vermeil over sterling",
+      "Black rhodium for dark, contemporary finishes",
+    ],
+  },
+  {
+    slug: "lacquer-plating",
+    title: "Lacquer Plating",
+    description: "Protective lacquer coatings that preserve plating and slow tarnish.",
+    intro:
+      "A protective lacquer coat seals plated and oxidised finishes, slowing tarnish and protecting colour through handling and wear.",
+    highlights: [
+      "Anti-tarnish protective coating",
+      "Preserves plated and lacquered colour finishes",
+      "Even, durable seal across complex shapes",
+    ],
+  },
+  {
+    slug: "laser-engraving",
+    title: "Laser Engraving",
+    description: "Computerized laser engraving for logos, hallmarks and personalization.",
+    intro:
+      "Computerized laser engraving adds logos, hallmarks, names and serial marks with crisp, repeatable precision, ideal for branding and personalization at scale.",
+    highlights: [
+      "Logos, hallmarks and custom text",
+      "Repeatable precision for branded runs",
+      "Engraving on flat and curved surfaces",
+    ],
+  },
+  {
+    slug: "micro-stone-setting",
+    title: "Micro & Stone Setting",
+    description: "Pavé, micro and bezel setting by bench artisans for gemstone work.",
+    intro:
+      "Bench artisans set gemstones by hand: pavé, micro, prong and bezel work for cubic zirconia, natural stones and your own supplied gems.",
+    highlights: [
+      "Pavé, micro, prong and bezel setting",
+      "CZ, natural stone and customer-supplied gems",
+      "Hand-finished for secure, even seats",
+    ],
+  },
+  {
+    slug: "sandblasting-finishes",
+    title: "Sandblasting & Antique Finishes",
+    description: "Oxidised, sandblasted and antique finishes to bring out detail and patina.",
+    intro:
+      "Surface finishing to your spec: oxidised and antiqued for depth and patina, sandblasted for a soft matte texture, or polished bright, finished by hand piece by piece.",
+    highlights: [
+      "Oxidised and antiqued patina finishes",
+      "Sandblasted matte texturing",
+      "Bright polish and combination finishes",
+    ],
+  },
 ];
+
+export function getService(slug: string): Service | undefined {
+  return SERVICES.find((s) => s.slug === slug);
+}
 
 export const VALUE_PROPS = [
   { title: "Solid 925 Sterling", text: "Every piece is cast and finished in genuine 925 sterling silver. No plating shortcuts." },

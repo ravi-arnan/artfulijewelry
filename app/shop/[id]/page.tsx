@@ -12,6 +12,7 @@ import { ProductMeta } from "@/components/product/ProductMeta";
 import { FinishSelector } from "@/components/product/FinishSelector";
 import { ProductInquiryCTA } from "@/components/product/ProductInquiryCTA";
 import { ProductRelated } from "@/components/product/ProductRelated";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamicParams = false;
 
@@ -52,19 +53,56 @@ export default async function ProductPage({
 
   const category = getCategory(product.category);
 
+  const SITE_URL = "https://bali-handmade.com";
+  const productUrl = `${SITE_URL}/shop/${product.id}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    material: product.material,
-    image: product.image ? `https://bali-handmade.com${product.image}` : undefined,
-    category: category?.name,
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "USD",
-      price: product.priceFrom,
-      availability: "https://schema.org/InStock",
-    },
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${productUrl}#product`,
+        name: product.name,
+        sku: product.id,
+        material: product.material,
+        url: productUrl,
+        image: product.image ? `${SITE_URL}${product.image}` : undefined,
+        category: category?.name,
+        brand: { "@type": "Brand", name: "Bali Handmade" },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: product.priceFrom,
+          url: productUrl,
+          itemCondition: "https://schema.org/NewCondition",
+          availability:
+            product.inStock === false
+              ? "https://schema.org/OutOfStock"
+              : "https://schema.org/InStock",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Shop", item: `${SITE_URL}/shop` },
+          ...(category
+            ? [
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: category.name,
+                  item: `${SITE_URL}/shop?category=${category.slug}`,
+                },
+              ]
+            : []),
+          {
+            "@type": "ListItem",
+            position: category ? 3 : 2,
+            name: product.name,
+            item: productUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -72,12 +110,7 @@ export default async function ProductPage({
       <AnnouncementBar />
       <Header />
       <main>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
+        <JsonLd data={jsonLd} />
 
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
           <nav

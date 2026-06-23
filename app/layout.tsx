@@ -3,6 +3,37 @@ import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { InquiryProvider } from "@/context/InquiryContext";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BRAND, CONTACT } from "@/lib/data";
+
+const SITE_URL = "https://bali-handmade.com";
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: BRAND.name,
+      url: SITE_URL,
+      slogan: BRAND.slogan,
+      foundingDate: String(BRAND.since),
+      sameAs: [`https://instagram.com/${BRAND.instagram.replace("@", "")}`],
+      contactPoint: CONTACT.emails.map((e) => ({
+        "@type": "ContactPoint",
+        contactType: e.label,
+        email: e.address,
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: BRAND.name,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -50,6 +81,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <JsonLd data={organizationLd} />
         <AuthProvider>
           <InquiryProvider>{children}</InquiryProvider>
         </AuthProvider>

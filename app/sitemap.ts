@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { CATEGORIES, COLLECTIONS } from "@/lib/data";
+import { CATEGORIES, COLLECTIONS, SERVICES } from "@/lib/data";
 import { getAllProducts } from "@/lib/products";
 
 const BASE_URL = "https://bali-handmade.com";
@@ -9,6 +9,7 @@ const STATIC_PATHS = [
   "/shop",
   "/about",
   "/shipping",
+  "/services",
   "/certificate",
   "/help",
   "/testimonials",
@@ -39,11 +40,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const serviceEntries: MetadataRoute.Sitemap = SERVICES.map((s) => ({
+    url: `${BASE_URL}/services/${s.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
   const productEntries: MetadataRoute.Sitemap = products.map((p) => ({
     url: `${BASE_URL}/shop/${p.id}`,
     changeFrequency: "monthly",
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...categoryEntries, ...collectionEntries, ...productEntries];
+  return [
+    ...staticEntries,
+    ...categoryEntries,
+    ...collectionEntries,
+    ...serviceEntries,
+    ...productEntries,
+  ];
 }

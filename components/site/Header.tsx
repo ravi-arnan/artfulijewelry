@@ -13,7 +13,7 @@ const NAV = [
   { label: "New In", href: "/shop?status=new" },
   { label: "On Sale", href: "/shop?status=sale" },
   { label: "Restocked", href: "/shop?status=restocked" },
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "Our Story", href: "/about" },
 ];
 

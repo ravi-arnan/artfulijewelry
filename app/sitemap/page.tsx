@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "@/components/site/SiteShell";
 import { PageHeader } from "@/components/site/PageHeader";
-import { CATEGORIES, COLLECTIONS } from "@/lib/data";
+import { CATEGORIES, COLLECTIONS, SERVICES } from "@/lib/data";
 import { STATUS_KEYS, STATUS_LABEL } from "@/lib/productStatus";
 
 export const metadata: Metadata = {
@@ -16,6 +16,7 @@ const MAIN_PAGES = [
   { label: "Shop the catalog", href: "/shop" },
   { label: "Our Story", href: "/about" },
   { label: "Shipping", href: "/shipping" },
+  { label: "Services", href: "/services" },
   { label: "Certificates", href: "/certificate" },
   { label: "Help & FAQ", href: "/help" },
   { label: "Testimonials", href: "/testimonials" },
@@ -60,6 +61,10 @@ export default function SitemapPage() {
     ...COLLECTIONS.map((c) => ({ label: c.name, href: `/shop?collection=${c.slug}` })),
     ...STATUS_KEYS.map((s) => ({ label: STATUS_LABEL[s], href: `/shop?status=${s}` })),
   ];
+  const serviceLinks = [
+    ...SERVICES.map((s) => ({ label: s.title, href: `/services/${s.slug}` })),
+    { label: "Metal Assay Certificates", href: "/certificate" },
+  ];
 
   return (
     <SiteShell>
@@ -74,6 +79,7 @@ export default function SitemapPage() {
           <LinkColumn title="Pages" links={MAIN_PAGES} />
           <LinkColumn title="Shop by category" links={categoryLinks} />
           <LinkColumn title="Collections" links={collectionLinks} />
+          <LinkColumn title="Services" links={serviceLinks} />
         </div>
       </section>
     </SiteShell>

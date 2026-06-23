@@ -18,7 +18,7 @@ const SHOP_LINKS = [
 
 const COMPANY_LINKS = [
   { label: "Our Story", href: "/#story" },
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "Certificates", href: "/certificate" },
   { label: "Shipping", href: "/shipping" },
   { label: "Help & FAQ", href: "/help" },
