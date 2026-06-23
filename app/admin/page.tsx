@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowUpRight, BellRing, Inbox, Package } from "lucide-react";
+import { ArrowUpRight, BellRing, Download, Inbox, Package } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { InquiryBoard, type AdminInquiry } from "@/components/admin/InquiryBoard";
@@ -108,7 +108,19 @@ export default async function AdminPage() {
           />
         </div>
 
-      <h2 className="mt-12 font-display text-2xl text-ink">Inquiries</h2>
+      <div className="mt-12 flex items-center justify-between gap-4">
+        <h2 className="font-display text-2xl text-ink">Inquiries</h2>
+        {inquiries.length > 0 && (
+          <a
+            href="/admin/export"
+            download
+            className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3.5 py-1.5 text-sm text-ink transition-colors hover:border-gold hover:bg-paper-deep"
+          >
+            <Download className="h-4 w-4" aria-hidden />
+            Export CSV
+          </a>
+        )}
+      </div>
       <InquiryBoard initial={inquiries} />
     </>
   );
