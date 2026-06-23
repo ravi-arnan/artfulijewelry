@@ -29,6 +29,8 @@ export interface Product {
   isRestocked?: boolean;
   /** Defaults to true everywhere it is not explicitly set to false. */
   inStock?: boolean;
+  /** Derived from the product name; see lib/subcategories.ts. */
+  subcategory?: string;
 }
 
 export interface Service {

@@ -17,10 +17,17 @@ interface CategoryFacet {
   count: number;
 }
 
+interface SubcategoryFacet {
+  slug: string;
+  name: string;
+}
+
 interface ShopCatalogProps {
   products: Product[];
   categories: CategoryFacet[];
+  subcategories: SubcategoryFacet[];
   category: string | null;
+  subcategory: string | null;
   metal: Metal | null;
   sort: SortKey;
   status: StatusKey | null;
@@ -32,6 +39,7 @@ interface ShopCatalogProps {
 
 type HrefState = {
   category: string | null;
+  subcategory: string | null;
   metal: Metal | null;
   sort: SortKey;
   status: StatusKey | null;
@@ -49,6 +57,7 @@ function buildHref(base: HrefState, changes: Partial<HrefState>): string {
   const next = { ...base, ...changes };
   const sp = new URLSearchParams();
   if (next.category) sp.set("category", next.category);
+  if (next.subcategory) sp.set("subcategory", next.subcategory);
   if (next.metal) sp.set("metal", next.metal);
   if (next.status) sp.set("status", next.status);
   if (next.sort && next.sort !== "featured") sp.set("sort", next.sort);
@@ -83,7 +92,9 @@ const STATUS_COPY: Record<StatusKey, { eyebrow: string; title: string; blurb: st
 export function ShopCatalog({
   products,
   categories,
+  subcategories,
   category,
+  subcategory,
   metal,
   sort,
   status,
@@ -94,8 +105,9 @@ export function ShopCatalog({
 }: ShopCatalogProps) {
   const router = useRouter();
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const activeFilters = (category ? 1 : 0) + (metal ? 1 : 0) + (status ? 1 : 0);
-  const base: HrefState = { category, metal, sort, status, page };
+  const activeFilters =
+    (category ? 1 : 0) + (subcategory ? 1 : 0) + (metal ? 1 : 0) + (status ? 1 : 0);
+  const base: HrefState = { category, subcategory, metal, sort, status, page };
   const heading = headingOverride ?? (status ? STATUS_COPY[status] : null);
   const lastPage = Math.max(1, Math.ceil(total / pageSize));
   const firstShown = total === 0 ? 0 : (page - 1) * pageSize + 1;
@@ -110,16 +122,27 @@ export function ShopCatalog({
     }),
   ];
   const categoryChips = [
-    { label: "All categories", href: buildHref(base, { category: null, page: 1 }), active: category === null },
+    { label: "All categories", href: buildHref(base, { category: null, subcategory: null, page: 1 }), active: category === null },
     ...categories.map((c) => {
       const nextCategory = category === c.slug ? null : c.slug;
       return {
         label: `${c.name} (${c.count})`,
-        href: buildHref(base, { category: nextCategory, page: 1 }),
+        // Switching category always clears the (category-specific) subcategory.
+        href: buildHref(base, { category: nextCategory, subcategory: null, page: 1 }),
         active: category === c.slug,
       };
     }),
   ];
+  const subcategoryChips =
+    category && subcategories.length > 0
+      ? [
+          { label: "All", href: buildHref(base, { subcategory: null, page: 1 }), active: subcategory === null },
+          ...subcategories.map((s) => {
+            const nextSub = subcategory === s.slug ? null : s.slug;
+            return { label: s.name, href: buildHref(base, { subcategory: nextSub, page: 1 }), active: subcategory === s.slug };
+          }),
+        ]
+      : [];
   const statusChips = [
     { label: "All items", href: buildHref(base, { status: null, page: 1 }), active: status === null },
     ...STATUS_KEYS.map((s) => {
@@ -186,6 +209,16 @@ export function ShopCatalog({
                 </FilterChip>
               ))}
             </FilterGroup>
+
+            {subcategoryChips.length > 0 && (
+              <FilterGroup label="Type">
+                {subcategoryChips.map((ch) => (
+                  <FilterChip key={ch.label} href={ch.href} active={ch.active}>
+                    {ch.label}
+                  </FilterChip>
+                ))}
+              </FilterGroup>
+            )}
 
             <FilterGroup label="Availability">
               {statusChips.map((ch) => (

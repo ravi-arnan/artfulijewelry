@@ -12,7 +12,17 @@ import "server-only";
 import type { Product, Metal } from "./data";
 import { PRODUCTS as SEED_PRODUCTS } from "./catalog.products.generated";
 import { normalize, enrich } from "./catalog.transform";
+import { deriveSubcategory } from "./subcategories";
 import { createCatalogClient } from "./supabase/catalog";
+
+// Tag each product with its derived subcategory (keyword match on the cleaned
+// name). Runs after normalize so the category and name are final.
+function withSubcategories(products: Product[]): Product[] {
+  return products.map((p) => ({
+    ...p,
+    subcategory: p.subcategory ?? deriveSubcategory(p.category, p.name),
+  }));
+}
 
 interface ProductRow {
   id: string;
@@ -67,7 +77,8 @@ async function loadAll(): Promise<Product[]> {
 let catalogCache: Promise<Product[]> | null = null;
 
 export function getAllProducts(): Promise<Product[]> {
-  if (!catalogCache) catalogCache = loadAll().then(normalize).then(enrich);
+  if (!catalogCache)
+    catalogCache = loadAll().then(normalize).then(enrich).then(withSubcategories);
   return catalogCache;
 }
 

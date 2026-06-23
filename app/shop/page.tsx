@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { ShopCatalog, type SortKey } from "@/components/shop/ShopCatalog";
 import { CATEGORIES, getCollection, type Metal, type Product } from "@/lib/data";
 import { STATUS_KEYS, matchesStatus, type StatusKey } from "@/lib/productStatus";
+import { getSubcategories } from "@/lib/subcategories";
 import { getAllProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -53,6 +54,13 @@ export default async function ShopPage({
   const collection = getCollection(asString(params.collection) ?? "");
   const collectionSlugs = collection ? new Set(collection.categorySlugs) : null;
 
+  // Subcategories only apply within a selected category.
+  const subItems = getSubcategories(category);
+  const subSlugs = new Set(subItems.map((s) => s.slug));
+  const subcategoryParam = asString(params.subcategory);
+  const subcategory =
+    subcategoryParam && subSlugs.has(subcategoryParam) ? subcategoryParam : null;
+
   const pageRaw = Number.parseInt(asString(params.page) ?? "1", 10);
   const requestedPage = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1;
 
@@ -61,6 +69,7 @@ export default async function ShopPage({
     allProducts.filter(
       (p) =>
         (!category || p.category === category) &&
+        (!subcategory || p.subcategory === subcategory) &&
         (!metal || p.metal === metal) &&
         (!collectionSlugs || collectionSlugs.has(p.category)) &&
         (!status || matchesStatus(p, status)),
@@ -83,12 +92,16 @@ export default async function ShopPage({
     count: c.itemCount,
   }));
 
+  const subcategoryFacets = subItems.map((s) => ({ slug: s.slug, name: s.label }));
+
   return (
     <SiteShell>
       <ShopCatalog
         products={slice}
         categories={categoryFacets}
+        subcategories={subcategoryFacets}
         category={category}
+        subcategory={subcategory}
         metal={metal}
         sort={sort}
         status={status}

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test lib/catalog.transform.test.ts lib/productStatus.test.ts"
+    "test": "node --test lib/catalog.transform.test.ts lib/productStatus.test.ts lib/subcategories.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
