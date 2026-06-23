@@ -9,7 +9,7 @@ The original owner's site is a dense legacy catalog; this is a clean rebuild.
 - Dev: `npm run dev` (script is `next dev --webpack` — DO NOT use Turbopack dev; it crashes the laptop. Turbopack is fine for `npm run build`).
 - `lucide-react` for icons (v1 dropped brand icons — X/Facebook use inline SVGs in `Footer.tsx`).
 - Build is green: `npm run build` → ~960 static pages. `npx tsc --noEmit`, `npx eslint .`, and
-  `npm test` (34 unit tests) are all clean.
+  `npm test` (50 unit tests) are all clean.
 - No emojis / no em-dashes in UI copy (use periods/commas/parens).
 
 ### Dev-server gotchas (important)
@@ -36,7 +36,8 @@ Real catalog crawled from the live site: **928 products / 13 categories / 6 fini
 - `lib/products.ts` — `PRODUCTS` + `getProductById` / `getProductsByCategory` (SERVER ONLY; keeps
   the 928-item array out of client bundles — this boundary matters, don't import PRODUCTS in client comps).
 - Product images in `public/products/` (~889 real images, ~20MB).
-- Prices/min-orders are SYNTHESIZED placeholders (live site hides prices behind login).
+- Prices/min-orders are SYNTHESIZED placeholders (live site hid prices behind login, and the
+  source site is now defunct so real prices are unobtainable — see Roadmap "Real prices").
 - Regenerate: scrape scripts were in `/tmp` (gone after reboot). `scripts/gen-seed.mjs` re-derives
   `supabase/seed.sql` from the generated catalog files.
 
@@ -105,7 +106,9 @@ To activate (the OAuth step kept getting dismissed):
 Fallback if OAuth keeps failing: paste the **anon key** + **service-role key** (Supabase
 dashboard → Settings → API) and apply schema/seed via service role instead of the MCP.
 
-### Next steps once Supabase is reachable (in order)
+### Next steps once Supabase is reachable — ALL COMPLETED (2026-06-23/24, historical)
+This list is done; kept only as a record of the original plan. Current state is in the
+"Session 2026-06-24" and "Roadmap (remaining)" sections below.
 1. Apply `supabase/migrations/0001_init.sql` (schema + RLS + RPC + trigger).
 2. Apply `supabase/seed.sql` (catalog). 928 rows — chunk if the SQL runner has size limits.
 3. Get the **anon key** → write into `.env.local` (`NEXT_PUBLIC_SUPABASE_ANON_KEY`).
