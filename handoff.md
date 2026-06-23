@@ -155,9 +155,33 @@ Project memory file: `~/.claude/projects/-home-ravi-Projects/memory/project_bali
   - Stat cards got icons + depth; Products card links to `/shop`; New/unhandled highlights
     in gold when > 0. Timestamps are deterministic UTC (date + time) to avoid hydration drift.
 
+## Admin + account features shipped (2026-06-24, second pass)
+- **Buyer inquiry history** on `/account` ("Your inquiries"): the signed-in buyer's own
+  submitted quote requests (status, date, item/piece totals, estimate). RLS owner-read already
+  supported it; query also filters by `user_id`. Shared `components/inquiry/StatusBadge.tsx`
+  now drives status pills in both the account history and the admin board.
+- **Admin CSV export**: `GET /admin/export` (admin-gated) streams all inquiries + line items as
+  CSV; "Export CSV" button on the dashboard. Pure serializer `lib/csv.ts` + `lib/inquiry-export.ts`
+  with formula-injection guarding and RFC 4180 quoting (unit-tested).
+- **Admin product editor**: `/admin/products` (search by name/ID via URL state) edits a product's
+  `price_from`, `min_order`, `is_new`, `is_sale` via the existing `products write` RLS, using the
+  `updateProduct` action and per-row `ProductEditRow` client component. Admin shell gained
+  Dashboard/Products nav. Shared `lib/supabase/adminContext.ts#getAdminContext` is the admin gate.
+  CAVEAT: the storefront reads a per-process memoized catalog (lib/products.ts), so price/flag
+  edits surface on the next deploy/restart, not instantly. Real fix later: drop the module-level
+  memo or move to `unstable_cache` + `revalidateTag`.
+- **Persisted saved cart**: migration `0002_saved_carts.sql` (owner-only RLS, JSONB items) +
+  `lib/cart-merge.ts` (pure, tested) + sync wired into `InquiryContext` (merge local+remote on
+  sign-in, debounced upsert after). All DB calls no-op cleanly until the migration is applied.
+  ACTION REQUIRED to activate: run `supabase/migrations/0002_saved_carts.sql` in the Supabase SQL
+  Editor. Until then the cart is local-only (signed-in users make one harmless failing
+  saved_carts request per sign-in; caught and ignored).
+- Unit tests now 50 (added csv, inquiry-export, cart-merge).
+
 ## Roadmap (remaining)
-Done: full backend wiring, auth (login/signup/account/reset/Google), deploy + auto-deploy,
-SEO/OG, e2e smoke + unit tests, dedicated admin console. Still open:
+Done: full backend wiring, auth, deploy + auto-deploy, SEO/OG, e2e smoke + 50 unit tests,
+dedicated admin console, buyer inquiry history, admin CSV export, admin product editor,
+persisted saved cart (pending migration apply). Still open:
 - **Real prices (BLOCKED, 2026-06-24).** `priceFrom` / `minOrder` are synthesized placeholders.
   Real prices on bali-handmade.com are login-gated ("Please login to see price"), AND the source
   site is no longer functioning, so they cannot be retrieved (confirmed this session). The public
@@ -166,11 +190,15 @@ SEO/OG, e2e smoke + unit tests, dedicated admin console. Still open:
   Revisit only when the client supplies a price list (CSV/spreadsheet keyed by product ID /
   variant). Fallback if no list ever appears: a dimension-based model (estimate silver weight
   from size x spot price x markup), but that is an estimate, not the shop's real numbers.
-- **Hard price-gate.** v1 is merchandising-only: products are public-read and `priceFrom` is in
-  the hydration payload, so the gate hides price in the UI but does not truly withhold it.
-  A hard gate (price column readable only to authed users, or a price-on-request RPC) would
-  drop SSG for the affected fields; document the tradeoff before changing.
-- **Account features.** Saved cart, order history, live stock (real stock columns; `enrich`
-  already no-ops once they exist).
-- **Admin depth (optional).** Product management UI (currently read-only count), inquiry
-  pagination beyond latest 100, CSV export.
+- **Hard price-gate (DEFERRED).** v1 is merchandising-only: products are public-read and
+  `priceFrom` is in the hydration payload, so the gate hides price in the UI but does not truly
+  withhold it. Deferred on purpose: with prices being placeholders indefinitely (source defunct),
+  a hard gate adds complexity to protect fake numbers. Revisit together with real prices; it would
+  drop SSG for the gated fields (price column readable only to authed users, or a price-on-request
+  RPC), so document that tradeoff when it happens.
+- **Live stock.** The products table has a real `in_stock` column, but `mapRow` does not select it,
+  so `enrich` synthesizes ~6% out-of-stock for demo variety. To make stock real (and admin-editable),
+  add `in_stock` to `PRODUCT_COLUMNS`/`mapRow` (then `enrich`'s `?? ` keeps the real value) and add
+  the toggle to the product editor. Note: this removes the synthesized OOS demo spread.
+- **Admin depth (optional).** Inquiry pagination beyond latest 100 (board filters client-side over
+  the latest 100); product create/delete (editor currently edits existing rows only).
