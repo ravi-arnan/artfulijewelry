@@ -3,6 +3,11 @@
 import { useMemo, useState, useTransition } from "react";
 import { Search, Mail, Clock, Inbox } from "lucide-react";
 import { updateInquiryStatus, type InquiryStatus } from "@/app/actions/admin";
+import {
+  StatusBadge,
+  STATUS_DOT,
+  STATUS_LABEL,
+} from "@/components/inquiry/StatusBadge";
 
 export interface AdminInquiryItem {
   name: string;
@@ -26,27 +31,6 @@ export interface AdminInquiry {
 const STATUSES: InquiryStatus[] = ["new", "contacted", "closed"];
 type Filter = "all" | InquiryStatus;
 const FILTERS: Filter[] = ["all", "new", "contacted", "closed"];
-
-const STATUS_LABEL: Record<InquiryStatus, string> = {
-  new: "New",
-  contacted: "Contacted",
-  closed: "Closed",
-};
-
-// On-brand status palette: gold for new (needs attention), a restrained blue
-// for in-progress, muted neutral for closed. Kept on the warm/cool axis so the
-// three are distinguishable at a glance without leaving the site's language.
-const STATUS_PILL: Record<InquiryStatus, string> = {
-  new: "bg-gold/15 text-gold-deep ring-gold/30",
-  contacted:
-    "bg-[oklch(95%_0.03_240)] text-[oklch(45%_0.1_245)] ring-[oklch(82%_0.05_240)]",
-  closed: "bg-paper-deep text-ink-soft ring-line",
-};
-const STATUS_DOT: Record<InquiryStatus, string> = {
-  new: "bg-gold-deep",
-  contacted: "bg-[oklch(55%_0.12_245)]",
-  closed: "bg-ink-soft",
-};
 
 // Deterministic UTC formatting so the server-rendered HTML matches client
 // hydration (locale/timezone-free), and the timestamp is unambiguous.
@@ -218,15 +202,7 @@ export function InquiryBoard({ initial }: { initial: AdminInquiry[] }) {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium ring-1 ${STATUS_PILL[inquiry.status]}`}
-                        >
-                          <span
-                            className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[inquiry.status]}`}
-                            aria-hidden
-                          />
-                          {STATUS_LABEL[inquiry.status]}
-                        </span>
+                        <StatusBadge status={inquiry.status} />
                         <span className="inline-flex items-center gap-1 text-xs text-ink-soft">
                           <Clock className="h-3 w-3" aria-hidden />
                           {formatDate(inquiry.created_at)}

@@ -5,6 +5,10 @@ import { ArrowUpRight, Mail, Building2, CalendarDays } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import {
+  InquiryHistory,
+  type AccountInquiry,
+} from "@/components/account/InquiryHistory";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -34,6 +38,17 @@ export default async function AccountPage() {
     .eq("id", user.id)
     .maybeSingle();
   if (profile?.company) company = profile.company;
+
+  // The buyer's own submitted inquiries. RLS already restricts reads to the
+  // owner, but scope explicitly by user_id so an admin viewing their own
+  // account sees only their inquiries, not every customer's.
+  const { data: inquiriesData } = await supabase
+    .from("inquiries")
+    .select("id, created_at, status, inquiry_items(name, quantity, price_from)")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(25);
+  const inquiries = (inquiriesData ?? []) as AccountInquiry[];
 
   const rows = [
     { icon: Mail, label: "Email", value: user.email ?? "Unknown" },
@@ -66,7 +81,15 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-10">
+          <h2 className="font-display text-2xl text-ink">Your inquiries</h2>
+          <p className="mt-1 mb-5 text-sm text-ink-soft">
+            Quote requests you have submitted while signed in.
+          </p>
+          <InquiryHistory inquiries={inquiries} />
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <Link
             href="/inquiry"
             className="group flex items-center justify-between rounded-2xl bg-paper-deep p-6 ring-1 ring-line transition-shadow hover:shadow-lg"
