@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ArrowUpRight, BellRing, Inbox, Package } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SiteShell } from "@/components/site/SiteShell";
-import { InquiryStatusControl } from "@/components/admin/InquiryStatusControl";
-import type { InquiryStatus } from "@/app/actions/admin";
+import { InquiryBoard, type AdminInquiry } from "@/components/admin/InquiryBoard";
 
 export const dynamic = "force-dynamic";
 
@@ -17,25 +18,6 @@ const CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
-
-interface InquiryItemRow {
-  name: string;
-  material: string | null;
-  quantity: number;
-  price_from: number | string | null;
-  min_order: number | null;
-}
-
-interface InquiryRow {
-  id: string;
-  created_at: string;
-  name: string;
-  email: string;
-  company: string | null;
-  message: string | null;
-  status: InquiryStatus;
-  inquiry_items: InquiryItemRow[];
-}
 
 function Notice({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -96,7 +78,7 @@ export default async function AdminPage() {
     supabase.from("products").select("id", { count: "exact", head: true }),
   ]);
 
-  const inquiries = (inquiriesData ?? []) as InquiryRow[];
+  const inquiries = (inquiriesData ?? []) as AdminInquiry[];
   const openCount = inquiries.filter((i) => i.status === "new").length;
 
   return (
@@ -109,89 +91,86 @@ export default async function AdminPage() {
           Dashboard
         </h1>
 
-        <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          <Stat label="Products" value={productCount ?? 0} />
-          <Stat label="Inquiries (latest 100)" value={inquiries.length} />
-          <Stat label="New / unhandled" value={openCount} />
-        </dl>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <StatCard
+            icon={Package}
+            label="Products"
+            value={productCount ?? 0}
+            href="/shop"
+            hint="View catalog"
+          />
+          <StatCard
+            icon={Inbox}
+            label="Inquiries"
+            value={inquiries.length}
+            hint="Latest 100"
+          />
+          <StatCard
+            icon={BellRing}
+            label="New / unhandled"
+            value={openCount}
+            accent={openCount > 0}
+            hint={openCount > 0 ? "Needs attention" : "All clear"}
+          />
+        </div>
 
         <h2 className="mt-12 font-display text-2xl text-ink">Inquiries</h2>
-        {inquiries.length === 0 ? (
-          <p className="mt-4 text-ink-soft">No inquiries yet.</p>
-        ) : (
-          <ul className="mt-6 space-y-4">
-            {inquiries.map((inquiry) => (
-              <li
-                key={inquiry.id}
-                className="rounded-2xl bg-paper-deep p-5 ring-1 ring-line"
-              >
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="font-display text-lg text-ink">
-                      {inquiry.name}
-                      {inquiry.company ? (
-                        <span className="text-ink-soft"> · {inquiry.company}</span>
-                      ) : null}
-                    </p>
-                    <a
-                      href={`mailto:${inquiry.email}`}
-                      className="text-sm text-gold-deep hover:underline"
-                    >
-                      {inquiry.email}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <time className="text-xs text-ink-soft">
-                      {new Date(inquiry.created_at).toLocaleDateString()}
-                    </time>
-                    <InquiryStatusControl
-                      id={inquiry.id}
-                      status={inquiry.status}
-                    />
-                  </div>
-                </div>
-
-                {inquiry.message && (
-                  <p className="mt-3 text-sm text-ink-soft">{inquiry.message}</p>
-                )}
-
-                <ul className="mt-4 divide-y divide-line border-t border-line text-sm">
-                  {inquiry.inquiry_items.map((item, index) => (
-                    <li
-                      key={`${inquiry.id}-${index}`}
-                      className="flex items-center justify-between gap-4 py-2"
-                    >
-                      <span className="text-ink">
-                        {item.name}
-                        {item.material ? (
-                          <span className="text-ink-soft"> · {item.material}</span>
-                        ) : null}
-                      </span>
-                      <span className="shrink-0 text-ink-soft">
-                        qty {item.quantity}
-                        {item.price_from != null
-                          ? ` · from $${Number(item.price_from).toFixed(2)}`
-                          : ""}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        )}
+        <InquiryBoard initial={inquiries} />
       </div>
     </SiteShell>
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-2xl bg-paper-deep p-5 ring-1 ring-line">
-      <dt className="text-xs uppercase tracking-widest text-ink-soft">
-        {label}
-      </dt>
-      <dd className="mt-1 font-display text-3xl text-ink">{value}</dd>
+interface StatCardProps {
+  icon: LucideIcon;
+  label: string;
+  value: number;
+  hint?: string;
+  href?: string;
+  accent?: boolean;
+}
+
+function StatCard({ icon: Icon, label, value, hint, href, accent }: StatCardProps) {
+  const body = (
+    <div
+      className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-5 ring-1 transition-shadow ${
+        accent
+          ? "bg-gold/10 ring-gold/30"
+          : "bg-paper ring-line shadow-[0_18px_48px_-30px_rgba(60,45,30,0.3)]"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <span
+          className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${
+            accent ? "bg-gold/25 text-gold-deep" : "bg-paper-deep text-ink-soft"
+          }`}
+        >
+          <Icon className="h-4.5 w-4.5" aria-hidden />
+        </span>
+        {href && (
+          <ArrowUpRight
+            className="h-4 w-4 text-ink-soft transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            aria-hidden
+          />
+        )}
+      </div>
+      <div className="mt-6">
+        <p className="font-display text-4xl text-ink tabular-nums">
+          {value.toLocaleString()}
+        </p>
+        <p className="mt-1 text-xs uppercase tracking-widest text-ink-soft">
+          {label}
+        </p>
+        {hint && <p className="mt-0.5 text-xs text-ink-soft/80">{hint}</p>}
+      </div>
     </div>
+  );
+
+  return href ? (
+    <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-2xl">
+      {body}
+    </Link>
+  ) : (
+    body
   );
 }
