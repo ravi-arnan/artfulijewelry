@@ -16,6 +16,7 @@ const MAIN_PAGES = [
   { label: "Shop the catalog", href: "/shop" },
   { label: "Our Story", href: "/about" },
   { label: "Shipping", href: "/shipping" },
+  { label: "Certificates", href: "/certificate" },
   { label: "Help & FAQ", href: "/help" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Terms & Conditions", href: "/terms" },

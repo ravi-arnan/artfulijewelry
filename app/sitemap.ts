@@ -9,6 +9,7 @@ const STATIC_PATHS = [
   "/shop",
   "/about",
   "/shipping",
+  "/certificate",
   "/help",
   "/testimonials",
   "/terms",

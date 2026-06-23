@@ -1,4 +1,5 @@
-import { Boxes, Droplets, Flame, Gem, PenTool, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Boxes, Droplets, Flame, Gem, PenTool, Sparkles } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import { ButtonLink } from "@/components/ui/Button";
 
@@ -29,6 +30,12 @@ export function ServicesSection() {
               <Boxes className="h-4 w-4" />
               Start a custom order
             </ButtonLink>
+            <Link
+              href="/certificate"
+              className="mt-6 flex items-center gap-1 text-sm text-paper/70 transition-colors hover:text-gold"
+            >
+              Metal assay certificates <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
 
           <div className="grid gap-px overflow-hidden rounded-2xl bg-paper/10 sm:grid-cols-2 lg:col-span-8">

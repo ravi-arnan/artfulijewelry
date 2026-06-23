@@ -138,6 +138,51 @@ export const FINISHES: Finish[] = [
 export const FTC_VERMEIL_NOTE =
   "Our vermeil meets the FTC standard: at least 100 millionths of an inch of fine gold over solid sterling silver.";
 
+// Independent precious-metal assay (XRF scan) certificates offered as part of the
+// one-stop service. Mirrors the live site's Certificate sub-section.
+export interface Certificate {
+  code: string;
+  name: string;
+  metal: string;
+  description: string;
+  swatch: string; // CSS color for the swatch dot
+}
+
+export const CERTIFICATES: Certificate[] = [
+  {
+    code: "GSC",
+    name: "Gold Certificate",
+    metal: "Yellow & White Gold",
+    description:
+      "XRF scan certificate documenting the karat and fineness of yellow- and white-gold pieces. Send the finished item and we return the assay report.",
+    swatch: "oklch(74% 0.1 80)",
+  },
+  {
+    code: "SSC",
+    name: "Silver Certificate",
+    metal: "925 Sterling Silver",
+    description:
+      "Assay scan certificate confirming solid 925 sterling content — proof of purity to pass on to your own customers.",
+    swatch: "oklch(80% 0.012 250)",
+  },
+  {
+    code: "PTSC",
+    name: "Platinum Certificate",
+    metal: "Platinum",
+    description:
+      "Independent scan certificate verifying platinum purity for fine and bridal work.",
+    swatch: "oklch(86% 0.004 250)",
+  },
+  {
+    code: "PLSC",
+    name: "Palladium Certificate",
+    metal: "Palladium",
+    description:
+      "Scan certificate documenting palladium content for white-metal and alloy pieces.",
+    swatch: "oklch(78% 0.008 250)",
+  },
+];
+
 // Illustrative testimonials for the redesign concept (not real customer quotes).
 export const TESTIMONIALS: Testimonial[] = [
   {
