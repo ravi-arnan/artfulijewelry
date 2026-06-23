@@ -6,9 +6,15 @@ import {
   useEffect,
   useMemo,
   useReducer,
+  useRef,
 } from "react";
 import type { Product } from "@/lib/data";
 import { type InquiryItem, toInquiryItem } from "@/lib/inquiry";
+import { mergeCarts } from "@/lib/cart-merge";
+import { useAuth } from "@/context/AuthContext";
+import { createClient } from "@/lib/supabase/client";
+
+const SAVE_DEBOUNCE_MS = 800;
 
 const STORAGE_KEY = "bh-inquiry";
 
@@ -82,6 +88,14 @@ const InquiryContext = createContext<InquiryContextValue | null>(null);
 
 export function InquiryProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, { items: [], hydrated: false });
+  const { user } = useAuth();
+
+  // Latest items, readable inside the sign-in effect without making that effect
+  // re-run on every cart change.
+  const itemsRef = useRef(state.items);
+  useEffect(() => {
+    itemsRef.current = state.items;
+  }, [state.items]);
 
   // Read persisted list once on mount (avoids SSR hydration mismatch).
   useEffect(() => {
@@ -104,6 +118,72 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
       // storage full or unavailable — non-fatal
     }
   }, [state.items, state.hydrated]);
+
+  // Tracks which user's saved cart has been merged into local state, so the
+  // one-time sign-in merge runs once per user and the save effect waits for it.
+  const mergedUserRef = useRef<string | null>(null);
+
+  // On sign-in: pull the saved cart, merge it with the local list, and adopt the
+  // union. Guarded so it no-ops cleanly when signed out, offline, or before the
+  // saved_carts migration is applied (the query simply errors and we keep local).
+  useEffect(() => {
+    if (!state.hydrated) return;
+    if (!user) {
+      mergedUserRef.current = null;
+      return;
+    }
+    if (mergedUserRef.current === user.id) return;
+    mergedUserRef.current = user.id;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("saved_carts")
+          .select("items")
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (error || cancelled || !data) return;
+        const remote = Array.isArray(data.items)
+          ? (data.items as unknown[]).filter(isValidItem)
+          : [];
+        if (remote.length === 0) return;
+        dispatch({ type: "HYDRATE", items: mergeCarts(itemsRef.current, remote) });
+      } catch {
+        // Table missing / network error: stay on the local list.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, state.hydrated]);
+
+  // While signed in (and after the initial merge), persist changes to the saved
+  // cart, debounced. No-ops cleanly when the table is absent.
+  useEffect(() => {
+    if (!state.hydrated || !user) return;
+    if (mergedUserRef.current !== user.id) return;
+    const handle = setTimeout(() => {
+      try {
+        const supabase = createClient();
+        void supabase
+          .from("saved_carts")
+          .upsert({
+            user_id: user.id,
+            items: state.items,
+            updated_at: new Date().toISOString(),
+          })
+          .then(
+            () => {},
+            () => {},
+          );
+      } catch {
+        // ignore
+      }
+    }, SAVE_DEBOUNCE_MS);
+    return () => clearTimeout(handle);
+  }, [state.items, state.hydrated, user]);
 
   const value = useMemo<InquiryContextValue>(
     () => ({
