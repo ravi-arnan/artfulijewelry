@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { ArrowUpRight, BellRing, Inbox, Package } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import { SiteShell } from "@/components/site/SiteShell";
 import { InquiryBoard, type AdminInquiry } from "@/components/admin/InquiryBoard";
 
 export const dynamic = "force-dynamic";
@@ -37,11 +36,9 @@ function Notice({ title, children }: { title: string; children: React.ReactNode 
 export default async function AdminPage() {
   if (!CONFIGURED) {
     return (
-      <SiteShell>
-        <Notice title="Admin is not available yet">
-          The Supabase backend is not configured for this deployment.
-        </Notice>
-      </SiteShell>
+      <Notice title="Admin is not available yet">
+        The Supabase backend is not configured for this deployment.
+      </Notice>
     );
   }
 
@@ -59,11 +56,9 @@ export default async function AdminPage() {
 
   if (profile?.role !== "admin") {
     return (
-      <SiteShell>
-        <Notice title="Not authorized">
-          This area is for store administrators only.
-        </Notice>
-      </SiteShell>
+      <Notice title="Not authorized">
+        This area is for store administrators only.
+      </Notice>
     );
   }
 
@@ -82,16 +77,15 @@ export default async function AdminPage() {
   const openCount = inquiries.filter((i) => i.status === "new").length;
 
   return (
-    <SiteShell>
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold-deep">
-          Store admin
-        </p>
-        <h1 className="mt-2 font-display text-4xl text-ink sm:text-5xl">
-          Dashboard
-        </h1>
+    <>
+      <p className="text-xs uppercase tracking-[0.25em] text-gold-deep">
+        Store admin
+      </p>
+      <h1 className="mt-2 font-display text-4xl text-ink sm:text-5xl">
+        Dashboard
+      </h1>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <StatCard
             icon={Package}
             label="Products"
@@ -114,10 +108,9 @@ export default async function AdminPage() {
           />
         </div>
 
-        <h2 className="mt-12 font-display text-2xl text-ink">Inquiries</h2>
-        <InquiryBoard initial={inquiries} />
-      </div>
-    </SiteShell>
+      <h2 className="mt-12 font-display text-2xl text-ink">Inquiries</h2>
+      <InquiryBoard initial={inquiries} />
+    </>
   );
 }
 

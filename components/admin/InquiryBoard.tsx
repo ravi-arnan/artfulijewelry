@@ -185,6 +185,13 @@ export function InquiryBoard({ initial }: { initial: AdminInquiry[] }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search name, email, company"
+            // A search box should never attract password managers; these hints
+            // tell 1Password / LastPass / Proton Pass to skip it (and avoid the
+            // extension-injected-attribute hydration warning they cause).
+            autoComplete="off"
+            data-1p-ignore
+            data-lpignore="true"
+            data-protonpass-ignore="true"
             className="w-full rounded-full border border-line bg-paper py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/70 focus:border-gold focus:outline-none"
           />
         </label>
