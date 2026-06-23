@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Loader2, MailCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { fieldClass } from "./authStyles";
+import { GoogleSignInButton } from "./GoogleSignInButton";
+import { AuthDivider } from "./AuthDivider";
 
 const CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -83,11 +85,14 @@ export function SignupForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="company" className="mb-1.5 block text-sm text-ink">
-          Company <span className="text-ink-soft">(optional)</span>
-        </label>
+    <div className="space-y-5">
+      <GoogleSignInButton next="/" />
+      <AuthDivider />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="company" className="mb-1.5 block text-sm text-ink">
+            Company <span className="text-ink-soft">(optional)</span>
+          </label>
         <input
           id="company"
           value={company}
@@ -141,12 +146,13 @@ export function SignupForm() {
         Create account
       </button>
 
-      <p className="text-center text-sm text-ink-soft">
-        Already have an account?{" "}
-        <Link href="/login" className="text-gold-deep hover:underline">
-          Log in
-        </Link>
-      </p>
-    </form>
+        <p className="text-center text-sm text-ink-soft">
+          Already have an account?{" "}
+          <Link href="/login" className="text-gold-deep hover:underline">
+            Log in
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 }

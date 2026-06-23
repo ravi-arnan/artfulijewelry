@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { fieldClass } from "./authStyles";
+import { GoogleSignInButton } from "./GoogleSignInButton";
+import { AuthDivider } from "./AuthDivider";
 
 const CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -17,9 +19,13 @@ export function LoginForm() {
   const params = useSearchParams();
   const next = params.get("next") || "/";
 
+  const oauthFailed = params.get("error") === "oauth";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(
+    oauthFailed ? "Google sign-in did not complete. Please try again." : null,
+  );
   const [pending, startTransition] = useTransition();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -45,11 +51,14 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="email" className="mb-1.5 block text-sm text-ink">
-          Email
-        </label>
+    <div className="space-y-5">
+      <GoogleSignInButton next={next} />
+      <AuthDivider />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="email" className="mb-1.5 block text-sm text-ink">
+            Email
+          </label>
         <input
           id="email"
           type="email"
@@ -90,12 +99,13 @@ export function LoginForm() {
         Log in
       </button>
 
-      <p className="text-center text-sm text-ink-soft">
-        New here?{" "}
-        <Link href="/signup" className="text-gold-deep hover:underline">
-          Create a wholesale account
-        </Link>
-      </p>
-    </form>
+        <p className="text-center text-sm text-ink-soft">
+          New here?{" "}
+          <Link href="/signup" className="text-gold-deep hover:underline">
+            Create a wholesale account
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 }
