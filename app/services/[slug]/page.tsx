@@ -82,10 +82,10 @@ export default async function ServiceDetailPage({
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-ink-soft transition-colors hover:bg-paper-deep hover:text-gold-deep"
+                    className="group/link flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-ink-soft transition-colors hover:bg-paper-deep hover:text-gold-deep"
                   >
                     {s.title}
-                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover/link:opacity-100" />
                   </Link>
                 </li>
               ))}
