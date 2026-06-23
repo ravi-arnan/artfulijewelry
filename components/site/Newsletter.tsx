@@ -22,7 +22,7 @@ export function Newsletter() {
         {submitted ? (
           <p className="inline-flex items-center gap-2 text-sm text-gold">
             <Check className="h-4 w-4" />
-            Thanks — you are on the list.
+            Thanks, you are on the list.
           </p>
         ) : (
           <form

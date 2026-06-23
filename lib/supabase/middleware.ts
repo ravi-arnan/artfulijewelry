@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-// Refreshes the Supabase auth session cookie on each request. Does NOT redirect —
+// Refreshes the Supabase auth session cookie on each request. Does NOT redirect -
 // the catalog is public; access control for /admin lives in those routes.
 export async function updateSession(request: NextRequest) {
   // No-op until Supabase env is configured, so the static site keeps working.

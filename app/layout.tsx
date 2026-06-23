@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bali-handmade.com"),
   title: {
-    default: "Bali Handmade — Wholesale Bali Silver, Gold Beads & Findings",
+    default: "Bali Handmade, Wholesale Bali Silver, Gold Beads & Findings",
     template: "%s | Bali Handmade",
   },
   description:
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "handmade silver charms",
   ],
   openGraph: {
-    title: "Bali Handmade — Wholesale Bali Silver & Gold Beads",
+    title: "Bali Handmade, Wholesale Bali Silver & Gold Beads",
     description:
       "Handmade 925 sterling silver beads and findings from Bali. Wholesale prices for everyone since 2004.",
     type: "website",

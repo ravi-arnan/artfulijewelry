@@ -35,7 +35,7 @@ export function StorySection() {
           <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-soft">
             <p>
               Since 2004 our workshop in Bali has cast, soldered and finished
-              every piece in solid 925 sterling silver — by hand, by artists who
+              every piece in solid 925 sterling silver, by hand, by artists who
               learned the craft from the generation before them.
             </p>
             <p>

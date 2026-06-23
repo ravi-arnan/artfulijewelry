@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
-  Bali Handmade redesign — light luxury / editorial direction.
+  Bali Handmade redesign, light luxury / editorial direction.
   Warm ivory paper, espresso ink, champagne-gold + cool-silver metallics.
   Tokens live here (Tailwind v4 @theme); no tailwind.config.ts.
 */
@@ -74,7 +74,7 @@ body {
   );
 }
 
-/* Metallic placeholder tiles — stand in for real product photography.
+/* Metallic placeholder tiles, stand in for real product photography.
    Designed to read as intentional silver/gold surfaces, not broken images. */
 .metal-silver {
   background:

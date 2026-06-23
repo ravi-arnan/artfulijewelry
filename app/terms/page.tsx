@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Wholesale ordering terms for Bali Handmade — pricing, payment, lead times, custom work and returns.",
+    "Wholesale ordering terms for Bali Handmade, pricing, payment, lead times, custom work and returns.",
   robots: { index: false },
 };
 

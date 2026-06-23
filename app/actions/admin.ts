@@ -12,7 +12,7 @@ export type UpdateStatusResult =
 
 // Updates an inquiry's status. RLS already restricts this to admins (the
 // "inquiries update" policy uses is_admin()); we also re-verify the caller here
-// as defense in depth — a Server Action is a public boundary.
+// as defense in depth, a Server Action is a public boundary.
 export async function updateInquiryStatus(
   id: string,
   status: InquiryStatus,

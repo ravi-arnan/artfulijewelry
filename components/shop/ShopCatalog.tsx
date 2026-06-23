@@ -76,7 +76,7 @@ const STATUS_COPY: Record<StatusKey, { eyebrow: string; title: string; blurb: st
   "out-of-stock": {
     eyebrow: "Made to order",
     title: "Out of stock",
-    blurb: "Currently between runs — message us to reserve the next batch.",
+    blurb: "Currently between runs, message us to reserve the next batch.",
   },
 };
 

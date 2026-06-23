@@ -27,7 +27,7 @@ export function ProductInquiryCTA({ product }: ProductInquiryCTAProps) {
           className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-espresso px-7 py-3 text-sm font-medium text-paper transition-colors hover:bg-espresso-deep"
         >
           <Check className="h-4 w-4 text-gold" />
-          In your inquiry — view list
+          In your inquiry, view list
           <ArrowRight className="h-4 w-4" />
         </Link>
       ) : (

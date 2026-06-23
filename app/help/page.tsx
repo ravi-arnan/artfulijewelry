@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { BRAND, CONTACT } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Help & FAQ — wholesale ordering, pricing & discounts",
+  title: "Help & FAQ, wholesale ordering, pricing & discounts",
   description:
     "Answers to common questions about wholesale pricing, sign-in pricing, minimum orders, discounts, custom manufacturing and shipping at Bali Handmade.",
 };
@@ -18,7 +18,7 @@ const FAQS: Faq[] = [
   {
     question: "Do I need a business account or reseller licence to buy?",
     answer:
-      "No. Our wholesale pricing is open to everyone — individual makers, designers and shops alike. There is no licence or membership requirement.",
+      "No. Our wholesale pricing is open to everyone, individual makers, designers and shops alike. There is no licence or membership requirement.",
   },
   {
     question: "Why are prices hidden until I sign in?",
@@ -38,14 +38,14 @@ const FAQS: Faq[] = [
   {
     question: "Can you make custom or private-label designs?",
     answer:
-      "Absolutely. We are a one-stop manufacturer: 3D design and CAD, casting, plating and vermeil, engraving, stone setting and oxidising — all under one roof since " +
+      "Absolutely. We are a one-stop manufacturer: 3D design and CAD, casting, plating and vermeil, engraving, stone setting and oxidising, all under one roof since " +
       BRAND.since +
       ".",
   },
   {
     question: "What does 'restocked' mean?",
     answer:
-      "Restocked designs are popular pieces we have just produced again and that are ready to ship now. Out-of-stock pieces are between production runs — contact us to reserve the next batch.",
+      "Restocked designs are popular pieces we have just produced again and that are ready to ship now. Out-of-stock pieces are between production runs, contact us to reserve the next batch.",
   },
   {
     question: "How do you ship and how long does it take?",

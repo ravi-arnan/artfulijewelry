@@ -5,7 +5,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { PageHeader } from "@/components/site/PageHeader";
 
 export const metadata: Metadata = {
-  title: "About — handmade silver from Bali since 2004",
+  title: "About, handmade silver from Bali since 2004",
   description:
     "Bali Handmade is a jewelry manufacturer in Bali producing solid 925 sterling silver beads, findings and finished jewelry at wholesale prices since 2004.",
 };
@@ -44,8 +44,8 @@ export default function AboutPage() {
           <div className="space-y-5 text-base leading-relaxed text-ink-soft">
             <p>
               Bali Handmade began in 2004 in a small workshop on the island of
-              Bali. Two decades on, the craft is the same — granulation,
-              filigree and stone work done by hand — but the facility has grown
+              Bali. Two decades on, the craft is the same, granulation,
+              filigree and stone work done by hand, but the facility has grown
               to a complete manufacturing house.
             </p>
             <p>
@@ -56,7 +56,7 @@ export default function AboutPage() {
               piece without leaving the building.
             </p>
             <p className="font-display text-xl italic text-ink">
-              “Every bead has its own story — and we guarantee the quality of
+              “Every bead has its own story, and we guarantee the quality of
               what we make.”
             </p>
           </div>

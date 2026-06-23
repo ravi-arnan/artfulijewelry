@@ -19,7 +19,7 @@ export function ServicesSection() {
             </h2>
             <p className="mt-5 text-base leading-relaxed text-paper/70">
               Beyond the catalog, we manufacture to order. Bring a reference or a
-              full CAD file — we handle the rest, from first cast to final
+              full CAD file, we handle the rest, from first cast to final
               finish.
             </p>
             <ButtonLink

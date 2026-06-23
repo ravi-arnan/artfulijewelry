@@ -51,7 +51,7 @@ export interface Testimonial {
 
 // CATEGORIES is small and safe to ship to the client (used by the Header).
 // PRODUCTS (the full ~928-item catalog) lives in lib/products.ts so it is only
-// ever imported by Server Components — never bundled into client JS.
+// ever imported by Server Components, never bundled into client JS.
 import { CATEGORIES } from "./catalog.categories.generated";
 export { CATEGORIES };
 
@@ -116,7 +116,7 @@ export const COLLECTIONS: Collection[] = [
     slug: "fine-jewelry",
     name: "Fine Jewelry",
     blurb:
-      "Finished sterling silver jewelry — rings, earrings, bracelets, necklaces and brooches, ready to wear or rebrand.",
+      "Finished sterling silver jewelry, rings, earrings, bracelets, necklaces and brooches, ready to wear or rebrand.",
     categorySlugs: ["rings", "earrings", "bracelets", "necklaces", "brooches"],
   },
 ];
@@ -162,7 +162,7 @@ export const CERTIFICATES: Certificate[] = [
     name: "Silver Certificate",
     metal: "925 Sterling Silver",
     description:
-      "Assay scan certificate confirming solid 925 sterling content — proof of purity to pass on to your own customers.",
+      "Assay scan certificate confirming solid 925 sterling content, proof of purity to pass on to your own customers.",
     swatch: "oklch(80% 0.012 250)",
   },
   {
@@ -181,6 +181,21 @@ export const CERTIFICATES: Certificate[] = [
       "Scan certificate documenting palladium content for white-metal and alloy pieces.",
     swatch: "oklch(78% 0.008 250)",
   },
+];
+
+// Real example scan certificates from the live catalogue, shown as a sample
+// gallery. Images are 600x400 XRF assay reports.
+export interface CertificateSample {
+  image: string;
+  metal: string;
+  caption: string;
+}
+
+export const CERTIFICATE_SAMPLES: CertificateSample[] = [
+  { image: "/certificates/GSC01.jpg", metal: "Gold", caption: "Gold XRF scan report" },
+  { image: "/certificates/SSC03.jpg", metal: "Silver", caption: "Silver XRF scan report" },
+  { image: "/certificates/SSC04.jpg", metal: "Silver", caption: "Silver scan certificate" },
+  { image: "/certificates/GSC02.jpg", metal: "Gold", caption: "Gold scan certificate" },
 ];
 
 // Illustrative testimonials for the redesign concept (not real customer quotes).

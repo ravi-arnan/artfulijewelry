@@ -39,7 +39,7 @@ export function ContactBand() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-[var(--spacing-section)] sm:px-6">
       <div className="grid overflow-hidden rounded-3xl shadow-[0_30px_80px_-40px_rgba(40,30,20,0.5)] ring-1 ring-line lg:grid-cols-2">
-        {/* Dark panel — message */}
+        {/* Dark panel, message */}
         <div className="relative isolate bg-espresso px-8 py-12 text-paper sm:px-12 sm:py-14">
           <div className="pointer-events-none absolute -left-16 -top-16 -z-10 h-64 w-64 rounded-full bg-gold/20 blur-3xl" />
           <p className="text-xs uppercase tracking-[0.25em] text-gold">
@@ -62,7 +62,7 @@ export function ContactBand() {
           </ul>
         </div>
 
-        {/* Light panel — contact methods */}
+        {/* Light panel, contact methods */}
         <div className="flex flex-col justify-center gap-3 bg-paper px-6 py-10 sm:px-10 sm:py-12">
           {ROWS.map((row) => (
             <a

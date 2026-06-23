@@ -12,7 +12,7 @@ interface WholesalePriceProps {
 // App-level wholesale price gate (v1). Until the buyer is signed in we render a
 // "sign in to see price" prompt instead of the figure. Note the products table
 // is public-read and the price is present in the hydration payload, so this is a
-// UX/merchandising gate, not a hard security boundary — a documented tradeoff
+// UX/merchandising gate, not a hard security boundary, a documented tradeoff
 // while the catalog stays statically generated.
 export function WholesalePrice({ price, variant = "card" }: WholesalePriceProps) {
   const { user, loading } = useAuth();

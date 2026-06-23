@@ -1,5 +1,5 @@
 // Wholesale inquiry (quote-request) model and message builders.
-// No payment/checkout — buyers assemble a list and submit via WhatsApp or email.
+// No payment/checkout, buyers assemble a list and submit via WhatsApp or email.
 
 import type { Product } from "@/lib/data";
 import { CONTACT } from "@/lib/data";

@@ -5,7 +5,7 @@
 // Source of truth is Supabase when configured; otherwise it falls back to the
 // generated catalog files. The fallback keeps the static site building and
 // rendering identically with no live credentials. The catalog is loaded once
-// per process and memoized — fine for SSG (build-time) and the public catalog,
+// per process and memoized, fine for SSG (build-time) and the public catalog,
 // which only changes on redeploy. Admin reads/writes go through their own
 // session-bound clients, not this cache.
 import "server-only";
@@ -59,7 +59,7 @@ async function loadAll(): Promise<Product[]> {
     if (error || !data || data.length === 0) return SEED_PRODUCTS;
     return (data as ProductRow[]).map(mapRow);
   } catch {
-    // Network/credential failure — keep the site working on the generated catalog.
+    // Network/credential failure, keep the site working on the generated catalog.
     return SEED_PRODUCTS;
   }
 }

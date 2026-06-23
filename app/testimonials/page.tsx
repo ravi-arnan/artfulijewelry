@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { TESTIMONIALS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Testimonials — what wholesale buyers say",
+  title: "Testimonials, what wholesale buyers say",
   description:
     "Designers and jewellery brands on working with Bali Handmade for solid 925 sterling silver components and one-stop manufacturing.",
 };

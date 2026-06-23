@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { BRAND, CONTACT } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Shipping — worldwide via DHL & EMS",
+  title: "Shipping, worldwide via DHL & EMS",
   description:
     "We ship wholesale orders worldwide via DHL and EMS, with free shipping on orders over $2,000 to major regions.",
 };

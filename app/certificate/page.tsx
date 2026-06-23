@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PackageOpen, ScanLine, FileCheck, ShieldCheck } from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
-import { CERTIFICATES, CONTACT } from "@/lib/data";
+import { CERTIFICATES, CERTIFICATE_SAMPLES, CONTACT } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Metal assay certificates — gold, silver, platinum & palladium",
+  title: "Metal assay certificates, gold, silver, platinum & palladium",
   description:
     "Independent XRF scan certificates verifying the precious-metal purity of your gold, silver, platinum and palladium pieces. Part of our one-stop service.",
 };
@@ -15,7 +16,7 @@ const STEPS = [
   {
     icon: PackageOpen,
     title: "Send your piece",
-    text: "Mail us the finished item — a bead, a finding, or a complete jewellery piece.",
+    text: "Mail us the finished item, a bead, a finding, or a complete jewellery piece.",
   },
   {
     icon: ScanLine,
@@ -35,7 +36,7 @@ export default function CertificatePage() {
       <PageHeader
         eyebrow="One-stop services"
         title="Metal assay certificates"
-        subtitle="Independent XRF scan certificates that verify the precious-metal purity of your pieces — proof of quality you can pass on to your own customers."
+        subtitle="Independent XRF scan certificates that verify the precious-metal purity of your pieces, proof of quality you can pass on to your own customers."
       />
 
       <section className="mx-auto max-w-7xl px-4 py-[var(--spacing-section)] sm:px-6">
@@ -78,6 +79,35 @@ export default function CertificatePage() {
                 {cert.description}
               </p>
             </article>
+          ))}
+        </div>
+
+        {/* Example certificates */}
+        <h2 className="mt-16 font-display text-2xl text-ink">Example certificates</h2>
+        <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+          Real XRF scan reports issued for past orders. Each documents the metal,
+          its spectrum and the measured fineness.
+        </p>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {CERTIFICATE_SAMPLES.map((sample) => (
+            <figure
+              key={sample.image}
+              className="overflow-hidden rounded-2xl bg-white ring-1 ring-line"
+            >
+              <Image
+                src={sample.image}
+                alt={`${sample.metal} scan certificate example`}
+                width={600}
+                height={400}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="h-auto w-full object-contain"
+              />
+              <figcaption className="border-t border-line px-4 py-3 text-xs text-ink-soft">
+                <span className="font-medium text-ink">{sample.metal}</span>
+                {" · "}
+                {sample.caption}
+              </figcaption>
+            </figure>
           ))}
         </div>
 

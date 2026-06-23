@@ -1,7 +1,7 @@
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
 
-// Service-role client — bypasses RLS. SERVER ONLY (never import from a client
+// Service-role client, bypasses RLS. SERVER ONLY (never import from a client
 // component). Used for seeding and trusted admin/server-action writes.
 export function createAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

@@ -6,7 +6,7 @@ import { CATEGORIES, COLLECTIONS } from "@/lib/data";
 import { STATUS_KEYS, STATUS_LABEL } from "@/lib/productStatus";
 
 export const metadata: Metadata = {
-  title: "Sitemap — browse every page",
+  title: "Sitemap, browse every page",
   description:
     "A directory of every section of the Bali Handmade site: shop categories, collections, services and company pages.",
 };
@@ -66,7 +66,7 @@ export default function SitemapPage() {
       <PageHeader
         eyebrow="Directory"
         title="Sitemap"
-        subtitle="Every page on the site in one place — pick a category, a collection, or a company page."
+        subtitle="Every page on the site in one place, pick a category, a collection, or a company page."
       />
 
       <section className="mx-auto max-w-7xl px-4 py-[var(--spacing-section)] sm:px-6">

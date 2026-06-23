@@ -51,8 +51,8 @@ export function normalize(products: Product[]): Product[] {
 }
 
 // Neither the generated seed nor the live products table currently carries
-// stock/restock data, so synthesize stable placeholder flags here — for whatever
-// source loaded — so the Restocked / Out-of-stock facets are demonstrable. Any
+// stock/restock data, so synthesize stable placeholder flags here, for whatever
+// source loaded, so the Restocked / Out-of-stock facets are demonstrable. Any
 // value the source DOES provide is preserved (?? guards), so this becomes a no-op
 // once real stock columns exist. Out-of-stock is rare; restocked never overlaps
 // "new".

@@ -30,7 +30,7 @@ export async function generateMetadata({
   if (!product) return { title: "Product not found" };
 
   return {
-    title: `${product.name} — Wholesale ${product.material}`,
+    title: `${product.name}, Wholesale ${product.material}`,
     description: `${product.name} in ${product.material}. Wholesale from $${product.priceFrom.toFixed(
       2,
     )} per piece, minimum order ${product.minOrder} pcs. Handmade in Bali.`,

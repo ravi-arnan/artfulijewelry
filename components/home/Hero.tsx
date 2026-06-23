@@ -70,7 +70,7 @@ export function Hero() {
 
           <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
             Wholesale 925 sterling beads, charms and findings cast and finished
-            by artisans in Bali. Every bead has its own story — and wholesale
+            by artisans in Bali. Every bead has its own story, and wholesale
             pricing for everyone, no reseller licence required.
           </p>
 
