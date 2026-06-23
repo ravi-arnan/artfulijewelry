@@ -23,14 +23,27 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col bg-paper">
       <header className="sticky top-0 z-40 border-b border-espresso-deep bg-espresso text-paper">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link href="/admin" className="flex items-center gap-2.5">
-            <span className="font-display text-lg leading-none tracking-tight">
-              Bali Handmade
-            </span>
-            <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-gold">
-              Admin
-            </span>
-          </Link>
+          <div className="flex items-center gap-5">
+            <Link href="/admin" className="flex items-center gap-2.5">
+              <span className="font-display text-lg leading-none tracking-tight">
+                Bali Handmade
+              </span>
+              <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-gold">
+                Admin
+              </span>
+            </Link>
+            <nav className="hidden items-center gap-4 text-sm text-paper/70 sm:flex">
+              <Link href="/admin" className="transition-colors hover:text-paper">
+                Dashboard
+              </Link>
+              <Link
+                href="/admin/products"
+                className="transition-colors hover:text-paper"
+              >
+                Products
+              </Link>
+            </nav>
+          </div>
 
           <div className="flex items-center gap-1 sm:gap-3">
             <Link
