@@ -24,7 +24,7 @@ function withSubcategories(products: Product[]): Product[] {
   }));
 }
 
-interface ProductRow {
+export interface ProductRow {
   id: string;
   name: string;
   category_slug: string | null;
@@ -40,7 +40,10 @@ interface ProductRow {
 const PRODUCT_COLUMNS =
   "id,name,category_slug,metal,material,price_from,min_order,image,is_new,is_sale";
 
-function mapRow(row: ProductRow): Product {
+// Exported for unit testing. Maps a snake_case Supabase row to the camelCase
+// Product shape, coercing the numeric price (Postgres numeric arrives as a
+// string over PostgREST) and normalizing nullable columns.
+export function mapRow(row: ProductRow): Product {
   return {
     id: row.id,
     name: row.name,
