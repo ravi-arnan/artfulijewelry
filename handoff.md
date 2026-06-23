@@ -158,8 +158,14 @@ Project memory file: `~/.claude/projects/-home-ravi-Projects/memory/project_bali
 ## Roadmap (remaining)
 Done: full backend wiring, auth (login/signup/account/reset/Google), deploy + auto-deploy,
 SEO/OG, e2e smoke + unit tests, dedicated admin console. Still open:
-- **Real prices.** `priceFrom` / `minOrder` are synthesized placeholders (the live site hides
-  prices behind login). Need real wholesale pricing data before this is a real store.
+- **Real prices (BLOCKED, 2026-06-24).** `priceFrom` / `minOrder` are synthesized placeholders.
+  Real prices on bali-handmade.com are login-gated ("Please login to see price"), AND the source
+  site is no longer functioning, so they cannot be retrieved (confirmed this session). The public
+  product pages still expose real dimensions (e.g. "9.94 x 11.40 mm, hole 4.69 mm") and finish
+  codes (VR vermeil, RG rose-gold, AV antique-vermeil, etc.), keyed by the same base IDs we use.
+  Revisit only when the client supplies a price list (CSV/spreadsheet keyed by product ID /
+  variant). Fallback if no list ever appears: a dimension-based model (estimate silver weight
+  from size x spot price x markup), but that is an estimate, not the shop's real numbers.
 - **Hard price-gate.** v1 is merchandising-only: products are public-read and `priceFrom` is in
   the hydration payload, so the gate hides price in the UI but does not truly withhold it.
   A hard gate (price column readable only to authed users, or a price-on-request RPC) would
