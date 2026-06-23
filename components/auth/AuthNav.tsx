@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { LogIn, LogOut, UserRound } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { LogIn, LogOut, UserRound, ShoppingBag } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 interface AuthNavProps {
@@ -11,6 +13,35 @@ interface AuthNavProps {
 
 export function AuthNav({ variant = "icon", onNavigate }: AuthNavProps) {
   const { user, loading, signOut } = useAuth();
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close the account menu on outside click or Escape.
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  async function handleSignOut() {
+    setOpen(false);
+    await signOut();
+    onNavigate?.();
+    router.refresh();
+  }
 
   if (loading) return null;
 
@@ -40,10 +71,7 @@ export function AuthNav({ variant = "icon", onNavigate }: AuthNavProps) {
         <span className="truncate text-sm text-ink-soft">{user.email}</span>
         <button
           type="button"
-          onClick={() => {
-            void signOut();
-            onNavigate?.();
-          }}
+          onClick={handleSignOut}
           className="inline-flex items-center gap-1.5 text-sm text-ink transition-colors hover:text-gold-deep"
         >
           <LogOut className="h-4 w-4" />
@@ -66,14 +94,47 @@ export function AuthNav({ variant = "icon", onNavigate }: AuthNavProps) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={() => void signOut()}
-      aria-label={`Signed in as ${user.email}. Sign out.`}
-      title={`Signed in as ${user.email}`}
-      className="rounded-full p-2 text-gold-deep transition-colors hover:text-espresso"
-    >
-      <UserRound className="h-5 w-5" />
-    </button>
+    <div ref={menuRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label={`Account menu for ${user.email}`}
+        className="rounded-full p-2 text-gold-deep transition-colors hover:text-espresso"
+      >
+        <UserRound className="h-5 w-5" />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full z-50 mt-2 w-60 overflow-hidden rounded-xl border border-line bg-paper shadow-xl"
+        >
+          <div className="border-b border-line px-4 py-3">
+            <p className="text-xs text-ink-soft">Signed in as</p>
+            <p className="truncate text-sm font-medium text-ink">{user.email}</p>
+          </div>
+          <Link
+            href="/inquiry"
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 px-4 py-3 text-sm text-ink transition-colors hover:bg-paper-deep"
+          >
+            <ShoppingBag className="h-4 w-4 text-ink-soft" />
+            My inquiry list
+          </Link>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-2 border-t border-line px-4 py-3 text-left text-sm text-ink transition-colors hover:bg-paper-deep"
+          >
+            <LogOut className="h-4 w-4 text-ink-soft" />
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
