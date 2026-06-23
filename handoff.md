@@ -8,7 +8,8 @@ The original owner's site is a dense legacy catalog; this is a clean rebuild.
 - **Next.js 16** (App Router, RSC) + **Tailwind v4** (tokens in `app/globals.css @theme`, no config file).
 - Dev: `npm run dev` (script is `next dev --webpack` — DO NOT use Turbopack dev; it crashes the laptop. Turbopack is fine for `npm run build`).
 - `lucide-react` for icons (v1 dropped brand icons — X/Facebook use inline SVGs in `Footer.tsx`).
-- Build is green: `npm run build` → ~937 static pages. `npx tsc --noEmit` and `npx eslint .` are clean.
+- Build is green: `npm run build` → ~960 static pages. `npx tsc --noEmit`, `npx eslint .`, and
+  `npm test` (34 unit tests) are all clean.
 - No emojis / no em-dashes in UI copy (use periods/commas/parens).
 
 ### Dev-server gotchas (important)
@@ -71,10 +72,12 @@ Project ref: **dlpehfmzzwqlwbzwikza** → URL `https://dlpehfmzzwqlwbzwikza.supa
   `app/actions/admin.ts` (RLS-enforced + re-verified).
 - Build green earlier (939 pages). tsc + eslint clean. Dev server runs on :3000.
 
-### FIRST ADMIN still needed (0 users exist yet)
-Sign up at `/signup`, then promote:
-`psql "$CONN" -c "update public.profiles set role='admin' where email='you@example.com';"`
-(the on_auth_user_created trigger creates the profile row on signup). Then `/admin` unlocks.
+### FIRST ADMIN done (2026-06-24)
+`raviarnankeren@gmail.com` is promoted to `role='admin'` (service-role PATCH on `profiles`;
+the on_auth_user_created trigger had already created the row on Google sign-in).
+To add more admins: the person signs in once, then
+`update public.profiles set role='admin' where email='...'` (Supabase SQL Editor, no DB
+password needed). Role is read per request, so sign out/in to pick up a change.
 
 ### Old scaffolding notes (kept for reference)
 
@@ -89,7 +92,11 @@ Sign up at `/signup`, then promote:
 - `.env.local` (URL set, keys blank) + `.env.local.example`.
 - Deps installed: `@supabase/supabase-js`, `@supabase/ssr`, `server-only`.
 
-### BLOCKER: Supabase MCP not connected
+### RESOLVED: Supabase MCP was never required
+Schema + seed were applied via `psql` / the service-role key, so the MCP pending-approval
+issue below is moot. Kept for reference only.
+
+### (historical) BLOCKER: Supabase MCP not connected
 `.mcp.json` now has the supabase server, but `claude mcp list` shows **"⏸ Pending approval"**.
 To activate (the OAuth step kept getting dismissed):
 1. Restart Claude Code (`claude`) → **approve** the project MCP server when prompted.
@@ -119,6 +126,45 @@ Price gating is app-level for v1 (products table is public-read); document this 
 Project memory file: `~/.claude/projects/-home-ravi-Projects/memory/project_bali_handmade_redesign.md`
 (has the full history, gotchas, and decisions). Read it at the start of the new session.
 
-## Not yet done
-- Backend wiring (steps above). - Deploy (Netlify/Vercel) once backend is in.
-- Account features beyond price-gate (saved cart, order history, live stock) — future.
+## Session 2026-06-24 (what shipped)
+- **Deploy is LIVE on Vercel.** Public site: `https://bali-handmade-redesign.vercel.app`
+  (clean alias is public; hashed deployment URLs are 401 via Vercel Deployment Protection,
+  which is expected). GitHub repo `ravi-arnan/bali-handmade-redesign` is now connected to the
+  Vercel project, so every push to `main` auto-deploys production (no `vercel --prod` needed).
+  Prod env has the `NEXT_PUBLIC_SUPABASE_*` keys (verified: catalog renders, price gate active,
+  Supabase URL inlined in the client bundle).
+- **First admin enabled** (see FIRST ADMIN above).
+- **Unit test coverage 19 -> 34.** Runner: `npm test` =
+  `node --conditions=react-server --import ./test/register.mjs --test "lib/**/*.test.ts"`.
+  `test/resolve-hook.mjs` is a TS-aware Node resolution hook (`@/` alias + extensionless
+  imports) so the whole server data layer is testable without changing production imports;
+  `--conditions=react-server` makes `server-only` a no-op under node. New tests cover
+  `mapRow` snake->camel + numeric/null coercion, the Supabase->seed fallback, product
+  lookups, `getCategory`, and the WhatsApp/mailto inquiry builders.
+- **Admin dashboard refined into a dedicated console.**
+  - `app/admin/layout.tsx` + `components/admin/AdminShell.tsx`: dark espresso console header
+    (logo + Admin badge, View store, signed-in email, Sign out). It does NOT use the public
+    `SiteShell` (no announcement bar / shop nav / marketing footer).
+  - `components/admin/InquiryBoard.tsx` (client, owns list state): status filter tabs with
+    live counts, search (name/email/company), color-coded status pills + accent stripe,
+    per-inquiry totals (pieces + estimate), and segmented New/Contacted/Closed quick-actions
+    with optimistic updates that re-bucket and re-count instantly (persists via the
+    `updateInquiryStatus` server action, RLS + re-verified). Search input opts out of
+    password-manager autofill (also silences an extension-caused hydration warning).
+  - The old `InquiryStatusControl.tsx` was folded into the board and removed.
+  - Stat cards got icons + depth; Products card links to `/shop`; New/unhandled highlights
+    in gold when > 0. Timestamps are deterministic UTC (date + time) to avoid hydration drift.
+
+## Roadmap (remaining)
+Done: full backend wiring, auth (login/signup/account/reset/Google), deploy + auto-deploy,
+SEO/OG, e2e smoke + unit tests, dedicated admin console. Still open:
+- **Real prices.** `priceFrom` / `minOrder` are synthesized placeholders (the live site hides
+  prices behind login). Need real wholesale pricing data before this is a real store.
+- **Hard price-gate.** v1 is merchandising-only: products are public-read and `priceFrom` is in
+  the hydration payload, so the gate hides price in the UI but does not truly withhold it.
+  A hard gate (price column readable only to authed users, or a price-on-request RPC) would
+  drop SSG for the affected fields; document the tradeoff before changing.
+- **Account features.** Saved cart, order history, live stock (real stock columns; `enrich`
+  already no-ops once they exist).
+- **Admin depth (optional).** Product management UI (currently read-only count), inquiry
+  pagination beyond latest 100, CSV export.
