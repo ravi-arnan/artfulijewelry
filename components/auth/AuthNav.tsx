@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogIn, LogOut, UserRound, ShoppingBag } from "lucide-react";
+import { LogIn, LogOut, UserRound, ShoppingBag, CircleUser } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { GoogleSignInButton } from "./GoogleSignInButton";
 
 interface AuthNavProps {
   variant?: "icon" | "full";
@@ -48,27 +49,37 @@ export function AuthNav({ variant = "icon", onNavigate }: AuthNavProps) {
   if (variant === "full") {
     if (!user) {
       return (
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <Link
-            href="/login"
-            onClick={onNavigate}
-            className="rounded-lg bg-paper-deep px-3 py-2 text-center text-sm text-ink"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            onClick={onNavigate}
-            className="rounded-lg bg-espresso px-3 py-2 text-center text-sm text-paper"
-          >
-            Create account
-          </Link>
+        <div className="mt-4 space-y-3 border-t border-line pt-4">
+          <GoogleSignInButton next="/" />
+          <div className="grid grid-cols-2 gap-2">
+            <Link
+              href="/login"
+              onClick={onNavigate}
+              className="rounded-lg bg-paper-deep px-3 py-2 text-center text-sm text-ink"
+            >
+              Log in
+            </Link>
+            <Link
+              href="/signup"
+              onClick={onNavigate}
+              className="rounded-lg bg-espresso px-3 py-2 text-center text-sm text-paper"
+            >
+              Create account
+            </Link>
+          </div>
         </div>
       );
     }
     return (
-      <div className="mt-4 flex items-center justify-between gap-2 border-t border-line pt-4">
-        <span className="truncate text-sm text-ink-soft">{user.email}</span>
+      <div className="mt-4 space-y-3 border-t border-line pt-4">
+        <Link
+          href="/account"
+          onClick={onNavigate}
+          className="flex items-center gap-2 text-sm text-ink transition-colors hover:text-gold-deep"
+        >
+          <CircleUser className="h-4 w-4" />
+          <span className="truncate">{user.email}</span>
+        </Link>
         <button
           type="button"
           onClick={handleSignOut}
@@ -115,6 +126,15 @@ export function AuthNav({ variant = "icon", onNavigate }: AuthNavProps) {
             <p className="text-xs text-ink-soft">Signed in as</p>
             <p className="truncate text-sm font-medium text-ink">{user.email}</p>
           </div>
+          <Link
+            href="/account"
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 px-4 py-3 text-sm text-ink transition-colors hover:bg-paper-deep"
+          >
+            <CircleUser className="h-4 w-4 text-ink-soft" />
+            My account
+          </Link>
           <Link
             href="/inquiry"
             role="menuitem"

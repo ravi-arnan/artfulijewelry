@@ -8,7 +8,16 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Keep account/admin and the inquiry workspace out of the index.
-      disallow: ["/admin", "/login", "/signup", "/inquiry"],
+      disallow: [
+        "/admin",
+        "/account",
+        "/login",
+        "/signup",
+        "/inquiry",
+        "/forgot-password",
+        "/reset-password",
+        "/auth",
+      ],
     },
     sitemap: `${BASE_URL}/sitemap.xml`,
   };
