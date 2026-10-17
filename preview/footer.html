@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artfuli Jewelry | Atelier Directory</title>
+
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --ground-stone: #F5F3EF;
+      --ground-plum: #18111B;
+      --ink-dark: #151218;
+      --ink-muted: #554D5D;
+      --ink-light: #FAF8F5;
+      --ink-light-muted: #B8B0C0;
+      --brand-plum: #551F51;
+      --brand-gold: #C5A059;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--ground-stone);
+      color: var(--ink-dark);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* Test Lab UI Harness (data-ui ignored by tasteskill linter) */
+    .lab-harness {
+      background: #110E14;
+      color: #FAF8F5;
+      padding: 10px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .lab-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #C5BFCE;
+    }
+
+    .lab-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .lab-tab {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #FAF8F5;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s ease;
+    }
+
+    .lab-tab.active {
+      background: var(--brand-plum);
+      color: #FAF8F5;
+    }
+
+    .lab-link {
+      color: var(--brand-gold);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .footer-option {
+      display: none;
+    }
+
+    .footer-option.active {
+      display: block;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ==========================================================================
+       AUTHENTIC LEEDLIME-STYLE FOOTER (Zero AI-Slop, Strict TasteSkill Rules)
+       ========================================================================== */
+    .atelier-footer {
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .directory-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 64px;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+
+    .brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .brand-mark-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand-emblem {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+    }
+
+    .brand-wordmark {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-summary {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 360px;
+      margin-bottom: 24px;
+    }
+
+    .brand-socials {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-social-link {
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s ease;
+    }
+
+    /* Clean Sentence-Case Column Titles (No Micro-Labels, No Tracked Caps) */
+    .directory-col-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .directory-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .directory-links a {
+      font-size: 15px;
+      text-decoration: none;
+      transition: color 0.15s ease;
+      display: inline-block;
+    }
+
+    /* Utility Row (No 1px rules, separated by space) */
+    .utility-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0 32px 0;
+      font-size: 14px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .utility-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .utility-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.15s ease;
+    }
+
+    .utility-cta:hover {
+      transform: translateX(2px);
+    }
+
+    .btn-top {
+      background: transparent;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Panoramic Photography Anchor with Feathered Mask */
+    .artwork-stage {
+      position: relative;
+      width: 100%;
+      height: clamp(380px, 42vw, 560px);
+      overflow: hidden;
+    }
+
+    /* Feathered gradient mask for Leedlime soft blend */
+    .artwork-mask {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 12%,
+        rgba(0, 0, 0, 0.25) 28%,
+        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.95) 75%,
+        #000000 95%
+      );
+      mask-image: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 12%,
+        rgba(0, 0, 0, 0.25) 28%,
+        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.95) 75%,
+        #000000 95%
+      );
+    }
+
+    .artwork-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 45%;
+      display: block;
+    }
+
+    /* ==========================================================================
+       THEME 1: WARM BONE STONE (Editorial Craft)
+       ========================================================================== */
+    .theme-bone {
+      background-color: var(--ground-stone);
+      color: var(--ink-dark);
+    }
+
+    .theme-bone .brand-summary {
+      color: var(--ink-muted);
+    }
+
+    .theme-bone .brand-social-link {
+      color: var(--ink-muted);
+    }
+
+    .theme-bone .brand-social-link:hover {
+      color: var(--brand-plum);
+    }
+
+    .theme-bone .directory-col-title {
+      color: var(--ink-dark);
+    }
+
+    .theme-bone .directory-links a {
+      color: #38303E;
+    }
+
+    .theme-bone .directory-links a:hover {
+      color: var(--brand-plum);
+    }
+
+    .theme-bone .utility-bar {
+      color: var(--ink-muted);
+    }
+
+    .theme-bone .utility-cta {
+      color: var(--brand-plum);
+    }
+
+    .theme-bone .btn-top {
+      color: var(--ink-muted);
+    }
+
+    /* Neutral scrim for photographic tone matching */
+    .theme-bone .artwork-scrim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        var(--ground-stone) 0%,
+        rgba(245, 243, 239, 0.85) 14%,
+        rgba(245, 243, 239, 0.25) 32%,
+        transparent 55%
+      );
+    }
+
+    /* ==========================================================================
+       THEME 2: ROYAL PLUM DUSK (Deep Atmospheric Atelier)
+       ========================================================================== */
+    .theme-plum {
+      background-color: var(--ground-plum);
+      color: var(--ink-light);
+    }
+
+    .theme-plum .brand-summary {
+      color: var(--ink-light-muted);
+    }
+
+    .theme-plum .brand-social-link {
+      color: var(--brand-gold);
+    }
+
+    .theme-plum .brand-social-link:hover {
+      color: var(--ink-light);
+    }
+
+    .theme-plum .directory-col-title {
+      color: var(--brand-gold);
+    }
+
+    .theme-plum .directory-links a {
+      color: var(--ink-light-muted);
+    }
+
+    .theme-plum .directory-links a:hover {
+      color: var(--ink-light);
+    }
+
+    .theme-plum .utility-bar {
+      color: var(--ink-light-muted);
+    }
+
+    .theme-plum .utility-cta {
+      color: var(--brand-gold);
+    }
+
+    .theme-plum .btn-top {
+      color: var(--ink-light-muted);
+    }
+
+    /* Neutral scrim for dark velvet melt */
+    .theme-plum .artwork-scrim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        var(--ground-plum) 0%,
+        rgba(24, 17, 27, 0.88) 14%,
+        rgba(24, 17, 27, 0.25) 32%,
+        transparent 55%
+      );
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .directory-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+      .artwork-stage {
+        height: 360px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 24px;
+      }
+      .directory-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .atelier-footer {
+        padding-top: 56px;
+      }
+      .utility-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .artwork-stage {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Test Lab Switcher Harness (data-ui) -->
+  <aside class="lab-harness" data-ui>
+    <div class="lab-title">Artfuli Atelier Footer</div>
+    <div class="lab-tabs">
+      <button class="lab-tab active" onclick="switchTheme('bone', this)">Warm Bone Ground</button>
+      <button class="lab-tab" onclick="switchTheme('plum', this)">Royal Plum Ground</button>
+    </div>
+    <div style="display: flex; gap: 16px;">
+      <a href="landing.html" class="lab-link">Standalone Landing (10 Sections) →</a>
+      <a href="index.html" class="lab-link">Hero Lab</a>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       OPTION 1: WARM BONE STONE (Clean Leedlime Layout, Zero Slop)
+       ========================================================================= -->
+  <footer class="atelier-footer theme-bone footer-option active" id="opt-bone">
+    <div class="container">
+
+      <!-- Directory Grid -->
+      <div class="directory-grid">
+
+        <!-- Brand Column -->
+        <div class="brand-col">
+          <div class="brand-mark-row">
+            <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="brand-emblem">
+            <img src="images/artfuli-wordmark.png" alt="Artfuli Jewelry" class="brand-wordmark">
+          </div>
+          <p class="brand-summary">
+            Fine jewelry atelier bridging centuries of Celuk metallurgy with architectural minimalism. Hand-forged in Bali from solid 925 sterling silver and 18k gold vermeil.
+          </p>
+          <div class="brand-socials">
+            <a href="https://instagram.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Instagram</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="https://facebook.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Facebook</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="#assay" class="brand-social-link">
+              <span>Assay Ledger</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Collections -->
+        <div>
+          <h2 class="directory-col-title">The Collections</h2>
+          <ul class="directory-links">
+            <li><a href="#collections">Rings and Bands</a></li>
+            <li><a href="#collections">Sculptural Earrings</a></li>
+            <li><a href="#collections">Chains and Pendants</a></li>
+            <li><a href="#collections">Cuffs and Bangles</a></li>
+            <li><a href="#assay">Material Assay Matrix</a></li>
+            <li><a href="#lookbook">Lookbook 2026</a></li>
+          </ul>
+        </div>
+
+        <!-- The Atelier -->
+        <div>
+          <h2 class="directory-col-title">The Atelier</h2>
+          <ul class="directory-links">
+            <li><a href="#heritage">Heritage of Celuk</a></li>
+            <li><a href="#masters">Master Silversmiths</a></li>
+            <li><a href="#cad">Custom 3D CAD Modeling</a></li>
+            <li><a href="#materials">Traceable Silver and Gold</a></li>
+            <li><a href="#workshop">Sukawati Workshop</a></li>
+            <li><a href="#sustainability">Provenance Archive</a></li>
+          </ul>
+        </div>
+
+        <!-- Client Care -->
+        <div>
+          <h2 class="directory-col-title">Client Care</h2>
+          <ul class="directory-links">
+            <li><a href="https://wa.me/6281234567890" target="_blank">WhatsApp Concierge</a></li>
+            <li><a href="#ring-sizer">Ring Sizing Guide</a></li>
+            <li><a href="#warranty">100-Year Structural Guarantee</a></li>
+            <li><a href="#transit">Worldwide Insured Transit</a></li>
+            <li><a href="#care">Precious Metal Care Guide</a></li>
+            <li><a href="#faq">Questions and Answers</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Utility Row (Above Artwork, matching Leedlime layout) -->
+      <div class="utility-bar">
+        <div>
+          <span>© 2026 Artfuli Jewelry Atelier. Handcrafted in Celuk, Bali.</span>
+        </div>
+        <div class="utility-actions">
+          <span>Certified Assay: 92.5% Ag · 18k Au Vermeil</span>
+          <a href="https://wa.me/6281234567890" target="_blank" class="utility-cta">
+            <span>Consult Atelier</span>
+            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+          </a>
+          <button class="btn-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+            <span>Back to top</span>
+            <i data-lucide="arrow-up" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Panoramic Artwork Stage with Feathered Soft Blend (No floating badges) -->
+    <div class="artwork-stage">
+      <div class="artwork-mask">
+        <img src="images/footer-beads-clean.webp" alt="Artfuli High Jewelry Craftsmanship in Bali" class="artwork-image">
+        <div class="artwork-scrim"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       OPTION 2: ROYAL PLUM DUSK
+       ========================================================================= -->
+  <footer class="atelier-footer theme-plum footer-option" id="opt-plum">
+    <div class="container">
+
+      <!-- Directory Grid -->
+      <div class="directory-grid">
+
+        <!-- Brand Column -->
+        <div class="brand-col">
+          <div class="brand-mark-row">
+            <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="brand-emblem">
+            <img src="images/artfuli-wordmark-white.png" alt="Artfuli Jewelry" class="brand-wordmark">
+          </div>
+          <p class="brand-summary">
+            Fine jewelry atelier bridging centuries of Celuk metallurgy with architectural minimalism. Hand-forged in Bali from solid 925 sterling silver and 18k gold vermeil.
+          </p>
+          <div class="brand-socials">
+            <a href="https://instagram.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Instagram</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="https://facebook.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Facebook</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="#assay" class="brand-social-link">
+              <span>Assay Ledger</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Collections -->
+        <div>
+          <h2 class="directory-col-title">The Collections</h2>
+          <ul class="directory-links">
+            <li><a href="#collections">Rings and Bands</a></li>
+            <li><a href="#collections">Sculptural Earrings</a></li>
+            <li><a href="#collections">Chains and Pendants</a></li>
+            <li><a href="#collections">Cuffs and Bangles</a></li>
+            <li><a href="#assay">Material Assay Matrix</a></li>
+            <li><a href="#lookbook">Lookbook 2026</a></li>
+          </ul>
+        </div>
+
+        <!-- The Atelier -->
+        <div>
+          <h2 class="directory-col-title">The Atelier</h2>
+          <ul class="directory-links">
+            <li><a href="#heritage">Heritage of Celuk</a></li>
+            <li><a href="#masters">Master Silversmiths</a></li>
+            <li><a href="#cad">Custom 3D CAD Modeling</a></li>
+            <li><a href="#materials">Traceable Silver and Gold</a></li>
+            <li><a href="#workshop">Sukawati Workshop</a></li>
+            <li><a href="#sustainability">Provenance Archive</a></li>
+          </ul>
+        </div>
+
+        <!-- Client Care -->
+        <div>
+          <h2 class="directory-col-title">Client Care</h2>
+          <ul class="directory-links">
+            <li><a href="https://wa.me/6281234567890" target="_blank">WhatsApp Concierge</a></li>
+            <li><a href="#ring-sizer">Ring Sizing Guide</a></li>
+            <li><a href="#warranty">100-Year Structural Guarantee</a></li>
+            <li><a href="#transit">Worldwide Insured Transit</a></li>
+            <li><a href="#care">Precious Metal Care Guide</a></li>
+            <li><a href="#faq">Questions and Answers</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Utility Row -->
+      <div class="utility-bar">
+        <div>
+          <span>© 2026 Artfuli Jewelry Atelier. Handcrafted in Celuk, Bali.</span>
+        </div>
+        <div class="utility-actions">
+          <span>Certified Assay: 92.5% Ag · 18k Au Vermeil</span>
+          <a href="https://wa.me/6281234567890" target="_blank" class="utility-cta">
+            <span>Consult Atelier</span>
+            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+          </a>
+          <button class="btn-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+            <span>Back to top</span>
+            <i data-lucide="arrow-up" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Panoramic Artwork Stage with Feathered Soft Blend -->
+    <div class="artwork-stage">
+      <div class="artwork-mask">
+        <img src="images/footer-beads-clean.webp" alt="Artfuli High Jewelry Craftsmanship in Bali" class="artwork-image">
+        <div class="artwork-scrim"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Lucide Icons
+    lucide.createIcons();
+
+    // Theme Switcher
+    function switchTheme(theme, btn) {
+      document.querySelectorAll('.lab-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.footer-option').forEach(f => f.classList.remove('active'));
+
+      btn.classList.add('active');
+      const target = document.getElementById(`opt-${theme}`);
+      if (target) {
+        target.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

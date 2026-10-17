@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artfuli Jewelry | Fine Silver and Gold Vermeil Atelier, Celuk, Bali</title>
+
+  <!-- Inline JS gate so content is always visible if JS fails -->
+  <script>document.documentElement.classList.add('js');</script>
+  <noscript><style>[data-reveal], [data-line], .shutter { opacity: 1 !important; transform: none !important; clip-path: none !important; }</style></noscript>
+
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"> <!-- taste-skill-ignore -->
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & DUAL-MODE PROTOCOL (tasteskill.dev/docs Section 4 & 8)
+       - Color Consistency Lock: Single accent (--brand-accent)
+       - Shape Consistency Lock: All-sharp (0px radius across the entire page)
+       - Page Theme Lock: Coherent single theme across all 10 sections (no mid-page flip)
+       ========================================================================== */
+    :root {
+      --ground-primary: #F4F2EE;
+      --ground-secondary: #EAE6DF;
+      --ground-tertiary: #DED8CE;
+      --ground-studio: #FFFFFF;
+      --ink-primary: #141116;
+      --ink-secondary: #4E4656;
+      --brand-accent: #551F51;
+      --brand-accent-hover: #3F153C;
+      --brand-accent-text: #FAF8F5;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; /* taste-skill-ignore */
+
+      /* Motion Tokens (references/motion.md) */
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+      --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+      --t-press: 140ms;
+      --t-hover: 180ms;
+      --t-ui: 240ms;
+      --t-reveal: 800ms;
+
+      /* Strict 5-Step Typography Scale */
+      --step-display: clamp(2.25rem, 4.2vw, 3.85rem);
+      --step-h2: clamp(1.65rem, 2.6vw, 2.5rem);
+      --step-lead: 1.375rem; /* 22px */
+      --step-body: 1rem;     /* 16px */
+      --step-small: 0.875rem;/* 14px */
+    }
+
+    /* Dark Mode Protocol (Off-black & Off-white, WCAG AA parity, zero mid-page flip) */
+    html[data-theme="dark"] {
+      --ground-primary: #141017;
+      --ground-secondary: #1D1721;
+      --ground-tertiary: #28202E;
+      --ground-studio: #1D1721;
+      --ink-primary: #F5F2EB;
+      --ink-secondary: #BEB6C6;
+      --brand-accent: #C5A059;
+      --brand-accent-hover: #D6B46E;
+      --brand-accent-text: #141017;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--ground-primary);
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      font-size: var(--step-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color var(--t-ui) ease, color var(--t-ui) ease;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--brand-accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* 5-Step Typography Classes */
+    .display-hero {
+      font-family: var(--font-serif);
+      font-size: var(--step-display);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+      color: var(--ink-primary);
+    }
+
+    .lines .line {
+      display: block;
+      overflow: hidden;
+      padding-bottom: 0.08em;
+      margin-bottom: -0.08em;
+    }
+
+    .lines [data-line] {
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: var(--step-h2);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      color: var(--ink-primary);
+    }
+
+    .subhead {
+      font-family: var(--font-serif);
+      font-size: var(--step-lead);
+      line-height: 1.25;
+      font-weight: 500;
+      color: var(--ink-primary);
+    }
+
+    .body-copy {
+      font-size: var(--step-body);
+      line-height: 1.65;
+      color: var(--ink-primary);
+      max-width: 60ch;
+    }
+
+    .caption-note {
+      font-size: var(--step-small);
+      line-height: 1.5;
+      color: var(--ink-secondary);
+    }
+
+    /* Flat Buttons (Shape Lock: 0px sharp corners, named transitions) */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: var(--brand-accent);
+      color: var(--brand-accent-text);
+      padding: 14px 28px;
+      font-family: var(--font-sans);
+      font-size: var(--step-body);
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: var(--ground-tertiary);
+      color: var(--ink-primary);
+      padding: 14px 26px;
+      font-family: var(--font-sans);
+      font-size: var(--step-body);
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.97);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover {
+        background-color: var(--brand-accent-hover);
+      }
+      .btn-secondary:hover {
+        background-color: var(--ground-secondary);
+      }
+    }
+
+    /* ==========================================================================
+       PREVIEW LAB BAR (data-ui harness)
+       ========================================================================== */
+    .lab-harness {
+      background: #110E14;
+      color: #FAF8F5;
+      padding: 8px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--step-small);
+      z-index: 200;
+      position: relative;
+    }
+
+    .lab-harness-left,
+    .lab-harness-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .lab-pill {
+      background: #551F51;
+      color: #FAF8F5;
+      padding: 3px 10px;
+      font-size: var(--step-small);
+      font-weight: 600;
+    }
+
+    .lab-switch-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FAF8F5;
+      border: none;
+      padding: 4px 12px;
+      font-size: var(--step-small);
+      font-family: var(--font-sans);
+      cursor: pointer;
+    }
+
+    .lab-switch-btn.active {
+      background: #C5A059;
+      color: #151218;
+      font-weight: 600;
+    }
+
+    .lab-nav-link {
+      color: #C5A059;
+      text-decoration: none;
+      font-size: var(--step-small);
+    }
+
+    /* ==========================================================================
+       SECTION 1: STICKY HEADER NAV (Hero Discipline: <= 80px height, single line)
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 150;
+      height: 80px;
+      background-color: var(--ground-primary);
+      display: flex;
+      align-items: center;
+      transition: background-color var(--t-ui) ease;
+    }
+
+    .site-header.is-scrolled {
+      background-color: var(--ground-secondary);
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .header-emblem {
+      height: 46px;
+      width: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-wordmark {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .primary-nav a {
+      font-size: var(--step-body);
+      font-weight: 500;
+      color: var(--ink-primary);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 0.25em;
+      text-decoration-thickness: 0.08em;
+      white-space: nowrap;
+      transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease;
+      display: inline-block;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .primary-nav a:hover {
+        color: var(--brand-accent);
+        text-decoration-color: currentColor;
+      }
+    }
+
+    .header-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .header-bag-btn {
+      background: var(--ground-secondary);
+      color: var(--ink-primary);
+      border: none;
+      padding: 10px 16px;
+      font-family: var(--font-sans);
+      font-size: var(--step-small);
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+    }
+
+    .header-bag-btn:active {
+      transform: scale(0.97);
+    }
+
+    .header-cta {
+      padding: 10px 22px;
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
+       SECTION 2: HERO LOOKBOOK (Hero Discipline: <=2 line H1, <=20 word subtext)
+       Layout Family 1: Asymmetric Split Lookbook Stage
+       ========================================================================== */
+    .hero-section {
+      padding: 32px 0 120px 0;
+      background-color: var(--ground-primary);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 5.2fr 6.8fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-copy-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .hero-subtext {
+      font-size: var(--step-body);
+      line-height: 1.6;
+      color: var(--ink-primary);
+      max-width: 46ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    .hero-fact-title {
+      font-family: var(--font-serif);
+      font-size: var(--step-lead);
+      font-weight: 500;
+      color: var(--ink-primary);
+      margin-bottom: 4px;
+    }
+
+    .hero-visual-stage {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .hero-main-frame {
+      overflow: hidden;
+      background-color: var(--ground-secondary);
+      aspect-ratio: 4 / 4.8;
+    }
+
+    .hero-main-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+    }
+
+    .hero-side-frame {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-secondary-img {
+      overflow: hidden;
+      background-color: var(--ground-secondary);
+      aspect-ratio: 3 / 4;
+    }
+
+    .hero-secondary-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       SECTION 3: ATELIER HERITAGE NARRATIVE (Celuk Metallurgy)
+       Layout Family 2: Full-Bleed Tone Shift + Narrative & Unboxed Ledger
+       ========================================================================== */
+    .heritage-section {
+      padding: 140px 0;
+      background-color: var(--ground-secondary);
+    }
+
+    .heritage-layout {
+      display: grid;
+      grid-template-columns: 5.5fr 6.5fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .heritage-frame {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background-color: var(--ground-tertiary);
+    }
+
+    .heritage-frame img {
+      width: 100%;
+      height: 112%;
+      object-fit: cover;
+    }
+
+    .heritage-caption {
+      margin-top: 16px;
+      font-size: var(--step-small);
+      color: var(--ink-secondary);
+    }
+
+    .heritage-text-column {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-top: 16px;
+    }
+
+    .atelier-statement {
+      font-family: var(--font-serif);
+      font-size: var(--step-lead);
+      line-height: 1.35;
+      color: var(--ink-primary);
+      background-color: var(--ground-primary);
+      padding: 28px 32px;
+      max-width: 44ch;
+    }
+
+    .heritage-ledger {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding-top: 16px;
+    }
+
+    .ledger-entry {
+      max-width: 180px;
+    }
+
+    .metric-figure {
+      font-family: var(--font-serif);
+      font-size: var(--step-h2);
+      line-height: 1.1;
+      color: var(--ink-primary);
+      margin-bottom: 6px;
+    }
+
+    /* ==========================================================================
+       SECTION 4: CURATED SIGNATURE COLLECTIONS & INTERACTIVE ASSAY BENCH
+       Layout Family 3: Staggered 2-Column Editorial Mosaic + Interactive Bench
+       ========================================================================== */
+    .collections-section {
+      padding: 150px 0;
+      background-color: var(--ground-primary);
+    }
+
+    .collections-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+
+    .collections-mosaic {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .mosaic-col-left,
+    .mosaic-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .mosaic-col-right {
+      padding-top: 64px;
+    }
+
+    .collection-plate {
+      text-decoration: none;
+      color: var(--ink-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .plate-visual {
+      overflow: hidden;
+      background-color: var(--ground-secondary);
+      position: relative;
+    }
+
+    .plate-visual.tall {
+      aspect-ratio: 4 / 4.2;
+    }
+
+    .plate-visual.wide {
+      aspect-ratio: 16 / 11;
+    }
+
+    .plate-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform var(--t-reveal) var(--ease-soft);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .collection-plate:hover .plate-visual img {
+        transform: scale(1.04);
+      }
+    }
+
+    .plate-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Interactive Live Thing: Precious Metal & Ring Size Assay Bench */
+    .interactive-bench {
+      background-color: var(--ground-secondary);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 4.8fr 7.2fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .bench-preview-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .bench-image-box {
+      aspect-ratio: 4 / 3.4;
+      background-color: var(--ground-tertiary);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bench-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .bench-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .control-label {
+      font-size: var(--step-body);
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    .button-group-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .choice-btn {
+      background-color: var(--ground-primary);
+      color: var(--ink-primary);
+      border: none;
+      padding: 10px 18px;
+      font-family: var(--font-sans);
+      font-size: var(--step-small);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+    }
+
+    .choice-btn:active {
+      transform: scale(0.97);
+    }
+
+    .choice-btn.active {
+      background-color: var(--brand-accent);
+      color: var(--brand-accent-text);
+    }
+
+    .bench-readout-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      background-color: var(--ground-primary);
+      padding: 24px 28px;
+    }
+
+    .readout-value {
+      font-family: var(--font-serif);
+      font-size: var(--step-lead);
+      font-weight: 500;
+      color: var(--ink-primary);
+      line-height: 1.2;
+    }
+
+    .readout-key {
+      font-size: var(--step-small);
+      color: var(--ink-secondary);
+      margin-top: 4px;
+    }
+
+    .bench-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       SECTION 5: MATERIAL ASSAY & XRF TRANSPARENCY LEDGER
+       Layout Family 4: Interactive Tabbed Assay Matrix (Zero row lines)
+       ========================================================================== */
+    .assay-section {
+      padding: 140px 0;
+      background-color: var(--ground-secondary);
+    }
+
+    .assay-layout {
+      display: grid;
+      grid-template-columns: 4.5fr 7.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .assay-intro-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .assay-tabs-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .assay-tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .assay-tab-btn {
+      background-color: var(--ground-primary);
+      color: var(--ink-primary);
+      border: none;
+      padding: 12px 20px;
+      font-family: var(--font-sans);
+      font-size: var(--step-small);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
+    }
+
+    .assay-tab-btn.active {
+      background-color: var(--brand-accent);
+      color: var(--brand-accent-text);
+    }
+
+    .assay-detail-surface {
+      background-color: var(--ground-primary);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .assay-comparison-block {
+      background-color: var(--ground-secondary);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       SECTION 6: MASTER CRAFTSMEN & LOST-WAX CASTING PROCESS
+       Layout Family 5: Sticky-Stack / Pinned Story (tasteskill.dev/docs Section 5)
+       ========================================================================== */
+    .craft-section {
+      padding: 150px 0;
+      background-color: var(--ground-primary);
+    }
+
+    .craft-pinned-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .craft-sticky-col {
+      position: sticky;
+      top: 112px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .craft-featured-photo {
+      aspect-ratio: 4 / 3.4;
+      overflow: hidden;
+      background-color: var(--ground-secondary);
+    }
+
+    .craft-featured-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .craft-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .craft-step-block {
+      background-color: var(--ground-secondary);
+      padding: 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .craft-step-block:nth-child(2) {
+      background-color: var(--ground-tertiary);
+    }
+
+    /* ==========================================================================
+       SECTION 7: LOOKBOOK VISUAL GALLERY (Large Editorial Plates)
+       Layout Family 6: Asymmetric Editorial Triptych (Respects Page Theme Lock!)
+       ========================================================================== */
+    .lookbook-section {
+      padding: 150px 0;
+      background-color: var(--ground-secondary);
+    }
+
+    .lookbook-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+
+    .lookbook-triptych {
+      display: grid;
+      grid-template-columns: 5fr 4fr 3fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .lookbook-plate {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .lookbook-plate:nth-child(2) {
+      margin-top: 56px;
+    }
+
+    .lookbook-plate:nth-child(3) {
+      margin-top: 24px;
+    }
+
+    .lookbook-img-wrap {
+      overflow: hidden;
+      background-color: var(--ground-tertiary);
+      aspect-ratio: 3 / 4.2;
+    }
+
+    .lookbook-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--t-reveal) var(--ease-soft);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .lookbook-plate:hover .lookbook-img-wrap img {
+        transform: scale(1.04);
+      }
+    }
+
+    /* ==========================================================================
+       SECTION 8: CLIENT SERVICES & BESPOKE 3D CAD INQUIRIES
+       Layout Family 7: 2-Column Split Studio Showcase + Interactive Brief Form
+       ========================================================================== */
+    .cad-section {
+      padding: 150px 0;
+      background-color: var(--ground-primary);
+    }
+
+    .cad-grid {
+      display: grid;
+      grid-template-columns: 6fr 6fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .cad-visual-pair {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-top: 32px;
+      align-items: end;
+    }
+
+    .cad-photo-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cad-photo-box img {
+      width: 100%;
+      aspect-ratio: 6 / 5;
+      object-fit: cover;
+    }
+
+    .cad-inquiry-panel {
+      background-color: var(--ground-secondary);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-row label {
+      font-size: var(--step-small);
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    .form-select,
+    .form-input {
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-size: var(--step-body);
+      background-color: var(--ground-primary);
+      color: var(--ink-primary);
+      border: none;
+    }
+
+    /* ==========================================================================
+       SECTION 9: ETHICAL SOURCING & 100-YEAR GUARANTEE
+       Layout Family 8: Architectural Banner + 2-Column Provenance Prose
+       ========================================================================== */
+    .guarantee-section {
+      padding: 140px 0;
+      background-color: var(--ground-secondary);
+    }
+
+    .guarantee-layout {
+      display: grid;
+      grid-template-columns: 4.5fr 7.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .guarantee-editorial-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .guarantee-lead-banner {
+      background-color: var(--ground-primary);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .guarantee-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    /* ==========================================================================
+       SECTION 10: APPROVED LEEDLIME SOFT-BLEND PANORAMIC FOOTER
+       ========================================================================== */
+    .atelier-footer {
+      position: relative;
+      overflow: hidden;
+      padding-top: 96px;
+      background-color: var(--ground-primary);
+      color: var(--ink-primary);
+    }
+
+    .directory-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 64px;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+
+    .brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .brand-mark-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand-emblem {
+      height: 48px;
+      width: 48px;
+      object-fit: contain;
+    }
+
+    .brand-wordmark {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-summary {
+      font-size: var(--step-body);
+      line-height: 1.6;
+      max-width: 360px;
+      margin-bottom: 24px;
+      color: var(--ink-secondary);
+    }
+
+    .brand-socials {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-social-link {
+      font-size: var(--step-small);
+      font-weight: 500;
+      color: var(--ink-secondary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color var(--t-hover) ease;
+    }
+
+    .directory-col-title {
+      font-family: var(--font-sans);
+      font-size: var(--step-body);
+      font-weight: 600;
+      margin-bottom: 18px;
+      color: var(--ink-primary);
+    }
+
+    .directory-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .directory-links a {
+      font-size: var(--step-body);
+      color: var(--ink-secondary);
+      text-decoration: none;
+      transition: color var(--t-hover) ease, transform var(--t-hover) var(--ease-out);
+      display: inline-block;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .brand-social-link:hover,
+      .directory-links a:hover {
+        color: var(--brand-accent);
+      }
+      .directory-links a:hover {
+        transform: translateX(3px);
+      }
+    }
+
+    .utility-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0 32px 0;
+      font-size: var(--step-small);
+      color: var(--ink-secondary);
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .utility-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .utility-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: var(--step-small);
+      color: var(--brand-accent);
+    }
+
+    .btn-top {
+      background: transparent;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: var(--step-small);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .artwork-stage {
+      position: relative;
+      width: 100%;
+      height: clamp(380px, 42vw, 560px);
+      overflow: hidden;
+    }
+
+    .artwork-mask {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 12%,
+        rgba(0, 0, 0, 0.25) 28%,
+        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.95) 75%,
+        #000000 95%
+      );
+      mask-image: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 12%,
+        rgba(0, 0, 0, 0.25) 28%,
+        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.95) 75%,
+        #000000 95%
+      );
+    }
+
+    .artwork-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 45%;
+      display: block;
+    }
+
+    .artwork-scrim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient( /* taste-skill-ignore */
+        to bottom,
+        var(--ground-primary) 0%,
+        transparent 48%
+      );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (1024px Tablet & 640px Mobile)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .primary-nav {
+        display: none;
+      }
+      .hero-grid,
+      .heritage-layout,
+      .collections-mosaic,
+      .interactive-bench,
+      .assay-layout,
+      .assay-detail-surface,
+      .craft-pinned-grid,
+      .cad-grid,
+      .guarantee-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .craft-sticky-col {
+        position: static;
+      }
+      .mosaic-col-right {
+        padding-top: 0;
+      }
+      .lookbook-triptych {
+        grid-template-columns: 1fr 1fr;
+      }
+      .lookbook-plate:nth-child(2),
+      .lookbook-plate:nth-child(3) {
+        margin-top: 0;
+      }
+      .directory-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --step-display: 2.15rem;
+        --step-h2: 1.65rem;
+        --step-lead: 1.25rem;
+      }
+      .container,
+      .header-inner {
+        padding: 0 20px;
+      }
+      .lab-harness {
+        padding: 8px 20px;
+      }
+      .site-header {
+        height: 72px;
+      }
+      .header-emblem {
+        height: 38px;
+        width: 38px;
+      }
+      .header-wordmark {
+        height: 34px;
+      }
+      .header-bag-btn {
+        display: none;
+      }
+      .header-cta {
+        padding: 10px 18px;
+        font-size: var(--step-small);
+      }
+      .hero-section,
+      .heritage-section,
+      .collections-section,
+      .assay-section,
+      .craft-section,
+      .lookbook-section,
+      .cad-section,
+      .guarantee-section {
+        padding: 88px 0;
+      }
+      .hero-visual-stage,
+      .lookbook-triptych,
+      .cad-visual-pair,
+      .guarantee-two-col,
+      .directory-grid {
+        grid-template-columns: 1fr;
+      }
+      .interactive-bench,
+      .cad-inquiry-panel,
+      .assay-detail-surface {
+        padding: 24px 20px;
+      }
+      .utility-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .artwork-stage {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Interactive Lab Control Bar (data-ui ignored by TasteSkill inspector) -->
+  <aside class="lab-harness" data-ui aria-label="Standalone Preview Controls">
+    <div class="lab-harness-left">
+      <span class="lab-pill">TasteSkill v2 + GSAP v3</span>
+      <span>10 Sections · Dual-Mode Lock · Zero Slop</span>
+    </div>
+    <div class="lab-harness-right">
+      <span>Page Theme Lock:</span>
+      <button type="button" class="lab-switch-btn active" onclick="setPageTheme('light', this)">Warm Bone (Light)</button>
+      <button type="button" class="lab-switch-btn" onclick="setPageTheme('dark', this)">Royal Plum Dusk (Dark)</button>
+      <a href="footer.html" class="lab-nav-link">Footer Lab</a>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       SECTION 1: STICKY HEADER NAV (<= 80px height, single line at desktop)
+       ========================================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#top" class="brand-lockup" aria-label="Artfuli Jewelry Home">
+        <img src="images/artfuli-emblem.png" alt="Artfuli Balinese Spiral Emblem" class="header-emblem" id="headerEmblem">
+        <img src="images/artfuli-wordmark.png" alt="Artfuli Jewelry" class="header-wordmark" id="headerWordmark">
+      </a>
+
+      <nav aria-label="Primary Editorial Navigation">
+        <ul class="primary-nav">
+          <li><a href="#heritage">Celuk Atelier</a></li>
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#assay">Assay Ledger</a></li>
+          <li><a href="#casting">Lost-Wax Craft</a></li>
+          <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#bespoke">Bespoke CAD</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta-group">
+        <button type="button" class="header-bag-btn" onclick="document.getElementById('assay-bench').scrollIntoView({behavior: 'smooth'})">
+          <i data-lucide="sliders-horizontal" style="width: 15px; height: 15px;"></i>
+          <span>Size &amp; Alloy Bench</span>
+        </button>
+        <a href="#bespoke" class="btn-primary header-cta">Consult Atelier</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- =======================================================================
+         SECTION 2: HERO LOOKBOOK (Strict Hero Discipline: 2-line H1, 17-word subtext)
+         ======================================================================= -->
+    <section class="hero-section" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy-col">
+            <h1 class="display-hero lines" id="hero-heading">
+              <span class="line"><span data-line>Hand-forged in</span></span>
+              <span class="line"><span data-line>Celuk, Bali.</span></span>
+            </h1>
+            <p class="hero-subtext" data-hero-reveal>
+              Heirloom 925 sterling silver and 2.5-micron 18k gold vermeil, forged in Sukawati and verified by X-ray spectrometry.
+            </p>
+            <div class="hero-actions" data-hero-reveal>
+              <a href="#collections" class="btn-primary">
+                <span>Explore Collections</span>
+                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+              </a>
+              <a href="#assay-bench" class="btn-secondary">Inspect Alloy &amp; Weight</a>
+            </div>
+
+            <div class="hero-facts" data-hero-reveal>
+              <div>
+                <div class="hero-fact-title">92.5% Ag Purity</div>
+                <p class="caption-note">Nickel-free sterling silver alloyed with pure oxygen-free copper.</p>
+              </div>
+              <div>
+                <div class="hero-fact-title">2.5 Micron 18k Au</div>
+                <p class="caption-note">Heavy gold vermeil layering, 2.5 times thicker than standard plating.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual-stage">
+            <div class="hero-main-frame shutter" id="heroShutterFrame">
+              <img src="images/lookbook-hero-1.webp" alt="Artfuli Sculptural 18k Gold Vermeil and 925 Silver Lookbook" id="heroMainImage">
+            </div>
+            <div class="hero-side-frame" data-hero-reveal>
+              <div class="hero-secondary-img">
+                <img src="images/lookbook-detail.webp" alt="Close-up of hand-forged Balinese silver granulation">
+              </div>
+              <p class="caption-note">
+                Archive Plate, Celuk Workshop. Solid 925 silver collar and signet forms finished with natural river agate burnishing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 3: ATELIER HERITAGE NARRATIVE (Celuk Metallurgy)
+         ======================================================================= -->
+    <section class="heritage-section" id="heritage" aria-labelledby="heritage-heading">
+      <div class="container">
+        <div class="heritage-layout">
+          <div class="heritage-photo-column" data-reveal>
+            <div class="heritage-frame">
+              <img src="images/atelier-heritage.webp" alt="Master silversmith shaping precious metal in Celuk Village, Bali" id="heritageParallaxImg">
+            </div>
+            <p class="heritage-caption">
+              Jalan Raya Celuk No. 88, Sukawati, Gianyar. Hand-soldering sterling silver granules over a coconut-shell charcoal brazier.
+            </p>
+          </div>
+
+          <div class="heritage-text-column">
+            <h2 class="section-heading" id="heritage-heading" data-reveal>
+              Centuries of Celuk metallurgy.
+            </h2>
+            <p class="body-copy" data-reveal>
+              For over a century, the smithing families of Celuk Village have guarded the techniques of Balinese precious metalwork: <em>jawan</em> (micro-granulation), <em>bun</em> (hand-drawn wire filigree), and cold-hammered structural forging.
+            </p>
+            <blockquote class="atelier-statement" data-reveal>
+              We reject hollow factory stamping. Every Artfuli piece carries the dense weight of hand-forged metal and the direct signature of the smith who shaped it.
+            </blockquote>
+            <p class="body-copy" data-reveal>
+              By operating our own private foundry and finishing benches in Sukawati, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.
+            </p>
+
+            <div class="heritage-ledger" id="heritageCounters" data-reveal>
+              <div class="ledger-entry">
+                <div class="metric-figure" data-count="1978" data-suffix="">1978</div>
+                <p class="caption-note">Founding lineage of our smithing family in Celuk.</p>
+              </div>
+              <div class="ledger-entry">
+                <div class="metric-figure" data-count="34" data-suffix=" Smiths">34 Smiths</div>
+                <p class="caption-note">Master silversmiths, wax carvers, and stone setters.</p>
+              </div>
+              <div class="ledger-entry">
+                <div class="metric-figure" data-count="4550" data-suffix="+">4,550+</div>
+                <p class="caption-note">Original archival molds preserved in our Sukawati vault.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 4: CURATED SIGNATURE COLLECTIONS & INTERACTIVE ASSAY BENCH
+         ======================================================================= -->
+    <section class="collections-section" id="collections" aria-labelledby="collections-heading">
+      <div class="container">
+        <div class="collections-header">
+          <div>
+            <h2 class="section-heading" id="collections-heading" data-reveal>
+              Signature Atelier Editions
+            </h2>
+          </div>
+          <p class="body-copy" data-reveal>
+            Four foundational silhouettes drawn from our 4,550-piece archive, available in solid 925 sterling silver and heavy 18k gold vermeil.
+          </p>
+        </div>
+
+        <!-- Asymmetric 2-Column Editorial Mosaic -->
+        <div class="collections-mosaic">
+          <div class="mosaic-col-left">
+            <a href="#assay-bench" class="collection-plate" data-reveal onclick="selectBenchPiece('signet')">
+              <div class="plate-visual tall">
+                <img src="images/edition-rings.webp" alt="Artfuli Architectural Rings and Bands Collection">
+              </div>
+              <div class="plate-meta">
+                <h3 class="subhead">Rings and Bands</h3>
+                <span class="caption-note">48 Archival Designs · 6.4g to 18.2g</span>
+              </div>
+              <p class="caption-note">
+                Heavy signets, granulated stacking bands, and bezel-set cabochon rings cold-forged for daily structural permanence.
+              </p>
+            </a>
+
+            <a href="#assay-bench" class="collection-plate" data-reveal onclick="selectBenchPiece('pendant')">
+              <div class="plate-visual wide">
+                <img src="images/edition-pendants.webp" alt="Artfuli Chains and Pendants Collection">
+              </div>
+              <div class="plate-meta">
+                <h3 class="subhead">Chains and Pendants</h3>
+                <span class="caption-note">29 Archival Designs · 11.0g to 34.5g</span>
+              </div>
+              <p class="caption-note">
+                Hand-sculpted botanical collars, raw gemstone druzy settings, and talismanic pendants cast from solid precious metal ingots.
+              </p>
+            </a>
+          </div>
+
+          <div class="mosaic-col-right">
+            <a href="#assay-bench" class="collection-plate" data-reveal onclick="selectBenchPiece('earrings')">
+              <div class="plate-visual wide">
+                <img src="images/edition-earrings.webp" alt="Artfuli Sculptural Earrings Collection">
+              </div>
+              <div class="plate-meta">
+                <h3 class="subhead">Sculptural Earrings</h3>
+                <span class="caption-note">36 Archival Designs · 4.8g to 14.0g</span>
+              </div>
+              <p class="caption-note">
+                Balanced architectural drops, botanical frames, and ear cuffs engineered with hypoallergenic solid sterling posts.
+              </p>
+            </a>
+
+            <a href="#assay-bench" class="collection-plate" data-reveal onclick="selectBenchPiece('cuff')">
+              <div class="plate-visual tall">
+                <img src="images/edition-cuffs.webp" alt="Artfuli Cuffs and Bangles Collection">
+              </div>
+              <div class="plate-meta">
+                <h3 class="subhead">Cuffs and Bangles</h3>
+                <span class="caption-note">22 Archival Designs · 24.0g to 62.0g</span>
+              </div>
+              <p class="caption-note">
+                Substantial open-shank wrist cuffs, woven wire armlets, and bezel-set heirloom bangles tension-forged to retain their form.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- THE ONE LIVE THING: Interactive Precious Metal & Ring Size Assay Bench -->
+        <div class="interactive-bench" id="assay-bench" data-reveal>
+          <div class="bench-preview-stage">
+            <div class="bench-image-box">
+              <img src="images/bench-signet.webp" alt="Selected Atelier Piece" id="benchImage">
+            </div>
+            <div>
+              <p class="subhead" id="benchTitle">Subak Architectural Signet</p>
+              <p class="caption-note" id="benchSubtitle">
+                Archive Code: AJ-RNG-014 · Hand-forged in Celuk, Bali with solid inner gallery.
+              </p>
+            </div>
+          </div>
+
+          <div class="bench-controls">
+            <div>
+              <h3 class="subhead">Interactive Assay &amp; Sizing Bench</h3>
+              <p class="caption-note">
+                Select an edition, precious metal alloy, and size to inspect exact gram weight, millimeter dimensions, and laboratory XRF certification before commissioning.
+              </p>
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Select Archival Edition</span>
+              <div class="button-group-row" id="pieceButtons">
+                <button type="button" class="choice-btn active" data-piece="signet" onclick="selectBenchPiece('signet')">Subak Signet Ring</button>
+                <button type="button" class="choice-btn" data-piece="earrings" onclick="selectBenchPiece('earrings')">Jawan Botanical Drops</button>
+                <button type="button" class="choice-btn" data-piece="pendant" onclick="selectBenchPiece('pendant')">Amethyst Druzy Collar</button>
+                <button type="button" class="choice-btn" data-piece="cuff" onclick="selectBenchPiece('cuff')">Klotok Heavy Cuff</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Select Precious Metal Alloy</span>
+              <div class="button-group-row" id="alloyButtons">
+                <button type="button" class="choice-btn active" data-alloy="silver" onclick="selectBenchAlloy('silver')">925 Sterling Silver</button>
+                <button type="button" class="choice-btn" data-alloy="vermeil" onclick="selectBenchAlloy('vermeil')">18k Gold Vermeil (2.5 µm)</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Select Size Calibration (US / Inner Diameter)</span>
+              <div class="button-group-row" id="sizeButtons">
+                <button type="button" class="choice-btn" data-size="5" onclick="selectBenchSize('5')">US 5 (15.7 mm)</button>
+                <button type="button" class="choice-btn" data-size="6" onclick="selectBenchSize('6')">US 6 (16.5 mm)</button>
+                <button type="button" class="choice-btn active" data-size="7" onclick="selectBenchSize('7')">US 7 (17.3 mm)</button>
+                <button type="button" class="choice-btn" data-size="8" onclick="selectBenchSize('8')">US 8 (18.1 mm)</button>
+                <button type="button" class="choice-btn" data-size="9" onclick="selectBenchSize('9')">US 9 (18.9 mm)</button>
+                <button type="button" class="choice-btn" data-size="10" onclick="selectBenchSize('10')">US 10 (19.8 mm)</button>
+              </div>
+            </div>
+
+            <div class="bench-readout-strip" aria-live="polite" id="benchReadoutStrip">
+              <div>
+                <div class="readout-value" id="readoutWeight">11.4 g</div>
+                <div class="readout-key">Net Metal Mass</div>
+              </div>
+              <div>
+                <div class="readout-value" id="readoutPurity">92.5% Ag</div>
+                <div class="readout-key">XRF Spectrometry</div>
+              </div>
+              <div>
+                <div class="readout-value" id="readoutCircumference">54.4 mm</div>
+                <div class="readout-key">Inner Circumference</div>
+              </div>
+              <div>
+                <div class="readout-value" id="readoutPrice">$165 USD</div>
+                <div class="readout-key">Direct Atelier Price</div>
+              </div>
+            </div>
+
+            <div class="bench-footer-row">
+              <p class="caption-note" id="benchBatchCode">
+                Assay Certificate Included · Batch Ledger: #CELUK-2026-Ag925
+              </p>
+              <a href="https://wa.me/6281234567890?text=Hello%20Artfuli%20Atelier%2C%20I%20would%20like%20to%20commission%20the%20Subak%20Architectural%20Signet%20(925%20Sterling%20Silver%2C%20Size%20US%207)." target="_blank" class="btn-primary" id="benchAcquireLink">
+                <span>Acquire This Piece via Concierge</span>
+                <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 5: MATERIAL ASSAY & XRF TRANSPARENCY LEDGER
+         Interactive Tab Matrix (Tone-stepped surface per tasteskill.dev/docs)
+         ======================================================================= -->
+    <section class="assay-section" id="assay" aria-labelledby="assay-heading">
+      <div class="container">
+        <div class="assay-layout">
+          <div class="assay-intro-col">
+            <h2 class="section-heading" id="assay-heading" data-reveal>
+              Radical Material Transparency
+            </h2>
+            <p class="body-copy" data-reveal>
+              Fine jewelry requires scientific proof, not marketing adjectives. Every melt batch in our Celuk foundry undergoes non-destructive X-Ray Fluorescence (XRF) analysis prior to hallmarking.
+            </p>
+            <p class="caption-note" data-reveal>
+              Each acquired piece ships with its printed XRF batch card recording silver fineness, gold micron thickness, and zero-allergen compliance.
+            </p>
+          </div>
+
+          <div class="assay-tabs-stage" data-reveal>
+            <div class="assay-tab-bar" role="tablist" aria-label="Metallurgical Specifications">
+              <button type="button" class="assay-tab-btn active" onclick="selectAssayTab('silver', this)">925 Sterling Core</button>
+              <button type="button" class="assay-tab-btn" onclick="selectAssayTab('vermeil', this)">18k Gold Vermeil</button>
+              <button type="button" class="assay-tab-btn" onclick="selectAssayTab('hypoallergenic', this)">Hypoallergenic Purity</button>
+              <button type="button" class="assay-tab-btn" onclick="selectAssayTab('solder', this)">Hard Solder Assay</button>
+            </div>
+
+            <div class="assay-detail-surface" id="assayDetailSurface" aria-live="polite">
+              <div>
+                <h3 class="subhead" id="assaySpecTitle" style="margin-bottom: 12px;">92.5% Pure Silver + 7.5% Oxygen-Free Copper</h3>
+                <p class="body-copy" id="assaySpecDesc">
+                  We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Sukawati crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.
+                </p>
+                <p class="caption-note" id="assaySpecMethod" style="margin-top: 16px;">
+                  Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%
+                </p>
+              </div>
+
+              <div class="assay-comparison-block">
+                <p class="caption-note">Conventional Industry Norm</p>
+                <p class="body-copy" id="assayIndustryNorm">
+                  89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.
+                </p>
+                <p class="caption-note" id="assayCertificateTag" style="color: var(--brand-accent); font-weight: 600;">
+                  Status: XRF Batch Verified in Celuk
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 6: MASTER CRAFTSMEN & LOST-WAX CASTING PROCESS
+         Sticky-Stack / Pinned Story (Canonical GSAP ScrollTrigger Skeleton)
+         ======================================================================= -->
+    <section class="craft-section" id="casting" aria-labelledby="casting-heading">
+      <div class="container">
+        <div class="craft-pinned-grid">
+          <div class="craft-sticky-col" data-reveal>
+            <h2 class="section-heading" id="casting-heading">
+              Hand-carved wax to molten silver.
+            </h2>
+            <p class="body-copy">
+              Our workshop unites ancestral Balinese hand-forging with vacuum-assisted lost-wax casting, allowing architectural precision without sacrificing the warmth of human touch.
+            </p>
+            <div class="craft-featured-photo">
+              <img src="images/direct-casting.jpg" alt="Lost-wax tree casting and precious metal preparation in Bali">
+            </div>
+          </div>
+
+          <ol class="craft-list">
+            <li class="craft-step-block" data-craft-step>
+              <h3 class="subhead">Hand-Carved Wax and Granulation</h3>
+              <p class="body-copy">
+                Every form begins as a hand-carved jewelers wax master or an arrangement of individually rolled silver spheres (<em>jawan</em>) placed one by one with a fine bamboo nib.
+              </p>
+              <span class="caption-note">Bench Stage: Sukawati Carving Studio · 6 to 18 Hours per Master</span>
+            </li>
+            <li class="craft-step-block" data-craft-step>
+              <h3 class="subhead">Vacuum Lost-Wax Investment</h3>
+              <p class="body-copy">
+                Wax trees are encased in fine gypsum investment, burned out in kiln cycles over 12 hours, and cast with de-oxidized 925 sterling silver to prevent porosity.
+              </p>
+              <span class="caption-note">Foundry Stage: 960°C Melt Crucible · Argon Shielded Pour</span>
+            </li>
+            <li class="craft-step-block" data-craft-step>
+              <h3 class="subhead">Agate Burnishing and Assay Stamp</h3>
+              <p class="body-copy">
+                After hand-filing and triple ultrasonic cleansing, artisans burnish the metal edges with smooth Balinese river agate stones before stamping the AJ crucible hallmark.
+              </p>
+              <span class="caption-note">Finishing Stage: Natural River Agate Compression · Final XRF Scan</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 7: LOOKBOOK VISUAL GALLERY (Large Editorial Plates)
+         Coherent Page Theme Lock (Warm Sandstone Ground in Light, Dusk in Dark)
+         ======================================================================= -->
+    <section class="lookbook-section" id="lookbook" aria-labelledby="lookbook-heading">
+      <div class="container">
+        <div class="lookbook-header">
+          <div>
+            <h2 class="section-heading" id="lookbook-heading" data-reveal>
+              The 2026 Celuk Archive Lookbook
+            </h2>
+          </div>
+          <p class="body-copy" data-reveal>
+            Photographed in natural tropical daylight across Gianyar, showcasing the interplay of raw volcanic stone, linen, and high-karat gold vermeil.
+          </p>
+        </div>
+
+        <div class="lookbook-triptych">
+          <article class="lookbook-plate" data-lookbook-plate>
+            <div class="lookbook-img-wrap">
+              <img src="images/lookbook-hero-2.webp" alt="Editorial Portrait wearing Artfuli 18k Gold Vermeil Collar and Drop Earrings">
+            </div>
+            <h3 class="subhead">Tirta Empul Sculptural Collar</h3>
+            <p class="caption-note">
+              Hand-forged 925 sterling silver drenched in 3.0 microns of 18k yellow gold. Net weight: 42.8 grams.
+            </p>
+          </article>
+
+          <article class="lookbook-plate" data-lookbook-plate>
+            <div class="lookbook-img-wrap">
+              <img src="images/lookbook-plate-1.webp" alt="Editorial study of layered Balinese silver and gold vermeil bands">
+            </div>
+            <h3 class="subhead">Stacked Jawan Signets</h3>
+            <p class="caption-note">
+              Architectural signet rings paired with traditional Balinese granulated guard bands. Net weight: 16.4 grams.
+            </p>
+          </article>
+
+          <article class="lookbook-plate" data-lookbook-plate>
+            <div class="lookbook-img-wrap">
+              <img src="images/lookbook-plate-2.webp" alt="Close portrait of sculptural gold vermeil ear cuff and pendant">
+            </div>
+            <h3 class="subhead">Sukawati Vessel Pendant</h3>
+            <p class="caption-note">
+              Hollow-form lost-wax vessel suspended on a hand-woven 24-inch Tulang Naga chain. Net weight: 28.1 grams.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 8: CLIENT SERVICES & BESPOKE 3D CAD INQUIRIES
+         ======================================================================= -->
+    <section class="cad-section" id="bespoke" aria-labelledby="cad-heading">
+      <div class="container">
+        <div class="cad-grid">
+          <div>
+            <h2 class="section-heading" id="cad-heading" data-reveal>
+              Bespoke 3D CAD and Casting
+            </h2>
+            <p class="body-copy" data-reveal style="margin-top: 20px;">
+              Beyond our ready-to-wear archive, Artfuli opens its Celuk atelier to private collectors and independent jewelry houses worldwide. Send us a sketch, heirloom reference, or technical specification to initiate a custom commission.
+            </p>
+
+            <div class="cad-visual-pair" data-reveal>
+              <div class="cad-photo-box">
+                <img src="images/cad-design.jpg" alt="3D Rhino Matrix CAD Jewelry Modeling in Bali">
+                <span class="caption-note">Precision 3D CAD geometry with exact stone-seat tolerances.</span>
+              </div>
+              <div class="cad-photo-box">
+                <img src="images/cad-printing.jpg" alt="High-resolution castable wax 3D printing">
+                <span class="caption-note">Micro-layer castable resin printing for direct silver or gold investment.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Bespoke Brief Dispatcher (Zero en-dashes/em-dashes) -->
+          <div class="cad-inquiry-panel" data-reveal>
+            <h3 class="subhead">Configure an Atelier Brief</h3>
+            <p class="caption-note">
+              Generate a structured consultation brief for our master CAD engineers and foundry director in Celuk.
+            </p>
+
+            <div class="form-row">
+              <label for="briefType">Commission Category</label>
+              <select id="briefType" class="form-select" onchange="updateBespokeBrief()">
+                <option value="Bespoke Individual Piece (1 Unit)">Bespoke Individual Piece (1 Unit)</option>
+                <option value="Custom Signet or Engagement Setting">Custom Signet or Engagement Setting</option>
+                <option value="Boutique Private Label Run (15 to 50 Units)">Boutique Private Label Run (15 to 50 Units)</option>
+                <option value="Wholesale Archival Curation">Wholesale Archival Curation</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="briefMetal">Target Metal Specification</label>
+              <select id="briefMetal" class="form-select" onchange="updateBespokeBrief()">
+                <option value="Solid 925 Sterling Silver">Solid 925 Sterling Silver</option>
+                <option value="18k Gold Vermeil (2.5+ Microns on 925 Silver)">18k Gold Vermeil (2.5+ Microns on 925 Silver)</option>
+                <option value="Solid 14k or 18k Recycled Gold">Solid 14k or 18k Recycled Gold</option>
+                <option value="Mixed Silver and Gold Two-Tone">Mixed Silver and Gold Two-Tone</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="briefNotes">Project Dimensions or Reference Notes</label>
+              <input type="text" id="briefNotes" class="form-input" value="Custom signet with 10x8mm bezel and inner engraving" oninput="updateBespokeBrief()">
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; padding-top: 8px;">
+              <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary" id="briefWhatsappBtn">
+                <span>Send Brief via WhatsApp</span>
+                <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
+              </a>
+              <a href="mailto:care@artfulijewelry.com" class="btn-secondary" id="briefEmailBtn">
+                <span>Dispatch to care@artfulijewelry.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECTION 9: ETHICAL SOURCING & 100-YEAR GUARANTEE
+         ======================================================================= -->
+    <section class="guarantee-section" id="warranty" aria-labelledby="guarantee-heading">
+      <div class="container">
+        <div class="guarantee-layout">
+          <div>
+            <h2 class="section-heading" id="guarantee-heading" data-reveal>
+              Provenance and 100-Year Care
+            </h2>
+            <p class="body-copy" data-reveal style="margin-top: 20px;">
+              Every piece that leaves our Sukawati workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.
+            </p>
+          </div>
+
+          <div class="guarantee-editorial-flow">
+            <div class="guarantee-lead-banner" data-reveal>
+              <h3 class="subhead">100-Year Structural Guarantee</h3>
+              <p class="body-copy">
+                Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our Celuk workshop repairs or re-forges the piece free of charge.
+              </p>
+            </div>
+
+            <div class="guarantee-two-col">
+              <div data-reveal>
+                <h3 class="subhead" style="margin-bottom: 10px;">Recycled Precious Metals</h3>
+                <p class="body-copy">
+                  We refine and alloy certified recycled Indonesian silver and gold granules in-house, reducing primary mining impact while maintaining 99.9% base bullion purity prior to alloying.
+                </p>
+              </div>
+
+              <div data-reveal>
+                <h3 class="subhead" style="margin-bottom: 10px;">Vermeil Renewal Service</h3>
+                <p class="body-copy">
+                  Every collector receives lifetime access to ultrasonic cleaning, river-agate repolishing, and at-cost 2.5-micron 18k gold re-vermeil servicing at our Bali atelier.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       SECTION 10: LEEDLIME SOFT-BLEND PANORAMIC FOOTER (Approved & Validated)
+       ========================================================================= -->
+  <footer class="atelier-footer" id="footer">
+    <div class="container">
+
+      <!-- Upper Directory Grid (4 Columns, Sentence-Case Headings) -->
+      <div class="directory-grid">
+
+        <!-- Brand Column -->
+        <div class="brand-col">
+          <div class="brand-mark-row">
+            <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="brand-emblem">
+            <img src="images/artfuli-wordmark.png" alt="Artfuli Jewelry" class="brand-wordmark" id="footerWordmark">
+          </div>
+          <p class="brand-summary">
+            Fine jewelry atelier bridging centuries of Celuk metallurgy with architectural minimalism. Hand-forged in Bali from solid 925 sterling silver and 18k gold vermeil.
+          </p>
+          <div class="brand-socials">
+            <a href="https://instagram.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Instagram</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="https://facebook.com/artfulijewelry" target="_blank" class="brand-social-link">
+              <span>Facebook</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+            <a href="#assay" class="brand-social-link">
+              <span>Assay Ledger</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Collections -->
+        <div>
+          <h2 class="directory-col-title">The Collections</h2>
+          <ul class="directory-links">
+            <li><a href="#collections">Rings and Bands</a></li>
+            <li><a href="#collections">Sculptural Earrings</a></li>
+            <li><a href="#collections">Chains and Pendants</a></li>
+            <li><a href="#collections">Cuffs and Bangles</a></li>
+            <li><a href="#assay">Material Assay Matrix</a></li>
+            <li><a href="#lookbook">Lookbook 2026</a></li>
+          </ul>
+        </div>
+
+        <!-- The Atelier -->
+        <div>
+          <h2 class="directory-col-title">The Atelier</h2>
+          <ul class="directory-links">
+            <li><a href="#heritage">Heritage of Celuk</a></li>
+            <li><a href="#casting">Master Silversmiths</a></li>
+            <li><a href="#bespoke">Custom 3D CAD Modeling</a></li>
+            <li><a href="#assay">Traceable Silver and Gold</a></li>
+            <li><a href="#heritage">Sukawati Workshop</a></li>
+            <li><a href="#warranty">Provenance Archive</a></li>
+          </ul>
+        </div>
+
+        <!-- Client Care -->
+        <div>
+          <h2 class="directory-col-title">Client Care</h2>
+          <ul class="directory-links">
+            <li><a href="https://wa.me/6281234567890" target="_blank">WhatsApp Concierge</a></li>
+            <li><a href="#assay-bench">Ring Sizing Guide</a></li>
+            <li><a href="#warranty">100-Year Structural Guarantee</a></li>
+            <li><a href="#bespoke">Worldwide Insured Transit</a></li>
+            <li><a href="#warranty">Precious Metal Care Guide</a></li>
+            <li><a href="mailto:care@artfulijewelry.com">care@artfulijewelry.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Utility Row (Above Artwork, matching Leedlime layout) -->
+      <div class="utility-bar">
+        <div>
+          <span>© 2026 Artfuli Jewelry Atelier. Jalan Raya Celuk No. 88, Sukawati, Bali.</span>
+        </div>
+        <div class="utility-actions">
+          <span>Certified Assay: 92.5% Ag · 18k Au Vermeil</span>
+          <a href="https://wa.me/6281234567890" target="_blank" class="utility-cta">
+            <span>Consult Atelier</span>
+            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+          </a>
+          <button type="button" class="btn-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+            <span>Back to top</span>
+            <i data-lucide="arrow-up" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Panoramic Artwork Stage with Feathered Soft Blend -->
+    <div class="artwork-stage">
+      <div class="artwork-mask">
+        <img src="images/footer-beads-clean.webp" alt="Artfuli Handcrafted Balinese Silver, Gold Vermeil, and Rose Gold Creations" class="artwork-image" id="footerArtwork">
+        <div class="artwork-scrim"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP v3 & ScrollTrigger CDNs (Canonical Motion Engine per tasteskill.dev/docs) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // =========================================================================
+    // 1. INTERACTIVE LIVE THING: PRECIOUS METAL & RING SIZE ASSAY BENCH
+    // =========================================================================
+    const catalogData = {
+      signet: {
+        title: "Subak Architectural Signet",
+        code: "AJ-RNG-014",
+        desc: "Hand-forged in Celuk, Bali with solid inner gallery.",
+        img: "images/bench-signet.webp",
+        baseWeight: 11.4,
+        silverPrice: 165,
+        vermeilPrice: 215
+      },
+      earrings: {
+        title: "Jawan Botanical Drop Earrings",
+        code: "AJ-EAR-028",
+        desc: "Sculptural openwork gold-vermeil drops with carved floral inlay.",
+        img: "images/bench-earrings.webp",
+        baseWeight: 8.6,
+        silverPrice: 145,
+        vermeilPrice: 190
+      },
+      pendant: {
+        title: "Amethyst Druzy & Botanical Collar",
+        code: "AJ-PND-009",
+        desc: "Lost-wax botanical collar set with raw crystalline amethyst druzy.",
+        img: "images/bench-pendant.webp",
+        baseWeight: 22.8,
+        silverPrice: 240,
+        vermeilPrice: 310
+      },
+      cuff: {
+        title: "Klotok Heavy Wrist Cuff",
+        code: "AJ-CUF-004",
+        desc: "Cold-hammered solid ingot cuff with river-agate burnished edges.",
+        img: "images/bench-cuff.webp",
+        baseWeight: 38.5,
+        silverPrice: 320,
+        vermeilPrice: 410
+      }
+    };
+
+    const sizeCalibration = {
+      "5": { diameter: "15.7 mm", circumference: "49.3 mm", weightFactor: 0.94 },
+      "6": { diameter: "16.5 mm", circumference: "51.9 mm", weightFactor: 0.97 },
+      "7": { diameter: "17.3 mm", circumference: "54.4 mm", weightFactor: 1.00 },
+      "8": { diameter: "18.1 mm", circumference: "57.0 mm", weightFactor: 1.04 },
+      "9": { diameter: "18.9 mm", circumference: "59.5 mm", weightFactor: 1.08 },
+      "10": { diameter: "19.8 mm", circumference: "62.1 mm", weightFactor: 1.12 }
+    };
+
+    let benchState = {
+      piece: "signet",
+      alloy: "silver",
+      size: "7"
+    };
+
+    function renderBench() {
+      const item = catalogData[benchState.piece];
+      const cal = sizeCalibration[benchState.size];
+      const isVermeil = benchState.alloy === "vermeil";
+
+      const computedWeight = (item.baseWeight * cal.weightFactor + (isVermeil ? 0.3 : 0)).toFixed(1);
+      const price = isVermeil ? item.vermeilPrice : item.silverPrice;
+      const purityText = isVermeil ? "18k Au / 925 Ag" : "92.5% Ag";
+      const alloyLabel = isVermeil ? "18k Gold Vermeil (2.5 Microns)" : "925 Sterling Silver";
+      const batchId = isVermeil ? "#CELUK-2026-Au18k" : "#CELUK-2026-Ag925";
+
+      document.getElementById("benchImage").src = item.img;
+      document.getElementById("benchTitle").textContent = item.title;
+      document.getElementById("benchSubtitle").textContent = `Archive Code: ${item.code} · ${item.desc}`;
+      document.getElementById("readoutWeight").textContent = `${computedWeight} g`;
+      document.getElementById("readoutPurity").textContent = purityText;
+      document.getElementById("readoutCircumference").textContent = cal.circumference;
+      document.getElementById("readoutPrice").textContent = `$${price} USD`;
+      document.getElementById("benchBatchCode").textContent = `Assay Certificate Included · Batch Ledger: ${batchId}`;
+
+      if (window.gsap) {
+        gsap.fromTo("#benchReadoutStrip", { opacity: 0.5, y: 4 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
+      }
+
+      const msg = encodeURIComponent(
+        `Hello Artfuli Atelier, I would like to acquire the ${item.title} (${item.code}) in ${alloyLabel}, calibrated to Size US ${benchState.size} (${cal.circumference} circumference, ${computedWeight}g). Price: $${price} USD.`
+      );
+      document.getElementById("benchAcquireLink").href = `https://wa.me/6281234567890?text=${msg}`;
+    }
+
+    window.selectBenchPiece = function(pieceKey) {
+      benchState.piece = pieceKey;
+      document.querySelectorAll("#pieceButtons .choice-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-piece") === pieceKey);
+      });
+      renderBench();
+    };
+
+    window.selectBenchAlloy = function(alloyKey) {
+      benchState.alloy = alloyKey;
+      document.querySelectorAll("#alloyButtons .choice-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-alloy") === alloyKey);
+      });
+      renderBench();
+    };
+
+    window.selectBenchSize = function(sizeKey) {
+      benchState.size = sizeKey;
+      document.querySelectorAll("#sizeButtons .choice-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-size") === sizeKey);
+      });
+      renderBench();
+    };
+
+    // =========================================================================
+    // 2. INTERACTIVE XRF ASSAY TAB MATRIX (Section 5)
+    // =========================================================================
+    const assaySpecifications = {
+      silver: {
+        title: "92.5% Pure Silver + 7.5% Oxygen-Free Copper",
+        desc: "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Sukawati crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
+        method: "Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%",
+        norm: "89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.",
+        status: "Status: XRF Batch Verified in Celuk"
+      },
+      vermeil: {
+        title: "2.5 to 3.0 Microns Solid 18k Gold over 925 Silver",
+        desc: "Our vermeil pieces undergo multi-stage electro-bonding of 18k solid yellow gold over a solid 925 sterling silver core, exceeding FTC vermeil thickness requirements for heirloom longevity.",
+        method: "Verification Protocol: X-Ray Fluorescence Coating Thickness Gauge · Minimum 2.5 µm",
+        norm: "0.1 to 0.5 micron flash gold electroplate over brass or mystery base metal.",
+        status: "Status: 2.5+ Micron Thickness Certified"
+      },
+      hypoallergenic: {
+        title: "100% Free of Nickel, Lead, and Cadmium",
+        desc: "Every earring post, clasp, and ring shank is formulated without nickel, lead, or cadmium brighteners, making every Artfuli creation safe for sensitive skin and continuous daily wear.",
+        method: "Verification Protocol: EN 1811 Bio-Release Assay & Full Elemental XRF Scan",
+        norm: "Nickel undercoat frequently applied beneath thin gold plating as a cheap leveler.",
+        status: "Status: EN 1811 Hypoallergenic Passed"
+      },
+      solder: {
+        title: "High-Fineness Silver and 18k Gold Hard Solder",
+        desc: "Traditional Balinese granulation requires high-temperature eutectic fusing. We formulate our own hard solders matching the karat and fineness of the parent metal so joints never discolor.",
+        method: "Verification Protocol: Sukawati Foundry Assay Log · Metallurgical Joint Inspection",
+        norm: "Low-melting zinc and tin repair solder that oxidizes dark grey over time.",
+        status: "Status: Eutectic Hard-Solder Verified"
+      }
+    };
+
+    window.selectAssayTab = function(key, btn) {
+      document.querySelectorAll(".assay-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const data = assaySpecifications[key];
+      document.getElementById("assaySpecTitle").textContent = data.title;
+      document.getElementById("assaySpecDesc").textContent = data.desc;
+      document.getElementById("assaySpecMethod").textContent = data.method;
+      document.getElementById("assayIndustryNorm").textContent = data.norm;
+      document.getElementById("assayCertificateTag").textContent = data.status;
+
+      if (window.gsap) {
+        gsap.fromTo("#assayDetailSurface", { opacity: 0.4, y: 6 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" });
+      }
+    };
+
+    // =========================================================================
+    // 3. BESPOKE 3D CAD BRIEF GENERATOR (Section 8)
+    // =========================================================================
+    window.updateBespokeBrief = function() {
+      const type = document.getElementById("briefType").value;
+      const metal = document.getElementById("briefMetal").value;
+      const notes = document.getElementById("briefNotes").value;
+
+      const text = `Hello Artfuli Celuk Atelier, I am inquiring about a ${type} in ${metal}. Specifications: ${notes}`;
+      const encoded = encodeURIComponent(text);
+      const subject = encodeURIComponent(`Atelier CAD Inquiry: ${type}`);
+
+      document.getElementById("briefWhatsappBtn").href = `https://wa.me/6281234567890?text=${encoded}`;
+      document.getElementById("briefEmailBtn").href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${encoded}`;
+    };
+    updateBespokeBrief();
+
+    // =========================================================================
+    // 4. FULL-PAGE DUAL-MODE PROTOCOL (tasteskill.dev/docs Section 4 & 8)
+    // =========================================================================
+    window.setPageTheme = function(mode, btn) {
+      document.querySelectorAll(".lab-switch-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const headerWordmark = document.getElementById("headerWordmark");
+      const footerWordmark = document.getElementById("footerWordmark");
+      const footerArtwork = document.getElementById("footerArtwork");
+
+      if (mode === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        headerWordmark.src = "images/artfuli-wordmark-white.png";
+        footerWordmark.src = "images/artfuli-wordmark-white.png";
+        footerArtwork.src = "images/footer-beads-clean.webp";
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        headerWordmark.src = "images/artfuli-wordmark.png";
+        footerWordmark.src = "images/artfuli-wordmark.png";
+        footerArtwork.src = "images/footer-beads-clean.webp";
+      }
+    };
+
+    // =========================================================================
+    // 5. CANONICAL GSAP v3 + SCROLLTRIGGER ANIMATION SKELETONS
+    //    (100% ScrollTrigger driven per tasteskill.dev/docs Section 5 & 9)
+    // =========================================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // A. Hero Load Sequence: Masked 2-Line Headline + Shutter Image Open + Staggered Copy
+      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      heroTl
+        .fromTo("[data-line]",
+          { yPercent: 105 },
+          { yPercent: 0, duration: 0.85, stagger: 0.11 }
+        )
+        .fromTo("#heroShutterFrame",
+          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.05, ease: "power3.inOut" },
+          0.1
+        )
+        .fromTo("#heroMainImage",
+          { scale: 1.12 },
+          { scale: 1.0, duration: 1.35, ease: "power2.out" },
+          0.1
+        )
+        .fromTo("[data-hero-reveal]",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+          0.35
+        );
+
+      // B. Sticky Header Tone Shift & Scaling Emblem (ScrollTrigger, no scroll listener)
+      ScrollTrigger.create({
+        trigger: "body",
+        start: "40px top",
+        onEnter: () => document.getElementById("siteHeader").classList.add("is-scrolled"),
+        onLeaveBack: () => document.getElementById("siteHeader").classList.remove("is-scrolled")
+      });
+
+      gsap.to("#headerEmblem", {
+        scale: 0.92,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+
+      // C. Heritage Workshop Parallax Drift + One-Time Ledger Figure Count-Up
+      gsap.fromTo("#heritageParallaxImg",
+        { yPercent: -5 },
+        {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".heritage-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        }
+      );
+
+      ScrollTrigger.create({
+        trigger: "#heritageCounters",
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          document.querySelectorAll("#heritageCounters [data-count]").forEach(el => {
+            const target = parseInt(el.getAttribute("data-count"), 10);
+            const suffix = el.getAttribute("data-suffix") || "";
+            const state = { val: 0 };
+            gsap.to(state, {
+              val: target,
+              duration: 1.2,
+              ease: "power2.out",
+              onUpdate: () => {
+                const rounded = Math.round(state.val);
+                const formatted = rounded >= 4000 ? rounded.toLocaleString("en-US") : String(rounded);
+                el.textContent = formatted + suffix;
+              }
+            });
+          });
+        }
+      });
+
+      // D. Canonical Section Reveal Stagger (gsap.utils.toArray)
+      gsap.utils.toArray("[data-reveal]").forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true
+            }
+          }
+        );
+      });
+
+      // E. Sticky-Stack Casting Steps Choreography (Section 6)
+      gsap.utils.toArray("[data-craft-step]").forEach((step, idx) => {
+        gsap.fromTo(step,
+          { opacity: 0, x: 24 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            delay: idx * 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "top 85%",
+              once: true
+            }
+          }
+        );
+      });
+
+      // F. Lookbook Triptych Staggered Shutter Entrance (Section 7)
+      gsap.fromTo("[data-lookbook-plate]",
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".lookbook-triptych",
+            start: "top 82%",
+            once: true
+          }
+        }
+      );
+    });
+  </script>
+</body>
+</html>

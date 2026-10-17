@@ -1,0 +1,9 @@
+{
+  "name": "bali-handmade-old",
+  "version": "1.0.0",
+  "description": "Static offline clone of bali-handmade.com",
+  "scripts": {
+    "start": "npx serve -p 3001 .",
+    "serve": "npx serve -p 3001 ."
+  }
+}

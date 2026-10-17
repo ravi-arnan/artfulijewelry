@@ -1,0 +1,1620 @@
+{
+ "url": "http://localhost:3002/landing.html",
+ "at": "2026-10-17T09:15:06.686Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.63,
+    0.96,
+    0.6,
+    0.67,
+    0.86,
+    0.8,
+    0.69,
+    1,
+    0.7,
+    0.68,
+    0.61,
+    0.78
+   ],
+   "motion": {
+    "elements": 46,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 45,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 10168,
+     "screens": 11.3,
+     "words": 1184,
+     "img": 19,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 15,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "lookbook-hero-1.webp",
+      "lookbook-detail.webp",
+      "atelier-heritage.webp",
+      "edition-rings.webp",
+      "edition-pendants.webp",
+      "edition-earrings.webp",
+      "edition-cuffs.webp",
+      "bench-signet.webp"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "chars": 27,
+     "lines": 2,
+     "size": 60.5,
+     "vw": 4.2,
+     "font": "Cormorant Garamond",
+     "weight": 400,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.24,
+     "top": 204,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "lines": 2,
+     "size": 60.5,
+     "font": "Cormorant Garamond"
+    },
+    "headings": [
+     {
+      "text": "Hand-forged in Celuk, Bali.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 60.5,
+      "vw": 4.2,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.24,
+      "top": 204,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Centuries of Celuk metallurgy.",
+      "words": 4,
+      "chars": 30,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.46,
+      "top": 932,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "1978",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.13,
+      "top": 1434,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "34 Smiths",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.13,
+      "top": 1434,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4,550+",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.13,
+      "top": 1434,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Signature Atelier Editions",
+      "words": 3,
+      "chars": 26,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.26,
+      "top": 1980,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Radical Material Transparency",
+      "words": 3,
+      "chars": 29,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 4781,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Hand-carved wax to molten silver.",
+      "words": 5,
+      "chars": 33,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 5474,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "The 2026 Celuk Archive Lookbook",
+      "words": 5,
+      "chars": 31,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 6469,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bespoke 3D CAD and Casting",
+      "words": 5,
+      "chars": 26,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.43,
+      "top": 7694,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Provenance and 100-Year Care",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 8631,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 11,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 4,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Cormorant Garamond",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      16,
+      22,
+      37,
+      61
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 16.7
+     },
+     "measureChars": 77,
+     "max": {
+      "size": 60.5,
+      "vw": 4.2,
+      "font": "Cormorant Garamond",
+      "text": "Hand-forged in"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f4f2ee",
+     "bodyBgHsl": {
+      "h": 40,
+      "s": 0.21,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f4f2ee",
+       "top": 124,
+       "hsl": {
+        "h": 40,
+        "s": 0.21,
+        "l": 0.95
+       }
+      },
+      {
+       "color": "#eae6df",
+       "top": 776,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.9
+       }
+      },
+      {
+       "color": "#ded8ce",
+       "top": 916,
+       "hsl": {
+        "h": 37,
+        "s": 0.2,
+        "l": 0.84
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#141116",
+       "share": 0.55
+      },
+      {
+       "color": "#4e4656",
+       "share": 0.41
+      },
+      {
+       "color": "#faf8f5",
+       "share": 0.03
+      },
+      {
+       "color": "#551f51",
+       "share": 0.01
+      },
+      {
+       "color": "#151218",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f4f2ee",
+      "hsl": {
+       "h": 40,
+       "s": 0.21,
+       "l": 0.95
+      },
+      "fg": "#141116"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 23,
+     "inHero": 4,
+     "radius": 0,
+     "height": 38,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Size & Alloy Bench",
+      "Consult Atelier",
+      "Explore Collections",
+      "Inspect Alloy & Weight"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 1,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 5474
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.16
+     }
+    ],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 80,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "cormorant garamond",
+     "plus jakarta sans"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.62,
+    0.87,
+    0.94,
+    0.76,
+    0.76,
+    0.8,
+    0.8,
+    0.69,
+    0.76,
+    0.86,
+    0.77,
+    1
+   ],
+   "motion": {
+    "elements": 46,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 45,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 16105,
+     "screens": 15.7,
+     "words": 1174,
+     "img": 19,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 15,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "lookbook-hero-1.webp",
+      "lookbook-detail.webp",
+      "atelier-heritage.webp",
+      "edition-rings.webp",
+      "edition-pendants.webp",
+      "edition-earrings.webp",
+      "edition-cuffs.webp",
+      "bench-signet.webp"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "chars": 27,
+     "lines": 2,
+     "size": 36,
+     "vw": 4.7,
+     "font": "Cormorant Garamond",
+     "weight": 400,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.27,
+     "top": 194,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "lines": 2,
+     "size": 36,
+     "font": "Cormorant Garamond"
+    },
+    "headings": [
+     {
+      "text": "Hand-forged in Celuk, Bali.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.27,
+      "top": 194,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Centuries of Celuk metallurgy.",
+      "words": 4,
+      "chars": 30,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2363,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "1978",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.23,
+      "top": 2853,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "34 Smiths",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.23,
+      "top": 2853,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4,550+",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.23,
+      "top": 2853,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Signature Atelier Editions",
+      "words": 3,
+      "chars": 26,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 3241,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Radical Material Transparency",
+      "words": 3,
+      "chars": 29,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 8220,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Hand-carved wax to molten silver.",
+      "words": 5,
+      "chars": 33,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 9247,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "The 2026 Celuk Archive Lookbook",
+      "words": 5,
+      "chars": 31,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.45,
+      "top": 11007,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bespoke 3D CAD and Casting",
+      "words": 5,
+      "chars": 26,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 12726,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Provenance and 100-Year Care",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 3.4,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 14244,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 11,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 4,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Cormorant Garamond",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      16,
+      22,
+      26,
+      36
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 16.7
+     },
+     "measureChars": 88,
+     "max": {
+      "size": 36,
+      "vw": 4.7,
+      "font": "Cormorant Garamond",
+      "text": "Hand-forged in"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f4f2ee",
+     "bodyBgHsl": {
+      "h": 40,
+      "s": 0.21,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f4f2ee",
+       "top": 162,
+       "hsl": {
+        "h": 40,
+        "s": 0.21,
+        "l": 0.95
+       }
+      },
+      {
+       "color": "#eae6df",
+       "top": 1218,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.9
+       }
+      },
+      {
+       "color": "#ded8ce",
+       "top": 1358,
+       "hsl": {
+        "h": 37,
+        "s": 0.2,
+        "l": 0.84
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#141116",
+       "share": 0.55
+      },
+      {
+       "color": "#4e4656",
+       "share": 0.41
+      },
+      {
+       "color": "#faf8f5",
+       "share": 0.03
+      },
+      {
+       "color": "#551f51",
+       "share": 0.01
+      },
+      {
+       "color": "#151218",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f4f2ee",
+      "hsl": {
+       "h": 40,
+       "s": 0.21,
+       "l": 0.95
+      },
+      "fg": "#141116"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 23,
+     "inHero": 4,
+     "radius": 0,
+     "height": 38,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Size & Alloy Bench",
+      "Consult Atelier",
+      "Explore Collections",
+      "Inspect Alloy & Weight"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 1,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.23
+     },
+     {
+      "type": "img",
+      "ratio": 0.12
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 80,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "cormorant garamond",
+     "plus jakarta sans"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.46,
+    0.8,
+    0.75,
+    0.77,
+    0.62,
+    0.57,
+    0.55,
+    0.79,
+    0.54,
+    0.75,
+    0.54,
+    0.74
+   ],
+   "motion": {
+    "elements": 46,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 45,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 444,
+     "h": 961
+    },
+    "page": {
+     "height": 17601,
+     "screens": 18.3,
+     "words": 1170,
+     "img": 19,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 15,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "lookbook-hero-1.webp",
+      "lookbook-detail.webp",
+      "atelier-heritage.webp",
+      "edition-rings.webp",
+      "edition-pendants.webp",
+      "edition-earrings.webp",
+      "edition-cuffs.webp",
+      "bench-signet.webp"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "chars": 27,
+     "lines": 2,
+     "size": 34.4,
+     "vw": 7.7,
+     "font": "Cormorant Garamond",
+     "weight": 400,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.44,
+     "top": 315,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hand-forged in Celuk, Bali.",
+     "words": 4,
+     "lines": 2,
+     "size": 34.4,
+     "font": "Cormorant Garamond"
+    },
+    "headings": [
+     {
+      "text": "Hand-forged in Celuk, Bali.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 34.4,
+      "vw": 7.7,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.44,
+      "top": 315,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Centuries of Celuk metallurgy.",
+      "words": 4,
+      "chars": 30,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 2599,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "1978",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3211,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "34 Smiths",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3328,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4,550+",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3445,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Signature Atelier Editions",
+      "words": 3,
+      "chars": 26,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.58,
+      "top": 3719,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Radical Material Transparency",
+      "words": 3,
+      "chars": 29,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 7770,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Hand-carved wax to molten silver.",
+      "words": 5,
+      "chars": 33,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 9004,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "The 2026 Celuk Archive Lookbook",
+      "words": 5,
+      "chars": 31,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 10811,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bespoke 3D CAD and Casting",
+      "words": 5,
+      "chars": 26,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.95,
+      "top": 13091,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Provenance and 100-Year Care",
+      "words": 4,
+      "chars": 28,
+      "lines": 1,
+      "size": 26.4,
+      "vw": 5.9,
+      "font": "Cormorant Garamond",
+      "weight": 400,
+      "tracking": -0.015,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 14942,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 11,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 4,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Cormorant Garamond",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      16,
+      20,
+      26,
+      34
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 16.7
+     },
+     "measureChars": 53,
+     "max": {
+      "size": 34.4,
+      "vw": 7.7,
+      "font": "Cormorant Garamond",
+      "text": "Hand-forged in"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f4f2ee",
+     "bodyBgHsl": {
+      "h": 40,
+      "s": 0.21,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f4f2ee",
+       "top": 227,
+       "hsl": {
+        "h": 40,
+        "s": 0.21,
+        "l": 0.95
+       }
+      },
+      {
+       "color": "#eae6df",
+       "top": 849,
+       "hsl": {
+        "h": 38,
+        "s": 0.21,
+        "l": 0.9
+       }
+      },
+      {
+       "color": "#ded8ce",
+       "top": 2015,
+       "hsl": {
+        "h": 37,
+        "s": 0.2,
+        "l": 0.84
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#141116",
+       "share": 0.55
+      },
+      {
+       "color": "#4e4656",
+       "share": 0.41
+      },
+      {
+       "color": "#faf8f5",
+       "share": 0.03
+      },
+      {
+       "color": "#551f51",
+       "share": 0.01
+      },
+      {
+       "color": "#151218",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f4f2ee",
+      "hsl": {
+       "h": 40,
+       "s": 0.21,
+       "l": 0.95
+      },
+      "fg": "#141116"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 22,
+     "inHero": 3,
+     "radius": 0,
+     "height": 38,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Consult Atelier",
+      "Explore Collections",
+      "Inspect Alloy & Weight"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 1,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 15,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 8,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 227
+      },
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 9558
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.09
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 72,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "cormorant garamond",
+     "plus jakarta sans"
+    ]
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 1440,
+   "message": "Yellow-cream background (page background #f4f2ee, section #f4f2ee, section #eae6df).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "card-rows",
+   "width": 390,
+   "message": "2 rows of identical boxed cards.",
+   "fix": "Vary the composition; not every section is a card grid."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/desktop-fold.jpg",
+   "pages": [
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/desktop-page-01.jpg",
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/desktop-page-02.jpg",
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/desktop-page-03.jpg"
+   ]
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/tablet-fold.jpg",
+   "pages": [
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/tablet-page-01.jpg",
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/tablet-page-02.jpg"
+   ]
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/mobile-fold.jpg",
+   "pages": [
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/mobile-page-01.jpg",
+    "/home/ravi/Projects/bali-handmade-redesign/.taste-skill/inspect/mobile-page-02.jpg"
+   ]
+  }
+ ]
+}

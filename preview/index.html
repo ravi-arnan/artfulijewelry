@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artfuli Jewelry | Fine Jewelry Atelier, Celuk, Bali</title>
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Clean Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Control Bar for Testing -->
+  <aside class="preview-control-bar" aria-label="Interactive Preview Controls" data-ui>
+    <span class="badge">TasteSkill v2</span>
+
+    <span style="opacity: 0.7; font-size: 12px;">Hero:</span>
+    <div class="preview-btn-group" id="heroButtons">
+      <button class="preview-btn active" data-mode="split" onclick="setHeroMode('split')">Split Stage</button>
+      <button class="preview-btn" data-mode="fullbleed" onclick="setHeroMode('fullbleed')">Full-Bleed</button>
+    </div>
+
+    <span style="opacity: 0.7; font-size: 12px; margin-left: 6px;">Story:</span>
+    <div class="preview-btn-group" id="storyButtons">
+      <button class="preview-btn active" data-mode="parallax" onclick="setStoryMode('parallax')">Parallax</button>
+      <button class="preview-btn" data-mode="pinned" onclick="setStoryMode('pinned')">Pinned</button>
+    </div>
+
+    <button class="replay-btn" onclick="replayAnimations()" title="Replay animations">
+      <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i> Replay
+    </button>
+
+    <a href="landing.html" class="preview-btn" style="text-decoration: none; color: #FAF8F5; background: #551F51; margin-left: 6px;">Full Landing (10 Sec) →</a>
+    <a href="footer.html" class="preview-btn" style="text-decoration: none; color: #C5A059; border: 1px solid rgba(197, 160, 89, 0.4); margin-left: 6px;">Footer Lab →</a>
+  </aside>
+
+  <!-- Site Sticky Header -->
+  <header class="site-header" id="siteHeader">
+    <a href="#" class="site-logo">
+      <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="logo-emblem">
+      <img src="images/artfuli-wordmark.png" alt="Artfuli Fine Jewelry" class="logo-wordmark">
+    </a>
+
+    <nav aria-label="Main Navigation">
+      <ul class="nav-links">
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#story">The Atelier</a></li>
+        <li><a href="#transparency">Transparency</a></li>
+        <li><a href="#footer">Concierge</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions" data-ui>
+      <button class="icon-btn" aria-label="Search Catalog">
+        <i data-lucide="search" style="width: 20px; height: 20px; stroke-width: 1.25;"></i>
+      </button>
+      <button class="icon-btn" aria-label="Saved Wishlist">
+        <i data-lucide="bookmark" style="width: 20px; height: 20px; stroke-width: 1.25;"></i>
+        <span class="badge-count">2</span>
+      </button>
+      <button class="icon-btn" aria-label="Cart Drawer">
+        <i data-lucide="shopping-bag" style="width: 20px; height: 20px; stroke-width: 1.25;"></i>
+        <span class="badge-count">1</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- CONCEPT A: SPLIT STAGE HERO (TasteSkill v2 Architecture) -->
+    <section class="hero-split" id="heroSplit">
+      <div class="container">
+        <div class="split-grid">
+          <div class="split-text">
+            <h1 class="hero-title split-text-title">
+              Architectural forms, forged by master hands.
+            </h1>
+            <p class="hero-lead split-text-lead">
+              Heirloom 925 sterling silver and heavy 18k gold vermeil. Hand-forged in Celuk, Bali with laboratory assay verification and direct atelier access.
+            </p>
+            <div class="split-cta-group">
+              <a href="#collections" class="btn-primary">Explore Collections</a>
+              <a href="#story" class="btn-secondary">The Celuk Atelier</a>
+            </div>
+          </div>
+
+          <div class="hero-image-stage">
+            <div class="hero-image-wrap">
+              <img src="images/lookbook-hero-1.webp" alt="Artfuli Fine Jewelry Collection" id="splitHeroImg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCEPT B: FULL-BLEED CINEMATIC HERO (Alternative) -->
+    <section class="hero-fullbleed hidden" id="heroFullbleed">
+      <div class="fullbleed-bg">
+        <img src="images/lookbook-hero-2.webp" alt="Artfuli High-Jewelry Editorial">
+      </div>
+      <div class="fullbleed-overlay"></div>
+      <div class="fullbleed-content">
+        <h1 class="hero-title">Timeless precious metal craftsmanship.</h1>
+        <p class="hero-lead">
+          Bridging generations of Balinese goldsmithing with modern structural minimalism. Certified 925 silver and 18k vermeil direct from the source.
+        </p>
+        <div class="btn-group">
+          <a href="#collections" class="btn-primary">Discover Creations</a>
+          <a href="#story" class="btn-secondary">Atelier Heritage</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CURATED COLLECTIONS -->
+    <section class="collections-section" id="collections">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">The Foundation Pieces</h2>
+          <a href="#collections" class="text-link">View Full Catalog →</a>
+        </div>
+
+        <div class="collections-grid">
+          <a href="#rings" class="collection-card">
+            <div class="card-image-wrap">
+              <img src="images/prod-ring.jpg" alt="Rings Collection">
+            </div>
+            <div class="card-info">
+              <span class="card-name">Rings & Bands</span>
+              <span class="card-count">48 Pieces</span>
+            </div>
+          </a>
+
+          <a href="#earrings" class="collection-card">
+            <div class="card-image-wrap">
+              <img src="images/prod-earrings.jpg" alt="Earrings Collection">
+            </div>
+            <div class="card-info">
+              <span class="card-name">Sculptural Earrings</span>
+              <span class="card-count">36 Pieces</span>
+            </div>
+          </a>
+
+          <a href="#necklaces" class="collection-card">
+            <div class="card-image-wrap">
+              <img src="images/prod-necklace.jpg" alt="Pendants & Chains">
+            </div>
+            <div class="card-info">
+              <span class="card-name">Chains & Pendants</span>
+              <span class="card-count">29 Pieces</span>
+            </div>
+          </a>
+
+          <a href="#bracelets" class="collection-card">
+            <div class="card-image-wrap">
+              <img src="images/prod-bracelet.jpg" alt="Bracelets & Cuffs">
+            </div>
+            <div class="card-info">
+              <span class="card-name">Cuffs & Bangles</span>
+              <span class="card-count">22 Pieces</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: STORYTELLING (CELUK HERITAGE) -->
+    <!-- Mode 1: Parallax Storytelling -->
+    <section class="story-section" id="storyParallax">
+      <div class="container">
+        <div class="story-grid">
+          <div class="story-image-box">
+            <img src="images/atelier-heritage.webp" alt="Master Silversmith at Work in Celuk" id="storyArtisanImg">
+          </div>
+
+          <div class="story-content">
+            <h2 class="story-content-reveal">Century-old metallurgy, reimagined.</h2>
+            <p class="story-content-reveal">
+              For generations, the silversmiths and goldsmiths of Celuk Village have held a revered place in Balinese decorative arts. From intricate granulation to precision hand-forged bezels, our master artisans breathe soul into raw precious metals.
+            </p>
+            <blockquote class="story-quote story-content-reveal">
+              We reject factory stamping. Every Artfuli piece carries the fingerprint of human dedication and generational mastery.
+            </blockquote>
+            <p class="story-content-reveal">
+              By maintaining our private atelier in Sukawati, Gianyar, we ensure honest maker remuneration and uncompromised structural integrity in every solder and polish.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mode 2: Pinned Storytelling (Alternative) -->
+    <section class="story-section hidden" id="storyPinned">
+      <div class="container pinned-container">
+        <div class="pinned-wrapper">
+          <div class="story-image-box">
+            <img src="images/lookbook-detail.webp" alt="Handcrafted Precious Metal Detail">
+          </div>
+
+          <div class="pinned-steps">
+            <div class="step-card active">
+              <h3 class="step-title">Traditional Granulation</h3>
+              <p class="step-desc">
+                Individual silver beads, rolled by hand and fused at exact metallurgical temperatures without flood solder, creating micro-architectural texture.
+              </p>
+            </div>
+
+            <div class="step-card">
+              <h3 class="step-title">Cold Hand-Forging</h3>
+              <p class="step-desc">
+                Solid sterling silver ingots cold-hammered repeatedly to compress the crystal lattice, resulting in superior scratch resistance and lifelong durability.
+              </p>
+            </div>
+
+            <div class="step-card">
+              <h3 class="step-title">Direct Atelier Access</h3>
+              <p class="step-desc">
+                No luxury middlemen markups. Every commission directly supports local artisan families and preserves indigenous craftsmanship.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: RADICAL MATERIAL TRANSPARENCY -->
+    <section class="assay-section" id="transparency">
+      <div class="container">
+        <div class="assay-header">
+          <h2 class="section-title">Radical Material Transparency</h2>
+          <p class="assay-intro">
+            True luxury requires rigorous scientific proof. Every batch of precious metal undergoes laboratory XRF spectrometry to ensure certified purity.
+          </p>
+        </div>
+
+        <div class="assay-grid">
+          <div class="assay-card">
+            <div class="assay-val" id="numSilver">0%</div>
+            <h3 class="assay-title">Solid 925 Sterling Silver</h3>
+            <p class="assay-desc">
+              Solid 925 sterling silver alloyed exclusively with pure oxygen-free copper. Completely free of nickel, lead, and cadmium allergens.
+            </p>
+            <div class="meter-bar">
+              <div class="meter-fill" data-width="92.5%"></div>
+            </div>
+          </div>
+
+          <div class="assay-card">
+            <div class="assay-val" id="numGold">0 µm</div>
+            <h3 class="assay-title">Heavy 18k Vermeil</h3>
+            <p class="assay-desc">
+              Thick 18k solid gold bonded over solid 925 sterling silver, exceeding FTC vermeil standards by 2.5 times for lasting heirloom luster.
+            </p>
+            <div class="meter-bar">
+              <div class="meter-fill" data-width="100%"></div>
+            </div>
+          </div>
+
+          <div class="assay-card">
+            <div class="assay-val">100% Verified</div>
+            <h3 class="assay-title">Laboratory Guarantee</h3>
+            <p class="assay-desc">
+              Independently verified hypoallergenic tolerance suitable for sensitive skin and everyday lifetime wear.
+            </p>
+            <div class="meter-bar">
+              <div class="meter-fill" data-width="100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- EDITORIAL FOOTER (TasteSkill v2 Split Design) -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="footer-emblem">
+            <img src="images/artfuli-wordmark-white.png" alt="Artfuli Jewelry" class="footer-wordmark">
+          </div>
+          <p class="footer-desc">
+            Light-luxury fine jewelry atelier bridging Celuk heritage with architectural minimalism. Hand-forged in Bali, Indonesia.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Atelier</span>
+          <ul class="footer-links">
+            <li><a href="#collections">The Collections</a></li>
+            <li><a href="#story">Celuk Heritage</a></li>
+            <li><a href="#transparency">Material Assay</a></li>
+            <li><a href="#footer">Bespoke 3D Casting</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Client Concierge</span>
+          <ul class="footer-links">
+            <li><a href="mailto:care@artfulijewelry.com">care@artfulijewelry.com</a></li>
+            <li><a href="#">WhatsApp Concierge</a></li>
+            <li><a href="#">Ring Size Guide</a></li>
+            <li><a href="#">Lifetime Warranty</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Workshop Location</span>
+          <p class="footer-address">
+            Jalan Raya Celuk No. 88<br>
+            Sukawati, Gianyar, Bali 80582<br>
+            Indonesia
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Artfuli Jewelry Atelier. All rights reserved.</span>
+        <span>Certified Assay Grade Precious Metals</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP v3 & ScrollTrigger CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Interactive App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
