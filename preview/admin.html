@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Artfuli Atelier Console | Landing Page Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Login -->
+  <main class="login-screen" id="loginScreen" hidden>
+    <form class="login-card" id="loginForm" autocomplete="off">
+      <img src="images/artfuli-wordmark.png" alt="Artfuli Jewelry" class="login-wordmark">
+      <h1 class="login-title">Atelier Console</h1>
+      <p class="login-note">Sign in to manage the landing page content.</p>
+      <label class="field">
+        <span class="field-label">Password</span>
+        <input type="password" id="loginPassword" required autofocus>
+      </label>
+      <p class="login-error" id="loginError" role="alert"></p>
+      <button type="submit" class="btn btn-primary" id="loginSubmit">Sign in</button>
+    </form>
+  </main>
+
+  <!-- Console -->
+  <div class="console" id="console" hidden>
+    <aside class="sidebar" aria-label="Admin sections">
+      <div class="sidebar-brand">
+        <img src="images/artfuli-emblem.png" alt="" class="sidebar-emblem">
+        <div>
+          <div class="sidebar-title">Atelier Console</div>
+          <div class="sidebar-sub">Landing page admin</div>
+        </div>
+      </div>
+      <nav>
+        <ul class="nav-list" id="navList">
+          <li><button type="button" class="nav-item" data-view="hero">Hero and announcement</button></li>
+          <li><button type="button" class="nav-item" data-view="collections">Collections</button></li>
+          <li><button type="button" class="nav-item" data-view="bench">Assay bench</button></li>
+          <li><button type="button" class="nav-item" data-view="contact">Contact and footer</button></li>
+        </ul>
+      </nav>
+      <div class="sidebar-foot">
+        <a href="landing.html" target="_blank" rel="noopener" class="link-quiet">Open landing page</a>
+        <button type="button" class="link-quiet" id="logoutBtn">Sign out</button>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <h2 class="view-title" id="viewTitle"></h2>
+          <p class="view-sub" id="viewSub"></p>
+        </div>
+        <div class="topbar-actions">
+          <span class="dirty-note" id="dirtyNote" hidden>Unsaved changes</span>
+          <button type="button" class="btn btn-secondary" id="discardBtn" disabled>Discard</button>
+          <button type="button" class="btn btn-primary" id="saveBtn" disabled>Save changes</button>
+        </div>
+      </header>
+      <div class="view-body" id="viewBody"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="fileInput" accept=".webp,.jpg,.jpeg,.png" hidden>
+
+  <script src="admin.js"></script>
+</body>
+</html>
