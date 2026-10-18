@@ -29,8 +29,13 @@ const server = http.createServer((req, res) => {
     pathname = "/index.html";
   }
 
-  const safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, "");
-  const filePath = path.join(__dirname, safePath);
+  const safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, "").replace(/^\/+/, "");
+  let filePath;
+  if (safePath.startsWith("old/") || safePath.startsWith("assets/")) {
+    filePath = path.join(__dirname, "..", safePath);
+  } else {
+    filePath = path.join(__dirname, safePath);
+  }
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
