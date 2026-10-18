@@ -2,6 +2,8 @@
 
 Rencana kerja bertahap untuk pengembangan platform e-commerce dan editorial storefront Artfuli Jewelry.
 
+> Untuk timeline lengkap implementasi ritel penuh, integrasi payment gateway Midtrans, multi-bahasa, dual-currency, dan penyusunan laporan Kerja Praktek (KP), silakan merujuk ke [TIMELINE_KP.md](TIMELINE_KP.md).
+
 ---
 
 ## Milestone 1: Foundation, Brand Identity & Specifications (Selesai)
