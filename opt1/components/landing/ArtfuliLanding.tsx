@@ -1402,7 +1402,7 @@ export function ArtfuliLanding() {
           {/* SECTION 8: CLIENT SERVICES & BESPOKE 3D CAD INQUIRIES */}
           <section className="cad-section" id="bespoke" aria-labelledby="cad-heading">
             <div className="container">
-              <div className="cad-layout">
+              <div className="cad-grid">
                 <div>
                   <h2 className="section-heading" id="cad-heading">
                     Bespoke Atelier Commissions
@@ -1411,7 +1411,7 @@ export function ArtfuliLanding() {
                     Whether modifying an archival Celuk master or drafting a 3D CAD prototype from your napkin sketch, our smiths and digital modelers bring custom heirloom designs to fruition.
                   </p>
 
-                  <div className="cad-features-grid">
+                  <div className="cad-visual-pair">
                     <div className="cad-card">
                       <div className="cad-photo-box">
                         <img src="/images/cad-design.jpg" alt="Jewelry 3D CAD Prototyping and Photorealistic Rendering in Bali" />
@@ -1435,17 +1435,17 @@ export function ArtfuliLanding() {
                 </div>
 
                 {/* Interactive Bespoke Inquiry Generator */}
-                <div className="cad-brief-box">
-                  <h3 className="subhead" style={{ marginBottom: 8 }}>Dispatch a Custom Atelier Brief</h3>
-                  <p className="caption-note" style={{ marginBottom: 20 }}>
+                <div className="cad-inquiry-panel">
+                  <h3 className="subhead" style={{ marginBottom: 4 }}>Dispatch a Custom Atelier Brief</h3>
+                  <p className="caption-note" style={{ marginBottom: 18 }}>
                     Select your commissioned silhouette and precious metal to generate a tailored WhatsApp inquiry directly to our Sukawati head caster.
                   </p>
 
-                  <div className="brief-field-group">
-                    <label className="brief-label" htmlFor="briefTypeSelect">Silhouette Classification</label>
+                  <div className="form-row">
+                    <label htmlFor="briefTypeSelect">Silhouette Classification</label>
                     <select
                       id="briefTypeSelect"
-                      className="brief-select"
+                      className="form-select"
                       value={briefType}
                       onChange={(e) => setBriefType(e.target.value)}
                     >
@@ -1457,11 +1457,11 @@ export function ArtfuliLanding() {
                     </select>
                   </div>
 
-                  <div className="brief-field-group">
-                    <label className="brief-label" htmlFor="briefMetalSelect">Metallurgy Alloy</label>
+                  <div className="form-row">
+                    <label htmlFor="briefMetalSelect">Metallurgy Alloy</label>
                     <select
                       id="briefMetalSelect"
-                      className="brief-select"
+                      className="form-select"
                       value={briefMetal}
                       onChange={(e) => setBriefMetal(e.target.value)}
                     >
@@ -1472,11 +1472,11 @@ export function ArtfuliLanding() {
                     </select>
                   </div>
 
-                  <div className="brief-field-group">
-                    <label className="brief-label" htmlFor="briefNotesInput">Atelier Notes &amp; Approximate Dimensions</label>
+                  <div className="form-row">
+                    <label htmlFor="briefNotesInput">Atelier Notes &amp; Approximate Dimensions</label>
                     <textarea
                       id="briefNotesInput"
-                      className="brief-textarea"
+                      className="form-textarea"
                       value={briefNotes}
                       onChange={(e) => setBriefNotes(e.target.value)}
                       rows={3}
@@ -1487,6 +1487,7 @@ export function ArtfuliLanding() {
                     <a
                       href={bespokeWaUrl}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="btn-primary"
                       id="briefWhatsappBtn"
                     >

@@ -1426,66 +1426,129 @@
        Layout Family 7: 2-Column Split Studio Showcase + Interactive Brief Form
        ========================================================================== */
     .cad-section {
-      padding: 150px 0;
+      padding: 120px 0;
       background-color: var(--ground-primary);
       border-bottom: 1px solid var(--border-frame); /* taste-skill-ignore */
     }
 
-    .cad-grid {
+    .cad-grid,
+    .cad-layout {
       display: grid;
-      grid-template-columns: 6fr 6fr;
-      gap: 64px;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
       align-items: start;
     }
 
-    .cad-visual-pair {
+    .cad-visual-pair,
+    .cad-features-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
       margin-top: 32px;
-      align-items: end;
+      align-items: start;
     }
 
-    .cad-photo-box {
+    .cad-photo-box,
+    .cad-card {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .cad-photo-box img {
+    .cad-photo-box img,
+    .cad-card img {
       width: 100%;
-      aspect-ratio: 6 / 5;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
+      background-color: var(--ground-secondary);
+      border: 1px solid var(--border-frame); /* taste-skill-ignore */
     }
 
-    .cad-inquiry-panel {
+    .cad-photo-box .subhead,
+    .cad-card .subhead {
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+
+    .cad-inquiry-panel,
+    .cad-brief-box {
       background-color: var(--ground-secondary);
-      padding: 48px;
+      padding: 44px 36px;
+      border: 1px solid var(--border-frame); /* taste-skill-ignore */
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 22px;
     }
 
-    .form-row {
+    .form-row,
+    .brief-field-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
     }
 
-    .form-row label {
+    .form-row label,
+    .brief-label {
+      font-family: var(--font-sans);
       font-size: var(--step-small);
       font-weight: 600;
       color: var(--ink-primary);
+      letter-spacing: 0.02em;
     }
 
     .form-select,
-    .form-input {
-      padding: 12px 16px;
+    .brief-select,
+    .form-input,
+    .brief-textarea,
+    .form-textarea {
+      width: 100%;
+      padding: 13px 16px;
       font-family: var(--font-sans);
       font-size: var(--step-body);
       background-color: var(--ground-primary);
       color: var(--ink-primary);
-      border: none;
+      border: 1px solid var(--border-frame); /* taste-skill-ignore */
+      border-radius: 0;
+      outline: none;
+      transition: border-color var(--t-hover) ease;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .form-select,
+    .brief-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234E4656' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    .form-select:focus,
+    .brief-select:focus,
+    .form-input:focus,
+    .brief-textarea:focus,
+    .form-textarea:focus {
+      border-color: var(--brand-accent);
+    }
+
+    .brief-textarea,
+    .form-textarea {
+      resize: vertical;
+      min-height: 92px;
+      line-height: 1.5;
+    }
+
+    .brief-actions,
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 8px;
     }
 
     /* ==========================================================================
