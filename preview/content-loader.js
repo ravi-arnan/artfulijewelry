@@ -166,6 +166,21 @@
     $$('a[href^="https://wa.me/"]').forEach((el) => {
       el.href = el.href.replace(/wa\.me\/\d+/, `wa.me/${window.SITE_WA}`);
     });
+    if (typeof window.checkoutViaWhatsApp === "function") {
+      const origWa = window.checkoutViaWhatsApp;
+      window.checkoutViaWhatsApp = function(e) {
+        if (e) e.preventDefault();
+        if (typeof cartItems === "undefined" || cartItems.length === 0) return;
+        const subtotal = cartItems.reduce((acc, it) => acc + (it.price * it.qty), 0);
+        let text = "Hello Artfuli Jewelry Atelier, I would like to commission the following pieces from your collection:\n\n";
+        cartItems.forEach((it, idx) => {
+          text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
+        });
+        text += `\nEstimated Total: $${subtotal} USD\nInsured Celuk Worldwide Shipping included.\nPlease advise on current casting timeline and payment details.`;
+        const encoded = encodeURIComponent(text);
+        window.open(`https://wa.me/${window.SITE_WA}?text=${encoded}`, "_blank");
+      };
+    }
   }
   if (typeof k.email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(k.email)) {
     window.SITE_EMAIL = k.email;
@@ -173,6 +188,21 @@
       el.href = `mailto:${k.email}`;
       if (el.textContent.includes("@")) el.textContent = k.email;
     });
+    if (typeof window.checkoutViaEmail === "function") {
+      window.checkoutViaEmail = function(e) {
+        if (e) e.preventDefault();
+        if (typeof cartItems === "undefined" || cartItems.length === 0) return;
+        const subtotal = cartItems.reduce((acc, it) => acc + (it.price * it.qty), 0);
+        let text = "Hello Artfuli Jewelry Atelier,\n\nI would like to commission the following pieces:\n\n";
+        cartItems.forEach((it, idx) => {
+          text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
+        });
+        text += `\nEstimated Total: $${subtotal} USD\n\nPlease reply with atelier invoice and delivery estimate.`;
+        const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
+        const body = encodeURIComponent(text);
+        window.location.href = `mailto:${window.SITE_EMAIL}?subject=${subject}&body=${body}`;
+      };
+    }
   }
   text($(".utility-bar > div:first-child > span"), k.address);
   if (safeUrl(k.instagram)) $$('.brand-social-link[href*="instagram"]').forEach((el) => (el.href = k.instagram));
