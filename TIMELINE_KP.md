@@ -11,7 +11,8 @@ Proyek ini bertujuan membangun platform e-commerce ritel perhiasan siap pakai (*
 
 ### Arsitektur Teknologi
 - **Frontend**: Next.js 16 (App Router, React Server Components & Server Actions), Tailwind CSS v4, GSAP Animations.
-- **Backend & Database**: Supabase (PostgreSQL, Row Level Security, Auth, Storage).
+- **Backend & Database**: Turso (libSQL / Edge SQLite) + Drizzle ORM (dukungan zero cold start, free tier 9GB, 500 DB, dan offline local database `file:local.db`).
+- **Media Storage**: Cloudflare R2 / Next.js Public Storage untuk aset foto katalog kriya perhiasan.
 - **Payment Gateway**: Midtrans Snap API & Core Webhook Handler (QRIS, GoPay, ShopeePay, Virtual Account BCA/Mandiri/BNI/BRI, Credit Card).
 - **Internasionalisasi**: 
   - Dual-Language: Bahasa Indonesia (`id`) & English (`en`).
@@ -41,7 +42,7 @@ Fokus: Menyiapkan struktur data transaksi dan sistem penggantian bahasa/mata uan
   - Tabel `orders`: `id`, `order_number` (format `ORD-YYYYMMDD-XXXX`), `user_id`, `guest_email`, `guest_name`, `guest_phone`, `currency`, `total_amount`, `shipping_cost`, `grand_total`, `status`, `payment_method`, `snap_token`.
   - Tabel `order_items`: `order_id`, `product_id`, `variant_selected` (ring size, metal finish), `quantity`, `unit_price`, `subtotal`.
   - Tabel `shipping_addresses`: detail alamat pengiriman lengkap (provinsi, kota, kecamatan, kodepos, negara).
-  - Setup Row Level Security (RLS) di Supabase untuk mengisolasi data pembeli dan guest.
+  - Validasi schema dan data access layer menggunakan Drizzle ORM / `@libsql/client`.
 - [ ] **Dual-Language Engine (ID / EN)**:
   - Setup kamus lokalisasi JSON (`locales/id.json` dan `locales/en.json`).
   - Context provider `LanguageContext` dengan persistensi cookie/localStorage.
@@ -52,7 +53,7 @@ Fokus: Menyiapkan struktur data transaksi dan sistem penggantian bahasa/mata uan
   - Sinkronisasi tampilan harga katalog dan product detail secara reaktif tanpa re-render penuh.
 
 **Output Deliverables**:
-1. Migration file SQL Supabase yang sudah teruji di staging database.
+1. Skema Drizzle ORM dan file migrasi Turso (libSQL) yang siap dieksekusi secara lokal (`file:local.db`) maupun di cloud Turso.
 2. Komponen selector bahasa dan mata uang yang aktif di navbar.
 3. Dokumentasi Entity Relationship Diagram (ERD) untuk Bab 3 Laporan KP.
 
@@ -79,7 +80,7 @@ Fokus: Membangun interaksi keranjang belanja hingga halaman ringkasan pemesanan.
 
 **Output Deliverables**:
 1. Alur Cart Drawer dan Checkout page fungsional.
-2. Server action yang memvalidasi data keranjang dan menyimpan order ke Supabase.
+2. Server action yang memvalidasi data keranjang dan menyimpan order ke database Turso.
 3. Activity Diagram alur pemesanan untuk Bab 3 Laporan KP.
 
 ---
@@ -137,7 +138,7 @@ Fokus: Pengelolaan operasional toko oleh admin / pemilik usaha.
   - Aksi update status pesanan menjadi `shipped` atau `delivered`.
 - [ ] **Product & Inventory Management (`/admin/products`)**:
   - Pengelolaan katalog: tambah produk baru, edit harga IDR & USD, perbarui stok unit.
-  - Upload foto produk perhiasan ke Supabase Storage bucket.
+  - Upload foto produk perhiasan ke Cloudflare R2 / public uploads directory.
   - Sakelar status produk (`active` / `draft`).
 
 **Output Deliverables**:
@@ -169,7 +170,7 @@ Fokus: Pengujian sistem secara komprehensif, simulasi edge case, dan perakitan d
 |---|---|---|
 | **Bab 1 & 2** | Latar belakang Celuk artisan, identitas brand Artfuli, studi pustaka payment gateway & e-commerce | Tersedia di `BRAND_IDENTITY.md` & `PRD.md` |
 | **Bab 3 (Perancangan)** | Use Case Diagram (Guest, Customer, Admin) | Dirancang dari alur Sprint 1 - 5 |
-| **Bab 3 (Perancangan)** | Entity Relationship Diagram (ERD) & Struktur Tabel PostgreSQL | Dirancang di Sprint 1 (`supabase/migrations`) |
+| **Bab 3 (Perancangan)** | Entity Relationship Diagram (ERD) & Struktur Tabel SQLite (Turso) | Dirancang di Sprint 1 (`schema.ts` / Drizzle Migrations) |
 | **Bab 3 (Perancangan)** | Sequence Diagram Alur Pembayaran Midtrans Snap & Webhook | Dirancang di Sprint 3 |
 | **Bab 4 (Implementasi)** | Cuplikan kode Server Action, Webhook Verification, i18n Context | Dibangun di Sprint 1 s/d Sprint 5 |
 | **Bab 4 (Pengujian)** | Tabel Uji Blackbox & Tangkapan Layar Simulator Midtrans | Dijalankan di Sprint 6 |
