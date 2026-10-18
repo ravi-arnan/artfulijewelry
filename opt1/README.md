@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Artfuli Jewelry (Next.js 16 Application)
 
-## Getting Started
+Aplikasi Next.js 16 App Router untuk storefront editorial dan sistem e-commerce ritel Artfuli Jewelry.
 
-First, run the development server:
+Dokumentasi lengkap proyek, arsitektur, dan panduan Kerja Praktek (KP) tersedia di root repository:
+- Master Documentation: [../README.md](../README.md)
+- Timeline & Roadmap KP: [../TIMELINE_KP.md](../TIMELINE_KP.md)
+- Spesifikasi Arsitektur: [../ARCHITECTURE.md](../ARCHITECTURE.md)
+- Panduan Deployment: [../DEPLOY.md](../DEPLOY.md)
 
+---
+
+## Menjalankan Aplikasi di Lokal
+
+### 1. Instalasi Dependensi
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Menjalankan Server Development
+```bash
+nice -n 19 npm run dev
+```
+Buka browser pada `http://localhost:3000`.  
+*(Gunakan selalu webpack dev sesuai script `package.json` untuk menjaga kestabilan laptop).*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Operasi Database Turso (libSQL) & Drizzle ORM
+Database otomatis memakai SQLite lokal `file:local.db` saat variabel `TURSO_DATABASE_URL` belum diset:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Push schema Drizzle ke database lokal/cloud
+nice -n 19 npx drizzle-kit push
 
-## Learn More
+# Generate migration SQL
+nice -n 19 npx drizzle-kit generate
 
-To learn more about Next.js, take a look at the following resources:
+# Buka Drizzle Studio web GUI
+nice -n 19 npx drizzle-kit studio
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Menjalankan Unit Test
+```bash
+nice -n 19 npm test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Memeriksa Tipe TypeScript
+```bash
+nice -n 19 npx tsc --noEmit
+```
