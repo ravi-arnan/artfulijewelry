@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ShoppingBag,
   ArrowRight,
@@ -12,6 +14,10 @@ import {
   ChevronDown,
   Menu,
 } from "lucide-react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // Catalog and Sizing Models
 interface CatalogItem {
@@ -162,6 +168,7 @@ export function ArtfuliLanding() {
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const megaMenuRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
 
   // Cart & Wishlist State
   const [cartItems, setCartItems] = useState<CartItem[]>([
@@ -257,6 +264,178 @@ export function ArtfuliLanding() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMegaMenuOpen]);
+
+  // GSAP & ScrollTrigger Choreography
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Hero Load Sequence
+      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      heroTl
+        .fromTo(
+          ".display-hero .line > span",
+          { yPercent: 110 },
+          { yPercent: 0, duration: 0.9, stagger: 0.12 }
+        )
+        .fromTo(
+          "#heroMainImage",
+          { scale: 1.12, opacity: 0.7 },
+          { scale: 1.0, opacity: 1, duration: 1.4, ease: "power2.out" },
+          0.1
+        )
+        .fromTo(
+          "[data-hero-reveal]",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+          0.3
+        );
+
+      // 2. Sticky Header Tone Shift & Scaling Emblem
+      ScrollTrigger.create({
+        trigger: "body",
+        start: "40px top",
+        onEnter: () => document.getElementById("siteHeader")?.classList.add("is-scrolled"),
+        onLeaveBack: () => document.getElementById("siteHeader")?.classList.remove("is-scrolled"),
+      });
+
+      gsap.to("#headerEmblem", {
+        scale: 0.92,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // 3. Heritage Workshop Parallax Drift
+      gsap.fromTo(
+        "#heritageParallaxImg",
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".heritage-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+
+      // 4. Heritage Ledger Figures Count-Up
+      ScrollTrigger.create({
+        trigger: "#heritageCounters",
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          const counters = document.querySelectorAll<HTMLElement>("#heritageCounters [data-count]");
+          counters.forEach((el) => {
+            const target = parseInt(el.getAttribute("data-count") || "0", 10);
+            const suffix = el.getAttribute("data-suffix") || "";
+            const state = { val: 0 };
+            gsap.to(state, {
+              val: target,
+              duration: 1.4,
+              ease: "power2.out",
+              onUpdate: () => {
+                const rounded = Math.round(state.val);
+                const formatted = rounded >= 4000 ? rounded.toLocaleString("en-US") : String(rounded);
+                el.textContent = formatted + suffix;
+              },
+            });
+          });
+        },
+      });
+
+      // 5. Canonical Section Reveal Stagger
+      const revealElements = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+      revealElements.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
+      });
+
+      // 6. Lost-Wax Craft Steps Choreography (Section 6)
+      const craftSteps = gsap.utils.toArray<HTMLElement>("[data-craft-step]");
+      craftSteps.forEach((step, idx) => {
+        gsap.fromTo(
+          step,
+          { opacity: 0, x: 24 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            delay: idx * 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      });
+
+      // 7. Lookbook Mosaic Staggered Shutter (Section 7)
+      gsap.fromTo(
+        "[data-lookbook-plate]",
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".lookbook-mosaic",
+            start: "top 82%",
+            once: true,
+          },
+        }
+      );
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Bench readout micro-animation
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      gsap.fromTo(
+        "#benchReadoutStrip",
+        { opacity: 0.4, y: 4 },
+        { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }
+      );
+    }
+  }, [benchPiece, benchAlloy, benchSize]);
+
+  // Assay tab transition micro-animation
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      gsap.fromTo(
+        "#assayDetailSurface",
+        { opacity: 0.4, y: 6 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+      );
+    }
+  }, [assayTab]);
 
   // Bench Calculations
   const pieceData = catalogData[benchPiece] || catalogData.signet;
@@ -386,7 +565,7 @@ export function ArtfuliLanding() {
 
 
       {/* Leedlime Framed Canvas Architecture */}
-      <div className="page-canvas">
+      <div className="page-canvas" ref={pageRef}>
         {/* SECTION 1: STICKY HEADER NAV WITH MEGA MENU */}
         <header className="site-header" id="siteHeader" ref={megaMenuRef}>
           <div className="header-inner">
@@ -798,11 +977,11 @@ export function ArtfuliLanding() {
                   <span className="line"><span>Celuk, Bali.</span></span>
                 </h1>
 
-                <p className="hero-subtext">
+                <p className="hero-subtext" data-hero-reveal>
                   Heirloom 925 sterling silver and 2.5-micron 18k gold vermeil, forged in Sukawati and verified by X-ray spectrometry.
                 </p>
 
-                <div className="hero-actions">
+                <div className="hero-actions" data-hero-reveal>
                   <a href="#collections" className="btn-primary">
                     <span>Explore Collections</span>
                     <ArrowRight style={{ width: 16, height: 16 }} />
@@ -811,7 +990,7 @@ export function ArtfuliLanding() {
                 </div>
 
                 {/* Assurances List */}
-                <div className="hero-assurances">
+                <div className="hero-assurances" data-hero-reveal>
                   <div className="assurance-item">
                     <CheckCircle className="assurance-icon" />
                     <span>Complimentary insured worldwide transit</span>
@@ -823,7 +1002,7 @@ export function ArtfuliLanding() {
                 </div>
 
                 {/* Facts row */}
-                <div className="hero-facts">
+                <div className="hero-facts" data-hero-reveal>
                   <div>
                     <div className="hero-fact-title">92.5% Ag Purity</div>
                     <p className="caption-note">Nickel-free sterling silver alloyed with pure oxygen-free copper.</p>
@@ -887,7 +1066,7 @@ export function ArtfuliLanding() {
                     <span className="logo-sub">Fine Craft Feature</span>
                   </div>
 
-                  {/* Set 2 (Identical for seamless infinite marquee loop) */}
+                  {/* Set 2 (Identical for continuous infinite marquee loop) */}
                   <div className="trust-logo-item">
                     <span className="logo-serif">Amanpuri</span>
                     <span className="logo-sub">Resorts Gallery</span>
@@ -959,15 +1138,15 @@ export function ArtfuliLanding() {
 
                   <div className="heritage-ledger" id="heritageCounters">
                     <div className="ledger-entry">
-                      <div className="metric-figure">1978</div>
+                      <div className="metric-figure" data-count="1978">1978</div>
                       <p className="caption-note">Founding lineage of our smithing family in Celuk.</p>
                     </div>
                     <div className="ledger-entry">
-                      <div className="metric-figure">34 Smiths</div>
+                      <div className="metric-figure" data-count="34" data-suffix=" Smiths">34 Smiths</div>
                       <p className="caption-note">Master silversmiths, wax carvers, and stone setters.</p>
                     </div>
                     <div className="ledger-entry">
-                      <div className="metric-figure">4,550+</div>
+                      <div className="metric-figure" data-count="4550" data-suffix="+">4,550+</div>
                       <p className="caption-note">Original archival molds preserved in our Sukawati vault.</p>
                     </div>
                   </div>
@@ -979,7 +1158,7 @@ export function ArtfuliLanding() {
           {/* SECTION 4: CURATED SIGNATURE COLLECTIONS & INTERACTIVE ASSAY BENCH */}
           <section className="collections-section" id="collections" aria-labelledby="collections-heading">
             <div className="container">
-              <div className="collections-header">
+              <div className="collections-header" data-reveal>
                 <div>
                   <h2 className="section-heading" id="collections-heading">
                     Signature Atelier Editions
@@ -1325,21 +1504,21 @@ export function ArtfuliLanding() {
                 </div>
 
                 <ol className="craft-list">
-                  <li className="craft-step-block">
+                  <li className="craft-step-block" data-craft-step>
                     <h3 className="subhead">Hand-Carved Wax and Granulation</h3>
                     <p className="body-copy">
                       Every form begins as a hand-carved jewelers wax master or an arrangement of individually rolled silver spheres (<em>jawan</em>) placed one by one with a fine bamboo nib.
                     </p>
                     <span className="caption-note">Bench Stage: Sukawati Carving Studio · 6 to 18 Hours per Master</span>
                   </li>
-                  <li className="craft-step-block">
+                  <li className="craft-step-block" data-craft-step>
                     <h3 className="subhead">Vacuum Lost-Wax Investment</h3>
                     <p className="body-copy">
                       Wax trees are encased in fine gypsum investment, burned out in kiln cycles over 12 hours, and cast with de-oxidized 925 sterling silver to prevent porosity.
                     </p>
                     <span className="caption-note">Foundry Stage: 960°C Melt Crucible · Argon Shielded Pour</span>
                   </li>
-                  <li className="craft-step-block">
+                  <li className="craft-step-block" data-craft-step>
                     <h3 className="subhead">Agate Burnishing and Assay Stamp</h3>
                     <p className="body-copy">
                       After hand-filing and triple ultrasonic cleansing, artisans burnish the metal edges with smooth Balinese river agate stones before stamping the AJ crucible hallmark.
@@ -1354,7 +1533,7 @@ export function ArtfuliLanding() {
           {/* SECTION 7: LOOKBOOK VISUAL GALLERY (Large Editorial Plates) */}
           <section className="lookbook-section" id="lookbook" aria-labelledby="lookbook-heading">
             <div className="container">
-              <div className="lookbook-header">
+              <div className="lookbook-header" data-reveal>
                 <div>
                   <h2 className="section-heading" id="lookbook-heading">
                     The 2026 Celuk Archive Lookbook
@@ -1366,7 +1545,7 @@ export function ArtfuliLanding() {
               </div>
 
               <div className="lookbook-triptych">
-                <article className="lookbook-plate">
+                <article className="lookbook-plate" data-lookbook-plate>
                   <div className="lookbook-img-wrap">
                     <img src="/images/lookbook-hero-2.webp" alt="Editorial Portrait wearing Artfuli 18k Gold Vermeil Collar and Drop Earrings" />
                   </div>
@@ -1376,7 +1555,7 @@ export function ArtfuliLanding() {
                   </p>
                 </article>
 
-                <article className="lookbook-plate">
+                <article className="lookbook-plate" data-lookbook-plate>
                   <div className="lookbook-img-wrap">
                     <img src="/images/lookbook-plate-1.webp" alt="Editorial study of layered Balinese silver and gold vermeil bands" />
                   </div>
@@ -1386,7 +1565,7 @@ export function ArtfuliLanding() {
                   </p>
                 </article>
 
-                <article className="lookbook-plate">
+                <article className="lookbook-plate" data-lookbook-plate>
                   <div className="lookbook-img-wrap">
                     <img src="/images/lookbook-plate-2.webp" alt="Close portrait of sculptural gold vermeil ear cuff and pendant" />
                   </div>

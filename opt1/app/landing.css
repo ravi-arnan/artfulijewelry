@@ -143,8 +143,10 @@
       margin-bottom: -0.08em;
     }
 
+    .lines .line > span,
     .lines [data-line] {
       display: block;
+      will-change: transform;
     }
 
     .section-heading {
