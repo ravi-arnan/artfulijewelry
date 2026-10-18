@@ -25,6 +25,17 @@
     "sideImage": "images/lookbook-detail.webp",
     "sideCaption": "Archive Plate, Celuk Workshop. Solid 925 silver collar and signet forms finished with natural river agate burnishing."
   },
+  "heritage": {
+    "heading": "Centuries of Celuk metallurgy.",
+    "subtext": "For over a century, the smithing families of Celuk Village have guarded the techniques of Balinese precious metalwork: jawan (micro-granulation), bun (hand-drawn wire filigree), and cold-hammered structural forging.",
+    "statement": "We reject hollow factory stamping. Every Artfuli piece carries the dense weight of hand-forged metal and the direct signature of the smith who shaped it.",
+    "note": "By operating our own private foundry and finishing benches in Sukawati, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.",
+    "years": 100,
+    "artisans": 32,
+    "archiveCount": 4550,
+    "image": "images/atelier-heritage.webp",
+    "caption": "Jalan Raya Celuk No. 88, Sukawati, Gianyar. Hand-soldering sterling silver granules over a coconut-shell charcoal brazier."
+  },
   "collections": {
     "heading": "Signature Atelier Editions",
     "intro": "Four foundational silhouettes drawn from our 4,550-piece archive, available in solid 925 sterling silver and heavy 18k gold vermeil.",
@@ -134,6 +145,67 @@
         "weightFactor": 1.12
       }
     }
+  },
+  "assay": {
+    "silver": {
+      "title": "92.5% Pure Silver + 7.5% Oxygen-Free Copper",
+      "desc": "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Sukawati crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
+      "method": "Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%",
+      "norm": "89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.",
+      "status": "Status: XRF Batch Verified in Celuk"
+    },
+    "vermeil": {
+      "title": "2.5 to 3.0 Microns Solid 18k Gold over 925 Silver",
+      "desc": "Our vermeil pieces undergo multi-stage electro-bonding of 18k solid yellow gold over a solid 925 sterling silver core, exceeding FTC vermeil thickness requirements for heirloom longevity.",
+      "method": "Verification Protocol: X-Ray Fluorescence Coating Thickness Gauge · Minimum 2.5 µm",
+      "norm": "0.1 to 0.5 micron flash gold electroplate over brass or mystery base metal.",
+      "status": "Status: 2.5+ Micron Thickness Certified"
+    },
+    "hypoallergenic": {
+      "title": "100% Free of Nickel, Lead, and Cadmium",
+      "desc": "Every earring post, clasp, and ring shank is formulated without nickel, lead, or cadmium brighteners, making every Artfuli creation safe for sensitive skin and continuous daily wear.",
+      "method": "Verification Protocol: EN 1811 Bio-Release Assay & Full Elemental XRF Scan",
+      "norm": "Nickel undercoat frequently applied beneath thin gold plating as a cheap leveler.",
+      "status": "Status: EN 1811 Hypoallergenic Passed"
+    },
+    "solder": {
+      "title": "High-Fineness Silver and 18k Gold Hard Solder",
+      "desc": "Traditional Balinese granulation requires high-temperature eutectic fusing. We formulate our own hard solders matching the karat and fineness of the parent metal so joints never discolor.",
+      "method": "Verification Protocol: Sukawati Foundry Assay Log · Metallurgical Joint Inspection",
+      "norm": "Low-melting zinc and tin repair solder that oxidizes dark grey over time.",
+      "status": "Status: Eutectic Hard-Solder Verified"
+    }
+  },
+  "lookbook": {
+    "heading": "Visual Archive & Daylight Plates",
+    "intro": "Photographed in natural tropical daylight across Gianyar, showcasing the interplay of raw volcanic stone, linen, and high-karat gold vermeil.",
+    "plates": [
+      {
+        "title": "Tirta Empul Sculptural Collar",
+        "caption": "Hand-forged collar with raw crystalline stone setting. Photographed at Tampaksiring sacred springs.",
+        "image": "images/lookbook-hero-2.webp"
+      },
+      {
+        "title": "Stacked Jawan Signets",
+        "caption": "Architectural signet rings paired with traditional Balinese granulated guard bands. Net weight: 16.4 grams.",
+        "image": "images/lookbook-plate-1.webp"
+      },
+      {
+        "title": "Sukawati Vessel Pendant",
+        "caption": "Lost-wax cast hollow-form vessel pendant worn on hand-braided solid sterling foxtail chain.",
+        "image": "images/lookbook-plate-2.webp"
+      }
+    ]
+  },
+  "guarantee": {
+    "headline": "Provenance and 100-Year Care",
+    "subtext": "Every piece that leaves our Sukawati workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.",
+    "warrantyTitle": "100-Year Structural Guarantee",
+    "warrantyDesc": "Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our Celuk workshop repairs or re-forges the piece free of charge.",
+    "recycledTitle": "Recycled Precious Metals",
+    "recycledDesc": "We refine and alloy certified recycled Indonesian silver and gold granules in-house, reducing primary mining impact while maintaining 99.9% base bullion purity prior to alloying.",
+    "renewalTitle": "Vermeil Renewal Service",
+    "renewalDesc": "Every collector receives lifetime access to ultrasonic cleaning, river-agate repolishing, and at-cost 2.5-micron 18k gold re-vermeil servicing at our Bali atelier."
   },
   "contact": {
     "whatsapp": "6281234567890",

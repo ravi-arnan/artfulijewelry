@@ -1,16 +1,21 @@
 :root {
-  --ground: #F4F2EE;
-  --ground-2: #EAE6DF;
+  --ground-primary: #F4F2EE;
+  --ground-secondary: #EAE6DF;
+  --ground-tertiary: #DED8CE;
   --surface: #FFFFFF;
-  --ink: #141116;
-  --ink-2: #4E4656;
-  --accent: #551F51;
-  --accent-hover: #3F153C;
-  --accent-text: #FAF8F5;
-  --danger: #8A1F2B;
-  --ok: #1F6B4F;
+  --ink-primary: #141116;
+  --ink-secondary: #4E4656;
+  --ink-muted: #7A7283;
+  --brand-accent: #551F51;
+  --brand-accent-hover: #3F153C;
+  --brand-accent-text: #FAF8F5;
+  --accent-gold: #C5A059;
+  --accent-cyan: #2BA89B;
+  --danger: #9B2C2C;
+  --ok: #1E6B52;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --t-hover: 180ms;
 }
 
 * {
@@ -24,17 +29,15 @@
 }
 
 body {
-  background: var(--ground);
-  color: var(--ink);
+  background: var(--ground-primary);
+  color: var(--ink-primary);
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
-button,
-input,
-textarea {
+button, input, textarea, select {
   font: inherit;
   color: inherit;
 }
@@ -44,34 +47,41 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--brand-accent);
   outline-offset: 2px;
 }
 
-/* Buttons */
+/* ==========================================================================
+   BUTTONS & ACTIONS
+   ========================================================================== */
 .btn {
   border: 0;
-  padding: 11px 22px;
+  padding: 10px 22px;
   font-weight: 500;
-  transition: background 180ms ease, opacity 180ms ease;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background var(--t-hover) ease, color var(--t-hover) ease, opacity var(--t-hover) ease;
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--accent-text);
+  background: var(--brand-accent);
+  color: var(--brand-accent-text);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
+  background: var(--brand-accent-hover);
 }
 
 .btn-secondary {
-  background: var(--ground-2);
-  color: var(--ink);
+  background: var(--ground-secondary);
+  color: var(--ink-primary);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #DED8CE;
+  background: var(--ground-tertiary);
 }
 
 .btn:disabled {
@@ -83,17 +93,41 @@ button {
   background: none;
   border: 0;
   padding: 0;
-  color: var(--ink-2);
+  color: var(--ink-secondary);
   text-decoration: none;
-  text-align: left;
-  font-size: 14px;
+  font-size: 13px;
+  transition: color var(--t-hover) ease;
 }
 
 .link-quiet:hover {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
-/* Fields */
+.badge-tag {
+  background: rgba(43, 168, 155, 0.15);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(43, 168, 155, 0.4);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.dot-gold {
+  width: 7px;
+  height: 7px;
+  background-color: var(--accent-gold);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* ==========================================================================
+   FORM FIELDS & INPUTS
+   ========================================================================== */
 .field {
   display: flex;
   flex-direction: column;
@@ -107,12 +141,12 @@ button {
 .field-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--ink-primary);
 }
 
 .field-hint {
-  font-size: 13px;
-  color: var(--ink-2);
+  font-size: 12px;
+  color: var(--ink-muted);
 }
 
 .field input[type="text"],
@@ -120,122 +154,175 @@ button {
 .field input[type="password"],
 .field textarea {
   width: 100%;
-  background: var(--ground);
-  border: 0;
-  border-bottom: 2px solid var(--ground-2);
-  padding: 10px 12px;
-  transition: border-color 180ms ease, background 180ms ease;
+  background: var(--ground-primary);
+  border: 1px solid var(--ground-tertiary);
+  border-bottom: 2px solid var(--brand-accent);
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: border-color var(--t-hover) ease, background var(--t-hover) ease;
 }
 
 .field textarea {
   resize: vertical;
-  min-height: 84px;
+  min-height: 80px;
+  line-height: 1.5;
 }
 
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-bottom-color: var(--accent);
-  background: #fff;
+  background: var(--surface);
+  border-color: var(--brand-accent);
 }
 
 .check-field {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   grid-column: 1 / -1;
+  padding: 6px 0;
 }
 
 .check-field input {
   width: 18px;
   height: 18px;
-  accent-color: var(--accent);
+  accent-color: var(--brand-accent);
+  cursor: pointer;
 }
 
 .check-field span {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-/* Login */
+/* ==========================================================================
+   LOGIN SCREEN
+   ========================================================================== */
 .login-screen {
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
+  background: radial-gradient(circle at center, #241A29 0%, #120D15 100%);
 }
 
 .login-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   background: var(--surface);
-  padding: 44px 40px;
+  padding: 48px 44px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.login-emblem {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
 }
 
 .login-wordmark {
-  height: 40px;
+  height: 36px;
   width: auto;
-  align-self: flex-start;
+  object-fit: contain;
 }
 
 .login-title {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 2.1rem;
-  line-height: 1.1;
+  font-size: 2.2rem;
+  line-height: 1.05;
+  color: var(--ink-primary);
 }
 
 .login-note {
-  color: var(--ink-2);
+  color: var(--ink-secondary);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .login-error {
   min-height: 20px;
   color: var(--danger);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-/* Console layout */
+.login-foot-hint {
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--ground-secondary);
+}
+
+/* ==========================================================================
+   CONSOLE SHELL LAYOUT
+   ========================================================================== */
 .console {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 270px 1fr;
   min-height: 100vh;
 }
 
 .sidebar {
-  background: #18111B;
+  background: #141017;
   color: #FAF8F5;
-  padding: 28px 22px;
+  padding: 28px 20px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   position: sticky;
   top: 0;
   height: 100vh;
+  border-right: 1px solid rgba(197, 160, 89, 0.15);
+  overflow-y: auto;
 }
 
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .sidebar-emblem {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
 }
 
 .sidebar-title {
   font-family: var(--font-serif);
   font-size: 1.35rem;
   line-height: 1.1;
+  color: #FAF8F5;
 }
 
 .sidebar-sub {
-  font-size: 13px;
+  font-size: 12px;
   color: #B8B0C0;
+  margin-top: 2px;
+}
+
+.nav-group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+  padding-left: 12px;
+  font-weight: 600;
 }
 
 .nav-list {
@@ -251,64 +338,99 @@ button {
   background: none;
   border: 0;
   color: #D6CFDD;
-  padding: 12px 14px;
+  padding: 10px 14px;
+  font-size: 13.5px;
   font-weight: 500;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background var(--t-hover) ease, color var(--t-hover) ease;
 }
 
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .nav-item.active {
-  background: var(--accent);
-  color: var(--accent-text);
+  background: var(--brand-accent);
+  color: var(--brand-accent-text);
+  font-weight: 600;
+  border-left: 3px solid var(--accent-gold);
 }
 
 .sidebar-foot {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.sidebar-foot .link-quiet {
+.atelier-badge-strip {
+  font-size: 11.5px;
   color: #B8B0C0;
+  display: flex;
+  align-items: center;
 }
 
-.sidebar-foot .link-quiet:hover {
-  color: #fff;
+.live-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(197, 160, 89, 0.1);
+  padding: 8px 12px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  color: var(--accent-gold);
+  font-weight: 500;
 }
 
+.live-link:hover {
+  background: rgba(197, 160, 89, 0.2);
+  color: #FFF;
+}
+
+/* ==========================================================================
+   WORKSPACE & TOPBAR
+   ========================================================================== */
 .workspace {
   min-width: 0;
+  background: var(--ground-primary);
 }
 
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgba(244, 242, 238, 0.96);
-  backdrop-filter: blur(10px);
-  padding: 22px 40px;
+  z-index: 20;
+  background: rgba(244, 242, 238, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 18px 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  border-bottom: 1px solid var(--ground-secondary);
+}
+
+.topbar-crumb {
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
 }
 
 .view-title {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.85rem;
   line-height: 1.1;
+  color: var(--ink-primary);
 }
 
 .view-sub {
-  color: var(--ink-2);
-  font-size: 14px;
+  color: var(--ink-secondary);
+  font-size: 13.5px;
   margin-top: 4px;
+  max-width: 60ch;
 }
 
 .topbar-actions {
@@ -319,23 +441,29 @@ button {
 }
 
 .dirty-note {
-  color: var(--accent);
+  color: var(--brand-accent);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
+  background: rgba(85, 31, 81, 0.1);
+  padding: 6px 12px;
+  border: 1px solid rgba(85, 31, 81, 0.25);
 }
 
 .view-body {
-  padding: 8px 40px 72px;
+  padding: 24px 36px 80px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  max-width: 1040px;
+  gap: 24px;
+  max-width: 1080px;
 }
 
-/* Cards */
+/* ==========================================================================
+   CARDS & GRIDS
+   ========================================================================== */
 .card {
   background: var(--surface);
-  padding: 30px 32px;
+  padding: 26px 30px;
+  border: 1px solid var(--ground-secondary);
 }
 
 .card-head {
@@ -343,48 +471,54 @@ button {
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ground-primary);
 }
 
 .card-title {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.15;
+  color: var(--ink-primary);
 }
 
 .card-note {
-  color: var(--ink-2);
-  font-size: 14px;
+  color: var(--ink-muted);
+  font-size: 13px;
+  margin-top: 3px;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 24px;
+  gap: 18px 22px;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px 24px;
+  gap: 18px 22px;
 }
 
 .card-tools {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .mini-btn {
-  background: var(--ground-2);
+  background: var(--ground-secondary);
   border: 0;
   padding: 6px 12px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
+  color: var(--ink-primary);
+  transition: background var(--t-hover) ease;
 }
 
 .mini-btn:hover:not(:disabled) {
-  background: #DED8CE;
+  background: var(--ground-tertiary);
 }
 
 .mini-btn:disabled {
@@ -392,7 +526,9 @@ button {
   cursor: not-allowed;
 }
 
-/* Image field */
+/* ==========================================================================
+   MEDIA / IMAGE ROW
+   ========================================================================== */
 .image-row {
   display: flex;
   gap: 14px;
@@ -400,10 +536,11 @@ button {
 }
 
 .thumb {
-  width: 72px;
-  height: 72px;
+  width: 68px;
+  height: 68px;
   object-fit: cover;
-  background: var(--ground-2);
+  background: var(--ground-secondary);
+  border: 1px solid var(--ground-tertiary);
   flex-shrink: 0;
 }
 
@@ -412,60 +549,68 @@ button {
   min-width: 0;
 }
 
-.image-row input {
-  width: 100%;
-}
-
-/* Sizes table */
+/* ==========================================================================
+   SIZE CALIBRATION TABLE
+   ========================================================================== */
 .size-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 8px;
 }
 
 .size-table th {
   text-align: left;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   padding: 0 12px 10px 0;
+  color: var(--ink-secondary);
+  border-bottom: 2px solid var(--ground-secondary);
 }
 
 .size-table td {
-  padding: 6px 12px 6px 0;
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--ground-primary);
 }
 
 .size-table input {
   width: 100%;
-  background: var(--ground);
-  border: 0;
-  border-bottom: 2px solid var(--ground-2);
-  padding: 8px 10px;
+  background: var(--ground-primary);
+  border: 1px solid var(--ground-tertiary);
+  border-bottom: 2px solid var(--brand-accent);
+  padding: 6px 10px;
+  font-size: 13.5px;
 }
 
 .size-table input:focus {
   outline: none;
-  border-bottom-color: var(--accent);
-  background: #fff;
+  background: var(--surface);
 }
 
 .size-key {
   font-weight: 600;
+  color: var(--brand-accent);
+  font-size: 13.5px;
 }
 
-/* Toast */
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
 .toast {
   position: fixed;
   left: 50%;
   bottom: 28px;
   transform: translate(-50%, 20px);
-  background: var(--ink);
-  color: var(--accent-text);
-  padding: 12px 22px;
+  background: var(--ink-primary);
+  color: var(--brand-accent-text);
+  padding: 12px 24px;
+  font-size: 13.5px;
   font-weight: 500;
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease, transform 220ms ease;
-  z-index: 50;
+  z-index: 999;
   max-width: 90vw;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
 }
 
 .toast.show {
@@ -481,35 +626,62 @@ button {
   background: var(--ok);
 }
 
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATIONS (Compact Laptops & Tablets)
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .console {
+    grid-template-columns: 240px 1fr;
+  }
+  .sidebar {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .topbar {
+    padding: 14px 28px;
+  }
+  .view-body {
+    padding: 18px 28px 60px;
+    gap: 18px;
+  }
+  .card {
+    padding: 20px 24px;
+  }
+}
+
 @media (max-width: 900px) {
   .console {
     grid-template-columns: 1fr;
   }
-
   .sidebar {
     position: static;
     height: auto;
-    gap: 18px;
+    gap: 16px;
   }
-
   .nav-list {
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 6px;
   }
-
+  .nav-item {
+    width: auto;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-item.active {
+    border-left: none;
+    border-bottom: 2px solid var(--accent-gold);
+  }
   .topbar {
     position: static;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    padding: 18px 20px;
   }
-
   .view-body {
-    padding: 8px 20px 60px;
+    padding: 16px 20px 60px;
   }
-
-  .grid-2,
-  .grid-3 {
+  .grid-2, .grid-3 {
     grid-template-columns: 1fr;
   }
 }

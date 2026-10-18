@@ -21,7 +21,7 @@
   };
   const safeUrl = (u) => typeof u === "string" && /^(#[\w-]*|https?:\/\/[^\s]+)$/.test(u.trim());
 
-  /* Announcement */
+  /* 1. Announcement */
   const a = c.announcement || {};
   const bar = $("#announceBar");
   if (bar && a.enabled && a.text) {
@@ -36,7 +36,7 @@
     bar.hidden = false;
   }
 
-  /* Hero */
+  /* 2. Hero */
   const h = c.hero || {};
   const lines = $$("#hero-heading [data-line]");
   text(lines[0], h.line1);
@@ -54,7 +54,38 @@
   img($(".hero-secondary-img img"), h.sideImage);
   text($(".hero-side-frame > .caption-note"), h.sideCaption);
 
-  /* Bench data (catalogData and sizeCalibration are globals from landing.html) */
+  /* 3. Heritage Narrative & Counters */
+  const her = c.heritage || {};
+  text($("#heritage h2.section-heading"), her.heading);
+  const herTexts = $$("#heritage .heritage-text-column > p.body-copy");
+  if (herTexts[0]) text(herTexts[0], her.subtext);
+  text($("#heritage .atelier-statement"), her.statement);
+  if (herTexts[1]) text(herTexts[1], her.note);
+  img($("#heritageParallaxImg"), her.image);
+  text($("#heritage .heritage-caption"), her.caption);
+
+  const counterEls = $$("#heritageCounters [data-count]");
+  if (counterEls[0] && her.years != null) counterEls[0].setAttribute("data-count", her.years);
+  if (counterEls[1] && her.artisans != null) counterEls[1].setAttribute("data-count", her.artisans);
+  if (counterEls[2] && her.archiveCount != null) counterEls[2].setAttribute("data-count", her.archiveCount);
+
+  /* 4. Collections */
+  const col = c.collections || {};
+  text($("#collections-heading"), col.heading);
+  text($(".collections-header .body-copy"), col.intro);
+  $$(".collection-plate").forEach((plate, i) => {
+    const it = (col.items || [])[i];
+    if (!it) return;
+    if (typeof catalogData !== "undefined" && catalogData[it.benchKey]) {
+      plate.setAttribute("onclick", `selectBenchPiece('${it.benchKey}')`);
+    }
+    img($("img", plate), it.image, it.title);
+    text($(".plate-meta .subhead", plate), it.title);
+    text($(".plate-meta .caption-note", plate), it.meta);
+    text($(":scope > p.caption-note", plate), it.description);
+  });
+
+  /* 5. Bench data (catalogData and sizeCalibration are globals from landing.html) */
   const b = c.bench || {};
   if (typeof catalogData !== "undefined" && b.pieces) {
     for (const [key, p] of Object.entries(b.pieces)) {
@@ -75,23 +106,60 @@
     }
   }
 
-  /* Collections */
-  const col = c.collections || {};
-  text($("#collections-heading"), col.heading);
-  text($(".collections-header .body-copy"), col.intro);
-  $$(".collection-plate").forEach((plate, i) => {
-    const it = (col.items || [])[i];
-    if (!it) return;
-    if (typeof catalogData !== "undefined" && catalogData[it.benchKey]) {
-      plate.setAttribute("onclick", `selectBenchPiece('${it.benchKey}')`);
+  /* 6. Material Assay & XRF Matrix */
+  const asy = c.assay || {};
+  if (typeof assaySpecifications !== "undefined") {
+    for (const [key, spec] of Object.entries(asy)) {
+      if (assaySpecifications[key]) {
+        Object.assign(assaySpecifications[key], spec);
+      }
     }
-    img($("img", plate), it.image, it.title);
-    text($(".plate-meta .subhead", plate), it.title);
-    text($(".plate-meta .caption-note", plate), it.meta);
-    text($(":scope > p.caption-note", plate), it.description);
+    // Re-render currently active tab
+    const activeBtn = $(".assay-tab-btn.active");
+    if (activeBtn) {
+      const activeKey = activeBtn.textContent.includes("18k") ? "vermeil" :
+                        activeBtn.textContent.includes("Hypoallergenic") ? "hypoallergenic" :
+                        activeBtn.textContent.includes("Solder") ? "solder" : "silver";
+      const data = assaySpecifications[activeKey];
+      if (data) {
+        text($("#assaySpecTitle"), data.title);
+        text($("#assaySpecDesc"), data.desc);
+        text($("#assaySpecMethod"), data.method);
+        text($("#assayIndustryNorm"), data.norm);
+        text($("#assayCertificateTag"), data.status);
+      }
+    }
+  }
+
+  /* 7. Lookbook Visual Plates */
+  const lb = c.lookbook || {};
+  text($("#lookbook h2.section-heading"), lb.heading);
+  text($(".lookbook-header .body-copy"), lb.intro);
+  $$("[data-lookbook-plate]").forEach((plate, i) => {
+    const item = (lb.plates || [])[i];
+    if (!item) return;
+    img($(".lookbook-img-wrap img", plate), item.image, item.title);
+    text($("h3.subhead", plate), item.title);
+    text($("p.caption-note", plate), item.caption);
   });
 
-  /* Contact and footer */
+  /* 8. Guarantee & Provenance */
+  const guar = c.guarantee || {};
+  text($("#warranty h2.section-heading"), guar.headline);
+  text($("#warranty .container > .guarantee-layout > div:first-child > p.body-copy"), guar.subtext);
+  text($("#warranty .guarantee-lead-banner .subhead"), guar.warrantyTitle);
+  text($("#warranty .guarantee-lead-banner .body-copy"), guar.warrantyDesc);
+  const twoCol = $$("#warranty .guarantee-two-col > div");
+  if (twoCol[0]) {
+    text($(".subhead", twoCol[0]), guar.recycledTitle);
+    text($(".body-copy", twoCol[0]), guar.recycledDesc);
+  }
+  if (twoCol[1]) {
+    text($(".subhead", twoCol[1]), guar.renewalTitle);
+    text($(".body-copy", twoCol[1]), guar.renewalDesc);
+  }
+
+  /* 9. Contact and footer */
   const k = c.contact || {};
   if (/^\d{8,15}$/.test(String(k.whatsapp || ""))) {
     window.SITE_WA = String(k.whatsapp);

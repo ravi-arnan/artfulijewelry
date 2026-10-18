@@ -45,3 +45,6 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# admin console runtime backup
+preview/data/content.backup.json
