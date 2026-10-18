@@ -820,13 +820,14 @@
       margin-bottom: 4px;
     }
 
-    /* Hero Right Stage: Pure full-bleed model photograph framed by architectural lines */
+    /* Hero Right Stage: Interactive Full-Bleed Editorial Carousel */
     .hero-stage-col {
       position: relative;
       overflow: hidden;
       background-color: var(--ground-secondary);
       display: flex;
       min-height: 640px;
+      outline: none;
     }
 
     @media (max-width: 991px) {
@@ -835,12 +836,183 @@
       }
     }
 
+    .hero-carousel-slides {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      will-change: transform, opacity;
+    }
+
+    .hero-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+
     .hero-stage-backdrop {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 20%;
       display: block;
+    }
+
+    /* Subtle bottom vignette to ensure indicators and caption stay perfectly legible */
+    .hero-slide-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0.72) 100%); /* taste-skill-ignore */
+      pointer-events: none;
+    }
+
+    /* Architectural Editorial Controller Bar */
+    .hero-carousel-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 18px;
+      background: rgba(22, 19, 16, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12); /* taste-skill-ignore */
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 640px) {
+      .hero-carousel-bar {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+    }
+
+    .hero-carousel-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .hero-carousel-index {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--brand-accent);
+      white-space: nowrap;
+      padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12); /* taste-skill-ignore */
+    }
+
+    .hero-carousel-desc {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .hero-carousel-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hero-carousel-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hero-carousel-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+      justify-content: flex-end;
+    }
+
+    .hero-progress-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-progress-pill {
+      position: relative;
+      width: 24px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.22);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      overflow: hidden;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hero-progress-pill.is-active {
+      width: 40px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .hero-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: #FFFFFF;
+    }
+
+    .hero-arrow-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-arrow-btn {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16); /* taste-skill-ignore */
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .hero-arrow-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .hero-arrow-btn:active {
+      transform: scale(0.92);
     }
 
     /* ==========================================================================

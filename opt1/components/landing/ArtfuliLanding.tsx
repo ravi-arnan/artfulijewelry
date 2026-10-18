@@ -12,12 +12,44 @@ import {
   CheckCircle,
   X,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Menu,
 } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+// Hero Section Carousel Slides Model
+interface HeroSlide {
+  src: string;
+  alt: string;
+  title: string;
+  subtitle: string;
+  objectPosition?: string;
+}
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    src: "/images/lookbook-hero-1.webp",
+    alt: "Balinese Royal Crown and 18k Gold Vermeil Heritage Collection",
+    title: "Archival Royal Crown",
+    subtitle: "Solid 925 Silver & 18k Gold Vermeil",
+  },
+  {
+    src: "/images/lookbook-plate-1.webp",
+    alt: "Hand-finished Granulation Rings and Heavy Cuffs in Solid 925 Silver",
+    title: "Granulation Rings & Heavy Cuffs",
+    subtitle: "Authentic Balinese Metalworking",
+  },
+  {
+    src: "/images/lookbook-plate-2.webp",
+    alt: "Sculptural Ear Cuff and Botanical Motif in FTC Standard Vermeil",
+    title: "Botanical Ear Cuff & Pendant",
+    subtitle: "Precision 3D CAD & Master Casting",
+  },
+];
 
 // Catalog and Sizing Models
 interface CatalogItem {
@@ -34,7 +66,7 @@ const catalogData: Record<string, CatalogItem> = {
   signet: {
     title: "Subak Architectural Signet",
     code: "AJ-RNG-014",
-    desc: "Hand-forged in Celuk, Bali with solid inner gallery.",
+    desc: "Handcrafted in Celuk, Bali with solid inner gallery.",
     img: "/images/bench-signet.webp",
     baseWeight: 11.4,
     silverPrice: 165,
@@ -265,6 +297,150 @@ export function ArtfuliLanding() {
     };
   }, [isMegaMenuOpen]);
 
+  // Hero Section GSAP Carousel State & Refs
+  const [heroSlideIdx, setHeroSlideIdx] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const heroSlideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const heroProgressRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const heroSlideIdxRef = useRef(0);
+  const isHeroTransitioningRef = useRef(false);
+  const heroProgressTweenRef = useRef<gsap.core.Tween | null>(null);
+  const isHeroPausedRef = useRef(false);
+  const heroTouchStartX = useRef<number | null>(null);
+
+  const startHeroProgress = (idx: number) => {
+    heroProgressRefs.current.forEach((ref, i) => {
+      if (ref) gsap.set(ref, { width: i === idx ? "0%" : "0%" });
+    });
+
+    const activeBar = heroProgressRefs.current[idx];
+    if (!activeBar) return;
+
+    if (heroProgressTweenRef.current) {
+      heroProgressTweenRef.current.kill();
+    }
+
+    heroProgressTweenRef.current = gsap.to(activeBar, {
+      width: "100%",
+      duration: 5.0,
+      ease: "none",
+      onComplete: () => {
+        if (!isHeroPausedRef.current) {
+          const next = (idx + 1) % HERO_SLIDES.length;
+          switchHeroSlide(next, 1);
+        }
+      },
+    });
+
+    if (isHeroPausedRef.current) {
+      heroProgressTweenRef.current.pause();
+    }
+  };
+
+  const switchHeroSlide = (toIdx: number, direction: 1 | -1 = 1) => {
+    if (isHeroTransitioningRef.current) return;
+    if (toIdx === heroSlideIdxRef.current) return;
+
+    isHeroTransitioningRef.current = true;
+    const fromIdx = heroSlideIdxRef.current;
+    const fromEl = heroSlideRefs.current[fromIdx];
+    const toEl = heroSlideRefs.current[toIdx];
+
+    if (heroProgressTweenRef.current) {
+      heroProgressTweenRef.current.kill();
+      heroProgressTweenRef.current = null;
+    }
+
+    if (heroProgressRefs.current[fromIdx]) {
+      gsap.set(heroProgressRefs.current[fromIdx], { width: "0%" });
+    }
+
+    if (!fromEl || !toEl) {
+      heroSlideIdxRef.current = toIdx;
+      setHeroSlideIdx(toIdx);
+      isHeroTransitioningRef.current = false;
+      return;
+    }
+
+    gsap.set(toEl, {
+      opacity: 0,
+      scale: 1.06,
+      zIndex: 2,
+      visibility: "visible",
+    });
+    gsap.set(fromEl, {
+      zIndex: 1,
+    });
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power2.out" },
+      onComplete: () => {
+        gsap.set(fromEl, { opacity: 0, visibility: "hidden" });
+        fromEl.classList.remove("is-active");
+        toEl.classList.add("is-active");
+        heroSlideIdxRef.current = toIdx;
+        setHeroSlideIdx(toIdx);
+        isHeroTransitioningRef.current = false;
+        startHeroProgress(toIdx);
+      },
+    });
+
+    tl.to(toEl, {
+      opacity: 1,
+      scale: 1.0,
+      duration: 0.95,
+    }).to(
+      fromEl,
+      {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.75,
+        ease: "power2.inOut",
+      },
+      0.05
+    );
+  };
+
+  const handleNextHeroSlide = () => {
+    const next = (heroSlideIdxRef.current + 1) % HERO_SLIDES.length;
+    switchHeroSlide(next, 1);
+  };
+
+  const handlePrevHeroSlide = () => {
+    const prev = (heroSlideIdxRef.current - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
+    switchHeroSlide(prev, -1);
+  };
+
+  const handleSelectHeroSlide = (idx: number) => {
+    if (idx === heroSlideIdxRef.current) return;
+    const dir = idx > heroSlideIdxRef.current ? 1 : -1;
+    switchHeroSlide(idx, dir);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      startHeroProgress(0);
+    }, 1200);
+
+    return () => {
+      clearTimeout(timer);
+      if (heroProgressTweenRef.current) {
+        heroProgressTweenRef.current.kill();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    isHeroPausedRef.current = isHeroPaused;
+    if (heroProgressTweenRef.current) {
+      if (isHeroPaused) {
+        heroProgressTweenRef.current.pause();
+      } else {
+        heroProgressTweenRef.current.resume();
+      }
+    }
+  }, [isHeroPaused]);
+
   // GSAP & ScrollTrigger Choreography
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -448,7 +624,7 @@ export function ArtfuliLanding() {
   const batchCode = isVermeil ? "#CELUK-2026-Au18k" : "#CELUK-2026-Ag925";
 
   const benchWaText = encodeURIComponent(
-    `Hello Artfuli Atelier, I would like to acquire the ${pieceData.title} (${pieceData.code}) in ${alloyFullTitle}, calibrated to Size US ${benchSize} (${cal.circumference} circumference, ${computedWeight}g). Price: $${currentPrice} USD.`
+    `Hello Bali Handmade / ArtFuli Workshop, I would like to order the ${pieceData.title} (${pieceData.code}) in ${alloyFullTitle}, calibrated to Size US ${benchSize} (${cal.circumference} circumference, ${computedWeight}g). Price: $${currentPrice} USD.`
   );
 
   const handleAddBenchToBag = () => {
@@ -522,25 +698,25 @@ export function ArtfuliLanding() {
   const handleCheckoutWa = (e: React.MouseEvent) => {
     e.preventDefault();
     if (cartItems.length === 0) return;
-    let text = "Hello Artfuli Jewelry Atelier, I would like to commission the following pieces from your collection:\n\n";
+    let text = "Hello Bali Handmade / ArtFuli Workshop, I would like to order the following pieces from your collection:\n\n";
     cartItems.forEach((it, idx) => {
       text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
     });
-    text += `\nEstimated Total: $${cartSubtotal} USD\nInsured Celuk Worldwide Shipping included.\nPlease advise on current casting timeline and payment details.`;
-    window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(text)}`, "_blank");
+    text += `\nEstimated Total: $${cartSubtotal} USD\nShipped directly from Bali via DHL Express / EMS.\nPlease advise on current production timeline and payment details.`;
+    window.open(`https://wa.me/6287883992277?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   const handleCheckoutEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     if (cartItems.length === 0) return;
-    let text = "Hello Artfuli Jewelry Atelier,\n\nI would like to commission the following pieces:\n\n";
+    let text = "Hello Bali Handmade / ArtFuli Workshop,\n\nI would like to order the following pieces:\n\n";
     cartItems.forEach((it, idx) => {
       text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
     });
-    text += `\nEstimated Total: $${cartSubtotal} USD\n\nPlease reply with atelier invoice and delivery estimate.`;
-    const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
+    text += `\nEstimated Total: $${cartSubtotal} USD\n\nPlease reply with order confirmation and shipping estimate.`;
+    const subject = encodeURIComponent("Bali Handmade / ArtFuli Order Inquiry");
     const body = encodeURIComponent(text);
-    window.location.href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:sales@bali-handmade.com?subject=${subject}&body=${body}`;
   };
 
   // Ring Sizer Operations
@@ -551,14 +727,14 @@ export function ArtfuliLanding() {
     const clamped = Math.min(Math.max(rounded, 5), 10);
     setBenchSize(String(clamped));
     setIsRingSizerOpen(false);
-    showToast(`Applied calibrated size US ${clamped} to Assay Bench`);
+    showToast(`Applied calibrated size US ${clamped} to Sizing Guide`);
     document.getElementById("assay-bench")?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Bespoke Brief WhatsApp & Mailto
-  const bespokeBriefText = `Hello Artfuli Celuk Atelier, I am inquiring about a ${briefType} in ${briefMetal}. Specifications: ${briefNotes}`;
-  const bespokeWaUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(bespokeBriefText)}`;
-  const bespokeEmailUrl = `mailto:care@artfulijewelry.com?subject=${encodeURIComponent("Atelier CAD Inquiry: " + briefType)}&body=${encodeURIComponent(bespokeBriefText)}`;
+  const bespokeBriefText = `Hello Bali Handmade / ArtFuli Celuk Workshop, I am inquiring about a custom ${briefType} in ${briefMetal}. Specifications: ${briefNotes}`;
+  const bespokeWaUrl = `https://wa.me/6287883992277?text=${encodeURIComponent(bespokeBriefText)}`;
+  const bespokeEmailUrl = `mailto:sales@bali-handmade.com?subject=${encodeURIComponent("Custom CAD Inquiry: " + briefType)}&body=${encodeURIComponent(bespokeBriefText)}`;
 
   return (
     <>
@@ -614,7 +790,7 @@ export function ArtfuliLanding() {
                 </li>
                 <li>
                   <a href="#heritage" onClick={() => setIsMegaMenuOpen(false)}>
-                    Atelier &amp; Craft
+                    Workshop &amp; Craft
                   </a>
                 </li>
                 <li>
@@ -648,7 +824,7 @@ export function ArtfuliLanding() {
                   setIsMobileMenuOpen(false);
                 }}
               >
-                Consult Atelier
+                Custom Order
               </a>
               <button
                 type="button"
@@ -704,7 +880,7 @@ export function ArtfuliLanding() {
                       <div className="mega-link-row">
                         <span className="mega-link-title">Cuffs &amp; Bangles</span>
                       </div>
-                      <span className="mega-link-desc">Heavy cast wrists &amp; forged open cuffs</span>
+                      <span className="mega-link-desc">Heavy cast wrists &amp; hand-finished cuffs</span>
                     </a>
                   </li>
                   <li>
@@ -771,7 +947,7 @@ export function ArtfuliLanding() {
                       <div className="mega-link-row">
                         <span className="mega-link-title">New Additions</span>
                       </div>
-                      <span className="mega-link-desc">Latest forgings from our Celuk benches</span>
+                      <span className="mega-link-desc">Latest handcrafted arrivals from our benches</span>
                     </a>
                   </li>
                   <li>
@@ -785,7 +961,7 @@ export function ArtfuliLanding() {
                   <li>
                     <a href="#collections" className="mega-link-item" onClick={() => setIsMegaMenuOpen(false)}>
                       <div className="mega-link-row">
-                        <span className="mega-link-title">Back in Atelier</span>
+                        <span className="mega-link-title">Re-Stocked Pieces</span>
                       </div>
                       <span className="mega-link-desc">Restocked editions cast for immediate transit</span>
                     </a>
@@ -818,7 +994,7 @@ export function ArtfuliLanding() {
                   </div>
                   <h4 className="mega-featured-title">The Celuk High Jewelry Series</h4>
                   <p className="mega-featured-desc">
-                    Hand-forged sterling silver and 18k gold vermeil creations photographed in Gianyar.
+                    Handcrafted sterling silver and 18k gold vermeil creations photographed in Gianyar.
                   </p>
                   <span className="mega-featured-cta">
                     <span>Explore Lookbook</span>
@@ -915,7 +1091,7 @@ export function ArtfuliLanding() {
                   </li>
                   <li>
                     <a href="#collections" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>Back in Atelier</span>
+                      <span>Re-Stocked Pieces</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
@@ -929,23 +1105,23 @@ export function ArtfuliLanding() {
               </div>
 
               <div className="mobile-nav-group">
-                <span className="mobile-nav-heading">Atelier Navigation</span>
+                <span className="mobile-nav-heading">Workshop Navigation</span>
                 <ul className="mobile-nav-links">
                   <li>
                     <a href="#heritage" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>Celuk Atelier &amp; Craft</span>
+                      <span>Celuk Workshop &amp; Craft</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
                   <li>
                     <a href="#bespoke" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>One-Stop Services (Bespoke &amp; 3D CAD)</span>
+                      <span>One-Stop Services (Custom &amp; 3D CAD)</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
                   <li>
                     <a href="#lookbook" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>High Jewelry Lookbook</span>
+                      <span>Fine Jewelry Lookbook</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
@@ -959,7 +1135,7 @@ export function ArtfuliLanding() {
                   style={{ width: "100%", justifyContent: "center" }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Consult Atelier
+                  Custom Order
                 </a>
               </div>
             </div>
@@ -973,12 +1149,12 @@ export function ArtfuliLanding() {
               {/* Left Column: Copy, CTAs, Assurances, Facts */}
               <div className="hero-copy-col">
                 <h1 className="display-hero lines" id="hero-heading">
-                  <span className="line"><span>Hand-forged in</span></span>
+                  <span className="line"><span>Handmade in</span></span>
                   <span className="line"><span>Celuk, Bali.</span></span>
                 </h1>
 
                 <p className="hero-subtext" data-hero-reveal>
-                  Heirloom 925 sterling silver and 2.5-micron 18k gold vermeil, forged in Sukawati and verified by X-ray spectrometry.
+                  Solid 925 sterling silver, FTC standard 24k and 18k gold vermeil, and cast brass direct from our Celuk, Bali workshop. Established 2004.
                 </p>
 
                 <div className="hero-actions" data-hero-reveal>
@@ -993,111 +1169,204 @@ export function ArtfuliLanding() {
                 <div className="hero-assurances" data-hero-reveal>
                   <div className="assurance-item">
                     <CheckCircle className="assurance-icon" />
-                    <span>Complimentary insured worldwide transit</span>
+                    <span>Worldwide tracked delivery via DHL Express and EMS</span>
                   </div>
                   <div className="assurance-item">
                     <CheckCircle className="assurance-icon" />
-                    <span>Celuk XRF assay metallurgy certificate included</span>
+                    <span>Genuine solid 925 silver &amp; FTC standard gold vermeil guaranteed</span>
                   </div>
                 </div>
 
                 {/* Facts row */}
                 <div className="hero-facts" data-hero-reveal>
                   <div>
-                    <div className="hero-fact-title">92.5% Ag Purity</div>
-                    <p className="caption-note">Nickel-free sterling silver alloyed with pure oxygen-free copper.</p>
+                    <div className="hero-fact-title">Solid 925 Silver</div>
+                    <p className="caption-note">Genuine sterling silver hand-crafted by Celuk artisans with authentic granulation.</p>
                   </div>
                   <div>
-                    <div className="hero-fact-title">2.5 Micron 18k Au</div>
-                    <p className="caption-note">Heavy gold vermeil layering, 2.5 times thicker than standard plating.</p>
+                    <div className="hero-fact-title">FTC Vermeil Standard</div>
+                    <p className="caption-note">Heavy gold layering of 100 millionths of an inch over solid silver, never hollow stamping.</p>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Pure Full-Bleed Model Photograph */}
-              <div className="hero-stage-col">
-                <img
-                  src="/images/lookbook-hero-1.webp"
-                  alt="Artfuli Sculptural 18k Gold Vermeil and 925 Silver Lookbook"
-                  className="hero-stage-backdrop"
-                  id="heroMainImage"
-                />
+              {/* Right Column: Interactive Full-Bleed Editorial Carousel */}
+              <div
+                className="hero-stage-col"
+                onMouseEnter={() => setIsHeroPaused(true)}
+                onMouseLeave={() => setIsHeroPaused(false)}
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Fine Jewelry Highlights"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowLeft") handlePrevHeroSlide();
+                  if (e.key === "ArrowRight") handleNextHeroSlide();
+                }}
+                onTouchStart={(e) => {
+                  heroTouchStartX.current = e.touches[0].clientX;
+                  setIsHeroPaused(true);
+                }}
+                onTouchEnd={(e) => {
+                  if (heroTouchStartX.current !== null) {
+                    const diff = heroTouchStartX.current - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 40) {
+                      if (diff > 0) handleNextHeroSlide();
+                      else handlePrevHeroSlide();
+                    }
+                    heroTouchStartX.current = null;
+                  }
+                  setIsHeroPaused(false);
+                }}
+              >
+                <div className="hero-carousel-slides">
+                  {HERO_SLIDES.map((slide, idx) => (
+                    <div
+                      key={slide.src}
+                      ref={(el) => { heroSlideRefs.current[idx] = el; }}
+                      className={`hero-slide ${idx === 0 ? "is-active" : ""}`}
+                      aria-hidden={idx !== heroSlideIdx}
+                    >
+                      <img
+                        src={slide.src}
+                        alt={slide.alt}
+                        className="hero-stage-backdrop"
+                        style={slide.objectPosition ? { objectPosition: slide.objectPosition } : undefined}
+                        id={idx === 0 ? "heroMainImage" : undefined}
+                      />
+                      <div className="hero-slide-scrim" aria-hidden="true" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Architectural Editorial Controller Bar */}
+                <div className="hero-carousel-bar" data-ui>
+                  <div className="hero-carousel-meta">
+                    <span className="hero-carousel-index">
+                      {Math.min(heroSlideIdx + 1, HERO_SLIDES.length)} / {HERO_SLIDES.length}
+                    </span>
+                    <div className="hero-carousel-desc">
+                      <span className="hero-carousel-title">{(HERO_SLIDES[heroSlideIdx] ?? HERO_SLIDES[0]).title}</span>
+                      <span className="hero-carousel-sub">{(HERO_SLIDES[heroSlideIdx] ?? HERO_SLIDES[0]).subtitle}</span>
+                    </div>
+                  </div>
+
+                  <div className="hero-carousel-controls">
+                    <div className="hero-progress-group" role="tablist" aria-label="Carousel pagination">
+                      {HERO_SLIDES.map((slide, idx) => (
+                        <button
+                          key={slide.src}
+                          type="button"
+                          className={`hero-progress-pill ${idx === heroSlideIdx ? "is-active" : ""}`}
+                          onClick={() => handleSelectHeroSlide(idx)}
+                          role="tab"
+                          aria-selected={idx === heroSlideIdx}
+                          aria-label={`Show ${slide.title}`}
+                        >
+                          <span
+                            className="hero-progress-fill"
+                            ref={(el) => { heroProgressRefs.current[idx] = el; }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="hero-arrow-group">
+                      <button
+                        type="button"
+                        className="hero-arrow-btn"
+                        onClick={handlePrevHeroSlide}
+                        aria-label="Previous photograph"
+                      >
+                        <ChevronLeft style={{ width: 14, height: 14 }} />
+                      </button>
+                      <button
+                        type="button"
+                        className="hero-arrow-btn"
+                        onClick={handleNextHeroSlide}
+                        aria-label="Next photograph"
+                      >
+                        <ChevronRight style={{ width: 14, height: 14 }} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
           {/* TRUST RIBBON: FEATURED IN & TRUSTED BY (Deep Obsidian Marquee) */}
-          <section className="trust-ribbon-section" aria-label="Featured in and Trusted by">
+          <section className="trust-ribbon-section" aria-label="Authentic Capabilities and Global Reach">
             <div className="trust-ribbon-inner">
-              <p className="trust-ribbon-title">FEATURED IN &amp; TRUSTED BY</p>
+              <p className="trust-ribbon-title">CRAFTED IN BALI · TRUSTED WORLDWIDE</p>
               <div className="marquee-viewport">
                 <div className="marquee-track">
                   {/* Set 1 */}
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Amanpuri</span>
-                    <span className="logo-sub">Resorts Gallery</span>
+                    <span className="logo-bold">EST. 2004</span>
+                    <span className="logo-sub">20+ Years in Celuk</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">VOGUE</span>
-                    <span className="logo-sub">Scandinavia Edit</span>
+                    <span className="logo-serif">50+ Countries</span>
+                    <span className="logo-sub">Worldwide Wholesale &amp; Retail</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Four Seasons</span>
-                    <span className="logo-sub">Bali Atelier</span>
+                    <span className="logo-display">DHL EXPRESS</span>
+                    <span className="logo-sub">Official Courier Partner</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-bold">SUCOFINDO</span>
-                    <span className="logo-sub">Certified XRF Assay</span>
+                    <span className="logo-bold">SOLID 925</span>
+                    <span className="logo-sub">Genuine Sterling Silver</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">TATLER</span>
-                    <span className="logo-sub">Asia Luxury Edit</span>
+                    <span className="logo-display">EMS POS INDONESIA</span>
+                    <span className="logo-sub">Tracked Global Transit</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Alila Living</span>
-                    <span className="logo-sub">Artisan Boutiques</span>
+                    <span className="logo-serif">FTC Standard</span>
+                    <span className="logo-sub">Certified Gold Vermeil</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-bold">PANDE MAS</span>
-                    <span className="logo-sub">Celuk Heritage Guild</span>
+                    <span className="logo-bold">DUAL FOUNDRY</span>
+                    <span className="logo-sub">2 In-House Casting Lines</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">HARPER'S BAZAAR</span>
-                    <span className="logo-sub">Fine Craft Feature</span>
+                    <span className="logo-display">ONE-STOP SERVICES</span>
+                    <span className="logo-sub">3D CAD, Laser &amp; Plating</span>
                   </div>
 
                   {/* Set 2 (Identical for continuous infinite marquee loop) */}
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Amanpuri</span>
-                    <span className="logo-sub">Resorts Gallery</span>
+                    <span className="logo-bold">EST. 2004</span>
+                    <span className="logo-sub">20+ Years in Celuk</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">VOGUE</span>
-                    <span className="logo-sub">Scandinavia Edit</span>
+                    <span className="logo-serif">50+ Countries</span>
+                    <span className="logo-sub">Worldwide Wholesale &amp; Retail</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Four Seasons</span>
-                    <span className="logo-sub">Bali Atelier</span>
+                    <span className="logo-display">DHL EXPRESS</span>
+                    <span className="logo-sub">Official Courier Partner</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-bold">SUCOFINDO</span>
-                    <span className="logo-sub">Certified XRF Assay</span>
+                    <span className="logo-bold">SOLID 925</span>
+                    <span className="logo-sub">Genuine Sterling Silver</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">TATLER</span>
-                    <span className="logo-sub">Asia Luxury Edit</span>
+                    <span className="logo-display">EMS POS INDONESIA</span>
+                    <span className="logo-sub">Tracked Global Transit</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-serif">Alila Living</span>
-                    <span className="logo-sub">Artisan Boutiques</span>
+                    <span className="logo-serif">FTC Standard</span>
+                    <span className="logo-sub">Certified Gold Vermeil</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-bold">PANDE MAS</span>
-                    <span className="logo-sub">Celuk Heritage Guild</span>
+                    <span className="logo-bold">DUAL FOUNDRY</span>
+                    <span className="logo-sub">2 In-House Casting Lines</span>
                   </div>
                   <div className="trust-logo-item">
-                    <span className="logo-display">HARPER'S BAZAAR</span>
-                    <span className="logo-sub">Fine Craft Feature</span>
+                    <span className="logo-display">ONE-STOP SERVICES</span>
+                    <span className="logo-sub">3D CAD, Laser &amp; Plating</span>
                   </div>
                 </div>
               </div>
@@ -1105,7 +1374,7 @@ export function ArtfuliLanding() {
             <div className="trust-ruler-grid" aria-hidden="true"></div>
           </section>
 
-          {/* SECTION 3: ATELIER HERITAGE NARRATIVE (Celuk Metallurgy) */}
+          {/* SECTION 3: WORKSHOP HERITAGE NARRATIVE (Celuk Metallurgy) */}
           <section className="heritage-section" id="heritage" aria-labelledby="heritage-heading">
             <div className="container">
               <div className="heritage-layout">
@@ -1121,33 +1390,33 @@ export function ArtfuliLanding() {
 
                 <div className="heritage-content-column">
                   <span className="caption-note" style={{ color: "var(--brand-accent)", fontWeight: 600, letterSpacing: "0.08em" }}>
-                    FOUNDED 1978 · SUKAWATI FOUNDRY
+                    ESTABLISHED 2004 · CELUK, BALI
                   </span>
                   <h2 className="section-heading" id="heritage-heading" style={{ marginTop: 12, marginBottom: 24 }}>
-                    Centuries of Celuk metallurgy.
+                    Two Decades of Authentic Balinese Metallurgy.
                   </h2>
                   <p className="body-copy">
-                    For over a century, the smithing families of Celuk Village have guarded the techniques of Balinese precious metalwork: <em>jawan</em> (micro-granulation), <em>bun</em> (hand-drawn wire filigree), and cold-hammered structural forging.
+                    Established in 2004 in Celuk Village, Bali Handmade (ArtFuli Jewellery) began as a dedicated artisan workshop producing solid 925 sterling silver beads, spacers, clasps, and fine jewelry. Over two decades, our workshop has grown into a comprehensive manufacturing house with dual in-house casting lines.
                   </p>
                   <blockquote className="atelier-statement">
-                    We reject hollow factory stamping. Every Artfuli piece carries the dense weight of hand-forged metal and the direct signature of the smith who shaped it.
+                    Every handmade piece has its own soul and story, crafted with patience by artisans whose families have shaped precious metals in Celuk for generations.
                   </blockquote>
                   <p className="body-copy">
-                    By operating our own private foundry and finishing benches in Sukawati, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.
+                    We offer direct island wholesale and retail pricing to everyone, from individual jewelry lovers and hobbyists to boutique studio owners in over 50 countries worldwide, with no reseller license required.
                   </p>
 
                   <div className="heritage-ledger" id="heritageCounters">
                     <div className="ledger-entry">
-                      <div className="metric-figure" data-count="1978">1978</div>
-                      <p className="caption-note">Founding lineage of our smithing family in Celuk.</p>
+                      <div className="metric-figure" data-count="2004">2004</div>
+                      <p className="caption-note">Founded in Celuk Village, the heart of Bali silversmithing.</p>
                     </div>
                     <div className="ledger-entry">
-                      <div className="metric-figure" data-count="34" data-suffix=" Smiths">34 Smiths</div>
-                      <p className="caption-note">Master silversmiths, wax carvers, and stone setters.</p>
+                      <div className="metric-figure" data-count="20" data-suffix="+ Years">20+ Years</div>
+                      <p className="caption-note">Continuous export and custom manufacturing worldwide.</p>
                     </div>
                     <div className="ledger-entry">
                       <div className="metric-figure" data-count="4550" data-suffix="+">4,550+</div>
-                      <p className="caption-note">Original archival molds preserved in our Sukawati vault.</p>
+                      <p className="caption-note">Original archival molds and designs preserved in our master catalog.</p>
                     </div>
                   </div>
                 </div>
@@ -1161,7 +1430,7 @@ export function ArtfuliLanding() {
               <div className="collections-header" data-reveal>
                 <div>
                   <h2 className="section-heading" id="collections-heading">
-                    Signature Atelier Editions
+                    Signature Collections
                   </h2>
                 </div>
                 <p className="body-copy">
@@ -1189,7 +1458,7 @@ export function ArtfuliLanding() {
                       <span className="caption-note">48 Archival Designs · 6.4g to 18.2g</span>
                     </div>
                     <p className="caption-note">
-                      Heavy signets, granulated stacking bands, and bezel-set cabochon rings cold-forged for daily structural permanence.
+                      Heavy signets, granulated stacking bands, and bezel-set cabochon rings hand-finished for daily structural permanence.
                     </p>
                   </a>
 
@@ -1254,7 +1523,7 @@ export function ArtfuliLanding() {
                       <span className="caption-note">22 Archival Designs · 24.0g to 62.0g</span>
                     </div>
                     <p className="caption-note">
-                      Substantial open-shank wrist cuffs, woven wire armlets, and bezel-set heirloom bangles tension-forged to retain their form.
+                      Substantial open-shank wrist cuffs, woven wire armlets, and bezel-set heirloom bangles hand-shaped to retain their form.
                     </p>
                   </a>
                 </div>
@@ -1338,7 +1607,7 @@ export function ArtfuliLanding() {
 
                   <div className="control-group">
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                      <span className="control-label">Atelier Sizing Calibration</span>
+                      <span className="control-label">Ring Size Calibration</span>
                       <button
                         type="button"
                         className="bench-sizer-btn"
@@ -1377,19 +1646,19 @@ export function ArtfuliLanding() {
                     </div>
                     <div>
                       <div className="readout-val" id="readoutPrice" style={{ color: "var(--brand-accent)" }}>${currentPrice} USD</div>
-                      <div className="readout-key">Atelier Commission</div>
+                      <div className="readout-key">Direct Workshop Price</div>
                     </div>
                   </div>
 
                   <div className="bench-actions">
                     <a
-                      href={`https://wa.me/6281234567890?text=${benchWaText}`}
+                      href={`https://wa.me/6287883992277?text=${benchWaText}`}
                       target="_blank"
                       className="btn-primary"
                       id="benchAcquireLink"
                       style={{ justifyContent: "center" }}
                     >
-                      <span>Commission via WhatsApp Concierge</span>
+                      <span>Inquire via WhatsApp</span>
                       <ArrowUpRight style={{ width: 16, height: 16 }} />
                     </a>
                     <button
@@ -1496,7 +1765,7 @@ export function ArtfuliLanding() {
                     Hand-carved wax to molten silver.
                   </h2>
                   <p className="body-copy">
-                    Our workshop unites ancestral Balinese hand-forging with vacuum-assisted lost-wax casting, allowing architectural precision without sacrificing the warmth of human touch.
+                    Our workshop unites ancestral Balinese silversmithing with vacuum-assisted lost-wax casting, allowing architectural precision without sacrificing the warmth of human touch.
                   </p>
                   <div className="craft-featured-photo">
                     <img src="/images/direct-casting.jpg" alt="Lost-wax tree casting and precious metal preparation in Bali" />
@@ -1551,7 +1820,7 @@ export function ArtfuliLanding() {
                   </div>
                   <h3 className="subhead">Tirta Empul Sculptural Collar</h3>
                   <p className="caption-note">
-                    Hand-forged 925 sterling silver drenched in 3.0 microns of 18k yellow gold. Net weight: 42.8 grams.
+                    Handcrafted 925 sterling silver drenched in 3.0 microns of 18k yellow gold. Net weight: 42.8 grams.
                   </p>
                 </article>
 
@@ -1584,7 +1853,7 @@ export function ArtfuliLanding() {
               <div className="cad-grid">
                 <div>
                   <h2 className="section-heading" id="cad-heading">
-                    Bespoke Atelier Commissions
+                    Custom Design &amp; 3D Casting
                   </h2>
                   <p className="body-copy" style={{ marginTop: 16, marginBottom: 28 }}>
                     Whether modifying an archival Celuk master or drafting a 3D CAD prototype from your napkin sketch, our smiths and digital modelers bring custom heirloom designs to fruition.
@@ -1615,7 +1884,7 @@ export function ArtfuliLanding() {
 
                 {/* Interactive Bespoke Inquiry Generator */}
                 <div className="cad-inquiry-panel">
-                  <h3 className="subhead" style={{ marginBottom: 4 }}>Dispatch a Custom Atelier Brief</h3>
+                  <h3 className="subhead" style={{ marginBottom: 4 }}>Send Custom Order Brief</h3>
                   <p className="caption-note" style={{ marginBottom: 18 }}>
                     Select your commissioned silhouette and precious metal to generate a tailored WhatsApp inquiry directly to our Sukawati head caster.
                   </p>
@@ -1652,7 +1921,7 @@ export function ArtfuliLanding() {
                   </div>
 
                   <div className="form-row">
-                    <label htmlFor="briefNotesInput">Atelier Notes &amp; Approximate Dimensions</label>
+                    <label htmlFor="briefNotesInput">Custom Order Notes &amp; Approximate Dimensions</label>
                     <textarea
                       id="briefNotesInput"
                       className="form-textarea"
@@ -1678,7 +1947,7 @@ export function ArtfuliLanding() {
                       className="btn-secondary"
                       id="briefEmailBtn"
                     >
-                      <span>Dispatch to care@artfulijewelry.com</span>
+                      <span>Dispatch to sales@bali-handmade.com</span>
                     </a>
                   </div>
                 </div>
@@ -1686,39 +1955,39 @@ export function ArtfuliLanding() {
             </div>
           </section>
 
-          {/* SECTION 9: ETHICAL SOURCING & 100-YEAR GUARANTEE */}
+          {/* SECTION 9: QUALITY ASSURANCES & WORLDWIDE CLIENT CARE */}
           <section className="guarantee-section" id="warranty" aria-labelledby="guarantee-heading">
             <div className="container">
               <div className="guarantee-layout">
                 <div>
                   <h2 className="section-heading" id="guarantee-heading">
-                    Provenance and 100-Year Care
+                    Quality Guarantee &amp; Worldwide Care
                   </h2>
                   <p className="body-copy" style={{ marginTop: 20 }}>
-                    Every piece that leaves our Sukawati workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.
+                    Every piece leaving our Celuk workshop represents over 20 years of Balinese metalsmithing integrity. We stand behind our craftsmanship with direct manufacturer guarantees.
                   </p>
                 </div>
 
                 <div className="guarantee-editorial-flow">
                   <div className="guarantee-lead-banner">
-                    <h3 className="subhead">100-Year Structural Guarantee</h3>
+                    <h3 className="subhead">7-Day Inspection &amp; Full Refund Guarantee</h3>
                     <p className="body-copy">
-                      Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our Celuk workshop repairs or re-forges the piece free of charge.
+                      We are committed to delivering the highest quality handmade jewelry. If you are not satisfied with the quality of your order upon receipt, you may return the merchandise within 7 days for a full merchandise refund.
                     </p>
                   </div>
 
                   <div className="guarantee-two-col">
                     <div>
-                      <h3 className="subhead" style={{ marginBottom: 10 }}>Recycled Precious Metals</h3>
+                      <h3 className="subhead" style={{ marginBottom: 10 }}>Solid 925 &amp; FTC Standard Vermeil</h3>
                       <p className="body-copy">
-                        We refine and alloy certified recycled Indonesian silver and gold granules in-house, reducing primary mining impact while maintaining 99.9% base bullion purity prior to alloying.
+                        All silver items are guaranteed solid 925 sterling silver. Our gold vermeil meets strict FTC standards of 100 millionths of an inch of fine gold over solid silver, never hollow stamping.
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="subhead" style={{ marginBottom: 10 }}>Vermeil Renewal Service</h3>
+                      <h3 className="subhead" style={{ marginBottom: 10 }}>Free Worldwide Shipping Above $2.0K</h3>
                       <p className="body-copy">
-                        Every collector receives lifetime access to ultrasonic cleaning, river-agate repolishing, and at-cost 2.5-micron 18k gold re-vermeil servicing at our Bali atelier.
+                        Orders ship directly from Bali via DHL Express and EMS Pos Indonesia. Complimentary tracked shipping is provided for purchases above $2,000 USD to USA, Europe, Australia, and Asia.
                       </p>
                     </div>
                   </div>
@@ -1745,15 +2014,15 @@ export function ArtfuliLanding() {
                   />
                 </div>
                 <p className="brand-summary">
-                  Fine jewelry atelier bridging centuries of Celuk metallurgy with architectural minimalism. Hand-forged in Bali from solid 925 sterling silver and 18k gold vermeil.
+                  ArtFuli Jewellery &amp; Manufacturer (Bali Handmade). Established in 2004 in Celuk Village, Bali. Professional fine jewelry manufacturing in solid 925 sterling silver, gold vermeil, brass, and bespoke 3D casting services.
                 </p>
                 <div className="brand-socials">
-                  <a href="https://instagram.com/artfulijewelry" target="_blank" className="brand-social-link">
-                    <span>Instagram</span>
+                  <a href="https://www.instagram.com/artfulijewelry/" target="_blank" rel="noopener noreferrer" className="brand-social-link">
+                    <span>Instagram (@artfulijewelry)</span>
                     <ArrowUpRight style={{ width: 13, height: 13 }} />
                   </a>
-                  <a href="https://facebook.com/artfulijewelry" target="_blank" className="brand-social-link">
-                    <span>Facebook</span>
+                  <a href="https://www.facebook.com/balihandmade" target="_blank" rel="noopener noreferrer" className="brand-social-link">
+                    <span>Facebook (Bali Handmade)</span>
                     <ArrowUpRight style={{ width: 13, height: 13 }} />
                   </a>
                   <a href="#assay" className="brand-social-link">
@@ -1776,9 +2045,9 @@ export function ArtfuliLanding() {
                 </ul>
               </div>
 
-              {/* The Atelier */}
+              {/* Workshop & Craft */}
               <div>
-                <h2 className="directory-col-title">The Atelier</h2>
+                <h2 className="directory-col-title">Our Workshop</h2>
                 <ul className="directory-links">
                   <li><a href="#heritage">Heritage of Celuk</a></li>
                   <li><a href="#casting">Master Silversmiths</a></li>
@@ -1793,12 +2062,12 @@ export function ArtfuliLanding() {
               <div>
                 <h2 className="directory-col-title">Client Care</h2>
                 <ul className="directory-links">
-                  <li><a href="https://wa.me/6281234567890" target="_blank">WhatsApp Concierge</a></li>
+                  <li><a href="https://wa.me/6287883992277" target="_blank" rel="noopener noreferrer">WhatsApp (+62 878-8399-2277)</a></li>
+                  <li><a href="https://wa.me/628123992277" target="_blank" rel="noopener noreferrer">WhatsApp (+62 812-399-2277)</a></li>
                   <li><a href="#assay-bench" onClick={() => setIsRingSizerOpen(true)}>Ring Sizing Guide</a></li>
-                  <li><a href="#warranty">100-Year Structural Guarantee</a></li>
-                  <li><a href="#bespoke">Worldwide Insured Transit</a></li>
-                  <li><a href="#warranty">Precious Metal Care Guide</a></li>
-                  <li><a href="mailto:care@artfulijewelry.com">care@artfulijewelry.com</a></li>
+                  <li><a href="#warranty">7-Day Quality Guarantee</a></li>
+                  <li><a href="#bespoke">DHL &amp; EMS Global Shipping</a></li>
+                  <li><a href="mailto:sales@bali-handmade.com">sales@bali-handmade.com</a></li>
                 </ul>
               </div>
             </div>
@@ -1806,12 +2075,12 @@ export function ArtfuliLanding() {
             {/* Utility Row */}
             <div className="utility-bar">
               <div>
-                <span>© 2026 Artfuli Jewelry Atelier. Jalan Raya Celuk No. 88, Sukawati, Bali.</span>
+                <span>© 2004 - 2026 Bali Handmade / Artfuli Jewelry. Celuk Village, Sukawati, Gianyar, Bali, Indonesia.</span>
               </div>
               <div className="utility-actions">
-                <span>Certified Assay: 92.5% Ag · 18k Au Vermeil</span>
-                <a href="https://wa.me/6281234567890" target="_blank" className="utility-cta">
-                  <span>Consult Atelier</span>
+                <span>Certified 925 Ag · FTC Standard Vermeil</span>
+                <a href="https://wa.me/6287883992277" target="_blank" rel="noopener noreferrer" className="utility-cta">
+                  <span>Contact Workshop</span>
                   <ArrowRight style={{ width: 14, height: 14 }} />
                 </a>
                 <button
@@ -2010,7 +2279,7 @@ export function ArtfuliLanding() {
               className="btn-secondary"
               style={{ justifyContent: "center", fontSize: "0.85rem" }}
             >
-              <span>Email Order to care@artfulijewelry.com</span>
+              <span>Email Order to sales@bali-handmade.com</span>
             </a>
           </div>
         )}
@@ -2031,7 +2300,7 @@ export function ArtfuliLanding() {
         <div className="ring-sizer-dialog">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16 }}>
             <div>
-              <h2 className="subhead" style={{ fontSize: "1.6rem", marginBottom: 6 }}>Ring Sizing Atelier Calibration</h2>
+              <h2 className="subhead" style={{ fontSize: "1.6rem", marginBottom: 6 }}>Ring Sizing Guide &amp; Calibration</h2>
               <p className="caption-note">
                 Calibrated to international millimeter circumference and US sizing standards. Celuk rings feature comfort-fit contoured inner galleries.
               </p>

@@ -19,13 +19,16 @@ const organizationLd = {
       url: SITE_URL,
       slogan: "Handcrafted Balinese Fine Jewelry & Celuk Metallurgy",
       foundingDate: "2004",
-      sameAs: ["https://instagram.com/artfulijewelry"],
+      sameAs: [
+        "https://www.instagram.com/artfulijewelry/",
+        "https://www.facebook.com/balihandmade",
+      ],
       contactPoint: [
         {
           "@type": "ContactPoint",
-          contactType: "Atelier Concierge",
-          email: "care@artfulijewelry.com",
-          telephone: "+62-812-3456-7890",
+          contactType: "Customer Support & Concierge",
+          email: "sales@bali-handmade.com",
+          telephone: "+62-878-8399-2277",
         },
       ],
     },
@@ -65,11 +68,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://artfulijewelry.com"),
   title: {
-    default: "Artfuli Jewelry | Fine Silver & Gold Vermeil Atelier, Celuk, Bali",
+    default: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
     template: "%s | Artfuli Jewelry",
   },
   description:
-    "Handcrafted 925 sterling silver and 18k gold vermeil jewelry forged by master silversmiths in Celuk, Gianyar, Bali since 2004. Certified XRF metallurgy.",
+    "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004. Certified XRF metallurgy.",
   keywords: [
     "Artfuli Jewelry",
     "Bali silver jewelry",
@@ -81,9 +84,9 @@ export const metadata: Metadata = {
     "wholesale Balinese jewelry",
   ],
   openGraph: {
-    title: "Artfuli Jewelry | Fine Silver & Gold Vermeil Atelier, Celuk, Bali",
+    title: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
     description:
-      "Handcrafted 925 sterling silver and 18k gold vermeil jewelry forged by master silversmiths in Celuk, Gianyar, Bali since 2004.",
+      "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004.",
     type: "website",
     locale: "en_US",
     url: "https://artfulijewelry.com",

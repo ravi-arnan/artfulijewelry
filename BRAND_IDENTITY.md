@@ -3,9 +3,11 @@
 ## 1. Brand Overview
 - **Brand Name**: Artfuli Jewelry
 - **Official Domain**: artfulijewelry.com
-- **Concierge Contact**: care@artfulijewelry.com
+- **Concierge Contact**: sales@bali-handmade.com / fulinandhina@gmail.com
+- **WhatsApp Concierge**: +62 878-8399-2277 (Fuli) / +62 812-399-2277 (Fajar)
 - **Origin & Atelier**: Celuk Village, Sukawati, Gianyar, Bali, Indonesia
-- **Category**: Light-Luxury Fine Jewelry & Bespoke Precious Metal Atelier
+- **Established**: 2004 (20+ years of fine jewelry manufacturing in Celuk, Bali)
+- **Category**: Balinese Fine Jewelry & Bespoke Precious Metal Atelier
 
 ## 2. Value Proposition
 Artfuli Jewelry bridges generations of master silversmithing and goldsmithing from Celuk, Bali with contemporary architectural minimalism. We craft heirloom-grade 925 sterling silver and thick 18k gold vermeil jewelry backed by laboratory XRF assay verification, offering direct-from-atelier transparency for individual collectors and bespoke partners worldwide.
@@ -17,7 +19,7 @@ Artfuli Jewelry operates at the intersection of two benchmarks:
 
 ## 4. Brand Pillars
 ### I. Celuk Heritage (Warisan Kriya Celuk)
-Every piece is shaped, soldered, and polished by master artisans in Celuk, Bali. We honor traditional Balinese granulation (jawan) and hand-forging techniques while integrating modern precision.
+Every piece is shaped, soldered, and polished by master artisans in Celuk, Bali. We honor traditional Balinese granulation (jawan), filigree (bun), and ancestral silversmithing techniques while integrating modern precision.
 
 ### II. Radical Material Transparency
 Luxury requires proof. Every batch of precious metal undergoes X-Ray Fluorescence (XRF) spectrometry testing to guarantee certified 925 sterling silver purity and a minimum of 2.5 microns of 18k solid gold layering for vermeil pieces, completely free of nickel and cadmium.

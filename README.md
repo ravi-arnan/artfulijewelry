@@ -1,14 +1,15 @@
 # Artfuli Jewelry
 
-> Handcrafted Balinese Fine Jewelry & Celuk Metallurgy Atelier  
+> Handcrafted Balinese Fine Jewelry & Celuk Silversmithing Workshop  
 > Production Domain: [artfulijewelry.com](https://artfulijewelry.com)  
+> Legacy Catalog Archive: [bali-handmade.com](https://bali-handmade.com)  
 > GitHub Repository: [github.com/ravi-arnan/artfulijewelry](https://github.com/ravi-arnan/artfulijewelry)
 
 ---
 
 ## 1. Overview
 
-Artfuli Jewelry adalah platform e-commerce dan editorial storefront mewah untuk perhiasan kriya perak 925, kuningan cetak, dan emas vermeil 18k khas Desa Celuk, Gianyar, Bali. Proyek ini memadukan estetika editorial atelier kelas dunia dengan sistem e-commerce ritel utuh, meneruskan warisan katalog grosir kerajinan perak Bali sejak tahun 2004.
+Artfuli Jewelry (Bali Handmade / ArtFuli Jewellery & Manufacturer) adalah platform e-commerce dan editorial storefront untuk perhiasan kriya perak 925, kuningan cetak, dan emas vermeil 18k khas Bali. Proyek ini memadukan estetika editorial kontemporer dengan sistem e-commerce ritel dan grosir utuh, meneruskan warisan katalog kerajinan perak Bali sejak tahun 2004.
 
 Platform ini dikembangkan dengan arsitektur modern untuk keperluan implementasi ritel nyata dan laporan Kerja Praktek (KP), mencakup sistem pembayaran terintegrasi Midtrans Payment Gateway, dukungan multi-bahasa (ID/EN), dual-currency (IDR/USD), serta manajemen pesanan dan inventaris.
 
