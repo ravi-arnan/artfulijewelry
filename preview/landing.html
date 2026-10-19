@@ -1311,6 +1311,51 @@
       flex-wrap: wrap;
     }
 
+    /* Technical Hallmark / Laboratory Ledger Certificate Typography */
+    .bench-batch-ledger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    .bench-batch-ledger .ledger-label {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .bench-batch-ledger .ledger-dot {
+      opacity: 0.4;
+    }
+
+    .bench-batch-ledger .ledger-sub {
+      opacity: 0.85;
+    }
+
+    .bench-batch-ledger .ledger-code {
+      font-family: ui-monospace, "SF Mono", Monaco, "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--brand-accent);
+      background: rgba(85, 31, 81, 0.06);
+      border: 1px solid rgba(85, 31, 81, 0.2);
+      padding: 3px 8px;
+      border-radius: 0px; /* TasteSkill Shape Lock: All-sharp corners */
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    html[data-theme="dark"] .bench-batch-ledger .ledger-code {
+      color: #E2A8DD;
+      background: rgba(226, 168, 221, 0.1);
+      border-color: rgba(226, 168, 221, 0.3);
+    }
+
     /* ==========================================================================
        SECTION 5: MATERIAL ASSAY & XRF TRANSPARENCY LEDGER
        Layout Family 4: Interactive Tabbed Assay Matrix (Zero row lines)
@@ -2843,9 +2888,12 @@
             </div>
 
             <div class="bench-footer-row">
-              <p class="caption-note" id="benchBatchCode">
-                Assay Certificate Included · Batch Ledger: #CELUK-2026-Ag925
-              </p>
+              <div class="bench-batch-ledger">
+                <span class="ledger-label">Assay Certificate Included</span>
+                <span class="ledger-dot">·</span>
+                <span class="ledger-sub">Batch Ledger:</span>
+                <code class="ledger-code" id="benchBatchCode">#CELUK-2026-Ag925</code>
+              </div>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <button type="button" class="btn-secondary" onclick="addBenchPieceToBag()" id="benchAddToBagBtn">
                   <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i>
@@ -3444,7 +3492,7 @@
       document.getElementById("readoutPurity").textContent = purityText;
       document.getElementById("readoutCircumference").textContent = cal.circumference;
       document.getElementById("readoutPrice").textContent = `$${price} USD`;
-      document.getElementById("benchBatchCode").textContent = `Assay Certificate Included · Batch Ledger: ${batchId}`;
+      document.getElementById("benchBatchCode").textContent = batchId;
 
       if (window.gsap) {
         gsap.fromTo("#benchReadoutStrip", { opacity: 0.5, y: 4 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });

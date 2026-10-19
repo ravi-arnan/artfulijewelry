@@ -1672,9 +1672,12 @@ export function ArtfuliLanding() {
                     </button>
                   </div>
 
-                  <p className="caption-note" id="benchBatchCode">
-                    Assay Certificate Included · Batch Ledger: {batchCode}
-                  </p>
+                  <div className="bench-batch-ledger">
+                    <span className="ledger-label">Assay Certificate Included</span>
+                    <span className="ledger-dot">·</span>
+                    <span className="ledger-sub">Batch Ledger:</span>
+                    <code className="ledger-code" id="benchBatchCode">{batchCode}</code>
+                  </div>
                 </div>
               </div>
             </div>
