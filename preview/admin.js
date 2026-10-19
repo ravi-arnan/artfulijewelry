@@ -113,10 +113,7 @@
       card("Proof Points (Metallurgy Badges)", "Two certified claims displayed beneath the action buttons.",
         `<div class="grid-2">${get("hero.facts").map((_, i) =>
           fText(`hero.facts.${i}.title`, `Badge ${i + 1} Title`) + fText(`hero.facts.${i}.note`, `Badge ${i + 1} Description`, { rows: 2 })).join("")}</div>`),
-      renderHeroSlides(),
-      card("Detail Photography", "Secondary craft photograph and its caption.",
-        `<div class="grid-2">${fImage("hero.sideImage", "Detail Craft Photo")}
-          ${fText("hero.sideCaption", "Detail Photo Caption", { rows: 2, wide: true })}</div>`)
+      renderHeroSlides()
     ].join("");
   }
 

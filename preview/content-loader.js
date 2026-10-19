@@ -56,8 +56,6 @@
       : (h.mainImage ? [{ image: h.mainImage, title: "", subtitle: "" }] : null);
     if (slides) window.heroCarousel.set(slides);
   }
-  img($(".hero-secondary-img img"), h.sideImage);
-  text($(".hero-side-frame > .caption-note"), h.sideCaption);
 
   /* 3. Heritage Narrative & Counters */
   const her = c.heritage || {};

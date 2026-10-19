@@ -131,6 +131,17 @@
     touchX = null;
   });
 
-  window.heroCarousel = { set: build, defaults: DEFAULT_SLIDES };
-  build(DEFAULT_SLIDES);
+  let initialized = false;
+  function setSlides(list) {
+    initialized = true;
+    clearTimeout(fallbackTimer);
+    build(list);
+  }
+
+  // Fallback if content-loader.js does not supply slides within 350ms
+  const fallbackTimer = setTimeout(() => {
+    if (!initialized) build(DEFAULT_SLIDES);
+  }, 350);
+
+  window.heroCarousel = { set: setSlides, defaults: DEFAULT_SLIDES };
 })();
