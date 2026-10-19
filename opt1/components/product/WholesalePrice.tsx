@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { Lock } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency } from "@/context/CurrencyContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { USD_TO_IDR_RATE } from "@/lib/currency";
 
 interface WholesalePriceProps {
   price: number;
@@ -16,8 +19,18 @@ interface WholesalePriceProps {
 // while the catalog stays statically generated.
 export function WholesalePrice({ price, variant = "card" }: WholesalePriceProps) {
   const { user, loading } = useAuth();
+  const { currency, formatPrice } = useCurrency();
+  const { language } = useLanguage();
   const detail = variant === "detail";
-  const label = detail ? "Wholesale, from" : "From";
+  const label = detail
+    ? language === "id"
+      ? "Grosir, mulai dari"
+      : "Wholesale, from"
+    : language === "id"
+    ? "Mulai dari"
+    : "From";
+
+  const effectivePrice = currency === "IDR" ? Math.round(price * USD_TO_IDR_RATE) : price;
 
   if (loading || !user) {
     return (
@@ -29,7 +42,7 @@ export function WholesalePrice({ price, variant = "card" }: WholesalePriceProps)
       >
         <Lock className={detail ? "h-4 w-4" : "h-3.5 w-3.5"} aria-hidden />
         <span className="underline-offset-4 group-hover:underline">
-          Sign in for price
+          {language === "id" ? "Masuk untuk lihat harga" : "Sign in for price"}
         </span>
       </Link>
     );
@@ -42,11 +55,15 @@ export function WholesalePrice({ price, variant = "card" }: WholesalePriceProps)
       </span>
       {detail ? (
         <p className="font-display text-4xl text-gold-deep">
-          ${price.toFixed(2)}
-          <span className="ml-1 text-base text-ink-soft">/ piece</span>
+          {formatPrice(effectivePrice)}
+          <span className="ml-1 text-base text-ink-soft">
+            {language === "id" ? "/ buah" : "/ piece"}
+          </span>
         </p>
       ) : (
-        <p className="font-display text-xl text-gold-deep">${price.toFixed(2)}</p>
+        <p className="font-display text-xl text-gold-deep">
+          {formatPrice(effectivePrice)}
+        </p>
       )}
     </>
   );

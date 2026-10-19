@@ -4,6 +4,8 @@ import "./globals.css";
 import "./landing.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { InquiryProvider } from "@/context/InquiryContext";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND, CONTACT } from "@/lib/data";
 
@@ -107,7 +109,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd data={organizationLd} />
         <AuthProvider>
-          <InquiryProvider>{children}</InquiryProvider>
+          <LanguageProvider>
+            <CurrencyProvider>
+              <InquiryProvider>{children}</InquiryProvider>
+            </CurrencyProvider>
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

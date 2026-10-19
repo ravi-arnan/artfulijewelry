@@ -7,6 +7,7 @@ import { BRAND, CATEGORIES } from "@/lib/data";
 import { ButtonLink } from "@/components/ui/Button";
 import { AuthNav } from "@/components/auth/AuthNav";
 import { useInquiry } from "@/context/InquiryContext";
+import { LocaleCurrencySwitcher } from "@/components/site/LocaleCurrencySwitcher";
 
 const NAV = [
   { label: "Shop", href: "/shop" },
@@ -46,6 +47,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LocaleCurrencySwitcher compact className="hidden sm:inline-flex" />
           <Link
             href="/inquiry"
             aria-label={`Inquiry list, ${itemCount} ${itemCount === 1 ? "item" : "items"}`}

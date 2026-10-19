@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "collections": "Koleksi",
+    "workshop": "Bengkel & Kriya",
+    "services": "Layanan",
+    "lookbook": "Katalog Visual",
+    "bag": "Keranjang",
+    "custom_order": "Pesanan Kustom",
+    "by_category": "Berdasarkan Kategori",
+    "by_metal": "Berdasarkan Logam",
+    "all_jewelry": "Semua Perhiasan"
+  },
+  "hero": {
+    "authenticity_tag": "Kriya Perak Asli Celuk Bali",
+    "since": "Celuk, Gianyar, Bali · Sejak 2004",
+    "explore_catalog": "Jelajahi Katalog",
+    "consult_bespoke": "Pesan Perhiasan Kustom"
+  },
+  "trust": {
+    "casting_title": "Pengecoran Presisi Lost-Wax",
+    "casting_desc": "Teknik vacuum casting induksi presisi tinggi berbahan perak 925 murni.",
+    "beads_title": "Manik Perak Buatan Tangan",
+    "beads_desc": "Warisan kriya Bali sarat ketelitian dengan kawat filigri dan granulasi jawan tradisional.",
+    "vermeil_title": "Lapisan Tebal Emas Vermeil 18k",
+    "vermeil_desc": "Memenuhi standar FTC dengan ketebalan emas 18k murni 2,5 sampai 3,0 mikron di atas perak 925 padat.",
+    "wholesale_title": "Harga Grosir Langsung untuk Umum",
+    "wholesale_desc": "Harga langsung dari perajin pulau Bali tanpa biaya distributor atau syarat izin bisnis.",
+    "guarantee_title": "Garansi Pengembalian 7 Hari",
+    "guarantee_desc": "Jaminan uang kembali penuh dalam 7 hari setelah barang tiba untuk kenyamanan berbelanja."
+  },
+  "cart": {
+    "title": "Pilihan Anda",
+    "bag": "Keranjang Belanja",
+    "wishlist": "Perhiasan Tersimpan",
+    "empty": "Keranjang belanja Anda masih kosong.",
+    "subtotal": "Subtotal",
+    "shipping": "Ongkos kirim dihitung saat checkout",
+    "checkout_btn": "Lanjut ke Pembayaran",
+    "continue": "Lanjut Memilih",
+    "remove": "Hapus",
+    "qty": "Jumlah",
+    "size": "Ukuran",
+    "metal": "Logam"
+  },
+  "product": {
+    "add_to_bag": "Tambah ke Keranjang",
+    "in_stock": "Tersedia",
+    "out_of_stock": "Dibuat Sesuai Pesanan",
+    "price_from": "Mulai dari",
+    "solid_silver": "Perak 925 Murni",
+    "gold_vermeil": "Emas Vermeil 18k",
+    "ring_sizer": "Panduan Ukuran Cincin"
+  },
+  "footer": {
+    "tagline": "Harga Grosir untuk Semua Orang",
+    "celuk_location": "Celuk, Sukawati, Gianyar, Bali 80582",
+    "rights": "Hak cipta dilindungi. Studio Perhiasan Kriya Bali.",
+    "direct_contacts": "Kontak Langsung WhatsApp & Konsultasi"
+  }
+}

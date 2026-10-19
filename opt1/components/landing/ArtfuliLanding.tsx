@@ -16,6 +16,10 @@ import {
   ChevronRight,
   Menu,
 } from "lucide-react";
+import { useCurrency } from "@/context/CurrencyContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { LocaleCurrencySwitcher } from "@/components/site/LocaleCurrencySwitcher";
+import { USD_TO_IDR_RATE } from "@/lib/currency";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -60,6 +64,8 @@ interface CatalogItem {
   baseWeight: number;
   silverPrice: number;
   vermeilPrice: number;
+  silverPriceIdr?: number;
+  vermeilPriceIdr?: number;
 }
 
 const catalogData: Record<string, CatalogItem> = {
@@ -71,6 +77,8 @@ const catalogData: Record<string, CatalogItem> = {
     baseWeight: 11.4,
     silverPrice: 165,
     vermeilPrice: 215,
+    silverPriceIdr: 2650000,
+    vermeilPriceIdr: 3450000,
   },
   earrings: {
     title: "Jawan Botanical Drop Earrings",
@@ -80,6 +88,8 @@ const catalogData: Record<string, CatalogItem> = {
     baseWeight: 8.6,
     silverPrice: 145,
     vermeilPrice: 190,
+    silverPriceIdr: 2300000,
+    vermeilPriceIdr: 3050000,
   },
   pendant: {
     title: "Amethyst Druzy & Botanical Collar",
@@ -89,6 +99,8 @@ const catalogData: Record<string, CatalogItem> = {
     baseWeight: 22.8,
     silverPrice: 240,
     vermeilPrice: 310,
+    silverPriceIdr: 3850000,
+    vermeilPriceIdr: 4950000,
   },
   cuff: {
     title: "Klotok Heavy Wrist Cuff",
@@ -98,6 +110,8 @@ const catalogData: Record<string, CatalogItem> = {
     baseWeight: 38.5,
     silverPrice: 320,
     vermeilPrice: 410,
+    silverPriceIdr: 5100000,
+    vermeilPriceIdr: 6550000,
   },
 };
 
@@ -163,6 +177,7 @@ interface CartItem {
   alloy: string;
   size: string;
   price: number;
+  priceIdr?: number;
   qty: number;
   img: string;
 }
@@ -173,10 +188,13 @@ interface WishlistItem {
   alloy: string;
   size: string;
   price: number;
+  priceIdr?: number;
   img: string;
 }
 
 export function ArtfuliLanding() {
+  const { currency, formatPrice } = useCurrency();
+  const { language, t } = useLanguage();
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // Assay Bench State
@@ -210,6 +228,7 @@ export function ArtfuliLanding() {
       alloy: "Solid 925 Sterling Silver",
       size: "US 7 (17.3 mm)",
       price: 165,
+      priceIdr: 2650000,
       qty: 1,
       img: "/images/bench-signet.webp",
     },
@@ -219,6 +238,7 @@ export function ArtfuliLanding() {
       alloy: "18k Gold Vermeil (2.5 µm)",
       size: "One Size (42 mm drop)",
       price: 210,
+      priceIdr: 3350000,
       qty: 1,
       img: "/images/bench-earrings.webp",
     },
@@ -231,6 +251,7 @@ export function ArtfuliLanding() {
       alloy: "Solid 925 Sterling Silver",
       size: "Medium (62 mm diameter)",
       price: 340,
+      priceIdr: 5450000,
       img: "/images/bench-cuff.webp",
     },
   ]);
@@ -618,13 +639,17 @@ export function ArtfuliLanding() {
   const cal = sizeCalibration[benchSize] || sizeCalibration["7"];
   const isVermeil = benchAlloy === "vermeil";
   const computedWeight = (pieceData.baseWeight * cal.weightFactor + (isVermeil ? 0.3 : 0)).toFixed(1);
-  const currentPrice = isVermeil ? pieceData.vermeilPrice : pieceData.silverPrice;
+  const currentPriceUsd = isVermeil ? pieceData.vermeilPrice : pieceData.silverPrice;
+  const currentPriceIdr = isVermeil
+    ? pieceData.vermeilPriceIdr || pieceData.vermeilPrice * USD_TO_IDR_RATE
+    : pieceData.silverPriceIdr || pieceData.silverPrice * USD_TO_IDR_RATE;
+  const currentPrice = currency === "IDR" ? currentPriceIdr : currentPriceUsd;
   const purityLabel = isVermeil ? "18k Au / 925 Ag" : "92.5% Ag";
   const alloyFullTitle = isVermeil ? "18k Gold Vermeil (2.5 Microns)" : "925 Sterling Silver";
   const batchCode = isVermeil ? "#CELUK-2026-Au18k" : "#CELUK-2026-Ag925";
 
   const benchWaText = encodeURIComponent(
-    `Hello Bali Handmade / ArtFuli Workshop, I would like to order the ${pieceData.title} (${pieceData.code}) in ${alloyFullTitle}, calibrated to Size US ${benchSize} (${cal.circumference} circumference, ${computedWeight}g). Price: $${currentPrice} USD.`
+    `Hello Bali Handmade / ArtFuli Workshop, I would like to order the ${pieceData.title} (${pieceData.code}) in ${alloyFullTitle}, calibrated to Size US ${benchSize} (${cal.circumference} circumference, ${computedWeight}g). Price: ${formatPrice(currentPrice)} (${currency}).`
   );
 
   const handleAddBenchToBag = () => {
@@ -645,7 +670,8 @@ export function ArtfuliLanding() {
           name: pieceData.title,
           alloy: alloyFullTitle,
           size: sizeStr,
-          price: currentPrice,
+          price: currentPriceUsd,
+          priceIdr: currentPriceIdr,
           qty: 1,
           img: pieceData.img,
         },
@@ -659,7 +685,10 @@ export function ArtfuliLanding() {
 
   // Cart Operations
   const totalCartCount = cartItems.reduce((acc, it) => acc + it.qty, 0);
-  const cartSubtotal = cartItems.reduce((acc, it) => acc + it.price * it.qty, 0);
+  const cartSubtotal = cartItems.reduce((acc, it) => {
+    const unitPrice = currency === "IDR" ? (it.priceIdr || it.price * USD_TO_IDR_RATE) : it.price;
+    return acc + unitPrice * it.qty;
+  }, 0);
 
   const updateCartQty = (index: number, delta: number) => {
     const updated = [...cartItems];
@@ -700,9 +729,10 @@ export function ArtfuliLanding() {
     if (cartItems.length === 0) return;
     let text = "Hello Bali Handmade / ArtFuli Workshop, I would like to order the following pieces from your collection:\n\n";
     cartItems.forEach((it, idx) => {
-      text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
+      const unit = currency === "IDR" ? (it.priceIdr || it.price * USD_TO_IDR_RATE) : it.price;
+      text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = ${formatPrice(unit * it.qty)}\n`;
     });
-    text += `\nEstimated Total: $${cartSubtotal} USD\nShipped directly from Bali via DHL Express / EMS.\nPlease advise on current production timeline and payment details.`;
+    text += `\nEstimated Total: ${formatPrice(cartSubtotal)} (${currency})\nShipped directly from Bali via DHL Express / EMS.\nPlease advise on current production timeline and payment details.`;
     window.open(`https://wa.me/6287883992277?text=${encodeURIComponent(text)}`, "_blank");
   };
 
@@ -711,12 +741,13 @@ export function ArtfuliLanding() {
     if (cartItems.length === 0) return;
     let text = "Hello Bali Handmade / ArtFuli Workshop,\n\nI would like to order the following pieces:\n\n";
     cartItems.forEach((it, idx) => {
-      text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
+      const unit = currency === "IDR" ? (it.priceIdr || it.price * USD_TO_IDR_RATE) : it.price;
+      text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = ${formatPrice(unit * it.qty)}\n`;
     });
-    text += `\nEstimated Total: $${cartSubtotal} USD\n\nPlease reply with order confirmation and shipping estimate.`;
+    text += `\nEstimated Total: ${formatPrice(cartSubtotal)} (${currency})\n\nPlease reply with order confirmation and shipping estimate.`;
     const subject = encodeURIComponent("Bali Handmade / ArtFuli Order Inquiry");
     const body = encodeURIComponent(text);
-    window.location.href = `mailto:sales@bali-handmade.com?subject=${subject}&body=${body}`;
+    window.location.assign(`mailto:sales@bali-handmade.com?subject=${subject}&body=${body}`);
   };
 
   // Ring Sizer Operations
@@ -781,7 +812,7 @@ export function ArtfuliLanding() {
                     aria-expanded={isMegaMenuOpen}
                     aria-controls="collections-mega-panel"
                   >
-                    <span>Collections</span>
+                    <span>{t("nav.collections")}</span>
                     <ChevronDown
                       className={`nav-chevron ${isMegaMenuOpen ? "is-open" : ""}`}
                       style={{ width: 14, height: 14 }}
@@ -790,23 +821,24 @@ export function ArtfuliLanding() {
                 </li>
                 <li>
                   <a href="#heritage" onClick={() => setIsMegaMenuOpen(false)}>
-                    Workshop &amp; Craft
+                    {t("nav.workshop")}
                   </a>
                 </li>
                 <li>
                   <a href="#bespoke" onClick={() => setIsMegaMenuOpen(false)}>
-                    Services
+                    {t("nav.services")}
                   </a>
                 </li>
                 <li>
                   <a href="#lookbook" onClick={() => setIsMegaMenuOpen(false)}>
-                    Lookbook
+                    {t("nav.lookbook")}
                   </a>
                 </li>
               </ul>
             </nav>
 
             <div className="header-cta-group">
+              <LocaleCurrencySwitcher />
               <button
                 type="button"
                 className="header-bag-btn"
@@ -814,7 +846,7 @@ export function ArtfuliLanding() {
                 aria-label="Open Collection Bag"
               >
                 <ShoppingBag style={{ width: 15, height: 15 }} />
-                <span>Bag ({totalCartCount})</span>
+                <span>{t("nav.bag")} ({totalCartCount})</span>
               </button>
               <a
                 href="#bespoke"
@@ -824,7 +856,7 @@ export function ArtfuliLanding() {
                   setIsMobileMenuOpen(false);
                 }}
               >
-                Custom Order
+                {t("nav.custom_order")}
               </a>
               <button
                 type="button"
@@ -1008,6 +1040,9 @@ export function ArtfuliLanding() {
           {/* MOBILE NAVIGATION DRAWER */}
           {isMobileMenuOpen && (
             <div className="mobile-nav-drawer" role="dialog" aria-label="Mobile Navigation">
+              <div style={{ padding: "0 0 16px 0", borderBottom: "1px solid var(--border-frame)", marginBottom: 16 }}>
+                <LocaleCurrencySwitcher compact />
+              </div>
               <div className="mobile-nav-group">
                 <span className="mobile-nav-heading">Collections by Category</span>
                 <ul className="mobile-nav-links">
@@ -1135,7 +1170,7 @@ export function ArtfuliLanding() {
                   style={{ width: "100%", justifyContent: "center" }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Custom Order
+                  {t("nav.custom_order")}
                 </a>
               </div>
             </div>
@@ -1645,7 +1680,7 @@ export function ArtfuliLanding() {
                       <div className="readout-key">Inner Circumference</div>
                     </div>
                     <div>
-                      <div className="readout-val" id="readoutPrice" style={{ color: "var(--brand-accent)" }}>${currentPrice} USD</div>
+                      <div className="readout-val" id="readoutPrice" style={{ color: "var(--brand-accent)" }}>{formatPrice(currentPrice)}</div>
                       <div className="readout-key">Direct Workshop Price</div>
                     </div>
                   </div>
@@ -2132,14 +2167,14 @@ export function ArtfuliLanding() {
               className={`drawer-tab-btn ${cartTab === "bag" ? "active" : ""}`}
               onClick={() => setCartTab("bag")}
             >
-              Bag ({totalCartCount})
+              {t("nav.bag")} ({totalCartCount})
             </button>
             <button
               type="button"
               className={`drawer-tab-btn ${cartTab === "wishlist" ? "active" : ""}`}
               onClick={() => setCartTab("wishlist")}
             >
-              Wishlist ({wishlistItems.length})
+              {t("cart.wishlist")} ({wishlistItems.length})
             </button>
           </div>
           <button
@@ -2200,13 +2235,19 @@ export function ArtfuliLanding() {
                     </div>
                   </div>
                   <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                    <div className="drawer-item-price">${it.price * it.qty} USD</div>
+                    <div className="drawer-item-price">
+                      {formatPrice(
+                        currency === "IDR"
+                          ? (it.priceIdr || it.price * USD_TO_IDR_RATE) * it.qty
+                          : it.price * it.qty
+                      )}
+                    </div>
                     <button
                       type="button"
                       className="drawer-remove-btn"
                       onClick={() => removeCartItem(idx)}
                     >
-                      Remove
+                      {t("cart.remove")}
                     </button>
                   </div>
                 </div>
@@ -2225,7 +2266,13 @@ export function ArtfuliLanding() {
                   <div>
                     <p className="drawer-item-name">{it.name}</p>
                     <p className="drawer-item-spec">{it.alloy}<br />{it.size}</p>
-                    <div className="drawer-item-price">${it.price} USD</div>
+                    <div className="drawer-item-price">
+                      {formatPrice(
+                        currency === "IDR"
+                          ? it.priceIdr || it.price * USD_TO_IDR_RATE
+                          : it.price
+                      )}
+                    </div>
                   </div>
                   <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
                     <button
@@ -2234,14 +2281,14 @@ export function ArtfuliLanding() {
                       onClick={() => moveWishlistToBag(idx)}
                       style={{ padding: "6px 12px", fontSize: "0.75rem" }}
                     >
-                      <span>Add to Bag</span>
+                      <span>{t("product.add_to_bag")}</span>
                     </button>
                     <button
                       type="button"
                       className="drawer-remove-btn"
                       onClick={() => removeWishlistItem(idx)}
                     >
-                      Remove
+                      {t("cart.remove")}
                     </button>
                   </div>
                 </div>
@@ -2262,7 +2309,7 @@ export function ArtfuliLanding() {
             </div>
             <div className="drawer-summary-total">
               <span>Estimated Total</span>
-              <span id="drawerTotalPrice">${cartSubtotal} USD</span>
+              <span id="drawerTotalPrice">{formatPrice(cartSubtotal)}</span>
             </div>
             <a
               href="#"

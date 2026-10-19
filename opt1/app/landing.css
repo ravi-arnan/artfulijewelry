@@ -309,11 +309,11 @@
 
     .header-inner {
       width: 100%;
-      padding: 0 40px;
+      padding: 0 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     @media (max-width: 768px) {
@@ -346,8 +346,36 @@
     .primary-nav {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 20px;
       list-style: none;
+      flex-shrink: 0;
+    }
+
+    .primary-nav li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .primary-nav li:nth-child(1) {
+      width: 104px;
+      min-width: 104px;
+    }
+
+    .primary-nav li:nth-child(2) {
+      width: 136px;
+      min-width: 136px;
+    }
+
+    .primary-nav li:nth-child(3) {
+      width: 68px;
+      min-width: 68px;
+    }
+
+    .primary-nav li:nth-child(4) {
+      width: 104px;
+      min-width: 104px;
     }
 
     .primary-nav a {
@@ -361,6 +389,8 @@
       white-space: nowrap;
       transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease;
       display: inline-block;
+      text-align: center;
+      width: 100%;
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -383,9 +413,12 @@
       color: var(--ink-primary);
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       cursor: pointer;
       padding: 8px 0;
+      width: 100%;
+      text-align: center;
       transition: color var(--t-hover) ease;
     }
 
@@ -687,15 +720,83 @@
     .header-cta-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       flex-shrink: 0;
+    }
+
+    .locale-currency-bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--ground-secondary);
+      border: 1px solid var(--border-frame); /* taste-skill-ignore */
+      padding: 8px 12px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1;
+      width: 168px;
+      min-width: 168px;
+      max-width: 168px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .locale-currency-bar.is-compact {
+      padding: 6px 10px;
+      font-size: 10px;
+      width: auto;
+      min-width: auto;
+      max-width: none;
+    }
+
+    .locale-segment {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .locale-btn {
+      background: transparent;
+      border: none;
+      color: var(--ink-muted);
+      cursor: pointer;
+      padding: 2px 3px;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 500;
+      line-height: 1;
+      transition: color var(--t-hover) ease;
+    }
+
+    .locale-btn:hover {
+      color: var(--ink-primary);
+    }
+
+    .locale-btn.is-active {
+      color: var(--ink-primary);
+      font-weight: 700;
+    }
+
+    .locale-sep {
+      color: var(--ink-faint, #94a3b8);
+      font-size: 10px;
+      user-select: none;
+    }
+
+    .locale-dot {
+      color: var(--ink-faint, #94a3b8);
+      margin: 0 1px;
+      user-select: none;
     }
 
     .header-bag-btn {
       background: var(--ground-secondary);
       color: var(--ink-primary);
       border: 1px solid var(--border-frame); /* taste-skill-ignore */
-      padding: 10px 16px;
+      padding: 10px 14px;
       font-family: var(--font-sans);
       font-size: var(--step-small);
       font-weight: 500;
@@ -703,7 +804,13 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
+      width: 148px;
+      min-width: 148px;
+      max-width: 148px;
+      flex-shrink: 0;
+      box-sizing: border-box;
       transition: background-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
     }
 
@@ -712,8 +819,17 @@
     }
 
     .header-cta {
-      padding: 10px 22px;
+      padding: 10px 16px;
       white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 168px;
+      min-width: 168px;
+      max-width: 168px;
+      flex-shrink: 0;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     /* ==========================================================================
