@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1792337540164,
+      "tag": "0000_slimy_avengers",
+      "breakpoints": true
+    }
+  ]
+}

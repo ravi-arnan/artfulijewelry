@@ -196,14 +196,24 @@ const server = http.createServer(async (req, res) => {
   if (pathname === "/") pathname = "/index.html";
   if (pathname === "/admin") pathname = "/admin.html";
 
-  const filePath = path.join(__dirname, path.normalize(pathname));
-  const rel = path.relative(__dirname, filePath);
+  const safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, "").replace(/^\/+/, "");
+  let filePath;
+  const isAllowedRoot = safePath.startsWith("old/") || safePath.startsWith("assets/");
+  if (isAllowedRoot) {
+    filePath = path.join(__dirname, "..", safePath);
+  } else {
+    filePath = path.join(__dirname, safePath);
+  }
+
+  const baseDir = isAllowedRoot ? path.resolve(__dirname, "..") : __dirname;
+  const rel = path.relative(baseDir, filePath);
   const blocked =
     rel.startsWith("..") ||
     path.isAbsolute(rel) ||
     rel.split(path.sep).some((seg) => seg.startsWith(".")) ||
     rel === "server.mjs" ||
-    rel.endsWith(".backup.json");
+    rel.endsWith(".backup.json") ||
+    rel.endsWith(".env");
 
   fs.stat(filePath, (err, stats) => {
     if (blocked || err || !stats.isFile()) {

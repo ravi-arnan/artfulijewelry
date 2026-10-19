@@ -309,7 +309,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "We send a sketch, they send back a production-ready sample in weeks. The one-stop casting and plating under one roof saves us so much coordination.",
     name: "Daniel Okafor",
-    role: "Product Lead, Atelier Mara",
+    role: "Product Lead, Studio Mara",
   },
   {
     quote:

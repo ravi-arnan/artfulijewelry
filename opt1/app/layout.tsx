@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Newsreader, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import "./landing.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { InquiryProvider } from "@/context/InquiryContext";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND, CONTACT } from "@/lib/data";
 
-const SITE_URL = "https://bali-handmade.com";
+const SITE_URL = "https://artfulijewelry.com";
 
 const organizationLd = {
   "@context": "https://schema.org",
@@ -14,22 +15,28 @@ const organizationLd = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: BRAND.name,
+      name: "Artfuli Jewelry",
       url: SITE_URL,
-      slogan: BRAND.slogan,
-      foundingDate: String(BRAND.since),
-      sameAs: [`https://instagram.com/${BRAND.instagram.replace("@", "")}`],
-      contactPoint: CONTACT.emails.map((e) => ({
-        "@type": "ContactPoint",
-        contactType: e.label,
-        email: e.address,
-      })),
+      slogan: "Handcrafted Balinese Fine Jewelry & Celuk Metallurgy",
+      foundingDate: "2004",
+      sameAs: [
+        "https://www.instagram.com/artfulijewelry/",
+        "https://www.facebook.com/balihandmade",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "Customer Support & Concierge",
+          email: "sales@bali-handmade.com",
+          telephone: "+62-878-8399-2277",
+        },
+      ],
     },
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: BRAND.name,
+      name: "Artfuli Jewelry",
       publisher: { "@id": `${SITE_URL}/#organization` },
     },
   ],
@@ -46,27 +53,44 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bali-handmade.com"),
+  metadataBase: new URL("https://artfulijewelry.com"),
   title: {
-    default: "Bali Handmade, Wholesale Bali Silver, Gold Beads & Findings",
-    template: "%s | Bali Handmade",
+    default: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
+    template: "%s | Artfuli Jewelry",
   },
   description:
-    "Solid 925 sterling silver beads, caps, charms and findings handmade by artisans in Bali since 2004. Wholesale prices for everyone, no reseller required.",
+    "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004. Certified XRF metallurgy.",
   keywords: [
-    "Bali beads wholesale",
-    "925 sterling silver beads",
-    "Bali silver findings",
-    "wholesale jewelry supplies",
-    "handmade silver charms",
+    "Artfuli Jewelry",
+    "Bali silver jewelry",
+    "Celuk metallurgy",
+    "925 sterling silver handmade",
+    "18k gold vermeil Bali",
+    "artisan silver rings",
+    "Celuk silversmiths",
+    "wholesale Balinese jewelry",
   ],
   openGraph: {
-    title: "Bali Handmade, Wholesale Bali Silver & Gold Beads",
+    title: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
     description:
-      "Handmade 925 sterling silver beads and findings from Bali. Wholesale prices for everyone since 2004.",
+      "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004.",
     type: "website",
     locale: "en_US",
+    url: "https://artfulijewelry.com",
+    siteName: "Artfuli Jewelry",
   },
 };
 
@@ -78,9 +102,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${newsreader.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      <body className="min-h-full flex flex-col">
         <JsonLd data={organizationLd} />
         <AuthProvider>
           <InquiryProvider>{children}</InquiryProvider>

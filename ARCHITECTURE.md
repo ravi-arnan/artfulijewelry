@@ -37,7 +37,10 @@ src/
 ├── data/
 │   └── catalog-manifest.ts         # Curated products mapped to verified photos in old/images/produk/
 ├── lib/
-│   ├── supabase/                   # Inherited from opt1/ (client.ts, server.ts)
+│   ├── db/                         # Turso libSQL client & Drizzle ORM schema
+│   │   ├── client.ts               # @libsql/client edge connection
+│   │   └── schema.ts               # Drizzle schema (products, orders, items, addresses)
+│   ├── midtrans.ts                 # Midtrans Snap & webhook verification helper
 │   ├── concierge.ts                # WhatsApp URL generator & mailto:care@artfulijewelry.com formatter
 │   └── utils.ts                    # Currency formatting, className merger
 └── types/
