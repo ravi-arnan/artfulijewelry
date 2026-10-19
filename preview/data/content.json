@@ -7,7 +7,7 @@
   },
   "hero": {
     "line1": "Hand-forged in",
-    "line2": "Celuk, Bali.",
+    "line2": "Denpasar, Bali.",
     "subtext": "Heirloom 925 sterling silver and 2.5-micron 18k gold vermeil, forged in Sukawati and verified by X-ray spectrometry.",
     "primaryCta": "Explore Collections",
     "secondaryCta": "Inspect Alloy & Weight",
@@ -19,6 +19,28 @@
       {
         "title": "2.5 Micron 18k Au",
         "note": "Heavy gold vermeil layering, 2.5 times thicker than standard plating."
+      }
+    ],
+    "slides": [
+      {
+        "image": "images/lookbook-hero-1.webp",
+        "title": "Archival Royal Crown",
+        "subtitle": "Solid 925 Silver & 18k Gold Vermeil"
+      },
+      {
+        "image": "images/lookbook-plate-1.webp",
+        "title": "Granulation Rings & Heavy Cuffs",
+        "subtitle": "Authentic Balinese Metalworking"
+      },
+      {
+        "image": "images/lookbook-plate-2.webp",
+        "title": "Botanical Ear Cuff & Pendant",
+        "subtitle": "Precision 3D CAD & Master Casting"
+      },
+      {
+        "image": "images/uploads/screenshot-2026-10-19-162419-mvfb805l.png",
+        "title": "New slide",
+        "subtitle": ""
       }
     ],
     "mainImage": "images/lookbook-hero-1.webp",

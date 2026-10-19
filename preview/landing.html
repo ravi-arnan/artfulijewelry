@@ -865,6 +865,56 @@
       display: block;
     }
 
+    /* Hero carousel (mirrors the 3-slide carousel of the Next.js storefront) */
+    .hero-carousel-slides { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-slide {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.9s var(--ease-soft), visibility 0s linear 0.9s;
+    }
+    .hero-slide.is-active { opacity: 1; visibility: visible; z-index: 1; transition: opacity 0.9s var(--ease-soft); }
+    .hero-slide-scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0.72) 100%);
+    }
+    .hero-carousel-bar {
+      position: absolute; bottom: 24px; left: 24px; right: 24px; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 18px;
+      background: rgba(22, 19, 16, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+    }
+    @media (max-width: 640px) {
+      .hero-carousel-bar { bottom: 16px; left: 16px; right: 16px; padding: 10px 14px; flex-direction: column; align-items: stretch; gap: 10px; }
+    }
+    .hero-carousel-meta { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .hero-carousel-index {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; color: #FFFFFF; white-space: nowrap;
+      padding: 3px 8px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .hero-carousel-desc { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .hero-carousel-title { font-size: 0.875rem; font-weight: 600; color: #FFFFFF; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hero-carousel-sub { font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hero-carousel-controls { display: flex; align-items: center; gap: 14px; flex-shrink: 0; justify-content: flex-end; }
+    .hero-progress-group { display: flex; align-items: center; gap: 6px; }
+    .hero-progress-pill {
+      position: relative; width: 24px; height: 3px; background: rgba(255, 255, 255, 0.22);
+      border: none; cursor: pointer; padding: 0; overflow: hidden;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+    .hero-progress-pill.is-active { width: 40px; background: rgba(255, 255, 255, 0.35); }
+    .hero-progress-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #FFFFFF; }
+    .hero-arrow-group { display: flex; align-items: center; gap: 6px; }
+    .hero-arrow-btn {
+      width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #FFFFFF; cursor: pointer; font-size: 14px; line-height: 1;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .hero-arrow-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
+    .hero-arrow-btn:active { transform: scale(0.92); }
+
     /* ==========================================================================
        TRUST RIBBON: FEATURED IN & TRUSTED BY (Deep Obsidian Architectural Band)
        - Substantial height matching Leedlime reference blueprint
@@ -2492,8 +2542,24 @@
           </div>
 
           <!-- Right Column: Pure Full-Bleed Model Photograph -->
-          <div class="hero-stage-col">
-            <img src="images/lookbook-hero-1.webp" alt="Artfuli Sculptural 18k Gold Vermeil and 925 Silver Lookbook" class="hero-stage-backdrop" id="heroMainImage">
+          <div class="hero-stage-col" id="heroStage" aria-roledescription="carousel" aria-label="Featured lookbook photographs">
+            <div class="hero-carousel-slides" id="heroSlides"></div>
+            <div class="hero-carousel-bar" id="heroBar">
+              <div class="hero-carousel-meta">
+                <span class="hero-carousel-index" id="heroIndex">1 / 1</span>
+                <div class="hero-carousel-desc">
+                  <span class="hero-carousel-title" id="heroSlideTitle"></span>
+                  <span class="hero-carousel-sub" id="heroSlideSub"></span>
+                </div>
+              </div>
+              <div class="hero-carousel-controls">
+                <div class="hero-progress-group" id="heroPills" role="tablist" aria-label="Carousel pagination"></div>
+                <div class="hero-arrow-group">
+                  <button type="button" class="hero-arrow-btn" id="heroPrev" aria-label="Previous photograph">&#8249;</button>
+                  <button type="button" class="hero-arrow-btn" id="heroNext" aria-label="Next photograph">&#8250;</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -4025,6 +4091,7 @@
     // Initial render
     renderCartDrawer();
   </script>
+  <script src="hero-carousel.js"></script>
   <script src="content-loader.js"></script>
 </body>
 </html>

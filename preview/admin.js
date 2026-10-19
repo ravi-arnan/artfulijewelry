@@ -113,10 +113,30 @@
       card("Proof Points (Metallurgy Badges)", "Two certified claims displayed beneath the action buttons.",
         `<div class="grid-2">${get("hero.facts").map((_, i) =>
           fText(`hero.facts.${i}.title`, `Badge ${i + 1} Title`) + fText(`hero.facts.${i}.note`, `Badge ${i + 1} Description`, { rows: 2 })).join("")}</div>`),
-      card("Hero Photography", "High-resolution lookbook plates with masked shutter entrance.",
-        `<div class="grid-2">${fImage("hero.mainImage", "Main Lookbook Photo (Right Stage)")}${fImage("hero.sideImage", "Detail Craft Photo")}
+      renderHeroSlides(),
+      card("Detail Photography", "Secondary craft photograph and its caption.",
+        `<div class="grid-2">${fImage("hero.sideImage", "Detail Craft Photo")}
           ${fText("hero.sideCaption", "Detail Photo Caption", { rows: 2, wide: true })}</div>`)
     ].join("");
+  }
+
+  const MAX_SLIDES = 6;
+  function renderHeroSlides() {
+    const slides = get("hero.slides") || [];
+    const cards = slides.map((s, i) => {
+      const p = `hero.slides.${i}`;
+      const tools = `<div class="card-tools">
+        <button type="button" class="mini-btn" data-action="slide-up" data-index="${i}"${i === 0 ? " disabled" : ""}>Move up</button>
+        <button type="button" class="mini-btn" data-action="slide-down" data-index="${i}"${i === slides.length - 1 ? " disabled" : ""}>Move down</button>
+        <button type="button" class="mini-btn" data-action="slide-remove" data-index="${i}"${slides.length <= 1 ? " disabled" : ""}>Remove</button></div>`;
+      return card(`Slide ${i + 1}: ${esc(s.title || "Untitled")}`, "",
+        `<div class="grid-2">${fText(`${p}.title`, "Slide Title")}${fText(`${p}.subtitle`, "Slide Subtitle")}
+          ${fImage(`${p}.image`, "Slide Photo")}</div>`, tools);
+    }).join("");
+    const add = `<button type="button" class="mini-btn" data-action="slide-add"${slides.length >= MAX_SLIDES ? " disabled" : ""}>Add slide</button>`;
+    const head = card("Hero Carousel", `Full-bleed photographs rotating on the right stage, same as the storefront carousel. ${slides.length} of ${MAX_SLIDES} slides used.`,
+      `<div class="card-tools">${add}</div>`);
+    return head + cards;
   }
 
   /* ---------- 2. Collections ---------- */
@@ -307,6 +327,19 @@
       pendingUploadPath = btn.dataset.path;
       $("#fileInput").value = "";
       $("#fileInput").click();
+    } else if (action.startsWith("slide-")) {
+      const slides = content.hero.slides = content.hero.slides || [];
+      const i = Number(btn.dataset.index);
+      if (action === "slide-add" && slides.length < MAX_SLIDES) {
+        slides.push({ image: "images/lookbook-hero-1.webp", title: "New slide", subtitle: "" });
+      } else if (action === "slide-remove" && slides.length > 1) {
+        slides.splice(i, 1);
+      } else if (action === "slide-up" || action === "slide-down") {
+        const j = action === "slide-up" ? i - 1 : i + 1;
+        if (j < 0 || j >= slides.length) return;
+        [slides[i], slides[j]] = [slides[j], slides[i]];
+      }
+      render();
     } else if (action === "move-up" || action === "move-down") {
       const i = Number(btn.dataset.index);
       const j = action === "move-up" ? i - 1 : i + 1;

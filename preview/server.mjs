@@ -100,6 +100,13 @@ function validateContent(c) {
   for (const [key, s] of Object.entries(c.bench.sizes)) {
     if (typeof s.weightFactor !== "number" || !isFinite(s.weightFactor) || s.weightFactor <= 0) return `bench.sizes.${key}.weightFactor must be a positive number`;
   }
+  if (c.hero.slides !== undefined) {
+    if (!Array.isArray(c.hero.slides) || c.hero.slides.length < 1 || c.hero.slides.length > 6) return "hero.slides must contain 1 to 6 slides";
+    for (const [i, s] of c.hero.slides.entries()) {
+      if (!isObj(s) || typeof s.image !== "string" || !s.image.trim()) return `hero.slides.${i}.image is required`;
+      if (typeof s.title !== "string" || typeof s.subtitle !== "string") return `hero.slides.${i} title and subtitle must be text`;
+    }
+  }
   if (!/^\d{8,15}$/.test(String(c.contact.whatsapp || ""))) return "WhatsApp must be digits only with country code (8 to 15 digits)";
   return null;
 }

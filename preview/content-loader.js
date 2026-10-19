@@ -50,7 +50,12 @@
     text($(".hero-fact-title", el), f.title);
     text($(".caption-note", el), f.note);
   });
-  img($("#heroMainImage"), h.mainImage);
+  if (window.heroCarousel) {
+    const slides = Array.isArray(h.slides) && h.slides.length
+      ? h.slides
+      : (h.mainImage ? [{ image: h.mainImage, title: "", subtitle: "" }] : null);
+    if (slides) window.heroCarousel.set(slides);
+  }
   img($(".hero-secondary-img img"), h.sideImage);
   text($(".hero-side-frame > .caption-note"), h.sideCaption);
 
