@@ -24,8 +24,8 @@ Di bagian atas layar terdapat **Floating Control Bar**:
 1. **Hero Concept Switcher**:
    - `Split Editorial`: Menguji format layout dua kolom (tipografi Cormorant Garamond di kiri + reveal curtain foto lookbook di kanan via GSAP clip-path timeline).
    - `Full-Bleed`: Menguji format sinematik layar penuh dengan zoom lembut (ambient scale-down) dan teks mengambang di tengah.
-2. **Storytelling Switcher (Celuk Heritage)**:
-   - `Parallax`: Menguji kedalaman scroll foto master artisan Celuk dengan efek parallax halus via `ScrollTrigger.scrub`.
+2. **Storytelling Switcher (Balinese Heritage)**:
+   - `Parallax`: Menguji kedalaman scroll foto master artisan Bali dengan efek parallax halus via `ScrollTrigger.scrub`.
    - `Pinned Step`: Menguji efek pinning di mana halaman tertahan sejenak saat poin teknik kriya (Jawan, Cold Forging, Direct Atelier) berpindah fokus.
 3. **Sticky Header Transition**:
    - Menguji transisi header dari transparan menjadi glassmorphic Warm Cream (`#FAF7F2` blur 16px) dengan border halus saat melewati batas hero.

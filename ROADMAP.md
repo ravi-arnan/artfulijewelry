@@ -28,7 +28,7 @@ Rencana kerja bertahap untuk pengembangan platform e-commerce dan editorial stor
   - Scaffolding 10 section terencana:
     1. Sticky Header Nav (approved)
     2. Hero Lookbook Balinese High Jewelry
-    3. Atelier Heritage Narrative (Celuk metallurgy)
+    3. Atelier Heritage Narrative (Balinese metallurgy)
     4. Curated Signature Collections Grid (Rings, Earrings, Pendants, Cuffs)
     5. Material Assay & XRF Transparency Ledger
     6. Master Craftsmen & Lost-Wax Casting Process
@@ -50,7 +50,7 @@ Rencana kerja bertahap untuk pengembangan platform e-commerce dan editorial stor
 - [ ] Galeri foto multi-sudut (*ProductGallery*) dengan thumbnail interaktif.
 - [ ] Selektor material dinamis (`925 Sterling Silver` vs `18k Gold Vermeil`) yang memperbarui SKU dan harga secara instan.
 - [ ] Selektor ukuran cincin dengan modal panduan interaktif (*Ring Sizer Guide Modal*) lengkap dengan tabel konversi milimeter dan diameter.
-- [ ] Accordion spesifikasi teknis: kadar kemurnian logam (XRF Verified), berat gram, dimensi millimeter, dan sertifikasi asal Celuk.
+- [ ] Accordion spesifikasi teknis: kadar kemurnian logam (XRF Verified), berat gram, dimensi millimeter, dan sertifikasi keaslian bengkel Bali.
 - [ ] Dual action buttons: "Add to Bag" (membuka Cart Drawer) dan "Inquire via Concierge" (membuka WhatsApp dengan detail SKU otomatis).
 
 ---

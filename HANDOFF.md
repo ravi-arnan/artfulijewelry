@@ -1,39 +1,43 @@
 # Project Handoff & Session Checkpoint
 
-- **Tanggal & Waktu**: 2026-10-19 02:01 WITA
-- **Branch**: main
+- **Tanggal & Waktu**: 2026-10-19 17:08 WITA
+- **Branch Aktif**: `feat/dual-lang-dual-currency-art-6-art-7` (PR #1 ke `main`)
 - **Tujuan Proyek**: Website e-commerce dan editorial storefront untuk brand perhiasan **Artfuli Jewelry** / **Bali Handmade** (`artfulijewelry.com` / `bali-handmade.com`).
 
 ---
 
 ## 1. Status Terakhir Proyek
 
-1. **Audit & Penyelarasan Copywriting (Berdasarkan Data Asli `bali-handmade.com`)**:
-   - Seluruh istilah non-otentik seperti `hand-forged`, `forged`, `forgings`, dan `Consult Atelier` telah dibersihkan 100% dari seluruh codebase (`opt1/`).
-   - Copywriting kini merefleksikan proses kriya otentik Bali:
-     - Pengecoran presisi (*lost-wax tree casting* dengan mesin impor berkapasitas tinggi).
-     - Kerajinan manik perak handmade (*"Handmade beads are made with soul and patience"*).
-     - Granulasi (*jawan*), kawat filigri (*bun*), ukiran manual, dan *hand-finishing*.
-     - Lapisan emas vermeil tebal standar FTC (100 millionths of an inch emas murni di atas perak 925).
-     - Model harga grosir langsung dari pulau (*wholesale pricing to the public with no reseller license required*).
-   - Tautan kontak, email, dan WhatsApp diselaraskan dengan kanal resmi pemilik: `sales@bali-handmade.com` / `fulinandhina@gmail.com` dan WhatsApp `+62 878-8399-2277` / `+62 812-399-2277`.
+1. **Sprint 1: Dual-Language (ID/EN) & Dual-Currency (IDR/USD) Engine**:
+   - Berhasil mengimplementasikan `LanguageContext` dan `CurrencyContext` dengan dukungan persistensi ganda (`localStorage` dan `document.cookie`).
+   - Kamus terjemahan lengkap di `opt1/locales/en.json` dan `opt1/locales/id.json`.
+   - Komponen terpadu `LocaleCurrencySwitcher` (`EN / ID · USD / IDR`) disematkan pada header desktop dan drawer navigasi mobile.
+   - Perhitungan harga cerdas: prioritas harga diskrit katalog (`priceIdr` & `priceUsd`), dengan fallback konversi dinamis jika data spesifik belum terisi.
 
-2. **Hero Section Editorial Carousel (GSAP)**:
-   - Sesuai permintaan owner, hero carousel diimplementasikan dengan GSAP timeline animasi transisi scale-drift dan progress bar interaktif.
-   - Total slide disesuaikan menjadi **3 slide** (1/3, 2/3, 3/3):
-     - `1 / 3`: *Archival Royal Crown* (Solid 925 Silver & 18k Gold Vermeil)
-     - `2 / 3`: *Granulation Rings & Heavy Cuffs* (Authentic Balinese Metalworking)
-     - `3 / 3`: *Botanical Ear Cuff & Pendant* (Precision 3D CAD & Master Casting)
-   - Dilengkapi fitur: auto-play 5 detik, pause on hover/touch, keyboard navigation (panah kiri/kanan), touch swipe gesture, dan defensive fallback untuk menjamin stabilitas runtime.
+2. **Penyelesaian Zero Layout Shift (0px CLS) pada Header**:
+   - Mengunci lebar slot interaktif pada `.header-cta-group`:
+     - `LocaleCurrencySwitcher`: lebar tetap 168px (`flex-shrink: 0`).
+     - `.header-bag-btn`: lebar tetap 148px (pas rapi untuk `Bag (x)` maupun `Keranjang (x)`).
+     - `.header-cta`: lebar tetap 168px (pas rapi untuk `Custom Order` maupun `Pesanan Kustom`).
+     - Total lebar grup CTA stabil persis di 508px pada kedua bahasa.
+   - Mengunci lebar slot item navigasi `.primary-nav li` (Collections/Koleksi: 104px, Workshop/Bengkel: 136px, Services/Layanan: 68px, Lookbook/Katalog Visual: 104px).
+   - Terverifikasi via pengukuran browser Playwright: pergeseran horizontal (delta shift) antara mode EN dan ID adalah **0 pixel**.
 
-3. **Backend & Database (Turso + Drizzle ORM)**:
-   - Skema database di `opt1/lib/db/schema.ts` terkonfigurasi dengan Turso libSQL (`@libsql/client`).
-   - Berjalan seamless di lokal (`file:local.db`) maupun di cloud Turso dengan kuota free-tier 9 GB.
-   - Unit test suite (`opt1/lib/db/db.test.ts`) 100% hijau via Node.js native test runner.
+3. **Status Git & Pull Request**:
+   - Branch: `feat/dual-lang-dual-currency-art-6-art-7`
+   - Commit: `eaf4831` (`feat(i18n): implement dual-language ID/EN and dual-currency IDR/USD with zero layout shift`)
+   - Pull Request: [PR #1](https://github.com/ravi-arnan/artfulijewelry/pull/1) menuju branch `main`.
+   - Unit test suite: 62 test lulus hijau (100% pass), ESLint 0 error.
 
-4. **Kepatuhan Desain Anti-Slop (TasteSkill v2)**:
-   - File `opt1/app/landing.css` dan `opt1/components/landing/ArtfuliLanding.tsx` lolos audit linter TasteSkill dengan hasil **0 FAIL, 0 WARN**.
-   - Tidak ada elemen tipikal AI slop (tidak ada emoji di antarmuka, tidak ada em dash, tidak ada border neon, pulsing dot, atau layout generik).
+4. **Sinkronisasi Linear Workspace (`artfuli-jewelry`)**:
+   - **ART-6** (Dual-Language ID/EN): status **In Review**, catatan PR #1 tersinkronisasi.
+   - **ART-7** (Dual-Currency IDR/USD): status **In Review**, catatan PR #1 tersinkronisasi.
+   - **ART-21** (Product Catalogue & Collections Showcase): status **In Progress** (Assignee: Ravi Arnan).
+   - **ART-17 & ART-18** (Admin Dashboard & Backoffice Order/Product Management): status **Todo** (Assignee: Chalimus Candra / `chalimuscandra@gmail.com`).
+
+5. **Dokumen Akademik Kerja Praktek (KP)**:
+   - Selesai mengonversi berkas `Form Surat Penentuan Pembimbing KP.pdf` menjadi format Word (`.docx`) dan PDF baru di direktori `Documents`.
+   - Logo Universitas Udayana diperbarui ke versi resmi beresolusi tinggi, serta tanda tangan digital pembimbing (Pak Yogiswara Dharma Putra) telah disematkan presisi dengan latar transparan.
 
 ---
 
@@ -52,16 +56,20 @@
 
 ## 3. Daftar File yang Diubah pada Sesi Ini
 
-- `BRAND_IDENTITY.md`: Pembersihan istilah tempa martil dan penyelarasan ke tradisi silversmithing/filigri.
-- `README.md`: Pembaruan deskripsi ringkas dan metadata arsip legacy `bali-handmade.com`.
+- `opt1/locales/en.json`: Kamus bahasa Inggris untuk header, nav, drawer, dan deskripsi produk.
+- `opt1/locales/id.json`: Kamus bahasa Indonesia dengan penyesuaian istilah "Pesanan Kustom" dan "Keranjang".
+- `opt1/lib/i18n.ts` & `opt1/lib/i18n.test.ts`: Helper terjemahan dan unit test suite i18n.
+- `opt1/lib/currency.ts` & `opt1/lib/currency.test.ts`: Formatter mata uang IDR/USD dan unit test suite currency.
+- `opt1/context/LanguageContext.tsx`: Context provider bahasa dengan penyimpanan ganda localStorage + cookie.
+- `opt1/context/CurrencyContext.tsx`: Context provider mata uang dengan penyimpanan ganda localStorage + cookie.
+- `opt1/components/site/LocaleCurrencySwitcher.tsx`: Komponen switcher interaktif bahasa dan mata uang.
+- `opt1/components/landing/ArtfuliLanding.tsx`: Integrasi switcher, translation hooks pada header, mobile drawer, dan cart drawer.
+- `opt1/app/landing.css`: Penguncian dimensi slot navigasi dan CTA group untuk eliminasi 100% layout shift.
+- `opt1/app/layout.tsx`: Penyertaan LanguageProvider dan CurrencyProvider pada root app layout.
 - `HANDOFF.md`: Pembaruan status checkpoint penutupan sesi.
-- `opt1/app/landing.css`: Penyesuaian layout dan styling GSAP carousel hero section.
-- `opt1/app/layout.tsx`: Penyelarasan metadata SEO dan OpenGraph tanpa istilah false.
-- `opt1/components/landing/ArtfuliLanding.tsx`: Pembersihan copy non-otentik, implementasi GSAP carousel 3 slide, update kontak WhatsApp/email, dan jaminan refund 7 hari.
-- `opt1/lib/data.ts`: Penyelarasan metadata deskripsi produk katalog.
 
 ---
 
 ## 4. Next Action (Langkah Selanjutnya)
 
-Lanjutkan implementasi alur checkout dan integrasi Midtrans Payment Gateway (Snap API & Webhook Simulator) untuk pengujian pembayaran ritel end-to-end.
+Lanjutkan pengerjaan **ART-21** (*Product Catalogue & Collections Showcase*) pada storefront untuk memuat katalog perhiasan kriya Bali berbasis data produk Turso libSQL.

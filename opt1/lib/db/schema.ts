@@ -21,7 +21,7 @@ export interface CartItemData {
 /**
  * 1. Products Table
  * Mendukung dual-currency (price_idr dan price_usd), inventaris stok,
- * dan metadata perhiasan Celuk (berat gram untuk ongkir, material, foto).
+ * dan metadata perhiasan Bali (berat gram untuk ongkir, material, foto).
  */
 export const products = sqliteTable("products", {
   id: text("id").primaryKey(),

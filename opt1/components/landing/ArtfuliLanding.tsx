@@ -72,7 +72,7 @@ const catalogData: Record<string, CatalogItem> = {
   signet: {
     title: "Subak Architectural Signet",
     code: "AJ-RNG-014",
-    desc: "Handcrafted in Celuk, Bali with solid inner gallery.",
+    desc: "Handcrafted in Bali with solid inner gallery.",
     img: "/images/bench-signet.webp",
     baseWeight: 11.4,
     silverPrice: 165,
@@ -143,10 +143,10 @@ const ringSizeMetrics: Record<string, { dia: string; circ: string; uk: string; e
 const assaySpecifications = {
   silver: {
     title: "92.5% Pure Silver + 7.5% Oxygen-Free Copper",
-    desc: "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Sukawati crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
+    desc: "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Bali workshop crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
     method: "Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%",
     norm: "89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.",
-    status: "Status: XRF Batch Verified in Celuk",
+    status: "Status: XRF Batch Verified in Atelier",
   },
   vermeil: {
     title: "2.5 to 3.0 Microns Solid 18k Gold over 925 Silver",
@@ -208,7 +208,7 @@ export function ArtfuliLanding() {
   // Bespoke 3D CAD State
   const [briefType, setBriefType] = useState("Signet Ring with Intaglio Engraving");
   const [briefMetal, setBriefMetal] = useState("925 Sterling Silver");
-  const [briefNotes, setBriefNotes] = useState("Solid inner gallery, oxidized Celuk jawan granulation around bezel.");
+  const [briefNotes, setBriefNotes] = useState("Solid inner gallery, oxidized traditional jawan granulation around bezel.");
 
   // Drawer & Modals State
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -646,7 +646,7 @@ export function ArtfuliLanding() {
   const currentPrice = currency === "IDR" ? currentPriceIdr : currentPriceUsd;
   const purityLabel = isVermeil ? "18k Au / 925 Ag" : "92.5% Ag";
   const alloyFullTitle = isVermeil ? "18k Gold Vermeil (2.5 Microns)" : "925 Sterling Silver";
-  const batchCode = isVermeil ? "#CELUK-2026-Au18k" : "#CELUK-2026-Ag925";
+  const batchCode = isVermeil ? "#BALI-2026-Au18k" : "#BALI-2026-Ag925";
 
   const benchWaText = encodeURIComponent(
     `Hello Bali Handmade / ArtFuli Workshop, I would like to order the ${pieceData.title} (${pieceData.code}) in ${alloyFullTitle}, calibrated to Size US ${benchSize} (${cal.circumference} circumference, ${computedWeight}g). Price: ${formatPrice(currentPrice)} (${currency}).`
@@ -763,7 +763,7 @@ export function ArtfuliLanding() {
   };
 
   // Bespoke Brief WhatsApp & Mailto
-  const bespokeBriefText = `Hello Bali Handmade / ArtFuli Celuk Workshop, I am inquiring about a custom ${briefType} in ${briefMetal}. Specifications: ${briefNotes}`;
+  const bespokeBriefText = `Hello Bali Handmade / ArtFuli Workshop, I am inquiring about a custom ${briefType} in ${briefMetal}. Specifications: ${briefNotes}`;
   const bespokeWaUrl = `https://wa.me/6287883992277?text=${encodeURIComponent(bespokeBriefText)}`;
   const bespokeEmailUrl = `mailto:sales@bali-handmade.com?subject=${encodeURIComponent("Custom CAD Inquiry: " + briefType)}&body=${encodeURIComponent(bespokeBriefText)}`;
 
@@ -921,7 +921,7 @@ export function ArtfuliLanding() {
                         <span className="mega-link-title">Wire Jewellery</span>
                         <span className="mega-badge">Heritage</span>
                       </div>
-                      <span className="mega-link-desc">Intricate Celuk hand-twisted filigree</span>
+                      <span className="mega-link-desc">Intricate Balinese hand-twisted filigree</span>
                     </a>
                   </li>
                 </ul>
@@ -985,7 +985,7 @@ export function ArtfuliLanding() {
                   <li>
                     <a href="#heritage" className="mega-link-item" onClick={() => setIsMegaMenuOpen(false)}>
                       <div className="mega-link-row">
-                        <span className="mega-link-title">Signature Celuk Motifs</span>
+                        <span className="mega-link-title">Signature Bali Motifs</span>
                       </div>
                       <span className="mega-link-desc">Granulation, bun, &amp; jawan masterworks</span>
                     </a>
@@ -1024,9 +1024,9 @@ export function ArtfuliLanding() {
                     />
                     <span className="mega-featured-tag">Editorial Lookbook</span>
                   </div>
-                  <h4 className="mega-featured-title">The Celuk High Jewelry Series</h4>
+                  <h4 className="mega-featured-title">The Heritage Fine Jewelry Series</h4>
                   <p className="mega-featured-desc">
-                    Handcrafted sterling silver and 18k gold vermeil creations photographed in Gianyar.
+                    Handcrafted sterling silver and 18k gold vermeil creations photographed in Bali.
                   </p>
                   <span className="mega-featured-cta">
                     <span>Explore Lookbook</span>
@@ -1120,7 +1120,7 @@ export function ArtfuliLanding() {
                   </li>
                   <li>
                     <a href="#heritage" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>Signature Celuk Motifs</span>
+                      <span>Signature Bali Motifs</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
@@ -1144,7 +1144,7 @@ export function ArtfuliLanding() {
                 <ul className="mobile-nav-links">
                   <li>
                     <a href="#heritage" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                      <span>Celuk Workshop &amp; Craft</span>
+                      <span>Bali Workshop &amp; Craft</span>
                       <ArrowRight style={{ width: 14, height: 14 }} />
                     </a>
                   </li>
@@ -1185,11 +1185,11 @@ export function ArtfuliLanding() {
               <div className="hero-copy-col">
                 <h1 className="display-hero lines" id="hero-heading">
                   <span className="line"><span>Handmade in</span></span>
-                  <span className="line"><span>Celuk, Bali.</span></span>
+                  <span className="line"><span>Bali, Indonesia.</span></span>
                 </h1>
 
                 <p className="hero-subtext" data-hero-reveal>
-                  Solid 925 sterling silver, FTC standard 24k and 18k gold vermeil, and cast brass direct from our Celuk, Bali workshop. Established 2004.
+                  Solid 925 sterling silver, FTC standard 24k and 18k gold vermeil, and cast brass direct from our Bali workshop. Established 2004.
                 </p>
 
                 <div className="hero-actions" data-hero-reveal>
@@ -1216,7 +1216,7 @@ export function ArtfuliLanding() {
                 <div className="hero-facts" data-hero-reveal>
                   <div>
                     <div className="hero-fact-title">Solid 925 Silver</div>
-                    <p className="caption-note">Genuine sterling silver hand-crafted by Celuk artisans with authentic granulation.</p>
+                    <p className="caption-note">Genuine sterling silver hand-crafted by Balinese artisans with authentic granulation.</p>
                   </div>
                   <div>
                     <div className="hero-fact-title">FTC Vermeil Standard</div>
@@ -1339,7 +1339,7 @@ export function ArtfuliLanding() {
                   {/* Set 1 */}
                   <div className="trust-logo-item">
                     <span className="logo-bold">EST. 2004</span>
-                    <span className="logo-sub">20+ Years in Celuk</span>
+                    <span className="logo-sub">20+ Years in Bali</span>
                   </div>
                   <div className="trust-logo-item">
                     <span className="logo-serif">50+ Countries</span>
@@ -1373,7 +1373,7 @@ export function ArtfuliLanding() {
                   {/* Set 2 (Identical for continuous infinite marquee loop) */}
                   <div className="trust-logo-item">
                     <span className="logo-bold">EST. 2004</span>
-                    <span className="logo-sub">20+ Years in Celuk</span>
+                    <span className="logo-sub">20+ Years in Bali</span>
                   </div>
                   <div className="trust-logo-item">
                     <span className="logo-serif">50+ Countries</span>
@@ -1409,7 +1409,7 @@ export function ArtfuliLanding() {
             <div className="trust-ruler-grid" aria-hidden="true"></div>
           </section>
 
-          {/* SECTION 3: WORKSHOP HERITAGE NARRATIVE (Celuk Metallurgy) */}
+          {/* SECTION 3: WORKSHOP HERITAGE NARRATIVE (Balinese Metallurgy) */}
           <section className="heritage-section" id="heritage" aria-labelledby="heritage-heading">
             <div className="container">
               <div className="heritage-layout">
@@ -1417,7 +1417,7 @@ export function ArtfuliLanding() {
                   <div className="heritage-frame">
                     <img
                       src="/images/atelier-heritage.webp"
-                      alt="Master silversmith shaping precious metal in Celuk Village, Bali"
+                      alt="Master silversmith shaping precious metal in Bali, Indonesia"
                       id="heritageParallaxImg"
                     />
                   </div>
@@ -1425,16 +1425,16 @@ export function ArtfuliLanding() {
 
                 <div className="heritage-content-column">
                   <span className="caption-note" style={{ color: "var(--brand-accent)", fontWeight: 600, letterSpacing: "0.08em" }}>
-                    ESTABLISHED 2004 · CELUK, BALI
+                    ESTABLISHED 2004 · BALI, INDONESIA
                   </span>
                   <h2 className="section-heading" id="heritage-heading" style={{ marginTop: 12, marginBottom: 24 }}>
                     Two Decades of Authentic Balinese Metallurgy.
                   </h2>
                   <p className="body-copy">
-                    Established in 2004 in Celuk Village, Bali Handmade (ArtFuli Jewellery) began as a dedicated artisan workshop producing solid 925 sterling silver beads, spacers, clasps, and fine jewelry. Over two decades, our workshop has grown into a comprehensive manufacturing house with dual in-house casting lines.
+                    Established in 2004 in Bali, Bali Handmade (ArtFuli Jewellery) began as a dedicated artisan workshop producing solid 925 sterling silver beads, spacers, clasps, and fine jewelry. Over two decades, our workshop has grown into a comprehensive manufacturing house with dual in-house casting lines.
                   </p>
                   <blockquote className="atelier-statement">
-                    Every handmade piece has its own soul and story, crafted with patience by artisans whose families have shaped precious metals in Celuk for generations.
+                    Every handmade piece has its own soul and story, crafted with patience by artisans whose families have shaped precious metals in Bali for generations.
                   </blockquote>
                   <p className="body-copy">
                     We offer direct island wholesale and retail pricing to everyone, from individual jewelry lovers and hobbyists to boutique studio owners in over 50 countries worldwide, with no reseller license required.
@@ -1443,7 +1443,7 @@ export function ArtfuliLanding() {
                   <div className="heritage-ledger" id="heritageCounters">
                     <div className="ledger-entry">
                       <div className="metric-figure" data-count="2004">2004</div>
-                      <p className="caption-note">Founded in Celuk Village, the heart of Bali silversmithing.</p>
+                      <p className="caption-note">Founded in Bali, dedicated to authentic silversmithing and casting excellence.</p>
                     </div>
                     <div className="ledger-entry">
                       <div className="metric-figure" data-count="20" data-suffix="+ Years">20+ Years</div>
@@ -1724,7 +1724,7 @@ export function ArtfuliLanding() {
                     Radical Material Transparency
                   </h2>
                   <p className="body-copy">
-                    Fine jewelry requires scientific proof, not marketing adjectives. Every melt batch in our Celuk foundry undergoes non-destructive X-Ray Fluorescence (XRF) analysis prior to hallmarking.
+                    Fine jewelry requires scientific proof, not marketing adjectives. Every melt batch in our foundry undergoes non-destructive X-Ray Fluorescence (XRF) analysis prior to hallmarking.
                   </p>
                   <p className="caption-note">
                     Each acquired piece ships with its printed XRF batch card recording silver fineness, gold micron thickness, and zero-allergen compliance.
@@ -1840,7 +1840,7 @@ export function ArtfuliLanding() {
               <div className="lookbook-header" data-reveal>
                 <div>
                   <h2 className="section-heading" id="lookbook-heading">
-                    The 2026 Celuk Archive Lookbook
+                    The 2026 Archive Lookbook
                   </h2>
                 </div>
                 <p className="body-copy">
@@ -1891,7 +1891,7 @@ export function ArtfuliLanding() {
                     Custom Design &amp; 3D Casting
                   </h2>
                   <p className="body-copy" style={{ marginTop: 16, marginBottom: 28 }}>
-                    Whether modifying an archival Celuk master or drafting a 3D CAD prototype from your napkin sketch, our smiths and digital modelers bring custom heirloom designs to fruition.
+                    Whether modifying an archival master or drafting a 3D CAD prototype from your napkin sketch, our smiths and digital modelers bring custom heirloom designs to fruition.
                   </p>
 
                   <div className="cad-visual-pair">
@@ -1907,7 +1907,7 @@ export function ArtfuliLanding() {
 
                     <div className="cad-card">
                       <div className="cad-photo-box">
-                        <img src="/images/cad-printing.jpg" alt="High-Resolution Wax 3D Printing for Fine Jewelry in Celuk" />
+                        <img src="/images/cad-printing.jpg" alt="High-Resolution Wax 3D Printing for Fine Jewelry in Bali" />
                       </div>
                       <h3 className="subhead">2. High-Res Wax Printing</h3>
                       <p className="caption-note">
@@ -1999,7 +1999,7 @@ export function ArtfuliLanding() {
                     Quality Guarantee &amp; Worldwide Care
                   </h2>
                   <p className="body-copy" style={{ marginTop: 20 }}>
-                    Every piece leaving our Celuk workshop represents over 20 years of Balinese metalsmithing integrity. We stand behind our craftsmanship with direct manufacturer guarantees.
+                    Every piece leaving our workshop represents over 20 years of Balinese metalsmithing integrity. We stand behind our craftsmanship with direct manufacturer guarantees.
                   </p>
                 </div>
 
@@ -2049,7 +2049,7 @@ export function ArtfuliLanding() {
                   />
                 </div>
                 <p className="brand-summary">
-                  ArtFuli Jewellery &amp; Manufacturer (Bali Handmade). Established in 2004 in Celuk Village, Bali. Professional fine jewelry manufacturing in solid 925 sterling silver, gold vermeil, brass, and bespoke 3D casting services.
+                  ArtFuli Jewellery &amp; Manufacturer (Bali Handmade). Established in 2004 in Bali, Indonesia. Professional fine jewelry manufacturing in solid 925 sterling silver, gold vermeil, brass, and bespoke 3D casting services.
                 </p>
                 <div className="brand-socials">
                   <a href="https://www.instagram.com/artfulijewelry/" target="_blank" rel="noopener noreferrer" className="brand-social-link">
@@ -2084,11 +2084,11 @@ export function ArtfuliLanding() {
               <div>
                 <h2 className="directory-col-title">Our Workshop</h2>
                 <ul className="directory-links">
-                  <li><a href="#heritage">Heritage of Celuk</a></li>
+                  <li><a href="#heritage">Workshop Heritage</a></li>
                   <li><a href="#casting">Master Silversmiths</a></li>
                   <li><a href="#bespoke">Custom 3D CAD Modeling</a></li>
                   <li><a href="#assay">Traceable Silver and Gold</a></li>
-                  <li><a href="#heritage">Sukawati Workshop</a></li>
+                  <li><a href="#heritage">Bali Workshop</a></li>
                   <li><a href="#warranty">Provenance Archive</a></li>
                 </ul>
               </div>
@@ -2110,7 +2110,7 @@ export function ArtfuliLanding() {
             {/* Utility Row */}
             <div className="utility-bar">
               <div>
-                <span>© 2004 - 2026 Bali Handmade / Artfuli Jewelry. Celuk Village, Sukawati, Gianyar, Bali, Indonesia.</span>
+                <span>© 2004 - 2026 Bali Handmade (ArtFuli Jewellery). Bali, Indonesia.</span>
               </div>
               <div className="utility-actions">
                 <span>Certified 925 Ag · FTC Standard Vermeil</span>
@@ -2257,7 +2257,7 @@ export function ArtfuliLanding() {
             wishlistItems.length === 0 ? (
               <div className="drawer-empty">
                 <p className="subhead" style={{ fontSize: "1.25rem", marginBottom: 8 }}>No Saved Pieces Yet</p>
-                <p className="caption-note">Save your favorite Celuk heirloom pieces to inspect or commission later.</p>
+                <p className="caption-note">Save your favorite heirloom pieces to inspect or commission later.</p>
               </div>
             ) : (
               wishlistItems.map((it, idx) => (
@@ -2304,8 +2304,8 @@ export function ArtfuliLanding() {
               <span style={{ color: "var(--brand-accent)", fontWeight: 500 }}>Complimentary</span>
             </div>
             <div className="drawer-summary-row">
-              <span>Celuk Assay Certification</span>
-              <span>Included (#CELUK-2026)</span>
+              <span>Atelier Assay Certification</span>
+              <span>Included (#BALI-2026)</span>
             </div>
             <div className="drawer-summary-total">
               <span>Estimated Total</span>
@@ -2349,7 +2349,7 @@ export function ArtfuliLanding() {
             <div>
               <h2 className="subhead" style={{ fontSize: "1.6rem", marginBottom: 6 }}>Ring Sizing Guide &amp; Calibration</h2>
               <p className="caption-note">
-                Calibrated to international millimeter circumference and US sizing standards. Celuk rings feature comfort-fit contoured inner galleries.
+                Calibrated to international millimeter circumference and US sizing standards. Our rings feature comfort-fit contoured inner galleries.
               </p>
             </div>
             <button
