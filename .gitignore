@@ -49,3 +49,8 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# admin console runtime backup and uploads
+preview/data/content.backup.json
+preview/images/uploads/*
+!preview/images/uploads/.gitkeep

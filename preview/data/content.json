@@ -1,0 +1,234 @@
+{
+  "announcement": {
+    "enabled": false,
+    "text": "Worldwide insured shipping on every atelier commission.",
+    "linkLabel": "Consult the atelier",
+    "linkUrl": "#bespoke"
+  },
+  "hero": {
+    "line1": "Hand-forged in",
+    "line2": "Denpasar, Bali.",
+    "subtext": "Heirloom 925 sterling silver and 2.5-micron 18k gold vermeil, forged in Sukawati and verified by X-ray spectrometry.",
+    "primaryCta": "Explore Collections",
+    "secondaryCta": "Inspect Alloy & Weight",
+    "facts": [
+      {
+        "title": "92.5% Ag Purity",
+        "note": "Nickel-free sterling silver alloyed with pure oxygen-free copper."
+      },
+      {
+        "title": "2.5 Micron 18k Au",
+        "note": "Heavy gold vermeil layering, 2.5 times thicker than standard plating."
+      }
+    ],
+    "slides": [
+      {
+        "image": "images/lookbook-hero-1.webp",
+        "title": "Archival Royal Crown",
+        "subtitle": "Solid 925 Silver & 18k Gold Vermeil"
+      },
+      {
+        "image": "images/lookbook-plate-1.webp",
+        "title": "Granulation Rings & Heavy Cuffs",
+        "subtitle": "Authentic Balinese Metalworking"
+      },
+      {
+        "image": "images/lookbook-plate-2.webp",
+        "title": "Botanical Ear Cuff & Pendant",
+        "subtitle": "Precision 3D CAD & Master Casting"
+      }
+    ],
+    "mainImage": "images/lookbook-hero-1.webp",
+    "sideImage": "images/lookbook-detail.webp",
+    "sideCaption": "Archive Plate, Bali Workshop. Solid 925 silver collar and signet forms finished with natural river agate burnishing."
+  },
+  "heritage": {
+    "heading": "Centuries of Balinese metallurgy.",
+    "subtext": "For generations, the silversmithing families of Bali have guarded the techniques of precious metalwork: jawan (micro-granulation), bun (hand-drawn wire filigree), and cold-hammered structural forging.",
+    "statement": "We reject hollow factory stamping. Every Artfuli piece carries the dense weight of hand-forged metal and the direct signature of the smith who shaped it.",
+    "note": "By operating our own private foundry and finishing benches in Bali, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.",
+    "years": 100,
+    "artisans": 32,
+    "archiveCount": 4550,
+    "image": "images/atelier-heritage.webp",
+    "caption": "Hand-soldering sterling silver granules over a coconut-shell charcoal brazier."
+  },
+  "collections": {
+    "heading": "Signature Atelier Editions",
+    "intro": "Four foundational silhouettes drawn from our 4,550-piece archive, available in solid 925 sterling silver and heavy 18k gold vermeil.",
+    "items": [
+      {
+        "benchKey": "signet",
+        "title": "Rings and Bands",
+        "meta": "48 Archival Designs · 6.4g to 18.2g",
+        "description": "Heavy signets, granulated stacking bands, and bezel-set cabochon rings cold-forged for daily structural permanence.",
+        "image": "images/edition-rings.webp"
+      },
+      {
+        "benchKey": "pendant",
+        "title": "Chains and Pendants",
+        "meta": "29 Archival Designs · 11.0g to 34.5g",
+        "description": "Hand-sculpted botanical collars, raw gemstone druzy settings, and talismanic pendants cast from solid precious metal ingots.",
+        "image": "images/edition-pendants.webp"
+      },
+      {
+        "benchKey": "earrings",
+        "title": "Sculptural Earrings",
+        "meta": "36 Archival Designs · 4.8g to 14.0g",
+        "description": "Balanced architectural drops, botanical frames, and ear cuffs engineered with hypoallergenic solid sterling posts.",
+        "image": "images/edition-earrings.webp"
+      },
+      {
+        "benchKey": "cuff",
+        "title": "Cuffs and Bangles",
+        "meta": "22 Archival Designs · 24.0g to 62.0g",
+        "description": "Substantial open-shank wrist cuffs, woven wire armlets, and bezel-set heirloom bangles tension-forged to retain their form.",
+        "image": "images/edition-cuffs.webp"
+      }
+    ]
+  },
+  "bench": {
+    "pieces": {
+      "signet": {
+        "label": "Subak Signet Ring",
+        "title": "Subak Architectural Signet",
+        "code": "AJ-RNG-014",
+        "desc": "Hand-forged in Bali with solid inner gallery.",
+        "img": "images/bench-signet.webp",
+        "baseWeight": 11.4,
+        "silverPrice": 165,
+        "vermeilPrice": 215
+      },
+      "earrings": {
+        "label": "Jawan Botanical Drops",
+        "title": "Jawan Botanical Drop Earrings",
+        "code": "AJ-EAR-028",
+        "desc": "Sculptural openwork gold-vermeil drops with carved floral inlay.",
+        "img": "images/bench-earrings.webp",
+        "baseWeight": 8.6,
+        "silverPrice": 145,
+        "vermeilPrice": 190
+      },
+      "pendant": {
+        "label": "Amethyst Druzy Collar",
+        "title": "Amethyst Druzy & Botanical Collar",
+        "code": "AJ-PND-009",
+        "desc": "Lost-wax botanical collar set with raw crystalline amethyst druzy.",
+        "img": "images/bench-pendant.webp",
+        "baseWeight": 22.8,
+        "silverPrice": 240,
+        "vermeilPrice": 310
+      },
+      "cuff": {
+        "label": "Klotok Heavy Cuff",
+        "title": "Klotok Heavy Wrist Cuff",
+        "code": "AJ-CUF-004",
+        "desc": "Cold-hammered solid ingot cuff with river-agate burnished edges.",
+        "img": "images/bench-cuff.webp",
+        "baseWeight": 38.5,
+        "silverPrice": 320,
+        "vermeilPrice": 410
+      }
+    },
+    "sizes": {
+      "5": {
+        "diameter": "15.7 mm",
+        "circumference": "49.3 mm",
+        "weightFactor": 0.94
+      },
+      "6": {
+        "diameter": "16.5 mm",
+        "circumference": "51.9 mm",
+        "weightFactor": 0.97
+      },
+      "7": {
+        "diameter": "17.3 mm",
+        "circumference": "54.4 mm",
+        "weightFactor": 1
+      },
+      "8": {
+        "diameter": "18.1 mm",
+        "circumference": "57.0 mm",
+        "weightFactor": 1.04
+      },
+      "9": {
+        "diameter": "18.9 mm",
+        "circumference": "59.5 mm",
+        "weightFactor": 1.08
+      },
+      "10": {
+        "diameter": "19.8 mm",
+        "circumference": "62.1 mm",
+        "weightFactor": 1.12
+      }
+    }
+  },
+  "assay": {
+    "silver": {
+      "title": "92.5% Pure Silver + 7.5% Oxygen-Free Copper",
+      "desc": "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our atelier crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
+      "method": "Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%",
+      "norm": "89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.",
+      "status": "Status: XRF Batch Verified in Atelier"
+    },
+    "vermeil": {
+      "title": "2.5 to 3.0 Microns Solid 18k Gold over 925 Silver",
+      "desc": "Our vermeil pieces undergo multi-stage electro-bonding of 18k solid yellow gold over a solid 925 sterling silver core, exceeding FTC vermeil thickness requirements for heirloom longevity.",
+      "method": "Verification Protocol: X-Ray Fluorescence Coating Thickness Gauge · Minimum 2.5 µm",
+      "norm": "0.1 to 0.5 micron flash gold electroplate over brass or mystery base metal.",
+      "status": "Status: 2.5+ Micron Thickness Certified"
+    },
+    "hypoallergenic": {
+      "title": "100% Free of Nickel, Lead, and Cadmium",
+      "desc": "Every earring post, clasp, and ring shank is formulated without nickel, lead, or cadmium brighteners, making every Artfuli creation safe for sensitive skin and continuous daily wear.",
+      "method": "Verification Protocol: EN 1811 Bio-Release Assay & Full Elemental XRF Scan",
+      "norm": "Nickel undercoat frequently applied beneath thin gold plating as a cheap leveler.",
+      "status": "Status: EN 1811 Hypoallergenic Passed"
+    },
+    "solder": {
+      "title": "High-Fineness Silver and 18k Gold Hard Solder",
+      "desc": "Traditional Balinese granulation requires high-temperature eutectic fusing. We formulate our own hard solders matching the karat and fineness of the parent metal so joints never discolor.",
+      "method": "Verification Protocol: Sukawati Foundry Assay Log · Metallurgical Joint Inspection",
+      "norm": "Low-melting zinc and tin repair solder that oxidizes dark grey over time.",
+      "status": "Status: Eutectic Hard-Solder Verified"
+    }
+  },
+  "lookbook": {
+    "heading": "Visual Archive & Daylight Plates",
+    "intro": "Photographed in natural tropical daylight across Gianyar, showcasing the interplay of raw volcanic stone, linen, and high-karat gold vermeil.",
+    "plates": [
+      {
+        "title": "Tirta Empul Sculptural Collar",
+        "caption": "Hand-forged collar with raw crystalline stone setting. Photographed at Tampaksiring sacred springs.",
+        "image": "images/lookbook-hero-2.webp"
+      },
+      {
+        "title": "Stacked Jawan Signets",
+        "caption": "Architectural signet rings paired with traditional Balinese granulated guard bands. Net weight: 16.4 grams.",
+        "image": "images/lookbook-plate-1.webp"
+      },
+      {
+        "title": "Sukawati Vessel Pendant",
+        "caption": "Lost-wax cast hollow-form vessel pendant worn on hand-braided solid sterling foxtail chain.",
+        "image": "images/lookbook-plate-2.webp"
+      }
+    ]
+  },
+  "guarantee": {
+    "headline": "Provenance and 100-Year Care",
+    "subtext": "Every piece that leaves our Bali workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.",
+    "warrantyTitle": "100-Year Structural Guarantee",
+    "warrantyDesc": "Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our workshop repairs or re-forges the piece free of charge.",
+    "recycledTitle": "Recycled Precious Metals",
+    "recycledDesc": "We refine and alloy certified recycled Indonesian silver and gold granules in-house, reducing primary mining impact while maintaining 99.9% base bullion purity prior to alloying.",
+    "renewalTitle": "Vermeil Renewal Service",
+    "renewalDesc": "Every collector receives lifetime access to ultrasonic cleaning, river-agate repolishing, and at-cost 2.5-micron 18k gold re-vermeil servicing at our Bali atelier."
+  },
+  "contact": {
+    "whatsapp": "6281234567890",
+    "email": "care@artfulijewelry.com",
+    "address": "© 2026 Artfuli Jewelry Atelier. Bali, Indonesia.",
+    "instagram": "https://instagram.com/artfulijewelry",
+    "facebook": "https://facebook.com/artfulijewelry"
+  }
+}
