@@ -29,7 +29,7 @@
     },
     heritage: {
       crumb: "Heritage & Craft Story",
-      title: "Celuk Heritage Narrative & Figures",
+      title: "Balinese Heritage Narrative & Figures",
       sub: "Historical storytelling of Balinese metallurgy, workshop blockquote statement, animated counter figures, and foundry photography.",
       render: renderHeritage
     },
@@ -42,7 +42,7 @@
     lookbook: {
       crumb: "Editorial Lookbook",
       title: "Editorial Lookbook Gallery",
-      sub: "High-resolution triptych plates photographed in tropical Gianyar daylight across volcanic stone and natural textiles.",
+      sub: "High-resolution triptych plates photographed in tropical Bali daylight across volcanic stone and natural textiles.",
       render: renderLookbook
     },
     guarantee: {
@@ -54,7 +54,7 @@
     contact: {
       crumb: "Contact & Concierge",
       title: "Client Care & Atelier Footer",
-      sub: "Direct WhatsApp concierge number (updates all buttons across the entire site), official inquiry email, and Celuk workshop address.",
+      sub: "Direct WhatsApp concierge number (updates all buttons across the entire site), official inquiry email, and atelier address.",
       render: renderContact
     }
   };
@@ -178,7 +178,7 @@
   /* ---------- 4. Heritage & Narrative ---------- */
   function renderHeritage() {
     return [
-      card("Atelier Metallurgy Story", "Historical narrative celebrating centuries of Celuk silversmithing.",
+      card("Atelier Metallurgy Story", "Historical narrative celebrating centuries of Balinese silversmithing.",
         `<div class="grid-2">${fText("heritage.heading", "Section Title", { wide: true })}
           ${fText("heritage.subtext", "First Paragraph (Historical Background)", { rows: 3, wide: true })}
           ${fText("heritage.statement", "Atelier Manifesto Blockquote", { rows: 3, wide: true, hint: "Highlighted in the warm stone callout block." })}
@@ -187,7 +187,7 @@
         `<div class="grid-3">${fNum("heritage.years", "Centuries / Years Figure", { hint: "Target figure (e.g. 100)." })}
           ${fNum("heritage.artisans", "Master Artisans Figure", { hint: "Target figure (e.g. 32)." })}
           ${fNum("heritage.archiveCount", "Archival Catalog Count", { hint: "Target figure (e.g. 4550)." })}</div>`),
-      card("Foundry Photography", "Photograph of Sukawati brazier smithing.",
+      card("Foundry Photography", "Photograph of Balinese brazier smithing.",
         `<div class="grid-2">${fImage("heritage.image", "Artisan Workshop Photo")}${fText("heritage.caption", "Photo Caption", { rows: 2, wide: true })}</div>`)
     ].join("");
   }

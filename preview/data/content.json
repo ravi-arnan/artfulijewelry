@@ -40,13 +40,13 @@
     ],
     "mainImage": "images/lookbook-hero-1.webp",
     "sideImage": "images/lookbook-detail.webp",
-    "sideCaption": "Archive Plate, Celuk Workshop. Solid 925 silver collar and signet forms finished with natural river agate burnishing."
+    "sideCaption": "Archive Plate, Bali Workshop. Solid 925 silver collar and signet forms finished with natural river agate burnishing."
   },
   "heritage": {
-    "heading": "Centuries of Celuk metallurgy.",
-    "subtext": "For over a century, the smithing families of Celuk Village have guarded the techniques of Balinese precious metalwork: jawan (micro-granulation), bun (hand-drawn wire filigree), and cold-hammered structural forging.",
+    "heading": "Centuries of Balinese metallurgy.",
+    "subtext": "For generations, the silversmithing families of Bali have guarded the techniques of precious metalwork: jawan (micro-granulation), bun (hand-drawn wire filigree), and cold-hammered structural forging.",
     "statement": "We reject hollow factory stamping. Every Artfuli piece carries the dense weight of hand-forged metal and the direct signature of the smith who shaped it.",
-    "note": "By operating our own private foundry and finishing benches in Sukawati, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.",
+    "note": "By operating our own private foundry and finishing benches in Bali, we eliminate luxury distributor markups while guaranteeing fair artisan remuneration and complete metallurgical traceability.",
     "years": 100,
     "artisans": 32,
     "archiveCount": 4550,
@@ -93,7 +93,7 @@
         "label": "Subak Signet Ring",
         "title": "Subak Architectural Signet",
         "code": "AJ-RNG-014",
-        "desc": "Hand-forged in Celuk, Bali with solid inner gallery.",
+        "desc": "Hand-forged in Bali with solid inner gallery.",
         "img": "images/bench-signet.webp",
         "baseWeight": 11.4,
         "silverPrice": 165,
@@ -166,10 +166,10 @@
   "assay": {
     "silver": {
       "title": "92.5% Pure Silver + 7.5% Oxygen-Free Copper",
-      "desc": "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our Sukawati crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
+      "desc": "We alloy pure 999 silver bullion exclusively with electrolytic oxygen-free copper in our atelier crucibles. This prevents fire-scale porosity and delivers higher tensile hardness than commercial scrap silver.",
       "method": "Verification Protocol: Olympus Vanta XRF Spectrometer · Batch Tolerance +/- 0.05%",
       "norm": "89% to 92% mixed reclaimed scrap alloyed with brass and de-oxidizing silicon additives.",
-      "status": "Status: XRF Batch Verified in Celuk"
+      "status": "Status: XRF Batch Verified in Atelier"
     },
     "vermeil": {
       "title": "2.5 to 3.0 Microns Solid 18k Gold over 925 Silver",
@@ -216,9 +216,9 @@
   },
   "guarantee": {
     "headline": "Provenance and 100-Year Care",
-    "subtext": "Every piece that leaves our Sukawati workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.",
+    "subtext": "Every piece that leaves our Bali workshop is built to outlive its first owner. We back our metallurgy with transparent sourcing and lifetime structural care.",
     "warrantyTitle": "100-Year Structural Guarantee",
-    "warrantyDesc": "Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our Celuk workshop repairs or re-forges the piece free of charge.",
+    "warrantyDesc": "Should any Artfuli clasp, shank, or bezel setting experience a structural fault under normal wear, our workshop repairs or re-forges the piece free of charge.",
     "recycledTitle": "Recycled Precious Metals",
     "recycledDesc": "We refine and alloy certified recycled Indonesian silver and gold granules in-house, reducing primary mining impact while maintaining 99.9% base bullion purity prior to alloying.",
     "renewalTitle": "Vermeil Renewal Service",
@@ -227,7 +227,7 @@
   "contact": {
     "whatsapp": "6281234567890",
     "email": "care@artfulijewelry.com",
-    "address": "© 2026 Artfuli Jewelry Atelier. Jalan Raya Celuk No. 88, Sukawati, Bali.",
+    "address": "© 2026 Artfuli Jewelry Atelier. Bali, Indonesia.",
     "instagram": "https://instagram.com/artfulijewelry",
     "facebook": "https://facebook.com/artfulijewelry"
   }

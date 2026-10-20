@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "collections": "Collections",
+    "workshop": "Workshop & Craft",
+    "services": "Services",
+    "lookbook": "Lookbook",
+    "bag": "Bag",
+    "custom_order": "Custom Order",
+    "by_category": "By Category",
+    "by_metal": "By Metal",
+    "all_jewelry": "All Jewelry"
+  },
+  "hero": {
+    "authenticity_tag": "Authentic Balinese Silversmithing",
+    "since": "Bali, Indonesia · Est. 2004",
+    "explore_catalog": "Explore Catalog",
+    "consult_bespoke": "Custom Jewelry Order"
+  },
+  "trust": {
+    "casting_title": "Lost-Wax Master Casting",
+    "casting_desc": "High-capacity precision induction vacuum casting with pure 925 sterling silver.",
+    "beads_title": "Handmade Silver Beads",
+    "beads_desc": "Traditional Balinese soul and patience with intricate filigree wire and granulation.",
+    "vermeil_title": "18k Heavy Gold Vermeil",
+    "vermeil_desc": "Exceeding US FTC standards with 2.5 to 3.0 microns of solid 18k gold over solid 925 silver.",
+    "wholesale_title": "Wholesale Direct to Public",
+    "wholesale_desc": "Fair workshop-direct pricing without distributor markups or minimum business license requirements.",
+    "guarantee_title": "7-Day Return Guarantee",
+    "guarantee_desc": "Full money-back guarantee within 7 days of delivery for complete buyer confidence."
+  },
+  "cart": {
+    "title": "Your Selection",
+    "bag": "Shopping Bag",
+    "wishlist": "Saved Pieces",
+    "empty": "Your collection bag is empty.",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping calculated at checkout",
+    "checkout_btn": "Proceed to Checkout",
+    "continue": "Continue Exploring",
+    "remove": "Remove",
+    "qty": "Quantity",
+    "size": "Size",
+    "metal": "Metal"
+  },
+  "product": {
+    "add_to_bag": "Add to Bag",
+    "in_stock": "In Stock",
+    "out_of_stock": "Crafted to Order",
+    "price_from": "From",
+    "solid_silver": "Solid 925 Silver",
+    "gold_vermeil": "18k Gold Vermeil",
+    "ring_sizer": "Find Your Ring Size"
+  },
+  "footer": {
+    "tagline": "Wholesale Pricing for Everyone",
+    "workshop_location": "Bali, Indonesia",
+    "rights": "All rights reserved. Authentic Balinese Jewelry Atelier.",
+    "direct_contacts": "Direct WhatsApp & Concierge"
+  }
+}

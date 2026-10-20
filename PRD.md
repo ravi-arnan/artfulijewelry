@@ -6,12 +6,12 @@
 | **1. Fine Jewelry Lover** | Discerning buyer seeking durable 925 silver and 18k vermeil staples for daily layering. Values skin-safe metals and weight specs. | Collections Grid, Material Filter, XRF Transparency Section, Wishlist. |
 | **2. Intentional Gift Buyer** | Purchasing for a milestone. Needs certainty on sizing, packaging presentation, and fast human guidance. | Ring Sizer Guide, Multi-angle PDP Gallery, Instant WhatsApp Concierge. |
 | **3. Custom Jewelry Seeker** | Individual or designer wanting a bespoke signet, engagement setting, or one-of-a-kind wax cast piece. | Atelier Services Section, Custom 3D Inquiry Form, Direct Spec Upload/Email. |
-| **4. Wholesale / B2B Client** | Independent boutique or jewelry label seeking reliable ethical manufacturing in Celuk, Bali. | Atelier Services (Wholesale Partnership), MOQ & Assay Standards Overview, B2B Concierge. |
+| **4. Wholesale / B2B Client** | Independent boutique or jewelry label seeking reliable ethical manufacturing in Bali, Indonesia. | Atelier Services (Wholesale Partnership), MOQ & Assay Standards Overview, B2B Concierge. |
 
 ## 2. Priority Feature Matrix
 | Priority | Feature Module | Description |
 | :--- | :--- | :--- |
-| **P0 (Core)** | **Editorial Storefront** | Lookbook Hero, Visual Collections Grid (Rings, Necklaces, Earrings, Bracelets, Men's, Fine Gold Vermeil), Celuk Heritage narrative, Materials & XRF Transparency, and Atelier Services. |
+| **P0 (Core)** | **Editorial Storefront** | Lookbook Hero, Visual Collections Grid (Rings, Necklaces, Earrings, Bracelets, Men's, Fine Gold Vermeil), Balinese Heritage narrative, Materials & XRF Transparency, and Atelier Services. |
 | **P0 (Core)** | **Authentic Local Asset Engine** | Deterministic mapping to authentic images in `old/images/produk/` with zero broken links and graceful fallback handling. |
 | **P0 (Core)** | **Luxury Product Detail Page (PDP)** | Multi-angle image gallery, Material/Finish selector (925 Sterling Silver vs. 18k Gold Vermeil), interactive Ring Sizer Guide modal, exact gram weight and millimeter dimensions. |
 | **P0 (Core)** | **Cart Drawer & Wishlist** | Slide-over Cart Drawer with subtotal calculation, quantity controls, and direct checkout/concierge dispatch; persistent Wishlist drawer/view. |
@@ -27,10 +27,10 @@
 ## 4. Page-by-Page Acceptance Criteria
 
 ### A. Editorial Storefront (`/`)
-- [ ] **Header Navigation**: Sticky glassmorphic warm-cream header featuring links to Shop, Collections, Celuk Atelier, Materials, Atelier Services, Wishlist counter, and Cart Drawer trigger.
-- [ ] **Hero Lookbook**: Full-bleed editorial split or overlay layout using high-resolution craft/product imagery from `old/images/produk/`, serif headline, and dual CTAs ("Explore Collection" and "The Celuk Atelier").
+- [ ] **Header Navigation**: Sticky glassmorphic warm-cream header featuring links to Shop, Collections, Atelier, Materials, Atelier Services, Wishlist counter, and Cart Drawer trigger.
+- [ ] **Hero Lookbook**: Full-bleed editorial split or overlay layout using high-resolution craft/product imagery from `old/images/produk/`, serif headline, and dual CTAs ("Explore Collection" and "The Atelier").
 - [ ] **Shop & Collections Grid**: Visual category cards for `Rings`, `Necklaces`, `Earrings`, `Bracelets`, `Men's`, and `Fine Gold Vermeil`, each displaying curated authentic photography and item counts.
-- [ ] **Our Heritage / Celuk Atelier Section**: Editorial storytelling highlighting traditional Balinese silversmithing, granulation, and hand-finishing with process imagery from the local archive.
+- [ ] **Our Heritage / Atelier Section**: Editorial storytelling highlighting traditional Balinese silversmithing, granulation, and hand-finishing with process imagery from the local archive.
 - [ ] **Materials & Transparency Section**: Clear breakdown comparing 925 Sterling Silver, 18k Gold Vermeil (2.5+ microns), and XRF Assay Verification standards.
 - [ ] **Atelier Services Section**: Dedicated structured showcase for Custom 3D Design, Precious Metal Casting, and Wholesale Partnerships with direct inquiry triggers.
 
@@ -42,5 +42,5 @@
 - [ ] Multi-angle gallery using authentic local product photos.
 - [ ] Interactive Material Selector (`925 Sterling Silver`, `18k Gold Vermeil`) that dynamically updates SKU and price.
 - [ ] Ring Size selector (`US 5` through `US 11`) with an interactive **Ring Sizer Guide** modal containing millimeter circumference and diameter conversion tables.
-- [ ] Technical Specifications accordion: Metal Purity (XRF Verified), Weight (grams), Band Width / Dimensions (mm), and Origin (Celuk Atelier, Bali).
+- [ ] Technical Specifications accordion: Metal Purity (XRF Verified), Weight (grams), Band Width / Dimensions (mm), and Origin (Bali Workshop, Indonesia).
 - [ ] Dual action buttons: "Add to Bag" (opens Cart Drawer) and "Inquire via Concierge" (opens pre-filled WhatsApp / `care@artfulijewelry.com` options).

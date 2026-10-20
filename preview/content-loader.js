@@ -179,7 +179,7 @@
         cartItems.forEach((it, idx) => {
           text += `${idx + 1}. ${it.name} (${it.alloy}, ${it.size}) x${it.qty} = $${it.price * it.qty} USD\n`;
         });
-        text += `\nEstimated Total: $${subtotal} USD\nInsured Celuk Worldwide Shipping included.\nPlease advise on current casting timeline and payment details.`;
+        text += `\nEstimated Total: $${subtotal} USD\nInsured Worldwide Shipping included.\nPlease advise on current casting timeline and payment details.`;
         const encoded = encodeURIComponent(text);
         window.open(`https://wa.me/${window.SITE_WA}?text=${encoded}`, "_blank");
       };

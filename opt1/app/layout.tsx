@@ -4,6 +4,8 @@ import "./globals.css";
 import "./landing.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { InquiryProvider } from "@/context/InquiryContext";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND, CONTACT } from "@/lib/data";
 
@@ -17,7 +19,7 @@ const organizationLd = {
       "@id": `${SITE_URL}/#organization`,
       name: "Artfuli Jewelry",
       url: SITE_URL,
-      slogan: "Handcrafted Balinese Fine Jewelry & Celuk Metallurgy",
+      slogan: "Handcrafted Balinese Fine Jewelry & Metallurgy",
       foundingDate: "2004",
       sameAs: [
         "https://www.instagram.com/artfulijewelry/",
@@ -68,25 +70,25 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://artfulijewelry.com"),
   title: {
-    default: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
+    default: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Bali",
     template: "%s | Artfuli Jewelry",
   },
   description:
-    "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004. Certified XRF metallurgy.",
+    "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Bali since 2004. Certified XRF metallurgy.",
   keywords: [
     "Artfuli Jewelry",
     "Bali silver jewelry",
-    "Celuk metallurgy",
+    "Balinese metallurgy",
     "925 sterling silver handmade",
     "18k gold vermeil Bali",
     "artisan silver rings",
-    "Celuk silversmiths",
+    "Bali silversmiths",
     "wholesale Balinese jewelry",
   ],
   openGraph: {
-    title: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Celuk, Bali",
+    title: "Artfuli Jewelry | Fine Silver & Gold Vermeil Workshop, Bali",
     description:
-      "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Celuk, Gianyar, Bali since 2004.",
+      "Handcrafted 925 sterling silver and 18k gold vermeil jewelry crafted by master silversmiths in Bali since 2004.",
     type: "website",
     locale: "en_US",
     url: "https://artfulijewelry.com",
@@ -107,7 +109,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd data={organizationLd} />
         <AuthProvider>
-          <InquiryProvider>{children}</InquiryProvider>
+          <LanguageProvider>
+            <CurrencyProvider>
+              <InquiryProvider>{children}</InquiryProvider>
+            </CurrencyProvider>
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

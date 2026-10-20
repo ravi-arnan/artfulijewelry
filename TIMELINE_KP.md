@@ -1,6 +1,6 @@
 # Timeline & Roadmap Implementasi E-Commerce Ritel (Kerja Praktek)
 **Platform**: Artfuli Jewelry (Redesign Bali Handmade)  
-**Studi Kasus**: Kerajinan Perak dan Kuningan Celuk, Gianyar, Bali  
+**Studi Kasus**: Kerajinan Perak dan Kuningan Bali (Bali Handmade)  
 **Fokus Utama**: Sistem Transaksi Ritel Utuh, Payment Gateway Midtrans, Multi-Bahasa (ID/EN), Dual-Currency (IDR/USD), dan Manajemen Pesanan
 
 ---
@@ -168,7 +168,7 @@ Fokus: Pengujian sistem secara komprehensif, simulasi edge case, dan perakitan d
 
 | Bab Laporan KP | Kebutuhan Teknis / Diagram | Status Sumber Daya |
 |---|---|---|
-| **Bab 1 & 2** | Latar belakang Celuk artisan, identitas brand Artfuli, studi pustaka payment gateway & e-commerce | Tersedia di `BRAND_IDENTITY.md` & `PRD.md` |
+| **Bab 1 & 2** | Latar belakang artisan Bali, identitas brand Artfuli, studi pustaka payment gateway & e-commerce | Tersedia di `BRAND_IDENTITY.md` & `PRD.md` |
 | **Bab 3 (Perancangan)** | Use Case Diagram (Guest, Customer, Admin) | Dirancang dari alur Sprint 1 - 5 |
 | **Bab 3 (Perancangan)** | Entity Relationship Diagram (ERD) & Struktur Tabel SQLite (Turso) | Dirancang di Sprint 1 (`schema.ts` / Drizzle Migrations) |
 | **Bab 3 (Perancangan)** | Sequence Diagram Alur Pembayaran Midtrans Snap & Webhook | Dirancang di Sprint 3 |

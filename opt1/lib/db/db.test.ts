@@ -10,7 +10,7 @@ test("Drizzle and Turso libSQL client can query products table", async () => {
   await db.insert(products).values({
     id: testId,
     sku: testSku,
-    name: "Celuk Filigree Test Ring",
+    name: "Balinese Filigree Test Ring",
     slug: `test-ring-${Date.now()}`,
     category: "Rings",
     material: "925 Sterling Silver",
@@ -27,7 +27,7 @@ test("Drizzle and Turso libSQL client can query products table", async () => {
   });
 
   assert.ok(found, "Product should exist in database");
-  assert.equal(found.name, "Celuk Filigree Test Ring");
+  assert.equal(found.name, "Balinese Filigree Test Ring");
   assert.equal(found.priceIdr, 850000);
   assert.equal(found.priceUsd, 55.0);
 

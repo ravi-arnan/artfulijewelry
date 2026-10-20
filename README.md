@@ -1,6 +1,6 @@
 # Artfuli Jewelry
 
-> Handcrafted Balinese Fine Jewelry & Celuk Silversmithing Workshop  
+> Handcrafted Balinese Fine Jewelry & Silversmithing Workshop  
 > Production Domain: [artfulijewelry.com](https://artfulijewelry.com)  
 > Legacy Catalog Archive: [bali-handmade.com](https://bali-handmade.com)  
 > GitHub Repository: [github.com/ravi-arnan/artfulijewelry](https://github.com/ravi-arnan/artfulijewelry)
@@ -21,7 +21,7 @@ Semua dokumen spesifikasi, arsitektur, dan panduan teknis tersedia di repositori
 
 - [TIMELINE_KP.md](TIMELINE_KP.md): **Timeline & Roadmap Kerja Praktek (KP)**, perincian Sprint 1 sampai 6, matriks laporan KP, dan skenario pengujian simulator Midtrans.
 - [ARCHITECTURE.md](ARCHITECTURE.md): Arsitektur teknis menyeluruh, struktur data Turso/libSQL, Drizzle ORM, dan prinsip rekayasa.
-- [BRAND_IDENTITY.md](BRAND_IDENTITY.md): Identitas brand, storytelling atelier Celuk, nilai luhur pande mas, dan pedoman tone of voice.
+- [BRAND_IDENTITY.md](BRAND_IDENTITY.md): Identitas brand, storytelling atelier Bali, nilai luhur pande mas, dan pedoman tone of voice.
 - [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md): Sistem token warna (Obsidian, Royal Plum, Gold Leaf, Bone White), tipografi editorial, dan tata kelola anti-slop.
 - [PRD.md](PRD.md): Product Requirements Document, matriks fitur ritel, dan alur checkout.
 - [ROADMAP.md](ROADMAP.md): Peta jalan pengembangan fitur storefront dan katalog.
@@ -35,7 +35,7 @@ Semua dokumen spesifikasi, arsitektur, dan panduan teknis tersedia di repositori
 ```text
 .
 ├── ARCHITECTURE.md          # Spesifikasi teknis & prinsip arsitektur sistem
-├── BRAND_IDENTITY.md        # Dokumen identitas brand & narasi kriya Celuk
+├── BRAND_IDENTITY.md        # Dokumen identitas brand & narasi kriya Bali
 ├── DESIGN-SYSTEM.md         # Design tokens, tipografi & aturan anti-slop
 ├── PRD.md                   # Product Requirements Document & matriks fitur
 ├── ROADMAP.md               # Roadmap umum pengembangan storefront
@@ -62,7 +62,7 @@ Semua dokumen spesifikasi, arsitektur, dan panduan teknis tersedia di repositori
 │   └── landing.html         # Eksplorasi animasi dan komposisi layout
 │
 └── assets/                  # Aset master brand beresolusi tinggi
-    ├── logo/                # Master emblem spiral Celuk & wordmark kaligrafi
+    ├── logo/                # Master emblem spiral Bali & wordmark kaligrafi
     └── model/               # Fotografi editorial perhiasan
 ```
 

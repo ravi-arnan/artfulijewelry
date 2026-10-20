@@ -22,7 +22,7 @@ src/
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx              # Navigation, Collection links, Cart & Wishlist triggers
-│   │   ├── Footer.tsx              # Editorial footer, Celuk address, care@artfulijewelry.com
+│   │   ├── Footer.tsx              # Editorial footer, atelier address, care@artfulijewelry.com
 │   │   ├── CartDrawer.tsx          # Client slide-over cart with WhatsApp/Email checkout
 │   │   └── WishlistDrawer.tsx      # Client slide-over saved pieces drawer
 │   ├── product/
