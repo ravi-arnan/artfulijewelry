@@ -103,17 +103,63 @@ button {
   color: var(--accent-gold);
 }
 
-.badge-tag {
-  background: rgba(43, 168, 155, 0.15);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(43, 168, 155, 0.4);
-  font-size: 10px;
+.badge-tag,
+.live-sync-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(43, 168, 155, 0.12);
+  color: #3CD0C1;
+  border: 1px solid rgba(43, 168, 155, 0.38);
+  border-radius: 9999px;
+  font-size: 9.5px;
   font-weight: 600;
-  padding: 2px 7px;
+  line-height: 1;
+  padding: 3.5px 8.5px 3.5px 7px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-left: 6px;
-  vertical-align: middle;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(43, 168, 155, 0.12);
+  transition: background var(--t-hover) ease, border-color var(--t-hover) ease;
+}
+
+.live-sync-pill:hover {
+  background: rgba(43, 168, 155, 0.2);
+  border-color: rgba(43, 168, 155, 0.6);
+}
+
+.pulse-dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  background-color: #2BA89B;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(43, 168, 155, 0.65);
+  animation: livePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes livePulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  60%, 100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
 }
 
 .dot-gold {
@@ -270,7 +316,7 @@ button {
    ========================================================================== */
 .console {
   display: grid;
-  grid-template-columns: 270px 1fr;
+  grid-template-columns: 286px 1fr;
   min-height: 100vh;
 }
 
@@ -300,19 +346,38 @@ button {
   width: 38px;
   height: 38px;
   object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
 }
 
 .sidebar-title {
   font-family: var(--font-serif);
   font-size: 1.35rem;
+  font-weight: 500;
   line-height: 1.1;
   color: #FAF8F5;
+  letter-spacing: 0.015em;
 }
 
 .sidebar-sub {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.sidebar-sub-label {
+  font-size: 11.5px;
   color: #B8B0C0;
-  margin-top: 2px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .nav-group-label {
@@ -631,7 +696,7 @@ button {
    ========================================================================== */
 @media (max-width: 1280px) {
   .console {
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 280px 1fr;
   }
   .sidebar {
     padding: 20px 16px;
