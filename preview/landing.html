@@ -865,6 +865,56 @@
       display: block;
     }
 
+    /* Hero carousel (mirrors the 3-slide carousel of the Next.js storefront) */
+    .hero-carousel-slides { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-slide {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.9s var(--ease-soft), visibility 0s linear 0.9s;
+    }
+    .hero-slide.is-active { opacity: 1; visibility: visible; z-index: 1; transition: opacity 0.9s var(--ease-soft); }
+    .hero-slide-scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0.72) 100%);
+    }
+    .hero-carousel-bar {
+      position: absolute; bottom: 24px; left: 24px; right: 24px; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 18px;
+      background: rgba(22, 19, 16, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+    }
+    @media (max-width: 640px) {
+      .hero-carousel-bar { bottom: 16px; left: 16px; right: 16px; padding: 10px 14px; flex-direction: column; align-items: stretch; gap: 10px; }
+    }
+    .hero-carousel-meta { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .hero-carousel-index {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; color: #FFFFFF; white-space: nowrap;
+      padding: 3px 8px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .hero-carousel-desc { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .hero-carousel-title { font-size: 0.875rem; font-weight: 600; color: #FFFFFF; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hero-carousel-sub { font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hero-carousel-controls { display: flex; align-items: center; gap: 14px; flex-shrink: 0; justify-content: flex-end; }
+    .hero-progress-group { display: flex; align-items: center; gap: 6px; }
+    .hero-progress-pill {
+      position: relative; width: 24px; height: 3px; background: rgba(255, 255, 255, 0.22);
+      border: none; cursor: pointer; padding: 0; overflow: hidden;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+    .hero-progress-pill.is-active { width: 40px; background: rgba(255, 255, 255, 0.35); }
+    .hero-progress-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #FFFFFF; }
+    .hero-arrow-group { display: flex; align-items: center; gap: 6px; }
+    .hero-arrow-btn {
+      width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #FFFFFF; cursor: pointer; font-size: 14px; line-height: 1;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .hero-arrow-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
+    .hero-arrow-btn:active { transform: scale(0.92); }
+
     /* ==========================================================================
        TRUST RIBBON: FEATURED IN & TRUSTED BY (Deep Obsidian Architectural Band)
        - Substantial height matching Leedlime reference blueprint
@@ -1016,15 +1066,20 @@
     }
 
     .heritage-frame {
+      position: relative;
       aspect-ratio: 4 / 5;
       overflow: hidden;
       background-color: var(--ground-tertiary);
     }
 
     .heritage-frame img {
+      position: absolute;
+      top: -12%;
+      left: 0;
       width: 100%;
-      height: 112%;
+      height: 124%;
       object-fit: cover;
+      display: block;
     }
 
     .heritage-caption {
@@ -1259,6 +1314,51 @@
       justify-content: space-between;
       gap: 24px;
       flex-wrap: wrap;
+    }
+
+    /* Technical Hallmark / Laboratory Ledger Certificate Typography */
+    .bench-batch-ledger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    .bench-batch-ledger .ledger-label {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .bench-batch-ledger .ledger-dot {
+      opacity: 0.4;
+    }
+
+    .bench-batch-ledger .ledger-sub {
+      opacity: 0.85;
+    }
+
+    .bench-batch-ledger .ledger-code {
+      font-family: ui-monospace, "SF Mono", Monaco, "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--brand-accent);
+      background: rgba(85, 31, 81, 0.06);
+      border: 1px solid rgba(85, 31, 81, 0.2);
+      padding: 3px 8px;
+      border-radius: 0px; /* TasteSkill Shape Lock: All-sharp corners */
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    html[data-theme="dark"] .bench-batch-ledger .ledger-code {
+      color: #E2A8DD;
+      background: rgba(226, 168, 221, 0.1);
+      border-color: rgba(226, 168, 221, 0.3);
     }
 
     /* ==========================================================================
@@ -2158,11 +2258,39 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
+    .announcement-bar {
+      background: var(--brand-accent);
+      color: var(--brand-accent-text);
+      font-size: 13px;
+      padding: 8px 24px;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .announcement-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .announcement-link {
+      color: var(--brand-accent-text);
+      text-decoration: underline;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
 
-
+  <!-- Top Announcement Bar (Configurable via Admin Console) -->
+  <aside class="announcement-bar" id="announceBar" hidden>
+    <div class="announcement-inner">
+      <span class="announcement-text" id="announceText">Worldwide Insured Atelier Delivery on Orders Over $350</span>
+      <a href="#collections" class="announcement-link" id="announceLink">Shop Archival Benches</a>
+    </div>
+  </aside>
 
   <!-- =========================================================================
        PAGE CANVAS ARCHITECTURE (Leedlime Framed Grid Blueprint)
@@ -2464,8 +2592,24 @@
           </div>
 
           <!-- Right Column: Pure Full-Bleed Model Photograph -->
-          <div class="hero-stage-col">
-            <img src="images/lookbook-hero-1.webp" alt="Artfuli Sculptural 18k Gold Vermeil and 925 Silver Lookbook" class="hero-stage-backdrop" id="heroMainImage">
+          <div class="hero-stage-col" id="heroStage" aria-roledescription="carousel" aria-label="Featured lookbook photographs">
+            <div class="hero-carousel-slides" id="heroSlides"></div>
+            <div class="hero-carousel-bar" id="heroBar">
+              <div class="hero-carousel-meta">
+                <span class="hero-carousel-index" id="heroIndex">1 / 1</span>
+                <div class="hero-carousel-desc">
+                  <span class="hero-carousel-title" id="heroSlideTitle"></span>
+                  <span class="hero-carousel-sub" id="heroSlideSub"></span>
+                </div>
+              </div>
+              <div class="hero-carousel-controls">
+                <div class="hero-progress-group" id="heroPills" role="tablist" aria-label="Carousel pagination"></div>
+                <div class="hero-arrow-group">
+                  <button type="button" class="hero-arrow-btn" id="heroPrev" aria-label="Previous photograph">&#8249;</button>
+                  <button type="button" class="hero-arrow-btn" id="heroNext" aria-label="Next photograph">&#8250;</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -2749,9 +2893,12 @@
             </div>
 
             <div class="bench-footer-row">
-              <p class="caption-note" id="benchBatchCode">
-                Assay Certificate Included · Batch Ledger: #BALI-2026-Ag925
-              </p>
+              <div class="bench-batch-ledger">
+                <span class="ledger-label">Assay Certificate Included</span>
+                <span class="ledger-dot">·</span>
+                <span class="ledger-sub">Batch Ledger:</span>
+                <code class="ledger-code" id="benchBatchCode">#BALI-2026-Ag925</code>
+              </div>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <button type="button" class="btn-secondary" onclick="addBenchPieceToBag()" id="benchAddToBagBtn">
                   <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i>
@@ -2982,8 +3129,8 @@
                 <span>Send Brief via WhatsApp</span>
                 <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
               </a>
-              <a href="mailto:care@artfulijewelry.com" class="btn-secondary" id="briefEmailBtn">
-                <span>Dispatch to care@artfulijewelry.com</span>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer" class="btn-secondary" id="briefEmailBtn">
+                <span>Dispatch to sales@bali-handmade.com</span>
               </a>
             </div>
           </div>
@@ -3105,7 +3252,7 @@
             <li><a href="#warranty">100-Year Structural Guarantee</a></li>
             <li><a href="#bespoke">Worldwide Insured Transit</a></li>
             <li><a href="#warranty">Precious Metal Care Guide</a></li>
-            <li><a href="mailto:care@artfulijewelry.com">care@artfulijewelry.com</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer">sales@bali-handmade.com</a></li>
           </ul>
         </div>
 
@@ -3183,7 +3330,7 @@
         <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
       </a>
       <a href="#" class="btn-secondary" id="drawerCheckoutEmail" onclick="checkoutViaEmail(event)" style="justify-content: center; font-size: 0.85rem;">
-        <span>Email Order to care@artfulijewelry.com</span>
+        <span>Email Order to sales@bali-handmade.com</span>
       </a>
     </div>
   </aside>
@@ -3350,7 +3497,7 @@
       document.getElementById("readoutPurity").textContent = purityText;
       document.getElementById("readoutCircumference").textContent = cal.circumference;
       document.getElementById("readoutPrice").textContent = `$${price} USD`;
-      document.getElementById("benchBatchCode").textContent = `Assay Certificate Included · Batch Ledger: ${batchId}`;
+      document.getElementById("benchBatchCode").textContent = batchId;
 
       if (window.gsap) {
         gsap.fromTo("#benchReadoutStrip", { opacity: 0.5, y: 4 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
@@ -3447,9 +3594,23 @@
       const text = `Hello Artfuli Atelier, I am inquiring about a ${type} in ${metal}. Specifications: ${notes}`;
       const encoded = encodeURIComponent(text);
       const subject = encodeURIComponent(`Atelier CAD Inquiry: ${type}`);
+      const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
 
-      document.getElementById("briefWhatsappBtn").href = `https://wa.me/6281234567890?text=${encoded}`;
-      document.getElementById("briefEmailBtn").href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${encoded}`;
+      const waBtn = document.getElementById("briefWhatsappBtn");
+      if (waBtn) {
+        waBtn.href = `https://wa.me/${window.SITE_WA || "6281234567890"}?text=${encoded}`;
+      }
+
+      const emailBtn = document.getElementById("briefEmailBtn");
+      if (emailBtn) {
+        emailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${encoded}`;
+        emailBtn.target = "_blank";
+        emailBtn.rel = "noopener noreferrer";
+        const emailSpan = emailBtn.querySelector("span");
+        if (emailSpan) {
+          emailSpan.textContent = `Dispatch to ${targetEmail}`;
+        }
+      }
     };
     updateBespokeBrief();
 
@@ -3862,7 +4023,9 @@
 
       const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
       const body = encodeURIComponent(text);
-      window.location.href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${body}`;
+      const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
     };
 
     // =========================================================================
@@ -3997,5 +4160,7 @@
     // Initial render
     renderCartDrawer();
   </script>
+  <script src="hero-carousel.js"></script>
+  <script src="content-loader.js"></script>
 </body>
 </html>

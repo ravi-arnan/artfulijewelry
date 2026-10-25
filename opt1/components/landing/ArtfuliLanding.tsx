@@ -747,7 +747,8 @@ export function ArtfuliLanding() {
     text += `\nEstimated Total: ${formatPrice(cartSubtotal)} (${currency})\n\nPlease reply with order confirmation and shipping estimate.`;
     const subject = encodeURIComponent("Bali Handmade / ArtFuli Order Inquiry");
     const body = encodeURIComponent(text);
-    window.location.assign(`mailto:sales@bali-handmade.com?subject=${subject}&body=${body}`);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com&su=${subject}&body=${body}`;
+    window.open(gmailUrl, "_blank", "noopener,noreferrer");
   };
 
   // Ring Sizer Operations
@@ -765,7 +766,7 @@ export function ArtfuliLanding() {
   // Bespoke Brief WhatsApp & Mailto
   const bespokeBriefText = `Hello Bali Handmade / ArtFuli Workshop, I am inquiring about a custom ${briefType} in ${briefMetal}. Specifications: ${briefNotes}`;
   const bespokeWaUrl = `https://wa.me/6287883992277?text=${encodeURIComponent(bespokeBriefText)}`;
-  const bespokeEmailUrl = `mailto:sales@bali-handmade.com?subject=${encodeURIComponent("Custom CAD Inquiry: " + briefType)}&body=${encodeURIComponent(bespokeBriefText)}`;
+  const bespokeGmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com&su=${encodeURIComponent("Custom CAD Inquiry: " + briefType)}&body=${encodeURIComponent(bespokeBriefText)}`;
 
   return (
     <>
@@ -1707,9 +1708,12 @@ export function ArtfuliLanding() {
                     </button>
                   </div>
 
-                  <p className="caption-note" id="benchBatchCode">
-                    Assay Certificate Included · Batch Ledger: {batchCode}
-                  </p>
+                  <div className="bench-batch-ledger">
+                    <span className="ledger-label">Assay Certificate Included</span>
+                    <span className="ledger-dot">·</span>
+                    <span className="ledger-sub">Batch Ledger:</span>
+                    <code className="ledger-code" id="benchBatchCode">{batchCode}</code>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1978,7 +1982,9 @@ export function ArtfuliLanding() {
                       <ArrowUpRight style={{ width: 16, height: 16 }} />
                     </a>
                     <a
-                      href={bespokeEmailUrl}
+                      href={bespokeGmailUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn-secondary"
                       id="briefEmailBtn"
                     >
@@ -2102,7 +2108,7 @@ export function ArtfuliLanding() {
                   <li><a href="#assay-bench" onClick={() => setIsRingSizerOpen(true)}>Ring Sizing Guide</a></li>
                   <li><a href="#warranty">7-Day Quality Guarantee</a></li>
                   <li><a href="#bespoke">DHL &amp; EMS Global Shipping</a></li>
-                  <li><a href="mailto:sales@bali-handmade.com">sales@bali-handmade.com</a></li>
+                  <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer">sales@bali-handmade.com</a></li>
                 </ul>
               </div>
             </div>
