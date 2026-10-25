@@ -187,10 +187,14 @@
   }
   if (typeof k.email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(k.email)) {
     window.SITE_EMAIL = k.email;
-    $$('a[href^="mailto:"]:not(#briefEmailBtn)').forEach((el) => {
-      el.href = `mailto:${k.email}`;
+    $$('a[href^="mailto:"], a[href*="mail.google.com"]:not(#briefEmailBtn)').forEach((el) => {
+      el.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(k.email)}`;
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
       if (el.textContent.includes("@")) el.textContent = k.email;
     });
+    const drawerEmailSpan = document.querySelector("#drawerCheckoutEmail span");
+    if (drawerEmailSpan) drawerEmailSpan.textContent = `Email Order to ${k.email}`;
     if (typeof window.checkoutViaEmail === "function") {
       window.checkoutViaEmail = function(e) {
         if (e) e.preventDefault();
@@ -203,7 +207,9 @@
         text += `\nEstimated Total: $${subtotal} USD\n\nPlease reply with atelier invoice and delivery estimate.`;
         const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
         const body = encodeURIComponent(text);
-        window.location.href = `mailto:${window.SITE_EMAIL}?subject=${subject}&body=${body}`;
+        const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+        window.open(gmailUrl, "_blank", "noopener,noreferrer");
       };
     }
   }

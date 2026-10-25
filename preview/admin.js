@@ -240,7 +240,7 @@
   function renderContact() {
     return card("Concierge, Workshop & Footer Directory", "Central atelier contacts that automatically update across all buttons and footer links.",
       `<div class="grid-2">${fText("contact.whatsapp", "WhatsApp Concierge Number", { inputmode: "numeric", hint: "Format: Country code + phone digits without plus sign. Example: 6281234567890. Dynamically updates all acquisition & inquiry buttons." })}
-        ${fText("contact.email", "Official Concierge Email", { hint: "Example: care@artfulijewelry.com" })}
+        ${fText("contact.email", "Official Concierge Email", { hint: "Example: sales@bali-handmade.com" })}
         ${fText("contact.address", "Atelier Legal / Copyright Line", { wide: true })}
         ${fText("contact.instagram", "Official Instagram Link")}${fText("contact.facebook", "Official Facebook Link")}</div>`);
   }

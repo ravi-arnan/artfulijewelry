@@ -3129,8 +3129,8 @@
                 <span>Send Brief via WhatsApp</span>
                 <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
               </a>
-              <a href="mailto:care@artfulijewelry.com" class="btn-secondary" id="briefEmailBtn">
-                <span>Dispatch to care@artfulijewelry.com</span>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer" class="btn-secondary" id="briefEmailBtn">
+                <span>Dispatch to sales@bali-handmade.com</span>
               </a>
             </div>
           </div>
@@ -3252,7 +3252,7 @@
             <li><a href="#warranty">100-Year Structural Guarantee</a></li>
             <li><a href="#bespoke">Worldwide Insured Transit</a></li>
             <li><a href="#warranty">Precious Metal Care Guide</a></li>
-            <li><a href="mailto:care@artfulijewelry.com">care@artfulijewelry.com</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer">sales@bali-handmade.com</a></li>
           </ul>
         </div>
 
@@ -3330,7 +3330,7 @@
         <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
       </a>
       <a href="#" class="btn-secondary" id="drawerCheckoutEmail" onclick="checkoutViaEmail(event)" style="justify-content: center; font-size: 0.85rem;">
-        <span>Email Order to care@artfulijewelry.com</span>
+        <span>Email Order to sales@bali-handmade.com</span>
       </a>
     </div>
   </aside>
@@ -3594,9 +3594,23 @@
       const text = `Hello Artfuli Atelier, I am inquiring about a ${type} in ${metal}. Specifications: ${notes}`;
       const encoded = encodeURIComponent(text);
       const subject = encodeURIComponent(`Atelier CAD Inquiry: ${type}`);
+      const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
 
-      document.getElementById("briefWhatsappBtn").href = `https://wa.me/6281234567890?text=${encoded}`;
-      document.getElementById("briefEmailBtn").href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${encoded}`;
+      const waBtn = document.getElementById("briefWhatsappBtn");
+      if (waBtn) {
+        waBtn.href = `https://wa.me/${window.SITE_WA || "6281234567890"}?text=${encoded}`;
+      }
+
+      const emailBtn = document.getElementById("briefEmailBtn");
+      if (emailBtn) {
+        emailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${encoded}`;
+        emailBtn.target = "_blank";
+        emailBtn.rel = "noopener noreferrer";
+        const emailSpan = emailBtn.querySelector("span");
+        if (emailSpan) {
+          emailSpan.textContent = `Dispatch to ${targetEmail}`;
+        }
+      }
     };
     updateBespokeBrief();
 
@@ -4009,7 +4023,9 @@
 
       const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
       const body = encodeURIComponent(text);
-      window.location.href = `mailto:care@artfulijewelry.com?subject=${subject}&body=${body}`;
+      const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
     };
 
     // =========================================================================
