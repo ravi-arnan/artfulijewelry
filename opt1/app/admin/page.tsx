@@ -86,27 +86,27 @@ export default async function AdminPage() {
       </h1>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <StatCard
-            icon={Package}
-            label="Products"
-            value={productCount ?? 0}
-            href="/shop"
-            hint="View catalog"
-          />
-          <StatCard
-            icon={Inbox}
-            label="Inquiries"
-            value={inquiries.length}
-            hint="Latest 100"
-          />
-          <StatCard
-            icon={BellRing}
-            label="New / unhandled"
-            value={openCount}
-            accent={openCount > 0}
-            hint={openCount > 0 ? "Needs attention" : "All clear"}
-          />
-        </div>
+        <StatCard
+          icon={Package}
+          label="Products"
+          value={productCount ?? 0}
+          href="/admin/products"
+          hint="Manage catalog"
+        />
+        <StatCard
+          icon={Inbox}
+          label="Inquiries"
+          value={inquiries.length}
+          hint="Latest 100"
+        />
+        <StatCard
+          icon={BellRing}
+          label="New / unhandled"
+          value={openCount}
+          accent={openCount > 0}
+          hint={openCount > 0 ? "Needs attention" : "All clear"}
+        />
+      </div>
 
       <div className="mt-12 flex items-center justify-between gap-4">
         <h2 className="font-display text-2xl text-ink">Inquiries</h2>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ExternalLink, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
@@ -12,6 +12,7 @@ import { useAuth } from "@/context/AuthContext";
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const { user, signOut } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   async function handleSignOut() {
     await signOut();
@@ -22,7 +23,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <header className="sticky top-0 z-40 border-b border-espresso-deep bg-espresso text-paper">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-5">
             <Link href="/admin" className="flex items-center gap-2.5">
               <span className="font-display text-lg leading-none tracking-tight">
@@ -32,13 +33,22 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 Admin
               </span>
             </Link>
-            <nav className="hidden items-center gap-4 text-sm text-paper/70 sm:flex">
-              <Link href="/admin" className="transition-colors hover:text-paper">
+            <nav className="flex items-center gap-4 text-sm">
+              <Link
+                href="/admin"
+                className={`transition-colors hover:text-paper ${
+                  pathname === "/admin" ? "font-medium text-paper" : "text-paper/70"
+                }`}
+              >
                 Dashboard
               </Link>
               <Link
                 href="/admin/products"
-                className="transition-colors hover:text-paper"
+                className={`transition-colors hover:text-paper ${
+                  pathname?.startsWith("/admin/products")
+                    ? "font-medium text-paper"
+                    : "text-paper/70"
+                }`}
               >
                 Products
               </Link>

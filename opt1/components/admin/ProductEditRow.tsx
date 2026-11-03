@@ -78,7 +78,7 @@ export function ProductEditRow({ product }: { product: EditableProduct }) {
             step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="w-28 rounded-lg border border-line bg-paper px-3 py-1.5 text-sm text-ink focus:border-gold focus:outline-none"
+            className="h-9 w-28 rounded-lg border border-line bg-paper px-3 text-sm text-ink focus:border-gold focus:outline-none"
           />
         </label>
         <label className="text-xs text-ink-soft">
@@ -89,10 +89,10 @@ export function ProductEditRow({ product }: { product: EditableProduct }) {
             step="1"
             value={minOrder}
             onChange={(e) => setMinOrder(e.target.value)}
-            className="w-24 rounded-lg border border-line bg-paper px-3 py-1.5 text-sm text-ink focus:border-gold focus:outline-none"
+            className="h-9 w-24 rounded-lg border border-line bg-paper px-3 text-sm text-ink focus:border-gold focus:outline-none"
           />
         </label>
-        <label className="inline-flex items-center gap-2 text-sm text-ink">
+        <label className="inline-flex h-9 cursor-pointer items-center gap-2 text-sm text-ink">
           <input
             type="checkbox"
             checked={isNew}
@@ -101,7 +101,7 @@ export function ProductEditRow({ product }: { product: EditableProduct }) {
           />
           New
         </label>
-        <label className="inline-flex items-center gap-2 text-sm text-ink">
+        <label className="inline-flex h-9 cursor-pointer items-center gap-2 text-sm text-ink">
           <input
             type="checkbox"
             checked={isSale}
@@ -115,7 +115,7 @@ export function ProductEditRow({ product }: { product: EditableProduct }) {
           type="button"
           onClick={handleSave}
           disabled={!dirty || pending}
-          className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-espresso px-4 py-1.5 text-sm text-paper transition-colors hover:bg-espresso-deep disabled:cursor-not-allowed disabled:opacity-40"
+          className="ml-auto inline-flex h-9 items-center gap-1.5 rounded-full bg-espresso px-4 text-sm text-paper transition-colors hover:bg-espresso-deep disabled:cursor-not-allowed disabled:opacity-40"
         >
           {pending ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

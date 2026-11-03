@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,12 @@
   <title>Artfuli Atelier Console | Fine Jewelry Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=2.3">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="admin.css?v=2.5">
 </head>
+
 <body>
 
   <!-- Login Screen -->
@@ -19,8 +23,10 @@
         <img src="images/artfuli-emblem.png" alt="Artfuli Emblem" class="login-emblem">
         <img src="images/artfuli-wordmark.png" alt="Artfuli Jewelry" class="login-wordmark">
       </div>
-      <h1 class="login-title">Atelier Console</h1>
-      <p class="login-note">Direct atelier management system for Artfuli Jewelry landing page.</p>
+      <div class="login-head">
+        <h1 class="login-title">Atelier Console</h1>
+        <p class="login-note">Direct atelier management system for Artfuli Jewelry landing page.</p>
+      </div>
       <label class="field">
         <span class="field-label">Atelier Keyphrase / Password</span>
         <input type="password" id="loginPassword" placeholder="Enter password from preview/.env" required autofocus>
@@ -51,7 +57,7 @@
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-group-label">Storefront Sections</div>
+        <div class="nav-group-label">Home Page Sections</div>
         <ul class="nav-list" id="navList">
           <li><button type="button" class="nav-item active" data-view="hero">Hero &amp; Announcement</button></li>
           <li><button type="button" class="nav-item" data-view="collections">Signature Collections</button></li>
@@ -61,6 +67,16 @@
           <li><button type="button" class="nav-item" data-view="lookbook">Editorial Lookbook</button></li>
           <li><button type="button" class="nav-item" data-view="guarantee">100-Year Guarantee</button></li>
           <li><button type="button" class="nav-item" data-view="contact">Contact &amp; Concierge</button></li>
+        </ul>
+
+        <div class="nav-group-label nav-group-spaced">Catalog &amp; Inventory</div>
+        <ul class="nav-list">
+          <li>
+            <button type="button" class="nav-item nav-item-row" data-view="catalog" id="catalogNavBtn">
+              <span>Product Catalog</span>
+              <span class="nav-pill-staged" id="catalogNavBadge">Nonaktif</span>
+            </button>
+          </li>
         </ul>
       </nav>
 
@@ -73,21 +89,27 @@
           <span>View Live Landing Page</span>
           <span class="arrow-glyph">↗</span>
         </a>
-        <button type="button" class="link-quiet signout-btn" id="logoutBtn">Sign out</button>
+        <button type="button" class="link-quiet signout-btn" id="logoutBtn">
+          <span>Sign out</span>
+          <span class="arrow-glyph">→</span>
+        </button>
       </div>
     </aside>
 
     <section class="workspace">
       <header class="topbar">
-        <div>
-          <div class="topbar-crumb">Artfuli Editorial Studio / <span id="viewCrumb">Hero</span></div>
-          <h2 class="view-title" id="viewTitle">Hero and announcement</h2>
-          <p class="view-sub" id="viewSub">First visual impression: top banner, headline, proof points and lead photography.</p>
-        </div>
-        <div class="topbar-actions">
-          <span class="dirty-note" id="dirtyNote" hidden>Unsaved changes</span>
-          <button type="button" class="btn btn-secondary" id="discardBtn" disabled>Discard</button>
-          <button type="button" class="btn btn-primary" id="saveBtn" disabled>Save to Live Site</button>
+        <div class="topbar-inner">
+          <div class="topbar-titles">
+            <div class="topbar-crumb">Artfuli Editorial Studio / <span id="viewCrumb">Hero</span></div>
+            <h2 class="view-title" id="viewTitle">Hero and announcement</h2>
+            <p class="view-sub" id="viewSub">First visual impression: top banner, headline, proof points and lead
+              photography.</p>
+          </div>
+          <div class="topbar-actions">
+            <span class="dirty-note" id="dirtyNote" hidden>Unsaved changes</span>
+            <button type="button" class="btn btn-secondary" id="discardBtn" disabled>Discard</button>
+            <button type="button" class="btn btn-primary" id="saveBtn" disabled>Save to Live Site</button>
+          </div>
         </div>
       </header>
 
@@ -98,6 +120,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <input type="file" id="fileInput" accept=".webp,.jpg,.jpeg,.png" hidden>
 
-  <script src="admin.js"></script>
+  <script src="admin.js?v=2.5"></script>
 </body>
+
 </html>
