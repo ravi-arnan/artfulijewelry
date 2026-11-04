@@ -20,11 +20,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     router.refresh();
   }
 
+  if (pathname === "/admin/login") {
+    return <main className="min-h-screen bg-paper">{children}</main>;
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <header className="sticky top-0 z-40 border-b border-espresso-deep bg-espresso text-paper">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/admin" className="flex items-center gap-2.5">
               <span className="font-display text-lg leading-none tracking-tight">
                 Bali Handmade
