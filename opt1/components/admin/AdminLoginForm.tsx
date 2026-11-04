@@ -32,10 +32,23 @@ export function AdminLoginForm() {
   const searchParams = useSearchParams();
   const next = sanitizeNext(searchParams.get("next"));
 
+  const oauthError = searchParams.get("error");
+  const oauthEmail = searchParams.get("email");
+
+  let initialError: string | null = null;
+  if (oauthError === "google_not_configured") {
+    initialError =
+      "Google SSO requires GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.local. Please sign in with your administrator password below.";
+  } else if (oauthError === "unauthorized_email") {
+    initialError = `Account ${oauthEmail ? `(${oauthEmail})` : ""} is not in the authorized administrator whitelist.`;
+  } else if (oauthError === "oauth_failed" || oauthError === "invalid_state") {
+    initialError = "Google sign-in was cancelled or failed. Please try again.";
+  }
+
   const [email, setEmail] = useState("admin@bali-handmade.com");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(initialError);
   const [pending, startTransition] = useTransition();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -77,7 +90,7 @@ export function AdminLoginForm() {
       </div>
 
       {/* SISI KIRI: Form Area (Centered 50% dengan jarak terukur presisi) */}
-      <div className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-12 lg:px-16 relative z-20 bg-white min-h-screen h-screen overflow-y-auto">
+      <div className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-12 lg:px-16 pt-24 pb-8 lg:py-16 relative z-20 bg-white min-h-screen h-screen overflow-y-auto">
         <div className="w-full max-w-[380px] flex flex-col">
           {/* 1. Welcome Heading Group */}
           <div className="text-left" style={{ marginBottom: "32px" }}>
@@ -91,14 +104,9 @@ export function AdminLoginForm() {
 
           {/* 2. Continue with Google */}
           <div>
-            <button
-              type="button"
-              onClick={() => {
-                setError(
-                  "Google SSO requires an authorized atelier domain (@bali-handmade.com). Please sign in using your administrator password below."
-                );
-              }}
-              className="h-[52px] cursor-pointer w-full flex items-center justify-center gap-3 bg-white border border-[#E0E0E0] hover:border-[#C8C8C8] hover:bg-[#FAFAFA] text-[#111827] font-medium rounded-[16px] transition-all active:scale-[0.98] text-[15px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+            <a
+              href="/api/auth/google"
+              className="h-[52px] cursor-pointer w-full flex items-center justify-center gap-3 bg-white border border-[#E0E0E0] hover:border-[#C8C8C8] hover:bg-[#FAFAFA] text-[#111827] font-medium rounded-[16px] transition-all active:scale-[0.98] text-[15px] shadow-[0_1px_3px_rgba(0,0,0,0.06)] no-underline"
             >
               <svg
                 width="20"
@@ -125,7 +133,7 @@ export function AdminLoginForm() {
                 />
               </svg>
               <span>Continue with Google</span>
-            </button>
+            </a>
 
             {/* 3. Divider 'or' dengan jarak vertikal lega yang terjamin */}
             <div
@@ -227,17 +235,16 @@ export function AdminLoginForm() {
             </div>
           </form>
 
-          {/* 6. Link Create Account dengan jarak 40px terjamin */}
+          {/* 6. Link Return to storefront */}
           <div
             className="text-center text-[13px] font-medium text-[#6B7280]"
             style={{ marginTop: "40px" }}
           >
-            New to our platform?{" "}
             <Link
               href="/"
-              className="text-[#111827] hover:text-black font-semibold transition-colors"
+              className="text-[#6B7280] hover:text-[#111827] transition-colors inline-flex items-center gap-1.5"
             >
-              Create account
+              &larr; Return to public storefront
             </Link>
           </div>
         </div>

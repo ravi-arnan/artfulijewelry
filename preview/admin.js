@@ -627,8 +627,16 @@
     $("#console").hidden = true;
     $("#loginScreen").hidden = false;
     $("#loginError").textContent = msg;
-    $("#loginPassword").value = "";
-    $("#loginPassword").focus();
+    const pwd = $("#loginPassword");
+    if (pwd) {
+      pwd.value = "";
+      pwd.type = "password";
+      pwd.focus();
+    }
+    const eye = $("#eyeIcon");
+    if (eye) {
+      eye.innerHTML = `<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>`;
+    }
   }
 
   function showConsole() {
@@ -865,7 +873,8 @@
   const googleOAuthBtn = $("#googleOAuthBtn");
   if (googleOAuthBtn) {
     googleOAuthBtn.addEventListener("click", () => {
-      $("#loginError").textContent = "Google SSO requires an authorized atelier domain (@bali-handmade.com). Please sign in using your administrator password below.";
+      $("#loginError").textContent =
+        "Google SSO is active on the Next.js production backend (/admin/login). For this standalone preview server, please sign in using the password from preview/.env.";
     });
   }
 

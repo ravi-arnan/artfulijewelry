@@ -317,7 +317,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 32px 24px;
+  padding: 88px 24px 32px;
   background: #FFFFFF;
   position: relative;
   z-index: 20;
