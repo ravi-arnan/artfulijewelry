@@ -54,8 +54,8 @@ function readBody(req, limit) {
     req.on("data", (c) => {
       size += c.length;
       if (size > limit) {
+        chunks.length = 0;
         reject(new Error("too_large"));
-        req.destroy();
         return;
       }
       chunks.push(c);
@@ -124,14 +124,16 @@ async function handleApi(req, res, pathname) {
     if (!ADMIN_PASSWORD) return sendJson(res, 503, { error: "ADMIN_PASSWORD is not set in preview/.env" });
     const ip = req.socket.remoteAddress || "local";
     const now = Date.now();
-    const rec = loginAttempts.get(ip) || { count: 0, resetAt: now + 15 * 60 * 1000 };
-    if (rec.resetAt < now) { rec.count = 0; rec.resetAt = now + 15 * 60 * 1000; }
+    let rec = loginAttempts.get(ip);
+    if (!rec || rec.resetAt < now) {
+      rec = { count: 0, resetAt: now + 15 * 60 * 1000 };
+      loginAttempts.set(ip, rec);
+    }
     if (rec.count >= 8) return sendJson(res, 429, { error: "Too many attempts. Try again in a few minutes." });
+    rec.count += 1;
     let body;
     try { body = JSON.parse((await readBody(req, 4096)).toString("utf8")); } catch { return sendJson(res, 400, { error: "Bad request" }); }
     if (typeof body.password !== "string" || !safeEqual(body.password, ADMIN_PASSWORD)) {
-      rec.count += 1;
-      loginAttempts.set(ip, rec);
       return sendJson(res, 401, { error: "Incorrect password" });
     }
     loginAttempts.delete(ip);
@@ -175,6 +177,7 @@ async function handleApi(req, res, pathname) {
     if (!UPLOAD_EXT.has(ext)) return sendJson(res, 415, { error: "Only .webp, .jpg, .jpeg, .png are allowed" });
     let buf;
     try { buf = await readBody(req, MAX_UPLOAD_BYTES); } catch { return sendJson(res, 413, { error: "File is larger than 5 MB" }); }
+    if (buf.length < 12) return sendJson(res, 415, { error: "Corrupted image file" });
     const isImage =
       (ext === ".png" && buf.slice(0, 4).toString("hex") === "89504e47") ||
       ((ext === ".jpg" || ext === ".jpeg") && buf.slice(0, 3).toString("hex") === "ffd8ff") ||
@@ -237,7 +240,9 @@ const server = http.createServer(async (req, res) => {
       "Cache-Control": "no-cache",
     });
 
-    fs.createReadStream(filePath).pipe(res);
+    const stream = fs.createReadStream(filePath);
+    stream.on("error", () => res.destroy());
+    stream.pipe(res);
   });
 });
 

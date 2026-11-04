@@ -638,7 +638,12 @@
   }
 
   async function api(path, opts = {}) {
-    const res = await fetch(path, { ...opts, headers: { ...(opts.headers || {}), Authorization: `Bearer ${token}` } });
+    let res;
+    try {
+      res = await fetch(path, { ...opts, headers: { ...(opts.headers || {}), Authorization: `Bearer ${token}` } });
+    } catch {
+      return { res: { ok: false, status: 0 }, data: { error: "Cannot reach atelier preview server." } };
+    }
     let data = {};
     try { data = await res.json(); } catch { /* empty body */ }
     return { res, data };
@@ -646,7 +651,9 @@
 
   async function loadContent() {
     const res = await fetch("/api/content", { cache: "no-store" });
-    content = await res.json();
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not load content");
+    content = data;
     savedSnapshot = JSON.stringify(content);
   }
 
@@ -852,8 +859,13 @@
     if (token) {
       const { res } = await api("/api/session");
       if (res.ok) {
-        await loadContent();
-        return showConsole();
+        try {
+          await loadContent();
+          return showConsole();
+        } catch {
+          showLogin("Could not load content. Sign in again to retry.");
+          return;
+        }
       }
       sessionStorage.removeItem(TOKEN_KEY);
       token = "";

@@ -27,11 +27,14 @@
   if (bar && a.enabled && a.text) {
     text($("#announceText"), a.text);
     const link = $("#announceLink");
-    if (a.linkLabel && safeUrl(a.linkUrl)) {
-      link.textContent = a.linkLabel;
-      link.href = a.linkUrl.trim();
-      if (/^https?:/.test(a.linkUrl)) { link.target = "_blank"; link.rel = "noopener"; }
-      link.hidden = false;
+    if (link) {
+      const hasValidLink = Boolean(a.linkLabel && safeUrl(a.linkUrl));
+      link.hidden = !hasValidLink;
+      if (hasValidLink) {
+        link.textContent = a.linkLabel;
+        link.href = a.linkUrl.trim();
+        if (/^https?:/.test(a.linkUrl)) { link.target = "_blank"; link.rel = "noopener"; }
+      }
     }
     bar.hidden = false;
   }

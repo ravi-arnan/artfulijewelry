@@ -2592,7 +2592,7 @@
           </div>
 
           <!-- Right Column: Pure Full-Bleed Model Photograph -->
-          <div class="hero-stage-col" id="heroStage" aria-roledescription="carousel" aria-label="Featured lookbook photographs">
+          <div class="hero-stage-col" id="heroStage" role="region" aria-roledescription="carousel" aria-label="Featured lookbook photographs">
             <div class="hero-carousel-slides" id="heroSlides"></div>
             <div class="hero-carousel-bar" id="heroBar">
               <div class="hero-carousel-meta">
@@ -3129,7 +3129,7 @@
                 <span>Send Brief via WhatsApp</span>
                 <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
               </a>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer" class="btn-secondary" id="briefEmailBtn">
+              <a href="mailto:sales@bali-handmade.com" class="btn-secondary" id="briefEmailBtn">
                 <span>Dispatch to sales@bali-handmade.com</span>
               </a>
             </div>
@@ -3252,7 +3252,7 @@
             <li><a href="#warranty">100-Year Structural Guarantee</a></li>
             <li><a href="#bespoke">Worldwide Insured Transit</a></li>
             <li><a href="#warranty">Precious Metal Care Guide</a></li>
-            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@bali-handmade.com" target="_blank" rel="noopener noreferrer">sales@bali-handmade.com</a></li>
+            <li><a href="mailto:sales@bali-handmade.com">sales@bali-handmade.com</a></li>
           </ul>
         </div>
 
@@ -3603,9 +3603,7 @@
 
       const emailBtn = document.getElementById("briefEmailBtn");
       if (emailBtn) {
-        emailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${encoded}`;
-        emailBtn.target = "_blank";
-        emailBtn.rel = "noopener noreferrer";
+        emailBtn.href = `mailto:${encodeURIComponent(targetEmail)}?subject=${subject}&body=${encoded}`;
         const emailSpan = emailBtn.querySelector("span");
         if (emailSpan) {
           emailSpan.textContent = `Dispatch to ${targetEmail}`;
@@ -4024,8 +4022,7 @@
       const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
       const body = encodeURIComponent(text);
       const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
-      window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      window.location.href = `mailto:${encodeURIComponent(targetEmail)}?subject=${subject}&body=${body}`;
     };
 
     // =========================================================================
