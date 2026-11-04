@@ -489,23 +489,12 @@ export function ArtfuliLanding() {
           0.3
         );
 
-      // 2. Sticky Header Tone Shift & Scaling Emblem
+      // 2. Sticky Header Tone Shift
       ScrollTrigger.create({
         trigger: "body",
         start: "40px top",
         onEnter: () => document.getElementById("siteHeader")?.classList.add("is-scrolled"),
         onLeaveBack: () => document.getElementById("siteHeader")?.classList.remove("is-scrolled"),
-      });
-
-      gsap.to("#headerEmblem", {
-        scale: 0.92,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
       });
 
       // 3. Heritage Workshop Parallax Drift

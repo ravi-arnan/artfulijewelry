@@ -3669,23 +3669,12 @@
           0.35
         );
 
-      // B. Sticky Header Tone Shift & Scaling Emblem (ScrollTrigger, no scroll listener)
+      // B. Sticky Header Tone Shift (ScrollTrigger, no scroll listener)
       ScrollTrigger.create({
         trigger: "body",
         start: "40px top",
         onEnter: () => document.getElementById("siteHeader").classList.add("is-scrolled"),
         onLeaveBack: () => document.getElementById("siteHeader").classList.remove("is-scrolled")
-      });
-
-      gsap.to("#headerEmblem", {
-        scale: 0.92,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
       });
 
       // C. Heritage Workshop Parallax Drift + One-Time Ledger Figure Count-Up
