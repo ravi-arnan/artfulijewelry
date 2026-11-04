@@ -813,7 +813,11 @@
 
   $("#logoutBtn").addEventListener("click", async () => {
     if (isDirty() && !confirm("You have unsaved changes. Sign out anyway?")) return;
-    await api("/api/logout", { method: "POST" });
+    const { res } = await api("/api/logout", { method: "POST" });
+    if (!res.ok) {
+      alert("Could not end the server session. Sign out again before you leave this browser.");
+      return;
+    }
     sessionStorage.removeItem(TOKEN_KEY);
     token = "";
     showLogin();

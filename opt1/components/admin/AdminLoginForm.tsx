@@ -12,10 +12,23 @@ const CONFIGURED = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
 
+function sanitizeNext(raw: string | null): string {
+  if (
+    !raw ||
+    !raw.startsWith("/") ||
+    raw.startsWith("//") ||
+    raw.includes("\\") ||
+    raw.startsWith("/\\")
+  ) {
+    return "/admin";
+  }
+  return raw;
+}
+
 export function AdminLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/admin";
+  const next = sanitizeNext(searchParams.get("next"));
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

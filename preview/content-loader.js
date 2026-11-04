@@ -191,9 +191,7 @@
   if (typeof k.email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(k.email)) {
     window.SITE_EMAIL = k.email;
     $$('a[href^="mailto:"], a[href*="mail.google.com"]:not(#briefEmailBtn)').forEach((el) => {
-      el.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(k.email)}`;
-      el.target = "_blank";
-      el.rel = "noopener noreferrer";
+      el.href = `mailto:${encodeURIComponent(k.email)}`;
       if (el.textContent.includes("@")) el.textContent = k.email;
     });
     const drawerEmailSpan = document.querySelector("#drawerCheckoutEmail span");
@@ -211,8 +209,7 @@
         const subject = encodeURIComponent("Artfuli Atelier Commission Inquiry");
         const body = encodeURIComponent(text);
         const targetEmail = window.SITE_EMAIL || "sales@bali-handmade.com";
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${subject}&body=${body}`;
-        window.open(gmailUrl, "_blank", "noopener,noreferrer");
+        window.location.href = `mailto:${encodeURIComponent(targetEmail)}?subject=${subject}&body=${body}`;
       };
     }
   }

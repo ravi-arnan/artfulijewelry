@@ -15,12 +15,26 @@ const CONFIGURED = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
 
+function sanitizeNext(raw: string | null | undefined): string {
+  if (
+    !raw ||
+    !raw.startsWith("/") ||
+    raw.startsWith("//") ||
+    raw.includes("\\") ||
+    raw.startsWith("/\\")
+  ) {
+    return "/admin";
+  }
+  return raw;
+}
+
 export default async function AdminLoginPage({
   searchParams,
 }: {
   searchParams: Promise<{ next?: string }>;
 }) {
-  const next = (await searchParams).next || "/admin";
+  const rawNext = (await searchParams).next;
+  const next = sanitizeNext(rawNext);
 
   if (CONFIGURED) {
     const supabase = await createClient();
