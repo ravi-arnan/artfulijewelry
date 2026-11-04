@@ -33,7 +33,7 @@ export default async function AdminProductsPage({
   }
 
   const { supabase, user, isAdmin } = await getAdminContext();
-  if (!user) redirect("/login?next=/admin/products");
+  if (!user) redirect("/admin/login?next=/admin/products");
   if (!isAdmin) {
     return (
       <p className="text-ink-soft">This area is for store administrators only.</p>
