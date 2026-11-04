@@ -1,43 +1,47 @@
 # Project Handoff & Session Checkpoint
 
-- **Tanggal & Waktu**: 2026-10-19 17:08 WITA
-- **Branch Aktif**: `feat/dual-lang-dual-currency-art-6-art-7` (PR #1 ke `main`)
+- **Tanggal & Waktu**: 2026-11-04 17:30 WITA
+- **Branch Aktif**: `fix/admin-turso-migration` (PR #3 ke `main`)
 - **Tujuan Proyek**: Website e-commerce dan editorial storefront untuk brand perhiasan **Artfuli Jewelry** / **Bali Handmade** (`artfulijewelry.com` / `bali-handmade.com`).
 
 ---
 
 ## 1. Status Terakhir Proyek
 
-1. **Sprint 1: Dual-Language (ID/EN) & Dual-Currency (IDR/USD) Engine**:
-   - Berhasil mengimplementasikan `LanguageContext` dan `CurrencyContext` dengan dukungan persistensi ganda (`localStorage` dan `document.cookie`).
-   - Kamus terjemahan lengkap di `opt1/locales/en.json` dan `opt1/locales/id.json`.
-   - Komponen terpadu `LocaleCurrencySwitcher` (`EN / ID · USD / IDR`) disematkan pada header desktop dan drawer navigasi mobile.
-   - Perhitungan harga cerdas: prioritas harga diskrit katalog (`priceIdr` & `priceUsd`), dengan fallback konversi dinamis jika data spesifik belum terisi.
+1. **Redesign Split-Screen Login Page (`/admin/login` & `preview/admin.html`)**:
+   - Menerapkan layout split 50:50 presisi terinspirasi dari `app.leedlime.com/login`.
+   - **Sisi Kiri**:
+     - Logo emblem + wordmark resmi Artfuli Jewelry di pojok kiri atas.
+     - Heading *"Welcome back"* dan sub-heading *"Please sign in to your account"*.
+     - Tombol *"Continue with Google"* dan pembatas *"or"*.
+     - Input *Email Address* dan *Password* dengan tombol toggle intip password (ikon mata) serta indentasi teks `26px`.
+     - Tombol *"Sign In"* solid dan link *"← Return to public storefront"*.
+   - **Sisi Kanan**:
+     - Lukisan oil painting background pastoral (`painting1.jpg`).
+     - Kartu melayang glassmorphic (*floating card*) dengan indikator kualifikasi ICP dan status leads match.
+     - Tombol concierge WhatsApp di pojok kanan bawah.
 
-2. **Penyelesaian Zero Layout Shift (0px CLS) pada Header**:
-   - Mengunci lebar slot interaktif pada `.header-cta-group`:
-     - `LocaleCurrencySwitcher`: lebar tetap 168px (`flex-shrink: 0`).
-     - `.header-bag-btn`: lebar tetap 148px (pas rapi untuk `Bag (x)` maupun `Keranjang (x)`).
-     - `.header-cta`: lebar tetap 168px (pas rapi untuk `Custom Order` maupun `Pesanan Kustom`).
-     - Total lebar grup CTA stabil persis di 508px pada kedua bahasa.
-   - Mengunci lebar slot item navigasi `.primary-nav li` (Collections/Koleksi: 104px, Workshop/Bengkel: 136px, Services/Layanan: 68px, Lookbook/Katalog Visual: 104px).
-   - Terverifikasi via pengukuran browser Playwright: pergeseran horizontal (delta shift) antara mode EN dan ID adalah **0 pixel**.
+2. **Implementasi Native Google Sign-In OAuth 2.0**:
+   - Endpoint inisiasi di `opt1/app/api/auth/google/route.ts` dengan CSRF state generator dan HTTP-only cookie.
+   - Endpoint callback di `opt1/app/api/auth/callback/google/route.ts` yang menukar auth code dengan token Google, membaca user profile, memverifikasi whitelist email admin (`raviarnankeren@gmail.com` dan domain `@bali-handmade.com`), dan menerbitkan cookie sesi HMAC `setAdminSession()`.
+   - Kredensial `GOOGLE_CLIENT_ID` dan `GOOGLE_CLIENT_SECRET` telah dikonfigurasi pada `.env.local` dan teruji redirect via `curl`.
 
-3. **Status Git & Pull Request**:
-   - Branch: `feat/dual-lang-dual-currency-art-6-art-7`
-   - Commit: `eaf4831` (`feat(i18n): implement dual-language ID/EN and dual-currency IDR/USD with zero layout shift`)
-   - Pull Request: [PR #1](https://github.com/ravi-arnan/artfulijewelry/pull/1) menuju branch `main`.
-   - Unit test suite: 62 test lulus hijau (100% pass), ESLint 0 error.
+3. **Perbaikan & Verifikasi Berdasarkan Review CodeRabbit**:
+   - Menghubungkan tombol Google Sign In ke alur OAuth yang berfungsi.
+   - Mengubah tautan footer login dari ekspektasi registrasi menjadi tautan kembali ke storefront publik.
+   - Mengamankan fallback database di `opt1/lib/db/client.ts` agar error inisialisasi dipropagasi secara transparan dan tidak mengekspos in-memory DB kosong.
+   - Menyesuaikan `padding-top: 88px` pada tampilan mobile (375x667) agar logo brand tidak menutupi heading form.
+   - Mereset tipe input password ke `password` dan mengembalikan ikon mata saat user logout (`showLogin()`).
 
-4. **Sinkronisasi Linear Workspace (`artfuli-jewelry`)**:
-   - **ART-6** (Dual-Language ID/EN): status **In Review**, catatan PR #1 tersinkronisasi.
-   - **ART-7** (Dual-Currency IDR/USD): status **In Review**, catatan PR #1 tersinkronisasi.
-   - **ART-21** (Product Catalogue & Collections Showcase): status **In Progress** (Assignee: Ravi Arnan).
-   - **ART-17 & ART-18** (Admin Dashboard & Backoffice Order/Product Management): status **Todo** (Assignee: Chalimus Candra / `chalimuscandra@gmail.com`).
+4. **Penyempurnaan Navbar Storefront**:
+   - Menghapus efek shrink emblem logo navbar pada scroll di `opt1/components/landing/ArtfuliLanding.tsx` dan `preview/landing.html`.
 
-5. **Dokumen Akademik Kerja Praktek (KP)**:
-   - Selesai mengonversi berkas `Form Surat Penentuan Pembimbing KP.pdf` menjadi format Word (`.docx`) dan PDF baru di direktori `Documents`.
-   - Logo Universitas Udayana diperbarui ke versi resmi beresolusi tinggi, serta tanda tangan digital pembimbing (Pak Yogiswara Dharma Putra) telah disematkan presisi dengan latar transparan.
+5. **Status Pengujian & Pull Request**:
+   - Branch: `fix/admin-turso-migration`
+   - Pull Request: [PR #3](https://github.com/ravi-arnan/artfulijewelry/pull/3) menuju branch `main`.
+   - Unit tests: 65/65 tests lulus (100% pass via `npm --prefix opt1 test`).
+   - ESLint: 0 error (`npm --prefix opt1 run lint`).
+   - Server lokal: Port 3000 dan port 3002 telah dimatikan secara aman.
 
 ---
 
@@ -49,27 +53,31 @@
 - `ARCHITECTURE.md`: Arsitektur teknis menyeluruh, arsitektur data libSQL, dan Drizzle ORM.
 - `DESIGN-SYSTEM.md`: Sistem desain, spesifikasi token warna, tipografi, dan aturan anti-slop.
 - `PRD.md`: Spesifikasi kebutuhan produk dan user stories e-commerce ritel.
-- `TIMELINE_KP.md`: Roadmap Kerja Praktek, rincian sprint, dan rencana simulasi pembayaran Midtrans.
 - `DEPLOY.md`: Panduan deployment Vercel dan Turso cloud.
 
 ---
 
 ## 3. Daftar File yang Diubah pada Sesi Ini
 
-- `opt1/locales/en.json`: Kamus bahasa Inggris untuk header, nav, drawer, dan deskripsi produk.
-- `opt1/locales/id.json`: Kamus bahasa Indonesia dengan penyesuaian istilah "Pesanan Kustom" dan "Keranjang".
-- `opt1/lib/i18n.ts` & `opt1/lib/i18n.test.ts`: Helper terjemahan dan unit test suite i18n.
-- `opt1/lib/currency.ts` & `opt1/lib/currency.test.ts`: Formatter mata uang IDR/USD dan unit test suite currency.
-- `opt1/context/LanguageContext.tsx`: Context provider bahasa dengan penyimpanan ganda localStorage + cookie.
-- `opt1/context/CurrencyContext.tsx`: Context provider mata uang dengan penyimpanan ganda localStorage + cookie.
-- `opt1/components/site/LocaleCurrencySwitcher.tsx`: Komponen switcher interaktif bahasa dan mata uang.
-- `opt1/components/landing/ArtfuliLanding.tsx`: Integrasi switcher, translation hooks pada header, mobile drawer, dan cart drawer.
-- `opt1/app/landing.css`: Penguncian dimensi slot navigasi dan CTA group untuk eliminasi 100% layout shift.
-- `opt1/app/layout.tsx`: Penyertaan LanguageProvider dan CurrencyProvider pada root app layout.
-- `HANDOFF.md`: Pembaruan status checkpoint penutupan sesi.
+- `opt1/app/admin/login/page.tsx`: Full-bleed container wrapper untuk AdminLoginForm.
+- `opt1/app/landing.css`: Penghapusan batasan `align-items: center` dari `body` dan perbaikan layout.
+- `opt1/app/layout.tsx`: Penyelarasan `w-full` pada `body`.
+- `opt1/components/admin/AdminLoginForm.tsx`: Komponen login split-screen 50:50 dengan Google OAuth dan Leedlime visual.
+- `opt1/components/admin/AdminShell.tsx`: Penyesuaian shell background untuk halaman login.
+- `opt1/components/landing/ArtfuliLanding.tsx`: Penghapusan animasi scroll shrink logo navbar.
+- `opt1/app/api/auth/google/route.ts`: Endpoint inisiasi Google OAuth 2.0.
+- `opt1/app/api/auth/callback/google/route.ts`: Endpoint callback verifikasi Google OAuth dan penerbitan sesi admin.
+- `opt1/lib/db/client.ts`: Perbaikan inisialisasi client database.
+- `opt1/public/images/painting1.jpg`: Aset lukisan pastoral untuk visual login Next.js.
+- `preview/admin.html`: Penerapan layout login Leedlime pada preview server Atelier Console.
+- `preview/admin.css`: Styling responsif login 50:50, floating card, dan brand spacing.
+- `preview/admin.js`: Reset state password saat logout, toggle eye, dan penanganan Google SSO preview.
+- `preview/landing.html`: Penghapusan animasi scroll shrink logo navbar preview.
+- `preview/images/painting1.jpg`: Aset lukisan pastoral untuk visual login preview.
+- `HANDOFF.md`: Dokumentasi handoff dan checkpoint sesi.
 
 ---
 
-## 4. Next Action (Langkah Selanjutnya)
+## 4. Next Action
 
-Lanjutkan pengerjaan **ART-21** (*Product Catalogue & Collections Showcase*) pada storefront untuk memuat katalog perhiasan kriya Bali berbasis data produk Turso libSQL.
+Verifikasi langsung Google Sign In pada browser via `http://localhost:3000/admin/login` (pastikan redirect URI terdaftar di Google Cloud Console), lalu merge [PR #3](https://github.com/ravi-arnan/artfulijewelry/pull/3) ke branch `main`.

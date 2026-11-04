@@ -37,14 +37,12 @@ export default async function AdminLoginPage({
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-12 sm:px-6">
-      <Suspense
-        fallback={
-          <div className="h-96 w-full max-w-md animate-pulse rounded-2xl border border-line bg-paper-deep/30" />
-        }
-      >
-        <AdminLoginForm />
-      </Suspense>
-    </div>
+    <Suspense
+      fallback={
+        <div className="min-h-screen w-full bg-paper animate-pulse" />
+      }
+    >
+      <AdminLoginForm />
+    </Suspense>
   );
 }

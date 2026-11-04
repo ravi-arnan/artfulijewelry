@@ -1,4 +1,4 @@
-import { createClient } from "@libsql/client";
+import { createClient, type Client } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import * as schema from "./schema";
 
@@ -6,7 +6,7 @@ import * as schema from "./schema";
 const url = process.env.TURSO_DATABASE_URL || "file:local.db";
 const authToken = process.env.TURSO_AUTH_TOKEN;
 
-export const client = createClient({
+export const client: Client = createClient({
   url,
   authToken,
 });
