@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ExternalLink, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { logoutAdminAction } from "@/app/actions/adminAuth";
 
 // Dedicated chrome for the store admin console. Deliberately NOT the public
 // SiteShell: no announcement bar, no shop navigation, no marketing footer. The
@@ -15,8 +16,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   async function handleSignOut() {
-    await signOut();
-    router.push("/");
+    try {
+      await signOut();
+    } catch {
+      // ignore
+    }
+    await logoutAdminAction();
+    router.push("/admin/login");
     router.refresh();
   }
 

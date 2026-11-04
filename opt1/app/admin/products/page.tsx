@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Search } from "lucide-react";
-import { getAdminContext } from "@/lib/supabase/adminContext";
+import { isAdminAuthenticated } from "@/lib/adminAuth";
+import { getAllProducts } from "@/lib/products";
 import {
   ProductEditRow,
   type EditableProduct,
@@ -15,41 +16,38 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-const CONFIGURED = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
-
 const PAGE_SIZE = 50;
-const COLUMNS = "id,name,category_slug,metal,price_from,min_order,is_new,is_sale";
 
 export default async function AdminProductsPage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
-  if (!CONFIGURED) {
-    return <p className="text-ink-soft">Backend is not configured.</p>;
-  }
+  const authed = await isAdminAuthenticated();
+  if (!authed) redirect("/admin/login?next=/admin/products");
 
-  const { supabase, user, isAdmin } = await getAdminContext();
-  if (!user) redirect("/admin/login?next=/admin/products");
-  if (!isAdmin) {
-    return (
-      <p className="text-ink-soft">This area is for store administrators only.</p>
-    );
-  }
+  const q = (await searchParams).q?.trim().toLowerCase() ?? "";
 
-  const q = (await searchParams).q?.trim() ?? "";
+  const allProducts = await getAllProducts();
+  const filtered = q
+    ? allProducts.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.id.toLowerCase().includes(q) ||
+          p.metal.toLowerCase().includes(q),
+      )
+    : allProducts;
 
-  let query = supabase.from("products").select(COLUMNS);
-  if (q) {
-    // Escape PostgREST's reserved characters in the user term before ilike.
-    const term = q.replace(/[%,()]/g, " ");
-    query = query.or(`name.ilike.%${term}%,id.ilike.%${term}%`);
-  }
-  const { data } = await query.order("id", { ascending: true }).limit(PAGE_SIZE);
-  const products = (data ?? []) as EditableProduct[];
+  const products: EditableProduct[] = filtered.slice(0, PAGE_SIZE).map((p) => ({
+    id: p.id,
+    name: p.name,
+    category_slug: p.category ?? null,
+    metal: p.metal,
+    price_from: p.priceFrom ?? 0,
+    min_order: p.minOrder ?? 1,
+    is_new: Boolean(p.isNew),
+    is_sale: Boolean(p.isSale),
+  }));
 
   return (
     <>
@@ -70,33 +68,49 @@ export default async function AdminProductsPage({
         <label className="relative block">
           <span className="sr-only">Search products</span>
           <Search
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft"
             aria-hidden
           />
           <input
             type="search"
             name="q"
             defaultValue={q}
-            placeholder="Search by name or ID"
-            className="w-full rounded-full border border-line bg-paper py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink-soft/70 focus:border-gold focus:outline-none"
+            placeholder="Search by name, metal, or ID..."
+            className="w-full rounded-full border border-line bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-soft/70 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
           />
         </label>
       </form>
 
-      <p className="mt-5 text-xs uppercase tracking-widest text-ink-soft">
-        {q ? `Results for "${q}"` : "All products"} · showing {products.length}
-        {products.length === PAGE_SIZE ? ` (first ${PAGE_SIZE}, refine your search)` : ""}
-      </p>
-
-      {products.length === 0 ? (
-        <p className="mt-6 text-ink-soft">No products match that search.</p>
-      ) : (
-        <ul className="mt-4 space-y-3">
-          {products.map((product) => (
-            <ProductEditRow key={product.id} product={product} />
-          ))}
-        </ul>
-      )}
+      <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_18px_48px_-30px_rgba(60,45,30,0.3)]">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="border-b border-line bg-paper-deep/60 text-xs uppercase tracking-wider text-ink-soft">
+              <tr>
+                <th className="px-5 py-3.5">Product</th>
+                <th className="px-5 py-3.5">Metal</th>
+                <th className="px-5 py-3.5">Price from ($)</th>
+                <th className="px-5 py-3.5">Min order</th>
+                <th className="px-5 py-3.5 text-center">New</th>
+                <th className="px-5 py-3.5 text-center">On sale</th>
+                <th className="px-5 py-3.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-line/60">
+              {products.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="px-5 py-12 text-center text-ink-soft">
+                    {q ? "No products matching your search." : "No products found."}
+                  </td>
+                </tr>
+              ) : (
+                products.map((product) => (
+                  <ProductEditRow key={product.id} product={product} />
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 }

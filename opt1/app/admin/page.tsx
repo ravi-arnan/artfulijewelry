@@ -3,7 +3,11 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowUpRight, BellRing, Download, Inbox, Package } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { isAdminAuthenticated } from "@/lib/adminAuth";
 import { createClient } from "@/lib/supabase/server";
+import { db, products } from "@/lib/db";
+import { count } from "drizzle-orm";
+import { getAllProducts } from "@/lib/products";
 import { InquiryBoard, type AdminInquiry } from "@/components/admin/InquiryBoard";
 
 export const dynamic = "force-dynamic";
@@ -13,67 +17,45 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-const CONFIGURED = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
-
-function Notice({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
-      <h1 className="font-display text-3xl text-ink">{title}</h1>
-      <p className="mt-3 text-ink-soft">{children}</p>
-      <Link
-        href="/"
-        className="mt-8 inline-flex text-sm text-gold-deep hover:underline"
-      >
-        Back to home
-      </Link>
-    </div>
-  );
-}
-
 export default async function AdminPage() {
-  if (!CONFIGURED) {
-    return (
-      <Notice title="Admin is not available yet">
-        The Supabase backend is not configured for this deployment.
-      </Notice>
-    );
+  const authed = await isAdminAuthenticated();
+  if (!authed) redirect("/admin/login");
+
+  let productCount = 0;
+  try {
+    const res = await db.select({ val: count() }).from(products);
+    productCount = res[0]?.val ?? 0;
+  } catch {
+    productCount = 0;
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/admin/login");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-
-  if (profile?.role !== "admin") {
-    return (
-      <Notice title="Not authorized">
-        This area is for store administrators only.
-      </Notice>
-    );
+  if (productCount === 0) {
+    const fallbackProducts = await getAllProducts();
+    productCount = fallbackProducts.length;
   }
 
-  const [{ data: inquiriesData }, { count: productCount }] = await Promise.all([
-    supabase
-      .from("inquiries")
-      .select(
-        "id, created_at, name, email, company, message, status, inquiry_items(name, material, quantity, price_from, min_order)",
-      )
-      .order("created_at", { ascending: false })
-      .limit(100),
-    supabase.from("products").select("id", { count: "exact", head: true }),
-  ]);
+  let inquiries: AdminInquiry[] = [];
+  if (
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    try {
+      const supabase = await createClient();
+      const { data: inquiriesData } = await supabase
+        .from("inquiries")
+        .select(
+          "id, created_at, name, email, company, message, status, inquiry_items(name, material, quantity, price_from, min_order)",
+        )
+        .order("created_at", { ascending: false })
+        .limit(100);
+      if (inquiriesData) {
+        inquiries = inquiriesData as AdminInquiry[];
+      }
+    } catch {
+      inquiries = [];
+    }
+  }
 
-  const inquiries = (inquiriesData ?? []) as AdminInquiry[];
   const openCount = inquiries.filter((i) => i.status === "new").length;
 
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { isAdminAuthenticated } from "@/lib/adminAuth";
 import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
 
 export const metadata: Metadata = {
@@ -9,11 +9,6 @@ export const metadata: Metadata = {
   description: "Administrator login portal for Bali Handmade atelier backoffice.",
   robots: { index: false, follow: false },
 };
-
-const CONFIGURED = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
 
 function sanitizeNext(raw: string | null | undefined): string {
   if (
@@ -36,15 +31,9 @@ export default async function AdminLoginPage({
   const rawNext = (await searchParams).next;
   const next = sanitizeNext(rawNext);
 
-  if (CONFIGURED) {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (user) {
-      redirect(next);
-    }
+  const isAuthenticated = await isAdminAuthenticated();
+  if (isAuthenticated) {
+    redirect(next);
   }
 
   return (

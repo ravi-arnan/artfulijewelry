@@ -4,13 +4,8 @@ import { useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Loader2, Lock, ShieldCheck } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
+import { loginAdminAction } from "@/app/actions/adminAuth";
 import { fieldClass } from "@/components/auth/authStyles";
-
-const CONFIGURED = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
 
 function sanitizeNext(raw: string | null): string {
   if (
@@ -30,7 +25,7 @@ export function AdminLoginForm() {
   const searchParams = useSearchParams();
   const next = sanitizeNext(searchParams.get("next"));
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("admin@bali-handmade.com");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -39,30 +34,15 @@ export function AdminLoginForm() {
     event.preventDefault();
     setError(null);
 
-    if (!CONFIGURED) {
-      setError(
-        "Supabase authentication is not configured in this environment. Please configure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local to enable administrator login.",
-      );
-      return;
-    }
-
     startTransition(async () => {
-      const supabase = createClient();
-      const { data, error: signInError } =
-        await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-      if (signInError) {
-        setError(signInError.message || "Invalid administrator credentials.");
+      const res = await loginAdminAction(password);
+      if (!res.ok) {
+        setError(res.error || "Password administrator salah.");
         return;
       }
 
-      if (data.user) {
-        router.push(next);
-        router.refresh();
-      }
+      router.push(next);
+      router.refresh();
     });
   }
 
@@ -95,7 +75,6 @@ export function AdminLoginForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
             autoComplete="email"
             placeholder="admin@bali-handmade.com"
             className={fieldClass}
@@ -127,17 +106,6 @@ export function AdminLoginForm() {
             className="rounded-xl border border-red-200 bg-red-50/80 p-3 text-xs leading-relaxed text-red-700"
           >
             {error}
-          </div>
-        )}
-
-        {!CONFIGURED && (
-          <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-3 text-[0.75rem] leading-relaxed text-amber-900">
-            <span className="font-semibold">Local Environment Notice:</span>{" "}
-            Supabase auth keys are not set. Add{" "}
-            <code className="rounded bg-amber-100 px-1 py-0.5 font-mono text-[0.7rem] text-amber-950">
-              NEXT_PUBLIC_SUPABASE_URL
-            </code>{" "}
-            to <code className="font-mono text-[0.7rem]">.env.local</code> to activate live login.
           </div>
         )}
 
